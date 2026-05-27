@@ -13,25 +13,24 @@ export class CertGrinderStack extends cdk.Stack {
     super(scope, id, props)
 
     // ── DynamoDB ─────────────────────────────────────────────────────────────
-    // Single table: PK = USER#<userId>  SK = MODULE#<moduleId>#<type>
-    // type = "progress" | "sympathy"
+    // PK = USER#<userId>  |  SK = MODULE#<moduleId>#<type>  (progress | sympathy)
     const table = new dynamodb.Table(this, 'UserData', {
-      tableName:     'certgrinder-user-data',
-      partitionKey:  { name: 'pk', type: dynamodb.AttributeType.STRING },
-      sortKey:       { name: 'sk', type: dynamodb.AttributeType.STRING },
-      billingMode:   dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,         // never delete data on stack destroy
+      tableName:    'certgrinder-user-data',
+      partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
+      sortKey:      { name: 'sk', type: dynamodb.AttributeType.STRING },
+      billingMode:  dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
       pointInTimeRecoverySpecification: { pointInTimeRecoveryEnabled: true },
     })
 
     // ── Lambda ───────────────────────────────────────────────────────────────
     const fn = new lambda.Function(this, 'UserDataFn', {
-      functionName:  'certgrinder-user-data',
-      runtime:       lambda.Runtime.PYTHON_3_12,
-      handler:       'user_data.handler',
-      code:          lambda.Code.fromAsset('../infra/lambda'),
-      timeout:       cdk.Duration.seconds(10),
-      environment:   { TABLE_NAME: table.tableName },
+      functionName: 'certgrinder-user-data',
+      runtime:      lambda.Runtime.PYTHON_3_12,
+      handler:      'user_data.handler',
+      code:         lambda.Code.fromAsset('lambda'),  // relative to certgrinder/infra/
+      timeout:      cdk.Duration.seconds(10),
+      environment:  { TABLE_NAME: table.tableName },
     })
     table.grantReadWriteData(fn)
 
@@ -39,9 +38,7 @@ export class CertGrinderStack extends cdk.Stack {
     const api = new apigwv2.HttpApi(this, 'Api', {
       apiName: 'certgrinder-api',
       corsPreflight: {
-        allowOrigins: apigwv2.CorsPreflightOptions.DEFAULT_HEADERS
-          ? ['*']                                       // restrict to CF domain in production
-          : ['http://localhost:5173'],
+        allowOrigins: ['*'],   // restrict to CloudFront URL in production
         allowMethods: [
           apigwv2.CorsHttpMethod.GET,
           apigwv2.CorsHttpMethod.PUT,
@@ -56,16 +53,16 @@ export class CertGrinderStack extends cdk.Stack {
 
     for (const dtype of ['progress', 'sympathy']) {
       api.addRoutes({
-        path:        `/users/{userId}/modules/{moduleId}/${dtype}`,
-        methods:     [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.PUT],
+        path:    `/users/{userId}/modules/{moduleId}/${dtype}`,
+        methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.PUT],
         integration,
       })
     }
 
     // ── S3 + CloudFront ───────────────────────────────────────────────────────
     const bucket = new s3.Bucket(this, 'FrontendBucket', {
-      bucketName:       `certgrinder-frontend-${this.account}-${this.region}`,
-      removalPolicy:    cdk.RemovalPolicy.DESTROY,
+      bucketName:        `certgrinder-frontend-${this.account}-${this.region}`,
+      removalPolicy:     cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     })
@@ -78,7 +75,6 @@ export class CertGrinderStack extends cdk.Stack {
       },
       defaultRootObject: 'index.html',
       errorResponses: [
-        // SPA fallback — React Router handles all paths
         { httpStatus: 403, responseHttpStatus: 200, responsePagePath: '/index.html' },
         { httpStatus: 404, responseHttpStatus: 200, responsePagePath: '/index.html' },
       ],
@@ -95,7 +91,7 @@ export class CertGrinderStack extends cdk.Stack {
     })
     new cdk.CfnOutput(this, 'BucketName', {
       value:       bucket.bucketName,
-      description: 'Upload frontend build here: aws s3 sync dist/ s3://<bucket>',
+      description: 'Upload: aws s3 sync dist/ s3://<bucket> --delete',
     })
     new cdk.CfnOutput(this, 'TableName', {
       value:       table.tableName,
