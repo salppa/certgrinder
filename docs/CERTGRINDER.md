@@ -1,8 +1,8 @@
 # CertGrinder — Tuotedokumentaatio
 
 **Versio:** 0.1.0  
-**Päivitetty:** 2026-05-26  
-**Status:** Vaihe 1 + 2 valmis
+**Päivitetty:** 2026-05-27  
+**Status:** Vaihe 1 + 2 valmis — Infra valmisteilla
 
 ---
 
@@ -33,6 +33,10 @@ certgrinder/
 │   │   ├── ReignsScreen.jsx     # Pääpelinäkymä (swipe + mittarit)
 │   │   └── GameOver.jsx         # Peli päättyi — mentori lohduttaa
 │   └── data/modules.js          # Moduulimäärittelyt + mentor-mapping
+├── infra/                       # AWS CDK — tulossa (Vaihe 4)
+│   ├── bin/                     # CDK app entry point
+│   ├── lib/                     # Stack-määrittelyt
+│   └── package.json
 ├── docs/CERTGRINDER.md          # Tämä tiedosto
 ├── package.json
 └── vite.config.js
@@ -132,6 +136,29 @@ cd certgrinder
 npm install
 npm run dev
 ```
+
+---
+
+## AWS-infrastruktuuri
+
+**Provider:** AWS CDK v2  
+**Region:** `eu-north-1` (Tukholma)  
+**Repo:** [github.com/salppa/certdrill](https://github.com/salppa/certdrill)
+
+### Deploy (kun infra-kansio on luotu)
+
+```bash
+cd certgrinder/infra
+npm install
+npx cdk bootstrap
+npm run deploy
+```
+
+### Edellytykset
+
+- AWS CLI asennettu ja konfiguroitu (`aws configure list`)
+- CDK: `npx cdk --version`
+- Avaimet: `~/.aws/credentials` + region `eu-north-1`
 
 ---
 
