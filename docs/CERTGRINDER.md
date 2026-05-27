@@ -2,7 +2,7 @@
 
 **Versio:** 0.1.0  
 **Päivitetty:** 2026-05-27  
-**Status:** Vaihe 1 + 2 valmis — Infra valmisteilla
+**Status:** Vaihe 1 + 2 valmis — Infra deployattu, CI/CD käytössä
 
 ---
 
@@ -13,12 +13,18 @@ sertifikaattivalmistelun Reigns-tyylisellä kriisinhallintasimulaattorilla.
 Glassmorphism-ulkoasulla, dynaamisilla mentoreilla ja emotionaalisella
 designilla.
 
+**Oma GitHub-repo:** [github.com/salppa/certgrinder](https://github.com/salppa/certgrinder)  
+**CertDrill-repo:** [github.com/salppa/certdrill](https://github.com/salppa/certdrill)
+
 ---
 
 ## Hakemistorakenne
 
 ```
 certgrinder/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml           # CI/CD — build + S3 + CloudFront
 ├── src/
 │   ├── App.jsx                  # Router + taustaefektit
 │   ├── main.jsx                 # React entry point
@@ -26,16 +32,29 @@ certgrinder/
 │   ├── components/
 │   │   ├── GlassCard.jsx        # Glassmorphism-peruskortti
 │   │   ├── ResourceMeter.jsx    # R1–R4 mittari (Framer Motion)
-│   │   └── MentorAvatar.jsx     # Mentori + 4 ilmettä + fallback emoji
+│   │   ├── MentorAvatar.jsx     # Mentori + 4 ilmettä + fallback emoji
+│   │   └── MentorMonologue.jsx  # Aloitusmonologi per episodi
 │   ├── screens/
 │   │   ├── Dashboard.jsx        # Etusivu
 │   │   ├── ModulePicker.jsx     # Moduulivalinta + [SIMULAATIO]-badge
 │   │   ├── ReignsScreen.jsx     # Pääpelinäkymä (swipe + mittarit)
+│   │   ├── EpisodeSelect.jsx    # Episodivalinta
+│   │   ├── EpisodeComplete.jsx  # Episodi läpi
 │   │   └── GameOver.jsx         # Peli päättyi — mentori lohduttaa
-│   └── data/modules.js          # Moduulimäärittelyt + mentor-mapping
-├── infra/                       # AWS CDK — tulossa (Vaihe 4)
-│   ├── bin/                     # CDK app entry point
-│   ├── lib/                     # Stack-määrittelyt
+│   ├── data/
+│   │   ├── modules.js           # Moduulimäärittelyt + mentor-mapping
+│   │   └── scenarios/
+│   │       └── togaf.js         # TOGAF-skenaariot
+│   ├── hooks/useProgress.js     # Edistymisen hallinta
+│   └── lib/api.js               # API-kutsukirjasto
+├── infra/                       # AWS CDK v2
+│   ├── lib/
+│   │   ├── app.ts               # CDK app entry point
+│   │   └── certgrinder-stack.ts # Stack-määrittely
+│   ├── lambda/
+│   │   └── user_data.py         # Lambda-funktio (Python 3.12)
+│   ├── cdk.json
+│   ├── tsconfig.json
 │   └── package.json
 ├── docs/CERTGRINDER.md          # Tämä tiedosto
 ├── package.json
@@ -107,10 +126,12 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
 ## Navigaatio
 
 ```
-/dashboard          → Etusivu
-/modules            → Moduulivalinta
-/reigns/:moduleId   → Reigns-pelinäkymä
-/gameover/:moduleId → Game over
+/dashboard            → Etusivu
+/modules              → Moduulivalinta
+/modules/:moduleId    → Episodivalinta
+/reigns/:moduleId     → Reigns-pelinäkymä
+/gameover/:moduleId   → Game over
+/complete/:moduleId   → Episodi läpi
 ```
 
 [SIMULAATIO]-nappi moduulikorteissa näkyy vain kun `module.hasScenarios === true`.
@@ -123,16 +144,15 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
 |-------|--------|---------|
 | 1 | ✅ Valmis | UI-runko, glassmorphism theme, perusnäkymät, routing |
 | 2 | ✅ Valmis | Reigns swipe, resurssimittarit, consequence preview, game over |
-| 3 | 🔲 Tulossa | Mentori-ilmeet, aloitusmonologi per episodi, episodiprogressio |
-| 4 | 🔲 Tulossa | `format=3` backend-endpoint, `scenarios.js` per moduuli, Python batch |
-| 5 | 🔲 Tulossa | DynamoDB sympathy-arvo, episodiprogressio, TOGAF-pilotti |
+| 3 | ✅ Valmis | Mentori-ilmeet, aloitusmonologi, episodiprogressio, skenaariot |
+| 4 | ✅ Valmis | AWS infra (CDK), Lambda, API Gateway, DynamoDB, S3, CloudFront |
+| 5 | 🔲 Tulossa | DynamoDB sympathy-arvo, episodiprogressio tallennus, TOGAF-pilotti |
 
 ---
 
-## Asennus
+## Paikallinen kehitys
 
 ```bash
-cd certgrinder
 npm install
 npm run dev
 ```
@@ -141,30 +161,74 @@ npm run dev
 
 ## AWS-infrastruktuuri
 
-**Provider:** AWS CDK v2  
+**Provider:** AWS CDK v2.1120+  
 **Region:** `eu-north-1` (Tukholma)  
-**Repo:** [github.com/salppa/certdrill](https://github.com/salppa/certdrill)
+**Account:** `609247456986`
 
-### Deploy (kun infra-kansio on luotu)
+### Resurssit (deployattu 2026-05-27)
+
+| Resurssi | Nimi / URL |
+|----------|-----------|
+| DynamoDB | `certgrinder-user-data` |
+| Lambda | `certgrinder-user-data` (Python 3.12) |
+| API Gateway | `https://ku422tldi6.execute-api.eu-north-1.amazonaws.com/` |
+| S3 Bucket | `certgrinder-frontend-609247456986-eu-north-1` |
+| CloudFront | `https://ddd8ui6hzibeo.cloudfront.net` |
+| CloudFront ID | `EVR0BK0EBPDUO` |
+
+### DynamoDB-skeema
+
+```
+PK: USER#<userId>
+SK: MODULE#<moduleId>#progress | MODULE#<moduleId>#sympathy
+```
+
+### API-reitit
+
+```
+GET  /users/{userId}/modules/{moduleId}/progress
+PUT  /users/{userId}/modules/{moduleId}/progress
+GET  /users/{userId}/modules/{moduleId}/sympathy
+PUT  /users/{userId}/modules/{moduleId}/sympathy
+```
+
+### Infra-deploy manuaalisesti
 
 ```bash
-cd certgrinder/infra
-npm install
+cd infra
+npm install --strict-ssl=false
 npx cdk bootstrap
 npm run deploy
 ```
 
-### Edellytykset
+---
 
-- AWS CLI asennettu ja konfiguroitu (`aws configure list`)
-- CDK: `npx cdk --version`
-- Avaimet: `~/.aws/credentials` + region `eu-north-1`
+## CI/CD — GitHub Actions
+
+**Tiedosto:** `.github/workflows/deploy.yml`  
+**Triggerit:** push `main`-haaraan tai manuaalinen käynnistys
+
+### Pipeline
+
+1. **deploy-infra** — CDK deploy (vain jos `infra/`-tiedostoja muutettu)
+2. **deploy-frontend** — `npm run build` → S3 sync → CloudFront invalidation
+
+### GitHub Secrets (kaikki asetettu)
+
+| Secret | Kuvaus |
+|--------|--------|
+| `AWS_ACCESS_KEY_ID` | IAM-avain |
+| `AWS_SECRET_ACCESS_KEY` | IAM-salainen avain |
+| `AWS_REGION` | `eu-north-1` |
+| `VITE_API_URL` | API Gateway -osoite |
+| `S3_BUCKET` | Frontend-bucket |
+| `CLOUDFRONT_DISTRIBUTION_ID` | `EVR0BK0EBPDUO` |
 
 ---
 
-## Avoimet päätökset (Vaihe 3+)
+## Avoimet päätökset (Vaihe 5+)
 
-- `format=3` endpoint rakennetaan Vaiheessa 4
-- Scenarios.js-skeema määritellään ennen Vaihetta 4
+- `format=3` endpoint rakennetaan Vaiheessa 5
+- Scenarios.js-skeema: lisää moduuleja togaf-mallin pohjalta
 - Python batch-skripti: generoi skenaarioita build-time, ei runtime
-- Sympathy value (Vs) DynamoDB: `{userId}:{moduleId}:sympathy`, per moduuli
+- Sympathy value (Vs) DynamoDB: `USER#<id>` / `MODULE#<id>#sympathy`
