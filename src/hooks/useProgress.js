@@ -1,21 +1,28 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
+import { api } from '../lib/api'
 
-const KEY = (moduleId, type) => `cg:local:${moduleId}:${type}`
+const lsKey = (moduleId, type) => `cg:local:${moduleId}:${type}`
+
+function lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) || fallback }
+  catch { return fallback }
+}
 
 export function useProgress(moduleId) {
-  const k = KEY(moduleId, 'progress')
-  const [progress, set] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(k)) || { completed: [] } }
-    catch { return { completed: [] } }
-  })
+  const [progress, set] = useState(() => lsGet(lsKey(moduleId, 'progress'), { completed: [] }))
+
+  useEffect(() => {
+    api.getProgress(moduleId).then(data => { if (data) set(data) })
+  }, [moduleId])
 
   const completeEpisode = useCallback((epId) => {
     set(prev => {
       const next = { completed: [...new Set([...prev.completed, epId])] }
-      localStorage.setItem(k, JSON.stringify(next))
+      localStorage.setItem(lsKey(moduleId, 'progress'), JSON.stringify(next))
+      api.setProgress(moduleId, next).catch(() => {})
       return next
     })
-  }, [k])
+  }, [moduleId])
 
   const isLocked = useCallback((epId) =>
     epId > 1 && !progress.completed.includes(epId - 1)
@@ -25,16 +32,23 @@ export function useProgress(moduleId) {
 }
 
 export function useSympathy(moduleId) {
-  const k = KEY(moduleId, 'sympathy')
-  const [value, set] = useState(() => parseInt(localStorage.getItem(k) || '50', 10))
+  const [value, set] = useState(() => {
+    const s = lsGet(lsKey(moduleId, 'sympathy'), { value: 50 })
+    return s.value ?? 50
+  })
+
+  useEffect(() => {
+    api.getSympathy(moduleId).then(data => { if (data?.value !== undefined) set(data.value) })
+  }, [moduleId])
 
   const update = useCallback((delta) => {
     set(prev => {
       const next = Math.max(0, Math.min(100, prev + delta))
-      localStorage.setItem(k, String(next))
+      localStorage.setItem(lsKey(moduleId, 'sympathy'), JSON.stringify({ value: next }))
+      api.setSympathy(moduleId, { value: next }).catch(() => {})
       return next
     })
-  }, [k])
+  }, [moduleId])
 
   return { sympathy: value, updateSympathy: update }
 }
