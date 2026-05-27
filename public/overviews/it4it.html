@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IT4IT v3 — IT Management Reference Architecture</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#0891B2;--cl:#67E8F9;--cb:rgba(8,145,178,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,rgba(99,102,241,.06) 60%,#0a0f1a 100%);border-bottom:1px solid #1e2d45;padding:48px 24px 40px}
+.hero-inner,.main-inner{max-width:920px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid rgba(8,145,178,.3);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1.5px;color:#fff;margin-bottom:10px;line-height:1.1}
+.sub{font-size:15px;color:#94a3b8;max-width:660px;line-height:1.65}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:16px}
+main{padding:36px 24px 100px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:32px;background:var(--cb);border:1px solid rgba(8,145,178,.25);border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:40px 0 14px;padding-bottom:10px;border-bottom:2px solid #1e2d45}
+h3{font-size:12px;font-weight:800;color:var(--cl);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+strong{color:#e2e8f0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card.indigo{border-left-color:#6366f1}
+.card.amber{border-left-color:#f59e0b}
+.card.rose{border-left-color:#f43f5e}
+.card.green{border-left-color:#10b981}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}
+th{text-align:left;padding:9px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827;letter-spacing:.04em}
+td{padding:10px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid rgba(8,145,178,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8;line-height:1.7}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8}
+.warn strong{color:#fbbf24}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:4px;margin:2px;letter-spacing:.04em}
+.pill-c{background:rgba(8,145,178,.12);color:#67E8F9;border:1px solid rgba(8,145,178,.25)}
+.pill-i{background:rgba(99,102,241,.12);color:#a5b4fc;border:1px solid rgba(99,102,241,.25)}
+.pill-g{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.sep{border:none;border-top:2px dashed #1e2d45;margin:44px 0}
+
+/* value stream pipeline */
+.pipeline{display:flex;gap:0;margin:16px 0 24px;overflow-x:auto}
+.vs-block{flex:1;min-width:140px;border:1px solid #1e2d45;padding:16px 12px;text-align:center;position:relative;background:#111827}
+.vs-block:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--cl);font-size:18px;font-weight:900;z-index:1}
+.vs-block:first-child{border-radius:8px 0 0 8px;border-left-color:rgba(8,145,178,.4)}
+.vs-block:last-child{border-radius:0 8px 8px 0}
+.vs-abbr{font-size:20px;font-weight:900;color:var(--cl);display:block;margin-bottom:4px}
+.vs-name{font-size:11px;font-weight:800;color:#fff;margin-bottom:3px;line-height:1.3}
+.vs-desc{font-size:10px;color:#64748b;line-height:1.4}
+
+/* fc grid */
+.fc-section{background:#0d1424;border:1px solid #1e2d45;border-radius:8px;padding:14px 18px;margin:10px 0}
+.fc-head{font-size:12px;font-weight:800;color:var(--cl);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.fc-list{display:flex;flex-wrap:wrap;gap:6px}
+.fc-chip{background:#111827;border:1px solid #1e2d45;border-radius:5px;padding:5px 10px;font-size:11px;color:#94a3b8;font-weight:600}
+.fc-chip.key{border-color:rgba(8,145,178,.4);color:var(--cl)}
+
+/* data objects */
+.do-row td:first-child{color:var(--cl);font-weight:700}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a>
+  <a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">🤖 AI-103</a>
+  <a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html">📐 ArchiMate</a>
+  <a href="it4it.html" class="active">🔄 IT4IT</a>
+  <a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a>
+  <a href="sabsa.html">🔐 SABSA</a>
+  <a href="ai-compliance.html">⚖️ AI Compliance</a>
+  <a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🔄 The Open Group · IT Management Architecture</div>
+  <h1>IT4IT v3</h1>
+  <p class="sub">The IT Management Reference Architecture. Defines what data and functional capabilities IT needs to manage its services — across the full lifecycle from strategy to operations. Complements ITIL, COBIT, and TOGAF.</p>
+  <div class="meta">
+    <span><a href="https://www.opengroup.org/it4it" target="_blank" class="ext">Official page ↗</a></span>
+    <span>80 questions · 6 domains</span>
+    <span>Version: 3.0 (current)</span>
+    <span>Related: <a href="togaf.html" class="ext">TOGAF →</a> <a href="itil4.html" class="ext">ITIL 4 →</a> <a href="cobit2019.html" class="ext">COBIT 2019 →</a></span>
+  </div>
+</div></div>
+
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <!-- BIG PICTURE -->
+  <h2>🗺️ The Big Picture</h2>
+  <div class="grid2">
+    <div class="card"><div class="card-title">What IT4IT IS</div><div class="card-body">An IT management <strong>reference architecture</strong> — defines the functional capabilities (Functional Components) and information model (Data Objects) the IT function needs to manage its services effectively.</div></div>
+    <div class="card"><div class="card-title">What IT4IT is NOT</div><div class="card-body">Not a process framework. IT4IT doesn't tell you how to run a Change Advisory Board — that's ITIL. IT4IT tells you what data and capabilities your tools must support.</div></div>
+    <div class="card teal">... wait</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><div class="card-title">Publisher</div><div class="card-body">The Open Group — same as TOGAF and ArchiMate. Managed by the IT4IT Forum.</div></div>
+    <div class="card"><div class="card-title">Relation to ITIL</div><div class="card-body">ITIL = <em>how</em> to run IT processes. IT4IT = <em>what</em> data and tools those processes need. Complementary — most organisations use both.</div></div>
+    <div class="card indigo"><div class="card-title">Relation to COBIT</div><div class="card-body">COBIT = <em>what outcomes</em> IT governance must achieve. IT4IT = the operational architecture to achieve them. Complementary.</div></div>
+    <div class="card green"><div class="card-title">Relation to TOGAF</div><div class="card-body">TOGAF ADM produces architecture outputs (Phase A–B) that feed IT4IT's S2P value stream — strategy drives portfolio decisions.</div></div>
+  </div>
+  <div class="tip"><strong>Core idea:</strong> IT4IT treats IT like a factory — it defines the assembly line (Value Streams), the machines on the line (Functional Components), and the parts flowing through (Data Objects). The Service is what comes off the production line.</div>
+
+  <!-- VALUE STREAMS -->
+  <h2>🔄 The Four Core Value Streams</h2>
+  <div class="pipeline">
+    <div class="vs-block"><span class="vs-abbr">S2P</span><div class="vs-name">Strategy to Portfolio</div><div class="vs-desc">Decide what to invest in</div></div>
+    <div class="vs-block"><span class="vs-abbr">R2D</span><div class="vs-name">Requirement to Deploy</div><div class="vs-desc">Build and deploy it</div></div>
+    <div class="vs-block"><span class="vs-abbr">R2F</span><div class="vs-name">Request to Fulfill</div><div class="vs-desc">Make it available to users</div></div>
+    <div class="vs-block"><span class="vs-abbr">D2C</span><div class="vs-name">Detect to Correct</div><div class="vs-desc">Keep it running</div></div>
+  </div>
+  <table>
+    <thead><tr><th>Value Stream</th><th>Primary question</th><th>Key artefact produced</th><th>ITIL equivalent</th></tr></thead>
+    <tbody>
+      <tr><td><strong>S2P</strong></td><td>Which services should IT invest in?</td><td>Approved Service Proposal / Blueprint</td><td>Strategy Management, Portfolio Mgmt</td></tr>
+      <tr><td><strong>R2D</strong></td><td>How do we build and deploy it reliably?</td><td>Service Release Blueprint</td><td>Change Enablement, Release Mgmt</td></tr>
+      <tr><td><strong>R2F</strong></td><td>How do users get access to services?</td><td>Request Record, Active Subscription</td><td>Request Fulfilment, Service Catalogue</td></tr>
+      <tr><td><strong>D2C</strong></td><td>How do we detect and fix problems?</td><td>Incident Record, Problem Record, Known Error</td><td>Incident Mgmt, Problem Mgmt, Event Mgmt</td></tr>
+    </tbody>
+  </table>
+
+  <!-- KEY CONCEPTS -->
+  <h2>🧱 Key Structural Concepts</h2>
+  <div class="grid2">
+    <div class="card"><div class="card-title">🔧 Functional Component (FC)</div><div class="card-body">A discrete software capability the IT function needs. Each FC has defined inputs, outputs, and responsibilities. IT management tools implement FCs. ~33–40 FCs in IT4IT v3 total.</div></div>
+    <div class="card"><div class="card-title">📄 Data Object</div><div class="card-body">A specific, defined piece of information with content, owner, and lifecycle. Examples: Service Blueprint, Release Blueprint, Request Record, Incident Record, CMDB CI. The "nouns" of IT4IT.</div></div>
+    <div class="card indigo"><div class="card-title">🔁 Data Backbone</div><div class="card-body">The shared information model and integration architecture linking all Functional Components across Value Streams. Prevents data silos. Ensures one CI record is shared by monitoring, ITSM, and CMDB tools.</div></div>
+    <div class="card indigo"><div class="card-title">🚪 Service Entry Point</div><div class="card-body">The defined handoff between adjacent Value Streams — specifying exactly which Data Objects pass from one stream to the next. S2P → R2D: Service Blueprint. R2D → R2F + D2C: Service Release Blueprint.</div></div>
+    <div class="card green"><div class="card-title">🏷️ IT Service Model</div><div class="card-body">The central shared object representing a service and its components, tracked across ALL four Value Streams. S2P funds it; R2D builds it; R2F exposes it; D2C monitors it.</div></div>
+    <div class="card green"><div class="card-title">📦 Digital Product (v3)</div><div class="card-body">IT4IT v3 addition: IT services managed with a product-centric model — product owner, customer outcomes, backlog. Extended the S2P value stream with Digital Product Management capabilities.</div></div>
+  </div>
+
+  <!-- S2P DETAIL -->
+  <hr class="sep"/>
+  <h2>1️⃣ Strategy to Portfolio (S2P)</h2>
+  <p>S2P answers: <em>"Given our business strategy, which IT services should we fund, build, maintain, and retire?"</em> It is triggered by business demand, market change, or regulatory requirement.</p>
+
+  <div class="fc-section">
+    <div class="fc-head">S2P Functional Components</div>
+    <div class="fc-list">
+      <span class="fc-chip key">Enterprise Architecture</span>
+      <span class="fc-chip key">Portfolio / Demand Management</span>
+      <span class="fc-chip key">Financial Management</span>
+      <span class="fc-chip key">Policy Management</span>
+      <span class="fc-chip">Service Portfolio Management</span>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>FC</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td>Enterprise Architecture</td><td>Aligns IT capabilities to business strategy; assesses build-vs-buy; models capability gaps</td></tr>
+      <tr><td>Demand Management</td><td>Captures and prioritises business demand before formal proposals are created</td></tr>
+      <tr><td>Service Portfolio Management</td><td>Governs all services (proposed, active, retired) — investment prioritisation and lifecycle decisions</td></tr>
+      <tr><td>Financial Management</td><td>Tracks total cost of ownership across service lifecycle; informs investment decisions</td></tr>
+      <tr><td>Policy Management</td><td>Defines compliance and governance policies propagated as constraints to all downstream streams</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>S2P v3 addition:</strong> Digital Product Management introduces a product-centric operating model into S2P. A Digital Product is an IT service with a dedicated product owner, customer value proposition, and a product backlog — reflecting product-led IT delivery.</div>
+
+  <!-- R2D DETAIL -->
+  <h2>2️⃣ Requirement to Deploy (R2D)</h2>
+  <p>R2D takes an approved Service Proposal from S2P and carries it through requirements, design, build, test, and controlled deployment. It is IT4IT's engineering value stream — the reference architecture for a DevOps / CI/CD toolchain.</p>
+
+  <div class="fc-section">
+    <div class="fc-head">R2D Functional Components</div>
+    <div class="fc-list">
+      <span class="fc-chip key">Requirement Management</span>
+      <span class="fc-chip key">Source Control Management</span>
+      <span class="fc-chip key">Build &amp; Test Management</span>
+      <span class="fc-chip key">Service Test Management</span>
+      <span class="fc-chip key">Defect Management</span>
+      <span class="fc-chip key">Release Management</span>
+      <span class="fc-chip">Change Management / Enablement</span>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>FC</th><th>Responsibility</th><th>Modern equivalent</th></tr></thead>
+    <tbody>
+      <tr><td>Requirement Management</td><td>Captures and traces requirements from proposal to delivery</td><td>Jira / Azure Boards stories</td></tr>
+      <tr><td>Source Control Management</td><td>Versions code and configuration artefacts, manages branches</td><td>Git / Azure Repos</td></tr>
+      <tr><td>Build &amp; Test Management</td><td>Automated compilation, packaging, unit and integration testing</td><td>Jenkins, GitHub Actions, Azure Pipelines</td></tr>
+      <tr><td>Defect Management</td><td>Captures and tracks pre-production quality defects</td><td>Jira bugs, GitHub Issues</td></tr>
+      <tr><td>Service Test Management</td><td>Quality gate — defines test strategy; approves release readiness</td><td>Test plans, QA gates</td></tr>
+      <tr><td>Release Management</td><td>Packages, schedules, and coordinates controlled deployment handoff</td><td>Release pipelines, deployment boards</td></tr>
+      <tr><td>Change Management</td><td>Governs risk assessment and authorisation of changes</td><td>Change Advisory Board, automated approvals</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>R2D output — Service Release Blueprint:</strong> The key artefact R2D produces. Contains the complete specification of what was built, how it is configured, and what is needed to deploy and monitor it. Passed to BOTH R2F (configure catalogue) and D2C (set up monitoring).</div>
+
+  <!-- R2F DETAIL -->
+  <h2>3️⃣ Request to Fulfill (R2F)</h2>
+  <p>R2F is the face of IT to its users. It takes services that R2D deployed and makes them consumable — through a catalogue, self-service portal, request handling, and automated or manual fulfilment.</p>
+
+  <div class="fc-section">
+    <div class="fc-head">R2F Functional Components</div>
+    <div class="fc-list">
+      <span class="fc-chip key">Offer Management</span>
+      <span class="fc-chip key">Request Management</span>
+      <span class="fc-chip key">Fulfillment Management</span>
+      <span class="fc-chip key">Subscription Management</span>
+      <span class="fc-chip key">Knowledge Management</span>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>FC</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td>Offer Management</td><td>Defines service offerings: what is available, configuration options, SLA tiers, pricing</td></tr>
+      <tr><td>Request Management</td><td>Receives, routes, and tracks user service requests — the Request Record lifecycle</td></tr>
+      <tr><td>Fulfillment Management</td><td>Executes automated or manual provisioning workflows; enforces policy during delivery</td></tr>
+      <tr><td>Subscription Management</td><td>Manages ongoing user entitlements — who has access to what and for how long</td></tr>
+      <tr><td>Knowledge Management</td><td>Stores and surfaces how-to guides, FAQs, workarounds for self-service and agent support</td></tr>
+    </tbody>
+  </table>
+  <div class="warn"><strong>Service Portfolio vs Service Catalogue:</strong> <strong>Portfolio</strong> (S2P) = ALL services in all states — proposed, active, retired. <strong>Catalogue</strong> (R2F) = ONLY currently available, requestable services. The catalogue is the user-facing subset of the portfolio.</div>
+
+  <!-- D2C DETAIL -->
+  <h2>4️⃣ Detect to Correct (D2C)</h2>
+  <p>D2C monitors running services, detects deviations, manages incidents and problems, controls emergency changes, and maintains configuration records. It is triggered by events, alerts, and anomalies in production.</p>
+
+  <div class="fc-section">
+    <div class="fc-head">D2C Functional Components</div>
+    <div class="fc-list">
+      <span class="fc-chip key">Event Management</span>
+      <span class="fc-chip key">Incident Management</span>
+      <span class="fc-chip key">Problem Management</span>
+      <span class="fc-chip key">Configuration Management (CMDB)</span>
+      <span class="fc-chip key">Change Control</span>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>FC</th><th>Responsibility</th><th>Key artefact</th></tr></thead>
+    <tbody>
+      <tr><td>Event Management</td><td>Monitors services; filters and correlates raw signals from monitoring tools</td><td>Event Record</td></tr>
+      <tr><td>Incident Management</td><td>Restores normal service as quickly as possible — speed over root cause</td><td>Incident Record</td></tr>
+      <tr><td>Problem Management</td><td>Investigates root cause; creates Known Error Records; feeds fixes into R2D</td><td>Problem Record, Known Error</td></tr>
+      <tr><td>Configuration Management</td><td>Maintains authoritative CMDB — CI records, attributes, and relationships</td><td>Configuration Item (CI)</td></tr>
+      <tr><td>Change Control</td><td>Emergency and remediation changes — reactive fixes to restore stability</td><td>Change Record (emergency)</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Incident vs Problem:</strong> Incident = restore service fast (even if root cause unknown). Problem = find and fix the root cause permanently. Incident Management is reactive and time-critical; Problem Management is investigative and preventive. One Problem may cause many Incidents.</div>
+  <div class="tip"><strong>D2C feedback loop:</strong> When Problem Management identifies a root cause requiring a software fix, it generates a Requirement or Change Request that enters R2D — closing the loop from production failures to engineered solutions.</div>
+
+  <!-- DATA OBJECTS -->
+  <hr class="sep"/>
+  <h2>📄 Key Data Objects — Handoff Map</h2>
+  <table>
+    <thead><tr><th>Data Object</th><th>Created in</th><th>Consumed by</th><th>What it contains</th></tr></thead>
+    <tbody class="do-row">
+      <tr><td>Service Proposal / Blueprint</td><td>S2P</td><td>R2D</td><td>Approved service definition, business value, funding, scope</td></tr>
+      <tr><td>Service Release Blueprint</td><td>R2D</td><td>R2F, D2C</td><td>What was built, how configured, deployment spec, monitoring requirements</td></tr>
+      <tr><td>Request Record</td><td>R2F</td><td>R2F (internal), D2C</td><td>User request details, status, fulfilment history, SLA clock</td></tr>
+      <tr><td>Active Subscription</td><td>R2F</td><td>D2C</td><td>Who has access to which service — impact scope for incidents</td></tr>
+      <tr><td>Incident Record</td><td>D2C</td><td>D2C (internal), R2D (via Problem)</td><td>Disruption details, timeline, affected CIs, resolution steps</td></tr>
+      <tr><td>Problem Record</td><td>D2C</td><td>D2C, R2D</td><td>Root cause investigation, linked incidents, Known Error, fix requirement</td></tr>
+      <tr><td>Known Error Record</td><td>D2C (Problem)</td><td>D2C (Incident Mgmt), R2F (Knowledge)</td><td>Confirmed root cause + workaround, pending permanent fix</td></tr>
+      <tr><td>Configuration Item (CI)</td><td>D2C (Config Mgmt)</td><td>All streams</td><td>IT asset attributes, relationships, state — the CMDB record</td></tr>
+      <tr><td>Change Record</td><td>R2D / D2C</td><td>R2D (planned), D2C (emergency)</td><td>Change description, risk, impact, approval status, schedule</td></tr>
+    </tbody>
+  </table>
+
+  <!-- QUICK REFERENCE -->
+  <hr class="sep"/>
+  <h2>⚡ Quick Reference — Exam Traps</h2>
+  <table>
+    <thead><tr><th>Question pattern</th><th>Correct answer</th><th>Common wrong answer</th></tr></thead>
+    <tbody>
+      <tr><td>IT4IT vs ITIL purpose</td><td>IT4IT = information/tool architecture; ITIL = process/practice design</td><td>They are the same / IT4IT replaces ITIL</td></tr>
+      <tr><td>IT4IT vs COBIT</td><td>COBIT = governance outcomes; IT4IT = operational architecture to achieve them</td><td>IT4IT replaces COBIT</td></tr>
+      <tr><td>Which stream decides investment?</td><td><strong>S2P</strong> — Strategy to Portfolio</td><td>R2D (builds, doesn't decide)</td></tr>
+      <tr><td>Which stream builds software?</td><td><strong>R2D</strong> — Requirement to Deploy</td><td>S2P (decides, doesn't build)</td></tr>
+      <tr><td>Which stream handles user requests?</td><td><strong>R2F</strong> — Request to Fulfill</td><td>D2C (handles incidents, not requests)</td></tr>
+      <tr><td>Incident vs Problem in D2C</td><td>Incident = restore fast; Problem = fix root cause permanently</td><td>Both are the same — just different severity</td></tr>
+      <tr><td>Service Portfolio vs Catalogue</td><td>Portfolio = all services all states (S2P); Catalogue = available now (R2F)</td><td>Same thing, different names</td></tr>
+      <tr><td>Service Release Blueprint flows to</td><td>BOTH R2F (catalogue config) AND D2C (monitoring config)</td><td>Only to R2F or only to D2C</td></tr>
+      <tr><td>D2C Emergency Change purpose</td><td>Reactive fix to restore/stabilise a failing production service</td><td>All changes go through D2C Change Control</td></tr>
+      <tr><td>D2C → R2D feedback trigger</td><td>Problem Management identifies root cause requiring a software fix → generates requirement into R2D</td><td>D2C is a closed loop with no outputs</td></tr>
+      <tr><td>Digital Product concept</td><td>IT4IT v3 addition to S2P — product-centric IT service management with product owner</td><td>Digital Product is in R2F (delivery)</td></tr>
+      <tr><td>Data Backbone purpose</td><td>Shared information model ensuring consistent data flow between tools — prevents silos</td><td>A physical network or message bus product</td></tr>
+    </tbody>
+  </table>
+</div></main>
+</body>
+</html>

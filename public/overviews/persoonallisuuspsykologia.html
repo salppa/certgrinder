@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Persoonallisuuspsykologia — Käytännön näkökulma</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#8B5CF6;--cl:#C4B5FD;--cb:rgba(139,92,246,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #8B5CF644;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #8B5CF630;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #8B5CF630;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:13px 16px;margin-bottom:8px;font-size:13px;color:#94a3b8}
+.warn strong{color:#FCA5A5}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">🤖 AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏗️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">📐 ArchiMate</a><a href="it4it.html">🔄 IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">⚖️ AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a><a href="persoonallisuuspsykologia.html" class="active">🧠 Psykologia</a><a href="kirjanpito.html">📊 Kirjanpito</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🧠 Persoonallisuuspsykologia</div>
+  <h1>Persoonallisuuspsykologia</h1>
+  <p class="sub">Big Five, kiintymystyylit, defenssimekanismit, temperamentti, psykologiset tarpeet, kognitiiviset vääristymät ja MBTI — käytännön näkökulmasta.</p>
+  <div class="meta"><span>80 kysymystä &bull; Suomeksi</span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🌊 Big Five / OCEAN — viisi persoonallisuusulottuvuutta</h2>
+  <p>Big Five on laajimmin tieteellisesti validoitu persoonallisuusmalli. Se kuvaa persoonallisuutta viidellä jatkuvalla ulottuvuudella.</p>
+  <table><thead><tr><th>Ulottuvuus</th><th>Suomeksi</th><th>Korkea arvo</th><th>Matala arvo</th></tr></thead><tbody>
+    <tr><td>Openness (O)</td><td>Avoimuus kokemuksille</td><td>Utelias, luova, taiteellinen</td><td>Käytännöllinen, rutiinisuuntautunut</td></tr>
+    <tr><td>Conscientiousness (C)</td><td>Tunnollisuus</td><td>Järjestelmällinen, luotettava, tavoiteorientoitunut</td><td>Impulsiivinen, ei-organisoitunut</td></tr>
+    <tr><td>Extraversion (E)</td><td>Ekstraversio</td><td>Sosiaalinen, puhelias, energinen seurassa</td><td>Varautunut, yksinolosta energiaa saava</td></tr>
+    <tr><td>Agreeableness (A)</td><td>Sovinnollisuus</td><td>Empaattinen, yhteistyökykyinen, joustava</td><td>Kilpailuhenkinen, kriittinen, suorapuheinen</td></tr>
+    <tr><td>Neuroticism (N)</td><td>Neuroottisuus</td><td>Ahdistunut, alakuloinen, tunne-epävakaa</td><td>Rauhallinen, emotionaalisesti vakaa</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Käytännössä:</strong> Tunnollisuus ennustaa parhaiten työssä suoriutumista. Neuroottisuus korreloi mielenterveyden ongelmiin. Avoimuus liittyy luovuuteen. Big Five on validoitu sadoissa kansainvälisisä tutkimuksissa — se on tieteellisesti luotettavin persoonallisuuden mittausväline.</div>
+
+  <h2>🔗 Kiintymystyylit</h2>
+  <p>John Bowlby kehitti kiintymysteorian, Mary Ainsworth tutki sen ilmentymiä lapsilla (Strange Situation -menetelmä).</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">✅ Turvallinen</div><div class="card-body">Syntyy johdonmukaisesta, responsiivisesta hoivauksesta. Aikuisena: luottamus muihin, kyky läheisyyteen, terveet rajat. Paras pohja hyvinvoinnille.</div></div>
+    <div class="card"><div class="card-title">🔒 Välttelevä</div><div class="card-body">Syntyy etäisestä tai torjuvasta hoivauksesta. Lapsi sammuttaa kiintymystarpeen. Aikuisena: emotionaalinen etäisyys, vaikeus sitoutua, itsenäisyyden ylikorostaminen.</div></div>
+    <div class="card"><div class="card-title">⚠️ Ahdistunut</div><div class="card-body">Syntyy epäjohdonmukaisesta hoivauksesta. Aikuisena: jatkuva hylkäämisen pelko, tarvitsevasuus, mustasukkaisuus, klinisuus ihmissuhteissa.</div></div>
+    <div class="card"><div class="card-title">⚡ Disorganisoitunut</div><div class="card-body">Syntyy kun hoivaaja on turvan ja pelon lähde samanaikaisesti (väkivalta, päihteet). Liittyy vahvimmin psyykkisiin ongelmiin aikuisuudessa.</div></div>
+  </div>
+  <div class="tip"><strong>Sisäiset työmallit:</strong> Varhaiset kiintymyskokemukset rakentavat sisäisiä työmalleja — odotuksia itsestä ja muista. Nämä ohjaavat aikuisuuden ihmissuhteita tiedostamatta. <strong>Earned Security</strong> = turvallisen kiintymystyylin saavuttaminen terapian tai korjaavien suhteiden kautta.</div>
+
+  <h2>🛡️ Defenssimekanismit</h2>
+  <p>Tiedostamattomia psyykkisiä strategioita, joilla ego suojaa itseään ahdistukselta (Freud, Anna Freud 1936; Vaillant 1977).</p>
+  <table><thead><tr><th>Defenssi</th><th>Kuvaus</th><th>Esimerkki</th><th>Kypsyys</th></tr></thead><tbody>
+    <tr><td>Torjunta</td><td>Uhkaava muisto pidetään tiedostamattomassa (tiedostamaton)</td><td>Traumaattinen tapahtuma unohdetaan täysin</td><td>Primitiivinen</td></tr>
+    <tr><td>Projektio</td><td>Oma tunne siirretään toiseen henkilöön</td><td>"En ole mustasukkainen — sinä olet!"</td><td>Kypsymätön</td></tr>
+    <tr><td>Rationalisointi</td><td>Järkeenkäyvät mutta epäaidot selitykset</td><td>"En saanut työtä koska firma ei ole hyvä"</td><td>Neurotinen</td></tr>
+    <tr><td>Reaktionmuodostus</td><td>Tunne muunnetaan täysin vastakkaiseksi</td><td>Vihata sisarustaan mutta käyttäytyä ylirakkaasti</td><td>Neurotinen</td></tr>
+    <tr><td>Regressio</td><td>Palaaminen lapsellisemmalle tasolle stressin alla</td><td>Aikuinen itkee kuin lapsi vastoinkäymisessä</td><td>Kypsymätön</td></tr>
+    <tr><td>Splitting</td><td>Asiat nähdään joko täysin hyvinä tai pahoina</td><td>"Olet paras!" → "Olet pahin!" pienestä pettymyksestä</td><td>Primitiivinen (BPD)</td></tr>
+    <tr><td>Sublimaatio</td><td>Impulssi kanavoidaan sosiaalisesti hyväksyttyyn</td><td>Aggressio → urheilu tai taide</td><td>Kypsä</td></tr>
+    <tr><td>Huumori</td><td>Ahdistus käsitellään huumorin avulla</td><td>Itseironinen vitsi vaikeasta tilanteesta</td><td>Kypsä</td></tr>
+  </tbody></table>
+
+  <h2>🌱 Temperamentti</h2>
+  <p>Temperamentti on biologisesti pohjainen, synnynnäinen käyttäytymistyyli. Persoonallisuus kehittyy temperamentin ja kokemusten yhdistelmästä.</p>
+  <table><thead><tr><th>Teoria</th><th>Keskeinen jako</th><th>Käytännön merkitys</th></tr></thead><tbody>
+    <tr><td>Thomas &amp; Chess</td><td>Helppo / Vaikea / Hitaasti lämpiävä</td><td>"Goodness of Fit" — ympäristön mukauttaminen temperamenttiin</td></tr>
+    <tr><td>Kagan</td><td>Inhibited (estoinen) / Uninhibited</td><td>Estoinen lapsi vetaytyy uutuuksista — yhteys amygdalan reaktiivisuuteen</td></tr>
+    <tr><td>Cloninger</td><td>Uutuudenhakuisuus, Vahinkovälttely, Palkintoriippuvuus, Sinnikkyys</td><td>Neurobiologinen pohja (dopamiini, serotoniini, noradrenaliini)</td></tr>
+    <tr><td>Aron (HSP)</td><td>Korkea herkkyys vs. normaali herkkyys</td><td>15–20% väestöstä — syvempi prosessointi, ei patologia</td></tr>
+  </tbody></table>
+
+  <h2>🎯 Psykologiset tarpeet</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🔵 SDT: Autonomia</div><div class="card-body">Toiminta omista lähtökohdista — ei ulkoisen pakon alla. Kontrolloiva ympäristö heikentää autonomiaa ja motivaatiota.</div></div>
+    <div class="card"><div class="card-title">💪 SDT: Kompetenssi</div><div class="card-body">Kokemus omasta pätevyydestä ja vaikuttavuudesta. Optimaaliset haasteet ruokkivat kompetenssitunnetta.</div></div>
+    <div class="card"><div class="card-title">🤝 SDT: Yhteenkuuluvuus</div><div class="card-body">Merkitykselliset, molemminpuoliset ihmissuhteet. Ei pelkkää hyväksyntää — aitoa yhteyttä.</div></div>
+    <div class="card"><div class="card-title">🏛️ Maslow: 5 tasoa</div><div class="card-body">Fysiologiset → Turvallisuus → Rakkaus → Arvostus → Itsensä toteuttaminen. Alemmat tarpeet ensin — kritiikki: hierarkia ei ole tiukka.</div></div>
+  </div>
+  <div class="tip"><strong>Overjustification effect:</strong> Kun ulkoinen palkkio lisätään sisäisesti motivoivaan toimintaan, koettu syy siirtyy "teen palkkion takia" — sisäinen motivaatio heikkenee.</div>
+
+  <h2>🧩 Kognitiiviset vääristymät (Aaron Beck / CBT)</h2>
+  <p>Systemaattisia virheitä ajattelussa, jotka vääristävät todellisuuden tulkintaa — usein negatiiviseen suuntaan.</p>
+  <table><thead><tr><th>Vääristymä</th><th>Kuvaus</th><th>Esimerkki</th></tr></thead><tbody>
+    <tr><td>Katastrofiajattelu</td><td>Pahin mahdollinen seurausketju pienestä asiasta</td><td>"Myöhästän → saan potkut → menetän kotini"</td></tr>
+    <tr><td>Mustavalkoinen ajattelu</td><td>Asiat joko täydellisiä tai epäonnistuneita</td><td>"En saavuttanut 100% — olen epäonnistuja"</td></tr>
+    <tr><td>Mielenluenta</td><td>Oletetaan tietävän muiden ajatukset</td><td>"Hän ei tervehtinyt — hän vihaa minua"</td></tr>
+    <tr><td>Personointi</td><td>Ulkoiset tapahtumat otetaan omaksi syyksi</td><td>"Pomoni on huonolla tuulella — olen tehnyt jotain väärin"</td></tr>
+    <tr><td>Yliyleistäminen</td><td>Yhdestä tapahtumasta laaja päätelmä</td><td>"Asiat meiyvät aina pieleen" (yksi virhe)</td></tr>
+    <tr><td>Henkinen suodatin</td><td>Vain negatiivinen nähdään</td><td>50 kehusta yksi kritiikki — mietitään kritiikkiä</td></tr>
+    <tr><td>"Pitäisi"-ajattelu</td><td>Jäykät vaatimukset itselle/muille</td><td>"Minun pitäisi aina olla tehokas"</td></tr>
+    <tr><td>Tulevaisuuden ennustaminen</td><td>Negatiivinen lopputulos oletetaan etukäteen</td><td>"En edes yritä — tiedän ettei onnistu"</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>CBT-ratkaisu:</strong> 1) Tunnista automaattinen negatiivinen ajatus 2) Testaa todisteita puolesta ja vastaan 3) Muodosta tasapainoisempi, realistisempi ajatus (kognitiivinen uudelleenrakentelu).</div>
+
+  <h2>🔶 MBTI — Myers-Briggs Type Indicator</h2>
+  <p>Perustuu Carl Jungin psykologisiin tyyppeihin (1921). Isabel Briggs Myers kehitti mittariston 1940-luvulla.</p>
+  <table><thead><tr><th>Dimensio</th><th>Vastakohtaparit</th><th>Käytännön ero</th></tr></thead><tbody>
+    <tr><td>E / I</td><td>Ekstrovertti / Introvertti</td><td>Energia sosiaalisista tilanteista vs. yksinolosta</td></tr>
+    <tr><td>S / N</td><td>Sensing / iNtuition</td><td>Faktat ja nykyhetki vs. mahdollisuudet ja tulevaisuus</td></tr>
+    <tr><td>T / F</td><td>Thinking / Feeling</td><td>Logiikka ja objektiivisuus vs. arvot ja harmonia</td></tr>
+    <tr><td>J / P</td><td>Judging / Perceiving</td><td>Rakenne ja suunnitelmallisuus vs. joustavuus</td></tr>
+  </tbody></table>
+  <div class="warn"><strong>Tieteellinen kritiikki:</strong> 50% ihmisistä saa eri tyypin 5 viikon päästä. Dikotominen jako on keinotekoinen — todellisuudessa jatkumo. Heikko ennustava validiteetti verrattuna Big Five:en. Suosittu käytännössä, koska kaikki tyypit ovat positiivisia ja se antaa kielen puhua erilaisuudesta.</div>
+
+  <h2>🔗 Resurssit</h2>
+  <p>
+    <a href="https://www.yourpersonality.net/" target="_blank" class="ext">Big Five -testi (ilmainen) ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.16personalities.com/fi" target="_blank" class="ext">MBTI-tyypit suomeksi ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.mielenterveystalo.fi" target="_blank" class="ext">Mielenterveystalo.fi ↗</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+</div></main>
+</body>
+</html>

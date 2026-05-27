@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>COBIT 2019 Foundation — Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#EF4444;--cl:#FCA5A5;--cb:rgba(239,68,68,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #EF444444;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #EF444430;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #EF444430;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.domain-block{background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:16px;margin-bottom:12px}
+.domain-header{font-size:14px;font-weight:800;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.domain-code{background:var(--cb);color:var(--cl);border-radius:4px;padding:2px 8px;font-size:12px;font-weight:900;border:1px solid var(--c)}
+.obj-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.obj{background:#0d1424;border:1px solid #1e2d45;border-radius:6px;padding:7px 10px;font-size:11px;color:#94a3b8}
+.obj-code{font-weight:800;color:var(--cl);margin-right:5px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html" class="active">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🎯 ISACA · Governance &amp; Management of Enterprise IT</div>
+  <h1>COBIT 2019 Foundation</h1>
+  <p class="sub">The governance and management framework for enterprise IT — 40 objectives across 6 domains, design factors, focus areas, and the goals cascade from stakeholder needs to IT objectives.</p>
+  <div class="meta"><span><a href="https://www.isaca.org/resources/cobit" target="_blank" class="ext">isaca.org/cobit ↗</a></span><span>Related: <a href="itil4.html" class="ext">ITIL 4 →</a> · <a href="togaf.html" class="ext">TOGAF →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>⚖️ Governance vs Management — The Core Distinction</h2>
+  <div class="grid">
+    <div class="card" style="border-left-color:#EF4444">
+      <div class="card-title">🏛️ Governance (EDM domain)</div>
+      <div class="card-body">
+        Set by the <strong>governing body</strong> (board, executives). Three activities:<br><br>
+        <strong>Evaluate</strong> — assess options and trade-offs<br>
+        <strong>Direct</strong> — set direction through priorities and policies<br>
+        <strong>Monitor</strong> — verify performance against targets and compliance<br><br>
+        5 objectives: EDM01–EDM05
+      </div>
+    </div>
+    <div class="card" style="border-left-color:#F59E0B">
+      <div class="card-title">⚙️ Management (APO/BAI/DSS/MEA domains)</div>
+      <div class="card-body">
+        Performed by <strong>management</strong> (C-suite, IT management). Four domains follow the Plan-Build-Run-Monitor model:<br><br>
+        <strong>APO</strong> — Align, Plan, Organise (Plan)<br>
+        <strong>BAI</strong> — Build, Acquire, Implement (Build)<br>
+        <strong>DSS</strong> — Deliver, Service, Support (Run)<br>
+        <strong>MEA</strong> — Monitor, Evaluate, Assess (Monitor)<br><br>
+        35 objectives total
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Key exam distinction:</strong> Governance = Evaluate, Direct, Monitor (EDM). Management = Plan, Build, Run, Monitor (APO, BAI, DSS, MEA). The board does governance. Management does management. They are separate but interlocked.</div>
+
+  <h2>📋 All 40 Governance &amp; Management Objectives</h2>
+
+  <div class="domain-block">
+    <div class="domain-header"><span class="domain-code">EDM</span> Evaluate, Direct and Monitor — 5 objectives</div>
+    <div class="obj-list">
+      <div class="obj"><span class="obj-code">EDM01</span>Governance Framework Setting and Maintenance</div>
+      <div class="obj"><span class="obj-code">EDM02</span>Benefits Delivery</div>
+      <div class="obj"><span class="obj-code">EDM03</span>Risk Optimisation</div>
+      <div class="obj"><span class="obj-code">EDM04</span>Resource Optimisation</div>
+      <div class="obj"><span class="obj-code">EDM05</span>Stakeholder Engagement</div>
+    </div>
+  </div>
+
+  <div class="domain-block">
+    <div class="domain-header"><span class="domain-code">APO</span> Align, Plan and Organise — 14 objectives</div>
+    <div class="obj-list">
+      <div class="obj"><span class="obj-code">APO01</span>Managed I&amp;T Management Framework</div>
+      <div class="obj"><span class="obj-code">APO02</span>Managed Strategy</div>
+      <div class="obj"><span class="obj-code">APO03</span>Managed Enterprise Architecture</div>
+      <div class="obj"><span class="obj-code">APO04</span>Managed Innovation</div>
+      <div class="obj"><span class="obj-code">APO05</span>Managed Portfolio</div>
+      <div class="obj"><span class="obj-code">APO06</span>Managed Budget and Costs</div>
+      <div class="obj"><span class="obj-code">APO07</span>Managed Human Resources</div>
+      <div class="obj"><span class="obj-code">APO08</span>Managed Relationships</div>
+      <div class="obj"><span class="obj-code">APO09</span>Managed Service Agreements</div>
+      <div class="obj"><span class="obj-code">APO10</span>Managed Vendors</div>
+      <div class="obj"><span class="obj-code">APO11</span>Managed Quality</div>
+      <div class="obj"><span class="obj-code">APO12</span>Managed Risk</div>
+      <div class="obj"><span class="obj-code">APO13</span>Managed Security</div>
+      <div class="obj"><span class="obj-code">APO14</span>Managed Data</div>
+    </div>
+  </div>
+
+  <div class="domain-block">
+    <div class="domain-header"><span class="domain-code">BAI</span> Build, Acquire and Implement — 10 objectives</div>
+    <div class="obj-list">
+      <div class="obj"><span class="obj-code">BAI01</span>Managed Programmes</div>
+      <div class="obj"><span class="obj-code">BAI02</span>Managed Requirements Definition</div>
+      <div class="obj"><span class="obj-code">BAI03</span>Managed Solutions Identification and Build</div>
+      <div class="obj"><span class="obj-code">BAI04</span>Managed Availability and Capacity</div>
+      <div class="obj"><span class="obj-code">BAI05</span>Managed Organisational Change</div>
+      <div class="obj"><span class="obj-code">BAI06</span>Managed IT Changes</div>
+      <div class="obj"><span class="obj-code">BAI07</span>Managed IT Change Acceptance and Transitioning</div>
+      <div class="obj"><span class="obj-code">BAI08</span>Managed Knowledge</div>
+      <div class="obj"><span class="obj-code">BAI09</span>Managed Assets</div>
+      <div class="obj"><span class="obj-code">BAI10</span>Managed Configuration</div>
+    </div>
+  </div>
+
+  <div class="domain-block">
+    <div class="domain-header"><span class="domain-code">DSS</span> Deliver, Service and Support — 6 objectives</div>
+    <div class="obj-list">
+      <div class="obj"><span class="obj-code">DSS01</span>Managed Operations</div>
+      <div class="obj"><span class="obj-code">DSS02</span>Managed IT Service Requests and Incidents</div>
+      <div class="obj"><span class="obj-code">DSS03</span>Managed Problems</div>
+      <div class="obj"><span class="obj-code">DSS04</span>Managed Continuity</div>
+      <div class="obj"><span class="obj-code">DSS05</span>Managed Security Services</div>
+      <div class="obj"><span class="obj-code">DSS06</span>Managed Business Process Controls</div>
+    </div>
+  </div>
+
+  <div class="domain-block">
+    <div class="domain-header"><span class="domain-code">MEA</span> Monitor, Evaluate and Assess — 4 objectives</div>
+    <div class="obj-list">
+      <div class="obj"><span class="obj-code">MEA01</span>Managed Performance and Conformance Monitoring</div>
+      <div class="obj"><span class="obj-code">MEA02</span>Managed System of Internal Control</div>
+      <div class="obj"><span class="obj-code">MEA03</span>Managed Compliance with External Requirements</div>
+      <div class="obj"><span class="obj-code">MEA04</span>Managed Assurance</div>
+    </div>
+  </div>
+
+  <h2>🎛️ The 11 Design Factors</h2>
+  <p>COBIT 2019 is not one-size-fits-all. Design factors shape a tailored governance system for each enterprise.</p>
+  <table><thead><tr><th>#</th><th>Design Factor</th><th>What it determines</th></tr></thead><tbody>
+    <tr><td>1</td><td>Enterprise Strategy</td><td>Growth/innovation vs stability vs cost leadership vs client service</td></tr>
+    <tr><td>2</td><td>Enterprise Goals</td><td>The 13 COBIT enterprise goals most relevant to the organisation</td></tr>
+    <tr><td>3</td><td>Risk Profile</td><td>Types of IT-related risk the enterprise faces today</td></tr>
+    <tr><td>4</td><td>I&amp;T-Related Issues</td><td>Current pain points — security incidents, compliance failures, project overruns</td></tr>
+    <tr><td>5</td><td>Threat Landscape</td><td>Normal vs high threat environment (e.g. financial sector = high threat)</td></tr>
+    <tr><td>6</td><td>Compliance Requirements</td><td>Regulatory, legal, and contractual compliance obligations</td></tr>
+    <tr><td>7</td><td>Role of IT</td><td>Support vs factory vs turnaround vs strategic role of IT</td></tr>
+    <tr><td>8</td><td>Sourcing Model</td><td>In-house vs outsourced vs cloud vs hybrid</td></tr>
+    <tr><td>9</td><td>IT Implementation Methods</td><td>Agile vs waterfall vs DevOps vs hybrid</td></tr>
+    <tr><td>10</td><td>Technology Adoption Strategy</td><td>First mover vs follower vs slow adopter</td></tr>
+    <tr><td>11</td><td>Enterprise Size</td><td>Small vs medium vs large — drives capability level targets</td></tr>
+  </tbody></table>
+
+  <h2>🎯 Focus Areas</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Digital Transformation</div><div class="card-body">How governance adapts when IT becomes the business. New risks, new value streams, new operating models.</div></div>
+    <div class="card"><div class="card-title">Cloud Computing</div><div class="card-body">Governance of cloud services — vendor risk, data sovereignty, shared responsibility, cloud cost governance.</div></div>
+    <div class="card"><div class="card-title">Cybersecurity</div><div class="card-body">APO13 (Managed Security) and DSS05 (Managed Security Services) are the primary objectives. Risk-based approach.</div></div>
+    <div class="card"><div class="card-title">Privacy</div><div class="card-body">APO14 (Managed Data) covers privacy. Aligned with GDPR and similar regulations. Data classification and handling.</div></div>
+    <div class="card"><div class="card-title">DevOps</div><div class="card-body">How COBIT governance applies to fast-moving DevOps pipelines. BAI06 (IT Changes) and BAI07 (Change Acceptance) are key.</div></div>
+    <div class="card"><div class="card-title">Small &amp; Medium Enterprises</div><div class="card-body">COBIT guidance for resource-constrained organisations. Prioritise objectives based on enterprise size design factor.</div></div>
+  </div>
+
+  <h2>📊 The Goals Cascade</h2>
+  <p>COBIT links stakeholder needs all the way down to specific governance objectives through a four-level cascade:</p>
+  <table><thead><tr><th>Level</th><th>Description</th><th>Count</th></tr></thead><tbody>
+    <tr><td>Stakeholder Needs</td><td>What stakeholders (investors, customers, regulators) actually want — value, risk reduction, resource optimisation</td><td>Varies</td></tr>
+    <tr><td>Enterprise Goals</td><td>High-level business goals that reflect stakeholder needs (e.g. "managed business risk", "customer-oriented service culture")</td><td>13 goals</td></tr>
+    <tr><td>Alignment Goals</td><td>I&amp;T-related goals that support enterprise goals (e.g. "security of information and processing infrastructure")</td><td>13 goals</td></tr>
+    <tr><td>Governance &amp; Management Objectives</td><td>Specific COBIT objectives (EDM, APO, BAI, DSS, MEA) that support alignment goals</td><td>40 objectives</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Exam tip:</strong> The Goals Cascade is how COBIT justifies governance investment to the business. It connects "what shareholders want" to "which APO/BAI/DSS objectives matter most" for your specific enterprise.</div>
+
+  <h2>🔗 Resources</h2>
+  <p>
+    <a href="https://www.isaca.org/resources/cobit" target="_blank" class="ext">ISACA COBIT 2019 ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.isaca.org/credentialing/cobit/cobit-foundation" target="_blank" class="ext">COBIT Foundation Exam ↗</a> &nbsp;|&nbsp;
+    <a href="itil4.html" class="ext">→ ITIL 4</a> &nbsp;|&nbsp;
+    <a href="togaf.html" class="ext">→ TOGAF</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

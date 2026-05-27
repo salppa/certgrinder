@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hygieniapassi — Elintarvikehygienia</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#059669;--cl:#6EE7B7;--cb:rgba(5,150,105,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #05966944;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #05966930;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #05966930;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.warn strong{color:#FCA5A5}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.temp-bar{display:flex;flex-direction:column;gap:4px;margin:12px 0 18px}
+.temp-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;font-size:13px}
+.t-freeze{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3)}
+.t-cold{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)}
+.t-danger{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3)}
+.t-hot{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3)}
+.t-label{font-weight:800;min-width:130px;color:#fff}
+.t-temp{font-weight:900;min-width:80px}
+.t-desc{color:#94a3b8;font-size:12px}
+.haccp-step{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.haccp-num{font-size:22px;font-weight:900;color:var(--cl);min-width:32px;line-height:1}
+.haccp-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px}
+.haccp-body{font-size:12px;color:#64748b;line-height:1.65}
+.tag{background:#1e2d45;color:#94a3b8;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;display:inline-block}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html" class="active">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🧴 Ruokavirasto · Elintarvikehygienia</div>
+  <h1>Hygieniapassi</h1>
+  <p class="sub">Elintarvikehygienian perusteet — lämpötilat, HACCP, mikrobit, henkilökohtainen hygienia ja Suomen elintarvikelainsäädäntö. (Food hygiene fundamentals in Finnish with English translations.)</p>
+  <div class="meta"><span><a href="https://www.ruokavirasto.fi" target="_blank" class="ext">ruokavirasto.fi ↗</a></span><span><a href="https://www.hygieniapassi.fi" target="_blank" class="ext">hygieniapassi.fi ↗</a></span><span>See also: <a href="kastikkeet.html" class="ext">Sauce Master →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🌡️ Lämpötilat — Temperature Zones</h2>
+  <p>Lämpötila on tärkein elintarviketurvallisuuden hallintakeino. Bakteerit lisääntyvät vaarallisella alueella (6–60°C) nopeasti. <em>(Temperature is the most important food safety control measure. Bacteria multiply rapidly in the danger zone 6–60°C.)</em></p>
+
+  <div class="temp-bar">
+    <div class="temp-row t-freeze"><span class="t-label">❄️ Pakastettu (Frozen)</span><span class="t-temp" style="color:#93C5FD">–18°C tai kylmempi</span><span class="t-desc">Bakteerit eivät lisäänny, mutta eivät kuole. Bacteria don't multiply but don't die either.</span></div>
+    <div class="temp-row t-cold"><span class="t-label">🧊 Kylmäsäilytys (Cold storage)</span><span class="t-temp" style="color:#6EE7B7">alle 6°C</span><span class="t-desc">Hidastaa bakteerien kasvua merkittävästi. Greatly slows bacterial growth.</span></div>
+    <div class="temp-row t-danger"><span class="t-label">⚠️ Vaara-alue (Danger zone)</span><span class="t-temp" style="color:#FCA5A5">6–60°C</span><span class="t-desc">Bakteerit lisääntyvät nopeasti — jopa kaksinkertaistuvat 20 minuutissa. Bacteria double every 20 min at optimum temperature.</span></div>
+    <div class="temp-row t-hot"><span class="t-label">🔥 Kuumana tarjoilu (Hot holding)</span><span class="t-temp" style="color:#FCD34D">yli 60°C</span><span class="t-desc">Estää bakteerien lisääntymisen. Prevents bacterial growth.</span></div>
+    <div class="temp-row t-hot"><span class="t-label">♨️ Uudelleenlämmitys (Reheating)</span><span class="t-temp" style="color:#FCD34D">yli 75°C sisälämpötila</span><span class="t-desc">Tappaa useimmat bakteerit. Kills most bacteria.</span></div>
+    <div class="temp-row t-hot"><span class="t-label">🍗 Siipikarjan kypsennys</span><span class="t-temp" style="color:#FCD34D">yli 75°C sydämessä</span><span class="t-desc">Salmonellan tuhoaminen edellyttää riittävää lämpötilaa. Required to destroy Salmonella.</span></div>
+  </div>
+
+  <div class="warn"><strong>⚠️ Kriittinen sääntö (Critical rule):</strong> Elintarvike ei saa olla vaara-alueella (6–60°C) yli 4 tuntia yhteensä koko elinkaarensa aikana. Mitä nopeammin vaara-alueen läpi, sen turvallisempaa. <em>Food must not spend more than 4 hours total in the danger zone.</em></div>
+
+  <h2>🦠 Mikrobit — Foodborne Pathogens</h2>
+  <table><thead><tr><th>Mikrobi</th><th>Tyypillinen lähde</th><th>Oireet</th><th>Erityispiirteet</th></tr></thead><tbody>
+    <tr><td>Salmonella</td><td>Raaka siipikarja, kananmunat, kontaminoitunut vihannekset</td><td>Ripuli, oksentelu, kuume (6–72h)</td><td>Tuhoutuu kypsennettäessä >75°C</td></tr>
+    <tr><td>Campylobacter</td><td>Raaka siipikarja, pastöroimaton maito</td><td>Voimakas ripuli, vatsakrampit (2–5 päivää)</td><td>Yleisin ruokamyrkytyksen aiheuttaja Suomessa</td></tr>
+    <tr><td>Listeria monocytogenes</td><td>Kylmäsavukala, pehmytjuustot, einekset</td><td>Kuume, päänsärky, vakava infektio riskiryhmillä</td><td>Kasvaa jääkaappilämpötiloissa. High risk: pregnant, elderly, immunocompromised.</td></tr>
+    <tr><td>E. coli (EHEC)</td><td>Raaka jauheliha, kontaminoitunut vesi, lehtikasvikset</td><td>Verinen ripuli, HUS (hemolyyttinen ureeminen oireyhtymä)</td><td>Hyvin pieni tartunta-annos. Dangerous for children.</td></tr>
+    <tr><td>Staphylococcus aureus</td><td>Ihmiskädet, haavat, sairaat elintarviketyöntekijät</td><td>Nopeat oireet 1–6h: oksentelu, pahoinvointi</td><td>Toksiinit kestävät kuumennusta — jo muodostunut toksiini jää ruokaan</td></tr>
+    <tr><td>Bacillus cereus</td><td>Keitetty riisi, pasta, tärkkelyspitoinen ruoka</td><td>Itiöt kestävät kypsennystä. Kahdenlainen oiretyyppi.</td><td>Älä säilytä keitettyä riisiä huoneenlämmössä</td></tr>
+    <tr><td>Norovirus</td><td>Kontaminoitunut vesi, raakana syötävät simpukat, sairas henkilö</td><td>Äkillinen oksentelu, ripuli (24–48h)</td><td>Hyvin tarttuva. Sairaan työntekijän täytyy jäädä kotiin 48h oireiden jälkeen.</td></tr>
+  </tbody></table>
+
+  <h2>✋ Henkilökohtainen hygienia — Personal Hygiene</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🧼 Käsienpesu (Handwashing)</div><div class="card-body">Vähintään 20 sekuntia saippualla. Pesu aina: ennen ruuan käsittelyä, WC:n jälkeen, raakaa lihaa käsiteltyä, keskeytyksen jälkeen, nenän niistämisen jälkeen, hanskojen riisumisen jälkeen. (<em>Min 20 seconds with soap. Always wash before handling food, after toilet, after raw meat, etc.</em>)</div></div>
+    <div class="card"><div class="card-title">🤒 Sairaana ei töihin</div><div class="card-body">Ripuli tai oksennus = KOTIIN. Ei töihin 48 tuntiin oireiden loppumisen jälkeen. Salmonella-diagnoosi = toimitilasta poistuminen lääkärin luvalla. (<em>Diarrhoea/vomiting = stay home. 48 hours after symptoms clear.</em>)</div></div>
+    <div class="card"><div class="card-title">🩹 Haavat (Wounds)</div><div class="card-body">Kaikki haavat peitettävä värillisellä (sininen) laastareilla, joissa on metallilangat — havaittavissa metallipaljastimella ja visuaalisesti. (<em>All cuts must be covered with coloured (blue) detectable plasters.</em>)</div></div>
+    <div class="card"><div class="card-title">💍 Korut ja kynsilakka</div><div class="card-body">Ei koruja elintarviketuotannossa. Ei kynsilakkaa, rakennekynsiä eikä irtoripsiä. (<em>No jewellery in food production. No nail polish, artificial nails, or false lashes.</em>)</div></div>
+    <div class="card"><div class="card-title">👕 Suojavaatetus</div><div class="card-body">Puhdas suojavaatetus päivittäin. Hiukset suojattu. Vaatteet vaihdetaan toimipisteessä, ei tuoda kotoa. (<em>Clean protective clothing daily. Hair covered. Changed on-site.</em>)</div></div>
+    <div class="card"><div class="card-title">🚬 Tupakointi</div><td></td><div class="card-body">Ei koskaan elintarviketiloissa. Käsienpesu aina tupakoinnin jälkeen ennen ruuan käsittelyä. (<em>Never in food areas. Always wash hands after smoking before handling food.</em>)</div></div>
+  </div>
+
+  <h2>📋 HACCP — Vaarojen Analysointi ja Kriittiset Hallintapisteet</h2>
+  <p>HACCP (Hazard Analysis and Critical Control Points) on järjestelmällinen ennaltaehkäisevä lähestymistapa elintarviketurvallisuuteen. EU-lainsäädäntö vaatii sen kaikilta elintarvikealan yrityksiltä.</p>
+
+  <div class="haccp-step"><div class="haccp-num">1</div><div><div class="haccp-title">Vaarojen tunnistaminen (Hazard Analysis)</div><div class="haccp-body">Tunnista kaikki biologiset, kemialliset ja fyysiset vaarat tuotantoprosessissa. Mitkä voivat aiheuttaa vahinkoa kuluttajalle?</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">2</div><div><div class="haccp-title">Kriittiset hallintapisteet (Critical Control Points — CCPs)</div><div class="haccp-body">Tunnista pisteet prosessissa, joissa vaaran voi estää tai poistaa (esim. kypsennys, jäähdytys, metallinpaljastin).</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">3</div><div><div class="haccp-title">Kriittiset rajat (Critical Limits)</div><div class="haccp-body">Määritä mitattavat raja-arvot jokaiselle CCP:lle (esim. sisälämpötila min. 75°C, jäähdytys alle 6°C 4 tunnissa).</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">4</div><div><div class="haccp-title">Seuranta (Monitoring)</div><div class="haccp-body">Mittaa ja kirjaa CCP:t säännöllisesti. Kuka, milloin, miten — kirjattu valvontajärjestelmässä.</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">5</div><div><div class="haccp-title">Korjaavat toimenpiteet (Corrective Actions)</div><div class="haccp-body">Jos kriittinen raja ylittyy tai alittuu, mitä tehdään? Tuotteen hävittäminen, prosessin korjaus, raportointi.</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">6</div><div><div class="haccp-title">Todentaminen (Verification)</div><div class="haccp-body">Varmista, että HACCP-järjestelmä toimii (auditit, testaus, prosessin tarkistus). Ei sama kuin seuranta.</div></div></div>
+  <div class="haccp-step"><div class="haccp-num">7</div><div><div class="haccp-title">Dokumentointi (Documentation)</div><div class="haccp-body">Kirjaa kaikki. Seurantatulokset, poikkeamat, korjaustoimet. Lainsäädäntö vaatii kirjaamisvelvollisuuden.</div></div></div>
+
+  <h2>🎨 Ristikontaminaation ehkäisy — Colour-Coded System</h2>
+  <table><thead><tr><th>Väri / Colour</th><th>Käyttö / Use</th></tr></thead><tbody>
+    <tr><td>🔴 Punainen / Red</td><td>Raaka liha / Raw meat</td></tr>
+    <tr><td>🟡 Keltainen / Yellow</td><td>Raaka siipikarja / Raw poultry</td></tr>
+    <tr><td>🔵 Sininen / Blue</td><td>Raaka kala / Raw fish</td></tr>
+    <tr><td>🟢 Vihreä / Green</td><td>Vihannekset ja hedelmät / Vegetables and fruit</td></tr>
+    <tr><td>⚪ Valkoinen / White</td><td>Leivonta, maitotuotteet / Bakery, dairy</td></tr>
+    <tr><td>🟤 Ruskea / Brown</td><td>Kypsä liha / Cooked meat</td></tr>
+  </tbody></table>
+
+  <h2>⚖️ Suomen Elintarvikelainsäädäntö</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Ruokavirasto</div><div class="card-body">Suomen elintarviketurvallisuusviranomainen. Vastaa valvonnasta, lainsäädännöstä ja hygieniapassijärjestelmästä. (<em>Finnish Food Authority — supervises food safety legislation.</em>) <a href="https://www.ruokavirasto.fi" target="_blank" class="ext">ruokavirasto.fi ↗</a></div></div>
+    <div class="card"><div class="card-title">Elintarvikelaki (297/2021)</div><div class="card-body">Suomen kansallinen elintarvikelaki. Pohjautuu EU:n elintarvikeasetuksiin (852/2004, 853/2004). Velvoittaa omavalvontasuunnitelman ja hygieniaosaamistodistuksen.</div></div>
+    <div class="card"><div class="card-title">Hygieniaosaamistodistus</div><div class="card-body">Pakollinen kaikille, jotka työskentelevät pakkaamattomien helposti pilaantuvien elintarvikkeiden kanssa. Testi Ruokaviraston hyväksymässä testauspaikassa. Voimassa toistaiseksi. (<em>Mandatory for all food handlers working with unpackaged perishables.</em>)</div></div>
+    <div class="card"><div class="card-title">Omavalvontasuunnitelma</div><div class="card-body">Jokainen elintarvikealan toimija on velvollinen tekemään ja toteuttamaan omavalvontasuunnitelman. HACCP on sen perusta. Valvontaviranomainen voi tarkistaa sen milloin tahansa.</div></div>
+  </div>
+
+  <h2>⚠️ 14 suurinta allergeenia (14 Major Allergens — EU)</h2>
+  <p>Nämä on aina ilmoitettava elintarvikelainsäädännön mukaan (<em>Must always be declared under EU food labelling law</em>):</p>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+    <span class="tag">🌾 Gluteeni (Gluten)</span><span class="tag">🦐 Äyriäiset (Crustaceans)</span><span class="tag">🥚 Munat (Eggs)</span><span class="tag">🐟 Kala (Fish)</span>
+    <span class="tag">🥜 Maapähkinät (Peanuts)</span><span class="tag">🫘 Soija (Soya)</span><span class="tag">🥛 Maito (Milk)</span><span class="tag">🌰 Pähkinät (Tree nuts)</span>
+    <span class="tag">🌿 Selleri (Celery)</span><span class="tag">🟡 Sinappi (Mustard)</span><span class="tag">🌱 Seesaminsiemenet (Sesame)</span><span class="tag">🍷 Sulfiitit (Sulphites)</span>
+    <span class="tag">🐌 Simpukat (Molluscs)</span><span class="tag">🫚 Lupiini (Lupin)</span>
+  </div>
+
+  <h2>🔗 Linkit / Resources</h2>
+  <p>
+    <a href="https://www.ruokavirasto.fi/henkiloasiakkaat/tietoa-elintarvikkeista/elintarvikehygienia/" target="_blank" class="ext">Ruokavirasto — Elintarvikehygienia ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.hygieniapassi.fi" target="_blank" class="ext">Hygieniapassi.fi ↗</a> &nbsp;|&nbsp;
+    <a href="kastikkeet.html" class="ext">→ Sauce Master</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

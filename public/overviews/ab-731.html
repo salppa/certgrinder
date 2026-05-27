@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AB-731 — Azure AI Business Professional</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#0EA5E9;--cl:#7DD3FC;--cb:rgba(14,165,233,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #0EA5E944;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #0EA5E930;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #0EA5E930;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.m-cell{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px;font-size:12px;color:#94a3b8}
+.m-label{font-weight:800;color:#fff;margin-bottom:4px;font-size:13px}
+.risk-row{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #1e2d45}
+.risk-level{min-width:110px;font-weight:800;font-size:12px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">🤖 AI-103</a><a href="ab-731.html" class="active">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">💼 Microsoft · AI Business Professional</div>
+  <h1>AB-731 Azure AI Business Professional</h1>
+  <p class="sub">AI strategy, business value identification, ROI frameworks, governance, risk, the EU AI Act, and Microsoft's AI platform from a business decision-maker's perspective.</p>
+  <div class="meta"><span><a href="https://learn.microsoft.com/ai" target="_blank" class="ext">learn.microsoft.com/ai ↗</a></span><span>Related: <a href="ai-900.html" class="ext">AI-900 Technical →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🎯 AI Strategy — The Business Framework</h2>
+  <p>Successful AI adoption requires a deliberate strategy. Ad-hoc AI projects without strategic alignment create technical debt, governance gaps, and low ROI. A structured approach follows four steps:</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">1. Define the AI Vision</div><div class="card-body">What business outcomes does AI serve? Articulate a clear, executive-endorsed AI vision tied to corporate strategy. "We will use AI to reduce customer churn by 20% in 18 months" — not "we will implement AI".</div></div>
+    <div class="card"><div class="card-title">2. Identify Use Cases</div><div class="card-body">Systematic scanning for AI opportunities. Prioritise using a feasibility-impact matrix. Quick wins for momentum; strategic bets for transformation.</div></div>
+    <div class="card"><div class="card-title">3. Build the Foundation</div><div class="card-body">Data quality, governance, cloud infrastructure, skills, culture. AI is only as good as its data. Without data foundations, AI projects fail.</div></div>
+    <div class="card"><div class="card-title">4. Scale and Govern</div><div class="card-body">Pilot → validate → scale. Establish AI governance, model monitoring, ethical review boards. The hardest part is not building AI — it's running it responsibly at scale.</div></div>
+  </div>
+
+  <h2>💡 Where AI Creates Business Value</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">⚡ Automate Repetitive Tasks</div><div class="card-body">Invoice processing, data entry, document classification, customer routing. Frees humans for higher-value work. Immediate ROI measurable in FTE savings.</div></div>
+    <div class="card"><div class="card-title">🧠 Augment Human Decisions</div><div class="card-body">Credit scoring, medical diagnosis support, demand forecasting. Human remains accountable; AI improves accuracy and speed. "Human-in-the-loop" design.</div></div>
+    <div class="card"><div class="card-title">🚀 Create New Products</div><div class="card-body">AI-native services that weren't possible before: personalised recommendations, real-time translation, predictive maintenance. Competitive differentiation.</div></div>
+    <div class="card"><div class="card-title">😊 Improve Customer Experience</div><div class="card-body">Personalisation, 24/7 chatbot support, sentiment-driven service routing, proactive outreach. NPS improvement often the KPI.</div></div>
+    <div class="card"><div class="card-title">🔍 Unlock Insights</div><div class="card-body">Pattern detection in data too large or complex for humans. Fraud detection, supply chain optimisation, equipment failure prediction.</div></div>
+    <div class="card"><div class="card-title">⚙️ Optimise Operations</div><div class="card-body">Resource scheduling, energy optimisation, inventory management, process bottleneck detection. Operational efficiency gains.</div></div>
+  </div>
+
+  <h2>📊 AI Use Case Prioritisation Matrix</h2>
+  <div class="matrix">
+    <div class="m-cell" style="border-left:3px solid #10B981"><div class="m-label" style="color:#10B981">✅ High Impact + High Feasibility → Do Now</div>Data is available, skills exist, clear ROI. E.g. invoice automation, customer churn prediction with existing CRM data.</div>
+    <div class="m-cell" style="border-left:3px solid #F59E0B"><div class="m-label" style="color:#F59E0B">🔶 High Impact + Low Feasibility → Invest &amp; Plan</div>Strategically important but needs data infrastructure or skills building. E.g. predictive maintenance requiring new IoT sensors.</div>
+    <div class="m-cell" style="border-left:3px solid #3B82F6"><div class="m-label" style="color:#3B82F6">📋 Low Impact + High Feasibility → Consider</div>Easy to do but limited ROI. Only pursue if it builds AI maturity or capabilities for bigger projects later.</div>
+    <div class="m-cell" style="border-left:3px solid #EF4444"><div class="m-label" style="color:#EF4444">❌ Low Impact + Low Feasibility → Avoid</div>Neither strategically important nor technically achievable. Decline or defer.</div>
+  </div>
+
+  <h2>💰 AI ROI &amp; Business Value Measurement</h2>
+  <table><thead><tr><th>Value Type</th><th>Examples</th><th>How to Measure</th></tr></thead><tbody>
+    <tr><td>Cost Reduction</td><td>FTE savings, reduced error rates, process time reduction</td><td>Hours saved × hourly cost; error cost before vs after</td></tr>
+    <tr><td>Revenue Uplift</td><td>Higher conversion, personalisation lift, new revenue streams</td><td>A/B testing, attribution models, incremental revenue</td></tr>
+    <tr><td>Risk Reduction</td><td>Fewer fraud incidents, compliance violations, safety incidents</td><td>Incident frequency × average cost per incident</td></tr>
+    <tr><td>Customer Experience</td><td>NPS improvement, reduced churn, faster resolution</td><td>NPS delta, churn rate before/after, CSAT scores</td></tr>
+    <tr><td>Employee Experience</td><td>Reduced manual work, better tools, higher satisfaction</td><td>eNPS, productivity metrics, time on valued work vs admin</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Total Cost of Ownership (TCO) for AI:</strong> Include ALL costs — data labelling, model training compute, inference costs, monitoring, retraining, human review, model governance, and decommissioning. AI projects routinely underestimate the 70% of cost that is post-deployment.</div>
+
+  <h2>🏛️ AI Governance</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">AI Ethics Committee</div><div class="card-body">Cross-functional: legal, compliance, data science, business, HR. Reviews high-risk AI use cases before deployment. Sets policy and adjudicates edge cases.</div></div>
+    <div class="card"><div class="card-title">Model Governance Lifecycle</div><div class="card-body">Development → Review → Approval → Production → Monitoring → Retraining → Retirement. Each stage needs documented criteria. No model escapes governance.</div></div>
+    <div class="card"><div class="card-title">Bias &amp; Fairness Review</div><div class="card-body">Test model performance across demographic groups before deployment. Disparate impact analysis. Ongoing monitoring after go-live for model drift.</div></div>
+    <div class="card"><div class="card-title">Explainability Requirements</div><div class="card-body">High-stakes decisions (credit, hiring, medical) require explainable outputs. "The AI said no" is never acceptable to regulators. Document model limitations.</div></div>
+  </div>
+
+  <h2>⚖️ EU AI Act — Risk Categories</h2>
+  <p>The EU AI Act (in force 2024) classifies AI systems by risk level. Higher risk = stricter requirements. Understanding this is critical for any business deploying AI in Europe.</p>
+  <div style="background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:16px;margin-bottom:16px">
+    <div class="risk-row"><div class="risk-level" style="color:#EF4444">🚫 Unacceptable Risk</div><div style="font-size:12px;color:#94a3b8">BANNED. Social scoring by governments, real-time remote biometric surveillance in public spaces (with exceptions), manipulation of subconscious behaviour, exploitation of vulnerabilities.</div></div>
+    <div class="risk-row"><div class="risk-level" style="color:#F59E0B">⚠️ High Risk</div><div style="font-size:12px;color:#94a3b8">STRICT REQUIREMENTS. Biometric identification, critical infrastructure, education, employment decisions, access to essential services, law enforcement, justice. Must have human oversight, risk management, documentation.</div></div>
+    <div class="risk-row"><div class="risk-level" style="color:#3B82F6">📋 Limited Risk</div><div style="font-size:12px;color:#94a3b8">TRANSPARENCY OBLIGATIONS. Chatbots must identify as AI. Deepfakes must be labelled. Emotion recognition systems must disclose usage.</div></div>
+    <div class="risk-row" style="border-bottom:none"><div class="risk-level" style="color:#10B981">✅ Minimal Risk</div><div style="font-size:12px;color:#94a3b8">NO SPECIAL REQUIREMENTS. Spam filters, AI in games, recommendation systems. No mandatory obligations beyond general law.</div></div>
+  </div>
+  <p><a href="https://artificialintelligenceact.eu/" target="_blank" class="ext">EU AI Act full text ↗</a></p>
+
+  <h2>🔧 Microsoft AI Platform (Business View)</h2>
+  <table><thead><tr><th>Platform</th><th>Business Use Case</th></tr></thead><tbody>
+    <tr><td>Azure OpenAI Service</td><td>Build custom AI apps with GPT-4, DALL-E. Enterprise security, private networking, content filtering. For developers building AI products.</td></tr>
+    <tr><td>Microsoft Copilot (M365)</td><td>AI assistant in Word, Excel, PowerPoint, Teams, Outlook. Summarise meetings, draft documents, analyse data in plain language. Licence: M365 Copilot add-on.</td></tr>
+    <tr><td>GitHub Copilot</td><td>AI coding assistant. Code completion, test generation, documentation. Typical claim: 30–55% productivity uplift for developers.</td></tr>
+    <tr><td>Power Platform AI Builder</td><td>Pre-built AI models in Power Apps, Power Automate, Power BI. No-code document processing, prediction, object detection for business users.</td></tr>
+    <tr><td>Dynamics 365 Copilot</td><td>AI in CRM and ERP. Summarise customer cases, generate email responses, forecast sales, detect anomalies in financial data.</td></tr>
+    <tr><td>Azure AI Search</td><td>Enterprise search with semantic ranking and vector search. Foundation for RAG (Retrieval Augmented Generation) architectures.</td></tr>
+  </tbody></table>
+
+  <h2>🔗 Resources</h2>
+  <p>
+    <a href="https://learn.microsoft.com/ai" target="_blank" class="ext">Microsoft AI platform ↗</a> &nbsp;|&nbsp;
+    <a href="https://learn.microsoft.com/azure/ai-services/responsible-use-of-ai-overview" target="_blank" class="ext">Responsible AI overview ↗</a> &nbsp;|&nbsp;
+    <a href="https://artificialintelligenceact.eu/" target="_blank" class="ext">EU AI Act ↗</a> &nbsp;|&nbsp;
+    <a href="ai-900.html" class="ext">← AI-900 Technical foundations</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

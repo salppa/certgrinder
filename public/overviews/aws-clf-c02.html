@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CLF-C02 — AWS Certified Cloud Practitioner</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#FF9900;--cl:#FFD580;--cb:rgba(255,153,0,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #FF990044;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #FF990030;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #FF990030;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.resp-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:18px}
+.resp-table th{padding:8px 12px;background:#111827;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #1e2d45}
+.resp-table .aws{color:#FF9900}.resp-table .cust{color:#3B82F6}
+.resp-table td{padding:9px 12px;border-bottom:1px solid #1a2030;font-size:12px;color:#94a3b8;vertical-align:top}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html" class="active">🔶 CLF-C02</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🔶 Amazon Web Services · Cloud Practitioner</div>
+  <h1>CLF-C02 AWS Cloud Practitioner</h1>
+  <p class="sub">AWS global infrastructure, core services, shared responsibility model, security, pricing, and the Well-Architected Framework — the complete foundation for AWS cloud knowledge.</p>
+  <div class="meta"><span><a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" target="_blank" class="ext">aws.amazon.com/certification ↗</a></span><span>Compare: <a href="az-900.html" class="ext">AZ-900 →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>☁️ The 6 Advantages of Cloud Computing</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">1. Trade capital for variable expense</div><div class="card-body">Pay only for what you consume. No massive upfront hardware investment. CapEx → OpEx.</div></div>
+    <div class="card"><div class="card-title">2. Benefit from massive economies of scale</div><div class="card-body">AWS aggregates usage from hundreds of thousands of customers → lower prices than you could achieve alone.</div></div>
+    <div class="card"><div class="card-title">3. Stop guessing capacity</div><div class="card-body">Scale up or down in minutes. No overprovisioning for peak, no underprovisioning for growth.</div></div>
+    <div class="card"><div class="card-title">4. Increase speed and agility</div><div class="card-body">New IT resources available in minutes, not weeks of procurement. Dramatically lowers cost of experimentation.</div></div>
+    <div class="card"><div class="card-title">5. Stop spending money on data centres</div><div class="card-body">Focus on customers and differentiating your business, not racking servers and cooling data centres.</div></div>
+    <div class="card"><div class="card-title">6. Go global in minutes</div><div class="card-body">Deploy to multiple AWS Regions with clicks. Serve users worldwide with low latency at minimal cost.</div></div>
+  </div>
+
+  <h2>🌍 AWS Global Infrastructure</h2>
+  <table><thead><tr><th>Concept</th><th>Definition</th><th>Key Facts</th></tr></thead><tbody>
+    <tr><td>Region</td><td>Geographic area with 2+ Availability Zones</td><td>33+ Regions. Select based on: compliance, latency, service availability, pricing.</td></tr>
+    <tr><td>Availability Zone (AZ)</td><td>One or more discrete data centres with independent power, cooling, and networking</td><td>105+ AZs. Connected by low-latency private links. Design for multi-AZ = high availability.</td></tr>
+    <tr><td>Edge Location / PoP</td><td>Endpoints for CloudFront and Route 53</td><td>400+ locations. Cache content close to users. Reduce latency for global users.</td></tr>
+    <tr><td>Local Zone</td><td>Extension of a Region placing compute/storage closer to specific metro areas</td><td>Single-digit ms latency for cities without a full Region. E.g. Los Angeles, Chicago.</td></tr>
+    <tr><td>Outposts</td><td>AWS hardware in your own data centre</td><td>Fully managed by AWS. Run AWS services on-premises for data residency requirements.</td></tr>
+  </tbody></table>
+
+  <h2>🔐 Shared Responsibility Model</h2>
+  <p>The most important concept in AWS security. AWS and the customer each have distinct responsibilities.</p>
+  <table class="resp-table">
+    <thead><tr><th class="aws">AWS Responsible For (Security OF the Cloud)</th><th class="cust">Customer Responsible For (Security IN the Cloud)</th></tr></thead>
+    <tbody>
+      <tr><td>Physical data centre security (guards, fences, cameras)</td><td>Customer data and data encryption</td></tr>
+      <tr><td>Hardware and servers</td><td>Identity and Access Management (IAM)</td></tr>
+      <tr><td>Network infrastructure (routers, switches, cables)</td><td>Operating system patching (for EC2)</td></tr>
+      <tr><td>Virtualisation layer</td><td>Application-level security</td></tr>
+      <tr><td>Global infrastructure (Regions, AZs, Edge Locations)</td><td>Network and firewall configuration (Security Groups, NACLs)</td></tr>
+      <tr><td>Managed service software (RDS OS, Lambda runtime)</td><td>Client-side and server-side encryption choices</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Key insight:</strong> The level of customer responsibility increases as you move from SaaS → PaaS → IaaS. With EC2 (IaaS) you patch the OS. With RDS (PaaS) AWS patches the DB engine. With S3 (SaaS-like) AWS manages everything except your data and access policies.</div>
+
+  <h2>⚙️ Core AWS Services</h2>
+  <h3>Compute</h3>
+  <table><thead><tr><th>Service</th><th>Type</th><th>Use Case</th></tr></thead><tbody>
+    <tr><td>EC2</td><td>Virtual machines</td><td>Full OS control. Many instance families: t (burstable/dev), m (general), c (compute), r (memory), p (GPU/ML). Choose on-demand, reserved, or spot.</td></tr>
+    <tr><td>Lambda</td><td>Serverless functions</td><td>Run code without servers. Event-driven. Pay per 1ms execution. Auto-scales to zero. Max 15 min timeout.</td></tr>
+    <tr><td>ECS / EKS</td><td>Container orchestration</td><td>ECS = AWS-native containers. EKS = Kubernetes on AWS. Both run on EC2 or Fargate (serverless containers).</td></tr>
+    <tr><td>Elastic Beanstalk</td><td>PaaS deployment</td><td>Upload code, Beanstalk handles infra. Good for developers who don't want to manage EC2 directly.</td></tr>
+    <tr><td>Lightsail</td><td>Simple VPS</td><td>Simplified, predictable pricing. For small websites, blogs, dev environments.</td></tr>
+  </tbody></table>
+  <h3>Storage</h3>
+  <table><thead><tr><th>Service</th><th>Storage Classes / Variants</th><th>Use Case</th></tr></thead><tbody>
+    <tr><td>S3 (Simple Storage Service)</td><td>Standard, Standard-IA, One Zone-IA, Glacier Instant, Glacier Flexible, Glacier Deep Archive, Intelligent-Tiering</td><td>Object storage for everything. Infinite scalability. 99.999999999% (11 nines) durability.</td></tr>
+    <tr><td>EBS (Elastic Block Store)</td><td>gp3 (general), io2 (high IOPS), st1 (throughput), sc1 (cold)</td><td>Block storage attached to EC2. Like a hard drive. Stays in one AZ.</td></tr>
+    <tr><td>EFS (Elastic File System)</td><td>Standard, IA tiers</td><td>Managed NFS. Multiple EC2 instances can mount simultaneously. Automatically scales.</td></tr>
+    <tr><td>S3 Glacier</td><td>Instant / Flexible / Deep Archive</td><td>Long-term archival. Deep Archive = cheapest storage in AWS, retrieval takes hours.</td></tr>
+  </tbody></table>
+  <h3>Databases</h3>
+  <table><thead><tr><th>Service</th><th>Type</th><th>Key Points</th></tr></thead><tbody>
+    <tr><td>RDS</td><td>Relational (managed)</td><td>MySQL, PostgreSQL, Oracle, SQL Server, MariaDB. Automated backups, Multi-AZ HA, read replicas.</td></tr>
+    <tr><td>Aurora</td><td>Relational (AWS-native)</td><td>MySQL/PostgreSQL compatible. Up to 5× faster than MySQL. 6 copies across 3 AZs. Serverless option available.</td></tr>
+    <tr><td>DynamoDB</td><td>NoSQL key-value / document</td><td>Single-digit ms latency at any scale. Serverless. Global Tables for multi-region. DAX for in-memory caching.</td></tr>
+    <tr><td>ElastiCache</td><td>In-memory cache</td><td>Redis or Memcached. Sub-ms latency. Session stores, leaderboards, real-time analytics.</td></tr>
+    <tr><td>Redshift</td><td>Data warehouse</td><td>Petabyte-scale analytics. Columnar storage. Integrates with S3 via Redshift Spectrum.</td></tr>
+  </tbody></table>
+  <h3>Networking</h3>
+  <table><thead><tr><th>Service</th><th>Purpose</th></tr></thead><tbody>
+    <tr><td>VPC</td><td>Virtual private network in AWS. Define subnets (public/private), route tables, Internet Gateway, NAT Gateway.</td></tr>
+    <tr><td>Security Groups</td><td>Stateful virtual firewall at the instance level. Default: deny all inbound, allow all outbound.</td></tr>
+    <tr><td>NACLs</td><td>Stateless firewall at the subnet level. Must define both inbound and outbound rules explicitly.</td></tr>
+    <tr><td>Route 53</td><td>Scalable DNS service. Domain registration, health checks, routing policies (simple, weighted, latency, failover, geolocation).</td></tr>
+    <tr><td>CloudFront</td><td>CDN. Cache content at 400+ Edge Locations. Integrates with S3, EC2, ALB. DDoS protection via Shield.</td></tr>
+    <tr><td>ELB — ALB</td><td>Application Load Balancer. Layer 7. Routes based on URL path, host headers, HTTP method.</td></tr>
+    <tr><td>ELB — NLB</td><td>Network Load Balancer. Layer 4 (TCP/UDP). Millions of requests/sec, ultra-low latency.</td></tr>
+    <tr><td>Direct Connect</td><td>Dedicated private connection from on-premises to AWS. Not over internet. More reliable, predictable.</td></tr>
+  </tbody></table>
+  <h3>Security &amp; Identity</h3>
+  <table><thead><tr><th>Service</th><th>Purpose</th></tr></thead><tbody>
+    <tr><td>IAM</td><td>Users, groups, roles, policies. Principle of least privilege. Roles for services and cross-account access. Never use root for daily work.</td></tr>
+    <tr><td>KMS</td><td>Key Management Service. Create and control encryption keys. AWS-managed or customer-managed.</td></tr>
+    <tr><td>Shield</td><td>DDoS protection. Shield Standard = free, automatic. Shield Advanced = paid, 24/7 DRT support, financial protection.</td></tr>
+    <tr><td>WAF</td><td>Web Application Firewall. Protect against SQLi, XSS, bad bots. Works with CloudFront, ALB, API Gateway.</td></tr>
+    <tr><td>GuardDuty</td><td>Threat detection using ML. Analyses VPC flow logs, DNS logs, CloudTrail events. No agents needed.</td></tr>
+    <tr><td>Inspector</td><td>Automated vulnerability scanning for EC2, Lambda, container images.</td></tr>
+    <tr><td>Macie</td><td>Discover and protect sensitive data in S3. ML-powered PII detection.</td></tr>
+    <tr><td>Secrets Manager</td><td>Securely store and auto-rotate credentials, API keys, database passwords.</td></tr>
+  </tbody></table>
+
+  <h2>💰 Pricing Models</h2>
+  <table><thead><tr><th>Model</th><th>Discount</th><th>Best For</th></tr></thead><tbody>
+    <tr><td>On-Demand</td><td>—</td><td>Unpredictable workloads. Short-term. No commitment.</td></tr>
+    <tr><td>Reserved Instances (1yr)</td><td>Up to 40%</td><td>Steady-state production. Standard RI (best discount) or Convertible RI (can change instance type).</td></tr>
+    <tr><td>Reserved Instances (3yr)</td><td>Up to 72%</td><td>Long-running, well-understood workloads. Full or partial upfront for max savings.</td></tr>
+    <tr><td>Savings Plans</td><td>Up to 66%</td><td>Compute Savings Plans = flexible (any EC2, Lambda, Fargate). More flexible than RIs.</td></tr>
+    <tr><td>Spot Instances</td><td>Up to 90%</td><td>Fault-tolerant, flexible workloads (batch processing, big data, CI/CD). Can be interrupted with 2-min notice.</td></tr>
+    <tr><td>Dedicated Hosts</td><td>Variable</td><td>Compliance requiring dedicated physical server. Software licences tied to physical hardware.</td></tr>
+  </tbody></table>
+
+  <h2>🏗️ AWS Well-Architected Framework — 6 Pillars</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🔧 Operational Excellence</div><div class="card-body">Run and monitor systems. Automate changes. Respond to events. Improve operations continuously. IaC, runbooks, game days.</div></div>
+    <div class="card"><div class="card-title">🔐 Security</div><div class="card-body">Protect information, systems, assets. IAM, encryption at rest/transit, detective controls, incident response automation.</div></div>
+    <div class="card"><div class="card-title">💪 Reliability</div><div class="card-body">Recover from disruptions. Scale dynamically. Multi-AZ, multi-region, auto-scaling, backups, chaos engineering.</div></div>
+    <div class="card"><div class="card-title">⚡ Performance Efficiency</div><div class="card-body">Use resources efficiently. Serverless, right-sizing, caching (CloudFront, ElastiCache), global distribution.</div></div>
+    <div class="card"><div class="card-title">💵 Cost Optimisation</div><div class="card-body">Avoid unnecessary cost. Reserved/Spot, right-sizing, Cost Explorer, Trusted Advisor, delete idle resources.</div></div>
+    <div class="card"><div class="card-title">🌱 Sustainability</div><div class="card-body">Minimise environmental impact. Serverless, managed services, efficient instance types, shut down unused resources.</div></div>
+  </div>
+
+  <h2>🔗 Exam Domains &amp; Resources</h2>
+  <table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>
+    <tr><td>Cloud Concepts</td><td>24%</td></tr>
+    <tr><td>Security and Compliance</td><td>30%</td></tr>
+    <tr><td>Cloud Technology and Services</td><td>34%</td></tr>
+    <tr><td>Billing, Pricing, and Support</td><td>12%</td></tr>
+  </tbody></table>
+  <p>
+    <a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" target="_blank" class="ext">Official CLF-C02 exam page ↗</a> &nbsp;|&nbsp;
+    <a href="https://aws.amazon.com/architecture/well-architected/" target="_blank" class="ext">Well-Architected Framework ↗</a> &nbsp;|&nbsp;
+    <a href="https://aws.amazon.com/free/" target="_blank" class="ext">AWS Free Tier ↗</a> &nbsp;|&nbsp;
+    <a href="az-900.html" class="ext">→ Compare with AZ-900</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

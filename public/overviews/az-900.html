@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AZ-900 — Microsoft Azure Fundamentals</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#0078D4;--cl:#50E6FF;--cb:rgba(0,120,212,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #0078D444;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #0078D430;border-radius:8px;padding:6px 14px}
+h2{font-size:20px;font-weight:800;color:#fff;margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:14px;font-weight:800;color:var(--cl);margin:16px 0 6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #0078D433;border-radius:8px;padding:14px 18px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.pct{font-size:11px;font-weight:800;color:var(--cl)}
+.hier{background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:20px;margin-bottom:16px;font-family:monospace;font-size:13px;line-height:2.2}
+.hier .l0{color:#50E6FF;font-weight:800}
+.hier .l1{color:#94a3b8;padding-left:20px}
+.hier .l2{color:#64748b;padding-left:40px}
+.hier .l3{color:#475569;padding-left:60px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html" class="active">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">☁️ Microsoft Azure · Fundamentals</div>
+  <h1>AZ-900 Azure Fundamentals</h1>
+  <p class="sub">Cloud concepts, Azure architecture, core services, identity, governance, and pricing — everything needed to pass AZ-900 and understand Microsoft's cloud platform.</p>
+  <div class="meta"><span>🎯 Entry-level certification</span><span><a href="https://learn.microsoft.com/certifications/exams/az-900" target="_blank" class="ext">learn.microsoft.com/az-900 ↗</a></span><span>See also: <a href="ai-900.html" class="ext">AI-900 →</a></span></div>
+</div></div>
+<main>
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>☁️ Cloud Concepts (25–30% of exam)</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">IaaS — Infrastructure as a Service</div><div class="card-body">Rent virtualised hardware. You manage OS, middleware, apps. Azure VMs, Azure Disk Storage. Most flexible, most responsibility.</div></div>
+    <div class="card"><div class="card-title">PaaS — Platform as a Service</div><div class="card-body">Managed platform; you deploy code, Azure manages infrastructure + OS. Azure App Service, Azure SQL Database, AKS. Focus on your app, not servers.</div></div>
+    <div class="card"><div class="card-title">SaaS — Software as a Service</div><div class="card-body">Fully managed application. Microsoft 365, Dynamics 365, Salesforce. No infrastructure management at all.</div></div>
+    <div class="card"><div class="card-title">Public Cloud</div><div class="card-body">Resources owned and operated by a cloud provider (Azure), delivered over internet. Shared hardware, pay-as-you-go, no capital expense.</div></div>
+    <div class="card"><div class="card-title">Private Cloud</div><div class="card-body">Cloud environment on-premises or hosted for a single organisation. Full control, higher cost. Azure Stack Hub enables on-prem Azure services.</div></div>
+    <div class="card"><div class="card-title">Hybrid Cloud</div><div class="card-body">Combines public and private cloud. Workloads move between environments. Azure Arc extends Azure management to any infrastructure.</div></div>
+  </div>
+  <h3>Cloud Benefits</h3>
+  <table><thead><tr><th>Benefit</th><th>What it means</th></tr></thead><tbody>
+    <tr><td>High Availability</td><td>SLA-backed uptime guarantees (99.9%–99.99%). Redundancy prevents single points of failure.</td></tr>
+    <tr><td>Scalability</td><td>Add resources as demand grows (vertical = bigger VM; horizontal = more VMs).</td></tr>
+    <tr><td>Elasticity</td><td>Auto-scale up AND down with demand. Pay only for what you use.</td></tr>
+    <tr><td>Agility</td><td>Provision infrastructure in minutes vs weeks. Accelerate innovation.</td></tr>
+    <tr><td>Geo-distribution</td><td>Deploy near users anywhere in the world. Reduce latency.</td></tr>
+    <tr><td>Disaster Recovery</td><td>Replicate workloads to secondary regions. Azure Site Recovery automates failover.</td></tr>
+  </tbody></table>
+
+  <h2>🌍 Azure Global Infrastructure (35–40%)</h2>
+  <table><thead><tr><th>Concept</th><th>Definition</th><th>Key Facts</th></tr></thead><tbody>
+    <tr><td>Region</td><td>Geographic area containing one or more data centres</td><td>60+ regions worldwide. Examples: West Europe, East US, Southeast Asia</td></tr>
+    <tr><td>Availability Zone</td><td>Physically separate data centres within a region</td><td>At least 3 per AZ-enabled region. Independent power, cooling, networking. Protects from data centre failure.</td></tr>
+    <tr><td>Region Pair</td><td>Two regions paired for disaster recovery</td><td>At least 300 miles apart. Sequential updates. One region always prioritised during outage.</td></tr>
+    <tr><td>Geography</td><td>Area containing two or more regions</td><td>Preserves data residency and compliance boundaries. E.g. Europe, Americas, Asia Pacific.</td></tr>
+    <tr><td>Edge Zones / CDN PoPs</td><td>Locations close to users for low-latency delivery</td><td>Used by Azure CDN, Azure Front Door. 100+ global PoPs.</td></tr>
+  </tbody></table>
+
+  <h2>⚙️ Core Azure Services</h2>
+  <h3>Compute</h3>
+  <table><thead><tr><th>Service</th><th>Use Case</th></tr></thead><tbody>
+    <tr><td>Azure Virtual Machines</td><td>IaaS VMs. Full OS control. Windows or Linux. Good for lift-and-shift.</td></tr>
+    <tr><td>Azure App Service</td><td>PaaS web apps, REST APIs, mobile backends. Managed runtime (.NET, Node, Python, Java, PHP).</td></tr>
+    <tr><td>Azure Functions</td><td>Serverless, event-driven compute. Pay per execution. Auto-scales to zero.</td></tr>
+    <tr><td>Azure Kubernetes Service (AKS)</td><td>Managed Kubernetes. Orchestrate containerised workloads.</td></tr>
+    <tr><td>Azure Container Instances</td><td>Run containers without managing servers. Fastest way to run a container in Azure.</td></tr>
+    <tr><td>Azure Virtual Desktop</td><td>Desktop-as-a-Service. Stream Windows desktops to any device.</td></tr>
+  </tbody></table>
+  <h3>Storage</h3>
+  <table><thead><tr><th>Service</th><th>Type</th><th>Use Case</th></tr></thead><tbody>
+    <tr><td>Blob Storage</td><td>Object</td><td>Unstructured data — images, videos, backups, logs. Hot/Cool/Cold/Archive tiers.</td></tr>
+    <tr><td>Azure Files</td><td>File share</td><td>SMB/NFS file shares in the cloud. Replace on-premises file servers.</td></tr>
+    <tr><td>Queue Storage</td><td>Message queue</td><td>Decouple application components. Asynchronous messaging.</td></tr>
+    <tr><td>Table Storage</td><td>NoSQL</td><td>Semi-structured, key/attribute store. Cost-effective for simple datasets.</td></tr>
+    <tr><td>Azure Managed Disks</td><td>Block storage</td><td>OS and data disks for VMs. Standard HDD/SSD and Premium SSD.</td></tr>
+  </tbody></table>
+  <h3>Databases</h3>
+  <table><thead><tr><th>Service</th><th>Engine</th><th>Best For</th></tr></thead><tbody>
+    <tr><td>Azure SQL Database</td><td>SQL Server (PaaS)</td><td>Relational OLTP. Fully managed, auto-scaling, built-in HA.</td></tr>
+    <tr><td>Azure Cosmos DB</td><td>Multi-model NoSQL</td><td>Global distribution, single-digit ms latency, 99.999% SLA. APIs: SQL, MongoDB, Cassandra, Gremlin, Table.</td></tr>
+    <tr><td>Azure Database for MySQL/PostgreSQL</td><td>Open-source relational</td><td>Managed MySQL or PostgreSQL. Migrate existing workloads.</td></tr>
+    <tr><td>Azure Cache for Redis</td><td>In-memory</td><td>Sub-millisecond data retrieval. Session cache, leaderboards, pub/sub.</td></tr>
+  </tbody></table>
+  <h3>Networking</h3>
+  <table><thead><tr><th>Service</th><th>Purpose</th></tr></thead><tbody>
+    <tr><td>Azure Virtual Network (VNet)</td><td>Private network in Azure. Subnet isolation, NSGs, routing.</td></tr>
+    <tr><td>Azure Load Balancer</td><td>Layer 4 (TCP/UDP) load balancing. High availability for VMs.</td></tr>
+    <tr><td>Application Gateway</td><td>Layer 7 (HTTP) load balancer with Web Application Firewall (WAF).</td></tr>
+    <tr><td>Azure VPN Gateway</td><td>Encrypted tunnel between Azure VNet and on-premises.</td></tr>
+    <tr><td>Azure ExpressRoute</td><td>Private, dedicated connection to Azure. Not over internet. Higher reliability.</td></tr>
+    <tr><td>Azure CDN</td><td>Cache content at edge locations. Reduce latency for global users.</td></tr>
+    <tr><td>Azure DNS</td><td>Host DNS domains. Resolve to Azure resources or external.</td></tr>
+  </tbody></table>
+
+  <h2>🔐 Identity &amp; Security</h2>
+  <p><strong>Microsoft Entra ID (formerly Azure Active Directory)</strong> is Azure's cloud-based identity service. Every Azure subscription has one Entra ID tenant.</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">Authentication vs Authorisation</div><div class="card-body">Authentication = Who are you? (verify identity). Authorisation = What can you do? (check permissions). Entra ID handles both.</div></div>
+    <div class="card"><div class="card-title">Multi-Factor Authentication (MFA)</div><div class="card-body">Something you know (password) + something you have (phone) + something you are (biometric). Dramatically reduces account compromise risk.</div></div>
+    <div class="card"><div class="card-title">Conditional Access</div><div class="card-body">Policy-based access. "If user is outside corporate network AND accessing sensitive app, require MFA." Zero Trust implementation.</div></div>
+    <div class="card"><div class="card-title">RBAC (Role-Based Access Control)</div><div class="card-body">Grant minimum necessary permissions. Built-in roles: Owner, Contributor, Reader. Custom roles possible. Applied at management group, subscription, resource group, or resource level.</td></div></div>
+    <div class="card"><div class="card-title">Zero Trust Principles</div><div class="card-body">Verify explicitly. Use least privilege access. Assume breach. Never trust, always verify — even inside the network perimeter.</div></div>
+    <div class="card"><div class="card-title">Defence in Depth</div><div class="card-body">7 layers: Physical → Identity → Perimeter → Network → Compute → Application → Data. Each layer protects against different attack vectors.</div></div>
+  </div>
+
+  <h2>🏛️ Azure Governance &amp; Management</h2>
+  <h3>Resource Hierarchy</h3>
+  <div class="hier">
+    <div class="l0">🏢 Management Groups</div>
+    <div class="l1">↳ Apply policies and RBAC across multiple subscriptions</div>
+    <div class="l1">📋 Subscriptions</div>
+    <div class="l2">↳ Billing boundary + access control boundary</div>
+    <div class="l2">📁 Resource Groups</div>
+    <div class="l3">↳ Logical container for related resources (deploy, manage, delete together)</div>
+    <div class="l3">⚙️ Resources (VMs, databases, storage accounts…)</div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-title">Azure Policy</div><div class="card-body">Enforce organisational standards. E.g. "all resources must have a Cost Centre tag", "VMs may only be created in West Europe". Audit, deny, or remediate non-compliant resources.</div></div>
+    <div class="card"><div class="card-title">Azure Blueprints</div><div class="card-body">Package policies, RBAC assignments, and ARM templates together. Repeatable, compliant environment setup. Like a "template for a subscription".</div></div>
+    <div class="card"><div class="card-title">Azure Cost Management</div><div class="card-body">Monitor spend, set budgets, get alerts, analyse costs by resource/department. Integrate with Azure Advisor for cost optimisation recommendations.</div></div>
+    <div class="card"><div class="card-title">Azure Advisor</div><div class="card-body">Personalised recommendations across 5 categories: Cost, Security, Reliability, Operational Excellence, Performance. Free, always-on guidance.</div></div>
+    <div class="card"><div class="card-title">Resource Locks</div><div class="card-body">CanNotDelete or ReadOnly locks on resources, groups, or subscriptions. Prevent accidental deletion or modification.</div></div>
+    <div class="card"><div class="card-title">Tags</div><div class="card-body">Key-value metadata on resources. Essential for cost allocation, governance, automation. E.g. Environment:Production, Owner:TeamName.</div></div>
+  </div>
+
+  <h2>💰 Pricing &amp; SLAs (30–35%)</h2>
+  <table><thead><tr><th>Concept</th><th>Details</th></tr></thead><tbody>
+    <tr><td>Pay-As-You-Go</td><td>No upfront commitment. Highest per-unit cost. Best for unpredictable workloads.</td></tr>
+    <tr><td>Reserved Instances</td><td>1-year or 3-year commitment. Up to 72% savings vs PAYG. Best for steady-state workloads.</td></tr>
+    <tr><td>Spot VMs</td><td>Use unused Azure capacity at up to 90% discount. Can be evicted with 30s notice. Non-critical batch workloads.</td></tr>
+    <tr><td>Azure Hybrid Benefit</td><td>Use existing on-premises Windows Server / SQL Server licences in Azure. Significant savings.</td></tr>
+    <tr><td>Total Cost of Ownership (TCO)</td><td>Azure TCO Calculator: compare on-premises vs Azure costs including hardware, software, power, facilities, IT staff.</td></tr>
+    <tr><td>SLA (Service Level Agreement)</td><td>Azure guarantees uptime % per service. VMs: 99.9% single, 99.99% across AZs. Downtime calculation: 99.9% = 8.7h/year, 99.99% = 52min/year.</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Composite SLA:</strong> When services depend on each other, multiply their SLAs. VM (99.9%) × SQL (99.99%) = 99.89%. Adding redundancy INCREASES composite SLA.</div>
+
+  <h2>🔗 Exam Domains &amp; Resources</h2>
+  <table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>
+    <tr><td>Describe cloud concepts</td><td>25–30%</td></tr>
+    <tr><td>Describe Azure architecture and services</td><td>35–40%</td></tr>
+    <tr><td>Describe Azure management and governance</td><td>30–35%</td></tr>
+  </tbody></table>
+  <p>
+    <a href="https://learn.microsoft.com/certifications/exams/az-900" target="_blank" class="ext">Official AZ-900 exam page ↗</a> &nbsp;|&nbsp;
+    <a href="https://learn.microsoft.com/training/paths/az-900-describe-cloud-concepts/" target="_blank" class="ext">Microsoft Learning Path ↗</a> &nbsp;|&nbsp;
+    <a href="ai-900.html" class="ext">→ AI-900 next step</a> &nbsp;|&nbsp;
+    <a href="aws-clf-c02.html" class="ext">→ Compare with AWS CLF-C02</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</main>
+</body>
+</html>

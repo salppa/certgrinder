@@ -1,0 +1,877 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Compliance — EU AI Act &amp; Azure</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;600;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2234;
+    --surface: #1e2b42;
+    --border: rgba(99,179,237,0.15);
+    --border-act: rgba(99,179,237,0.45);
+    --text: #e2e8f0;
+    --muted: #718096;
+    --accent: #63b3ed;
+    --accent2: #f6e05e;
+    --green: #68d391;
+    --red: #fc8181;
+    --purple: #b794f4;
+    --orange: #f6ad55;
+    --mono: 'IBM Plex Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(99,179,237,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,179,237,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: relative; z-index: 10;
+    background: #0d1424;
+    border-bottom: 1px solid #1e2d45;
+    padding: 10px 20px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  nav a {
+    font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid #1e2d45;
+    color: #64748b; white-space: nowrap;
+  }
+  nav a:hover, nav a.active {
+    background: rgba(99,179,237,0.12);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  .app { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--accent); background: rgba(99,179,237,0.08);
+    border: 1px solid rgba(99,179,237,0.2);
+    padding: 4px 12px; border-radius: 4px; margin-bottom: 16px;
+  }
+  .header-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: var(--display); font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800; line-height: 1.1; color: #fff;
+    letter-spacing: -0.02em;
+  }
+  h1 span { color: var(--accent); }
+
+  .header-sub {
+    font-size: 14px; color: var(--muted); margin-top: 10px;
+    font-family: var(--mono);
+  }
+
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent2); font-size: 13px; font-weight: 700;
+    text-decoration: none; margin-bottom: 28px;
+    background: rgba(246,224,94,0.08); border: 1px solid rgba(246,224,94,0.2);
+    border-radius: 8px; padding: 6px 14px;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 4px; margin-bottom: 28px;
+    background: var(--bg2); padding: 4px; border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1; padding: 10px 16px; border: none; border-radius: 7px;
+    background: transparent; color: var(--muted);
+    font-family: var(--display); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;
+  }
+  .tab-btn.active {
+    background: var(--surface); color: var(--accent);
+    box-shadow: 0 0 0 1px var(--border-act);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  .tab-panel { display: none; animation: fadeIn 0.25s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+  /* ── STUDY GUIDE ── */
+  .study-section { margin-bottom: 36px; }
+  .study-section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    padding: 3px 10px; border-radius: 3px; font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tag-eu { background: rgba(246,224,94,0.12); color: var(--accent2); border: 1px solid rgba(246,224,94,0.2); }
+  .tag-azure { background: rgba(99,179,237,0.1); color: var(--accent); border: 1px solid rgba(99,179,237,0.2); }
+  .tag-gdpr { background: rgba(104,211,145,0.1); color: var(--green); border: 1px solid rgba(104,211,145,0.2); }
+  .tag-gov { background: rgba(183,148,244,0.1); color: var(--purple); border: 1px solid rgba(183,148,244,0.2); }
+  .tag-fi { background: rgba(246,173,85,0.1); color: var(--orange); border: 1px solid rgba(246,173,85,0.2); }
+
+  .study-section h2 {
+    font-family: var(--display); font-size: 18px; font-weight: 700;
+    color: #fff; letter-spacing: -0.01em;
+  }
+
+  .study-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin-bottom: 12px;
+  }
+  .study-card h3 {
+    font-family: var(--display); font-size: 14px; font-weight: 600;
+    color: var(--accent); margin-bottom: 10px; letter-spacing: 0.02em;
+  }
+  .study-card p { color: #a0aec0; font-size: 14px; line-height: 1.7; }
+  .study-card ul { padding-left: 0; list-style: none; }
+  .study-card ul li {
+    color: #a0aec0; font-size: 14px; padding: 5px 0;
+    padding-left: 20px; position: relative;
+  }
+  .study-card ul li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-family: var(--mono);
+  }
+
+  .risk-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  .risk-table th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--muted); text-align: left; padding: 8px 12px;
+    border-bottom: 1px solid var(--border); text-transform: uppercase;
+  }
+  .risk-table td { padding: 10px 12px; border-bottom: 1px solid rgba(99,179,237,0.06); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-pill {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    padding: 2px 8px; border-radius: 3px; font-weight: 600;
+  }
+  .risk-unacceptable { background: rgba(252,129,129,0.15); color: var(--red); }
+  .risk-high { background: rgba(246,173,85,0.15); color: var(--orange); }
+  .risk-limited { background: rgba(246,224,94,0.12); color: var(--accent2); }
+  .risk-minimal { background: rgba(104,211,145,0.1); color: var(--green); }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item { position: relative; margin-bottom: 16px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -24px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg2);
+  }
+  .timeline-item .date { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 3px; }
+  .timeline-item .desc { font-size: 13px; color: #a0aec0; }
+  .timeline-item .title { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  .key-concept {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--bg3); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 10px;
+  }
+  .concept-label {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    white-space: nowrap; padding-top: 2px; min-width: 80px;
+    letter-spacing: 0.06em;
+  }
+  .concept-text { font-size: 13px; color: #a0aec0; line-height: 1.6; }
+
+  /* ── QUIZ ── */
+  .quiz-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 24px;
+  }
+  .quiz-meta { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .quiz-meta strong { color: var(--text); }
+
+  .progress-bar-wrap { height: 4px; background: var(--bg3); border-radius: 2px; margin-bottom: 28px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); border-radius: 2px; transition: width 0.4s ease; }
+
+  .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .filter-btn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    padding: 5px 14px; border-radius: 4px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+  }
+  .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(99,179,237,0.07); }
+
+  .question-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px; margin-bottom: 20px; transition: border-color 0.2s;
+  }
+  .question-card:hover { border-color: var(--border-act); }
+
+  .q-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .q-num { font-family: var(--mono); font-size: 11px; color: var(--muted); background: var(--bg3); padding: 3px 10px; border-radius: 3px; }
+  .q-domain { font-size: 11px; }
+
+  .question-text { font-family: var(--display); font-size: 16px; font-weight: 600; color: #fff; line-height: 1.5; margin-bottom: 20px; letter-spacing: -0.01em; }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 18px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg3);
+    color: var(--text); cursor: pointer; text-align: left;
+    transition: all 0.15s; width: 100%; font-size: 14px;
+    font-family: var(--body); line-height: 1.5;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--border-act); background: rgba(99,179,237,0.05); }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.correct { border-color: var(--green); background: rgba(104,211,145,0.07); }
+  .option-btn.wrong { border-color: var(--red); background: rgba(252,129,129,0.07); }
+  .option-btn.reveal-correct { border-color: var(--green); background: rgba(104,211,145,0.05); }
+
+  .opt-letter {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    min-width: 26px; height: 26px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg2); color: var(--muted);
+    border: 1px solid var(--border); flex-shrink: 0; margin-top: 1px; transition: all 0.15s;
+  }
+  .option-btn.correct .opt-letter { background: rgba(104,211,145,0.2); color: var(--green); border-color: var(--green); }
+  .option-btn.wrong .opt-letter { background: rgba(252,129,129,0.2); color: var(--red); border-color: var(--red); }
+  .option-btn.reveal-correct .opt-letter { background: rgba(104,211,145,0.15); color: var(--green); border-color: rgba(104,211,145,0.4); }
+
+  .explanation {
+    margin-top: 16px; padding: 16px; border-radius: 8px;
+    background: rgba(99,179,237,0.05); border: 1px solid rgba(99,179,237,0.15);
+    font-size: 13px; color: #a0aec0; line-height: 1.7; display: none;
+  }
+  .explanation.show { display: block; animation: fadeIn 0.2s ease; }
+  .explanation strong { color: var(--accent); }
+  .explanation a { color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 11px; }
+  .explanation a:hover { text-decoration: underline; }
+
+  .score-panel {
+    display: none; text-align: center; padding: 48px 24px;
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  }
+  .score-panel.show { display: block; animation: fadeIn 0.4s ease; }
+  .score-big { font-family: var(--display); font-size: 72px; font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+  .score-label { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; letter-spacing: 0.1em; }
+  .score-breakdown { display: flex; gap: 24px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+  .score-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 16px 24px; min-width: 100px; }
+  .score-stat .val { font-family: var(--display); font-size: 28px; font-weight: 700; }
+  .score-stat .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .score-stat.green .val { color: var(--green); }
+  .score-stat.red .val { color: var(--red); }
+  .score-stat.blue .val { color: var(--accent); }
+
+  .btn-primary {
+    margin-top: 32px; display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--display); font-size: 14px; font-weight: 600;
+    padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer;
+    background: var(--accent); color: var(--bg); transition: all 0.15s; letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(99,179,237,0.3); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--display); font-size: 13px; font-weight: 600;
+    padding: 9px 20px; border-radius: 7px; border: 1px solid var(--border);
+    cursor: pointer; background: transparent; color: var(--muted);
+    transition: all 0.15s; letter-spacing: 0.02em;
+  }
+  .btn-secondary:hover { border-color: var(--border-act); color: var(--text); }
+
+  .quiz-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .domain-weak { font-family: var(--mono); font-size: 12px; margin-top: 24px; padding: 16px; background: var(--bg3); border-radius: 8px; border: 1px solid var(--border); }
+  .domain-weak h4 { color: var(--accent); margin-bottom: 8px; font-size: 12px; letter-spacing: 0.08em; }
+  .domain-row { display: flex; justify-content: space-between; margin: 4px 0; font-size: 12px; }
+  .domain-row .dn { color: var(--muted); }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a>
+  <a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a>
+  <a href="sabsa.html">🔐 SABSA</a>
+  <a href="ai-compliance.html" class="active">⚖️ AI Compliance</a>
+  <a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+
+<div class="app">
+  <div class="header">
+    <div class="header-badge">CertDrill — AI Compliance Module v1.0</div>
+    <h1>EU AI Act &amp; <span>Azure AI</span><br>Compliance</h1>
+    <div class="header-sub">40 questions · 5 domains · Enterprise Architect focus · Finnish org context</div>
+  </div>
+
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('study', event)">📖 Study Guide</button>
+    <button class="tab-btn" onclick="switchTab('quiz', event)">🎯 Quiz Drill</button>
+  </div>
+
+  <!-- STUDY GUIDE TAB -->
+  <div id="tab-study" class="tab-panel active">
+
+    <!-- SECTION 1: EU AI Act -->
+    <div class="study-section">
+      <div class="study-section-header">
+        <span class="section-tag tag-eu">EU AI Act</span>
+        <h2>EU Artificial Intelligence Act — Core Framework</h2>
+      </div>
+
+      <div class="study-card">
+        <h3>What is the EU AI Act?</h3>
+        <p>The world's first comprehensive legal framework for AI, adopted by the European Parliament in March 2024 and entering into force August 2024. It applies to providers, deployers, importers and distributors of AI systems in the EU — regardless of where the provider is established. Finnish organisations deploying Azure AI services are subject to the Act as <strong>deployers</strong>.</p>
+      </div>
+
+      <div class="study-card">
+        <h3>Risk-Based Classification System</h3>
+        <table class="risk-table">
+          <thead>
+            <tr><th>Risk Level</th><th>Definition</th><th>EA Action</th><th>Examples</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="risk-pill risk-unacceptable">Unacceptable</span></td>
+              <td style="color:#a0aec0;font-size:13px;">Banned outright</td>
+              <td style="color:#a0aec0;font-size:13px;">Do not deploy</td>
+              <td style="color:#a0aec0;font-size:13px;">Social scoring, subliminal manipulation, real-time biometric surveillance (with narrow exceptions)</td>
+            </tr>
+            <tr>
+              <td><span class="risk-pill risk-high">High Risk</span></td>
+              <td style="color:#a0aec0;font-size:13px;">Strict obligations before market placement</td>
+              <td style="color:#a0aec0;font-size:13px;">Conformity assessment, registration in EU database, human oversight</td>
+              <td style="color:#a0aec0;font-size:13px;">Recruitment AI, credit scoring, critical infrastructure, biometric categorisation, law enforcement</td>
+            </tr>
+            <tr>
+              <td><span class="risk-pill risk-limited">Limited Risk</span></td>
+              <td style="color:#a0aec0;font-size:13px;">Transparency obligations only</td>
+              <td style="color:#a0aec0;font-size:13px;">Disclose AI interaction to users</td>
+              <td style="color:#a0aec0;font-size:13px;">Chatbots, deepfake tools, emotion recognition</td>
+            </tr>
+            <tr>
+              <td><span class="risk-pill risk-minimal">Minimal Risk</span></td>
+              <td style="color:#a0aec0;font-size:13px;">Voluntary codes of conduct</td>
+              <td style="color:#a0aec0;font-size:13px;">Best-effort compliance</td>
+              <td style="color:#a0aec0;font-size:13px;">AI in video games, spam filters, basic recommendation engines</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="study-card">
+        <h3>Key Enforcement Timeline</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="date">AUG 2024</div>
+            <div class="title">Act enters into force</div>
+            <div class="desc">20 days after publication in the Official Journal</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">FEB 2025</div>
+            <div class="title">Prohibited AI systems ban applies</div>
+            <div class="desc">Unacceptable risk systems must be discontinued</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">AUG 2025</div>
+            <div class="title">GPAI model obligations apply</div>
+            <div class="desc">General Purpose AI (incl. GPT-4, Claude) providers face transparency &amp; documentation rules</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">AUG 2026</div>
+            <div class="title">High-risk system obligations fully apply</div>
+            <div class="desc">Full conformity assessment, registration, technical documentation required</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">AUG 2027</div>
+            <div class="title">High-risk AI in regulated products</div>
+            <div class="desc">Medical devices, machinery, vehicles with AI components covered</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="study-card">
+        <h3>Obligations for High-Risk AI Deployers (Finnish Organisations)</h3>
+        <ul>
+          <li>Implement a risk management system before deployment</li>
+          <li>Ensure human oversight measures are in place</li>
+          <li>Log system activities — ensure traceability</li>
+          <li>Register system in the EU AI Act database (when applicable)</li>
+          <li>Conduct fundamental rights impact assessments (FRIA) for public bodies</li>
+          <li>Designate an EU representative if the provider is outside the EU</li>
+          <li>Inform and train staff who operate or oversee high-risk AI</li>
+        </ul>
+      </div>
+
+      <div class="study-card">
+        <h3>GPAI Model Rules — Why Azure OpenAI Is in Scope</h3>
+        <p>General Purpose AI (GPAI) models like GPT-4 must provide: technical documentation, training data summaries, copyright compliance policies, and safety evaluations. Models trained with &gt;10²⁵ FLOPs face additional systemic risk obligations. As an Azure AI deployer building on GPAI models, your organisation must ensure the upstream provider (Microsoft/OpenAI) is compliant and obtain evidence of that compliance.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2: GDPR + AI -->
+    <div class="study-section">
+      <div class="study-section-header">
+        <span class="section-tag tag-gdpr">GDPR × AI</span>
+        <h2>GDPR Obligations When Deploying AI</h2>
+      </div>
+
+      <div class="study-card">
+        <h3>How GDPR Interacts with AI Systems</h3>
+        <p>GDPR applies to any AI system processing personal data. The EU AI Act and GDPR are <strong>cumulative</strong> — both apply simultaneously. In Finland, the Data Protection Ombudsman (Tietosuojavaltuutettu) enforces GDPR and cooperates with AI oversight authorities.</p>
+      </div>
+
+      <div class="study-card">
+        <h3>Key GDPR Principles for AI Deployment</h3>
+        <div class="key-concept">
+          <div class="concept-label">Art. 5</div>
+          <div class="concept-text">Data minimisation — AI must process only necessary personal data. Avoid training on excessive personal data.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Art. 22</div>
+          <div class="concept-text">Automated decision-making — individuals have the right not to be subject to solely automated decisions with significant effects. Human review must be available.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Art. 25</div>
+          <div class="concept-text">Data protection by design and by default — privacy features must be built into AI systems from the start, not added later.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Art. 35</div>
+          <div class="concept-text">Data Protection Impact Assessment (DPIA) — mandatory before deploying AI systems that involve systematic profiling, biometrics, or large-scale processing.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Art. 13/14</div>
+          <div class="concept-text">Transparency — individuals must be informed that AI is being used and how their data is processed. Plain-language explanation required.</div>
+        </div>
+      </div>
+
+      <div class="study-card">
+        <h3>Finnish-Specific Considerations</h3>
+        <ul>
+          <li>Finnish Data Protection Act (1050/2018) supplements GDPR with national specifications</li>
+          <li>Public sector AI must go through Tietosuojavaltuutettu consultation for new high-risk processing</li>
+          <li>Special categories of data (health, trade union membership, ethnicity) require explicit legal basis — common in HR AI tools</li>
+          <li>DigiFinland and Finnish government cloud strategy require data residency within EU/EEA — Azure Finnish data centres (Finland South/North) satisfy this</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Azure AI Governance -->
+    <div class="study-section">
+      <div class="study-section-header">
+        <span class="section-tag tag-azure">Azure AI</span>
+        <h2>Azure AI Governance &amp; Responsible AI Controls</h2>
+      </div>
+
+      <div class="study-card">
+        <h3>Microsoft Responsible AI Standard</h3>
+        <ul>
+          <li><strong>Fairness</strong> — AI must treat all people fairly, tested across demographic groups</li>
+          <li><strong>Reliability &amp; Safety</strong> — systems must behave as intended and be fail-safe</li>
+          <li><strong>Privacy &amp; Security</strong> — personal data protected by design</li>
+          <li><strong>Inclusiveness</strong> — designed for all users regardless of ability</li>
+          <li><strong>Transparency</strong> — explainability for AI-driven decisions</li>
+          <li><strong>Accountability</strong> — humans must be accountable for AI systems</li>
+        </ul>
+      </div>
+
+      <div class="study-card">
+        <h3>Azure AI Compliance Controls — EA Reference</h3>
+        <div class="key-concept">
+          <div class="concept-label">Azure Policy</div>
+          <div class="concept-text">Enforce governance rules across all Azure AI resource deployments. Prevent non-compliant model deployments via policy deny effects.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Content Safety</div>
+          <div class="concept-text">Azure AI Content Safety service filters harmful outputs. Mandatory for customer-facing applications under responsible AI policy.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Managed Identity</div>
+          <div class="concept-text">Avoid credential exposure by using Managed Identity for Azure OpenAI access. Eliminates stored API key risk.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Private Endpoints</div>
+          <div class="concept-text">Azure OpenAI should be accessed via Private Endpoint in production, eliminating public internet exposure of sensitive AI inference traffic.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Customer Managed Keys</div>
+          <div class="concept-text">For sensitive data processed by Azure AI, use CMK (Customer Managed Keys) in Azure Key Vault so Microsoft cannot access encryption keys.</div>
+        </div>
+        <div class="key-concept">
+          <div class="concept-label">Audit Logging</div>
+          <div class="concept-text">Enable Azure Monitor and Diagnostic Settings for all Azure AI services. Log AI interactions for accountability and forensics per EU AI Act traceability requirements.</div>
+        </div>
+      </div>
+
+      <div class="study-card">
+        <h3>Azure OpenAI Data Residency</h3>
+        <ul>
+          <li>Prompts and completions are NOT stored by default in Azure OpenAI</li>
+          <li>When abuse monitoring is enabled, data may be retained up to 30 days by Microsoft</li>
+          <li>You can request to opt out of human review for abuse monitoring with Microsoft approval</li>
+          <li>Choose the Azure region closest to Finland (Sweden Central, North Europe) for data residency</li>
+          <li>Fine-tuned model data stays in your chosen region</li>
+        </ul>
+      </div>
+
+      <div class="study-card">
+        <h3>Copilot for Microsoft 365 — Enterprise Controls</h3>
+        <ul>
+          <li>Copilot respects existing Microsoft 365 permissions — it won't surface data users can't normally access</li>
+          <li>Copilot interaction logs are stored in the user's Exchange Online mailbox (Copilot chat history)</li>
+          <li>Microsoft Purview can be used to apply retention labels and DLP policies to Copilot outputs</li>
+          <li>No customer data is used to train the underlying models (contractual guarantee in enterprise agreements)</li>
+          <li>Sensitivity labels from Microsoft Purview propagate into Copilot-generated content</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 4: EA Decision Frameworks -->
+    <div class="study-section">
+      <div class="study-section-header">
+        <span class="section-tag tag-gov">EA Governance</span>
+        <h2>Enterprise Architect AI Decision Frameworks</h2>
+      </div>
+
+      <div class="study-card">
+        <h3>AI System Classification Checklist (for EA Gate Reviews)</h3>
+        <ul>
+          <li>Does the system make or support decisions affecting individuals' rights or access to services?</li>
+          <li>Does it process biometric, health, or other special category data?</li>
+          <li>Is it deployed in critical infrastructure, law enforcement, or education?</li>
+          <li>Does it operate autonomously without continuous human oversight?</li>
+          <li>Will it interact with vulnerable groups (children, elderly, minorities)?</li>
+        </ul>
+        <p style="margin-top:10px;color:#718096;font-size:13px;">→ If ANY answer is yes: initiate high-risk assessment track. Involve legal counsel and Data Protection Officer.</p>
+      </div>
+
+      <div class="study-card">
+        <h3>Build vs Buy AI Decision — Compliance Angle</h3>
+        <table class="risk-table">
+          <thead>
+            <tr><th>Factor</th><th>Build (Custom)</th><th>Buy (Azure OpenAI / SaaS)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:#a0aec0;font-size:13px;">Data control</td>
+              <td style="color:#68d391;font-size:13px;">Full control</td>
+              <td style="color:#f6ad55;font-size:13px;">Contractual guarantees needed</td>
+            </tr>
+            <tr>
+              <td style="color:#a0aec0;font-size:13px;">EU AI Act compliance</td>
+              <td style="color:#f6ad55;font-size:13px;">You are provider + deployer</td>
+              <td style="color:#68d391;font-size:13px;">Shared responsibility with vendor</td>
+            </tr>
+            <tr>
+              <td style="color:#a0aec0;font-size:13px;">GPAI rules</td>
+              <td style="color:#68d391;font-size:13px;">Not applicable if self-trained</td>
+              <td style="color:#f6ad55;font-size:13px;">Vendor must be GPAI compliant</td>
+            </tr>
+            <tr>
+              <td style="color:#a0aec0;font-size:13px;">Audit logging</td>
+              <td style="color:#f6ad55;font-size:13px;">Must build yourself</td>
+              <td style="color:#68d391;font-size:13px;">Azure Monitor built-in</td>
+            </tr>
+            <tr>
+              <td style="color:#a0aec0;font-size:13px;">Speed to value</td>
+              <td style="color:#fc8181;font-size:13px;">Slow (months to years)</td>
+              <td style="color:#68d391;font-size:13px;">Fast (days to weeks)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 5: Finnish Context -->
+    <div class="study-section">
+      <div class="study-section-header">
+        <span class="section-tag tag-fi">🇫🇮 Finland</span>
+        <h2>Finnish National AI Context</h2>
+      </div>
+
+      <div class="study-card">
+        <h3>Key Finnish Regulatory Bodies for AI</h3>
+        <ul>
+          <li><strong>Tietosuojavaltuutettu</strong> (Data Protection Ombudsman) — GDPR enforcement, lead authority for many cross-border AI cases</li>
+          <li><strong>Liikenne- ja viestintävirasto (Traficom)</strong> — designated as market surveillance authority under EU AI Act for several sectors</li>
+          <li><strong>Kilpailu- ja kuluttajavirasto (KKV)</strong> — consumer protection aspects of AI</li>
+          <li><strong>Finanssivalvonta (FIN-FSA)</strong> — AI in financial services (credit scoring, trading, insurance)</li>
+        </ul>
+      </div>
+
+      <div class="study-card">
+        <h3>DigiFinland &amp; Public Sector AI</h3>
+        <ul>
+          <li>Finnish government cloud strategy mandates EU data residency for all public sector data</li>
+          <li>DigiFinland services must comply with both EU AI Act and GDPR simultaneously</li>
+          <li>Public bodies deploying high-risk AI must conduct Fundamental Rights Impact Assessments (FRIA)</li>
+          <li>JulkICT (Government ICT) guidelines specify AI procurement requirements for state organisations</li>
+          <li>National AI strategy (Tekoälyohjelma) promotes responsible AI adoption with ethical guidelines</li>
+        </ul>
+      </div>
+
+      <div class="study-card">
+        <h3>SAP + Azure AI in Finnish Enterprise Context</h3>
+        <ul>
+          <li>SAP S/4HANA on Azure: AI-assisted allocations (Universal Allocation) may qualify as high-risk if used for workforce cost decisions</li>
+          <li>SAP Joule (embedded AI) on Azure infrastructure is subject to both EU AI Act and SAP's responsible AI framework</li>
+          <li>Azure OpenAI integrated with SAP via API requires DPIA if processing employee personal data</li>
+          <li>Finnish Works Council Act (Yhteistoimintalaki) requires consultation before deploying AI-based HR tools</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /tab-study -->
+
+  <!-- QUIZ TAB -->
+  <div id="tab-quiz" class="tab-panel">
+
+    <div class="quiz-header">
+      <div>
+        <div class="quiz-meta">Domain filter · <strong id="visible-count">40</strong> questions shown</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-secondary" onclick="shuffleAndReset()">⟳ Shuffle</button>
+        <button class="btn-secondary" onclick="resetAll()">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterDomain('all', this)">All</button>
+      <button class="filter-btn" onclick="filterDomain('EU AI Act', this)">EU AI Act</button>
+      <button class="filter-btn" onclick="filterDomain('GDPR × AI', this)">GDPR × AI</button>
+      <button class="filter-btn" onclick="filterDomain('Azure AI', this)">Azure AI</button>
+      <button class="filter-btn" onclick="filterDomain('EA Governance', this)">EA Governance</button>
+      <button class="filter-btn" onclick="filterDomain('Finnish Context', this)">🇫🇮 Finnish</button>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div id="score-panel" class="score-panel">
+      <div class="score-big" id="score-big">—</div>
+      <div class="score-label">SCORE</div>
+      <div class="score-breakdown">
+        <div class="score-stat green"><div class="val" id="sc-correct">0</div><div class="lbl">Correct</div></div>
+        <div class="score-stat red"><div class="val" id="sc-wrong">0</div><div class="lbl">Wrong</div></div>
+        <div class="score-stat blue"><div class="val" id="sc-total">0</div><div class="lbl">Answered</div></div>
+      </div>
+      <div class="domain-weak" id="domain-breakdown"></div>
+      <button class="btn-primary" onclick="resetAll()">↺ Restart Quiz</button>
+    </div>
+
+    <div id="questions-container"></div>
+
+  </div><!-- /tab-quiz -->
+
+</div><!-- /app -->
+
+<script>
+const QUESTIONS = [
+  // EU AI ACT
+  { id:1, domain:'EU AI Act', q:'Under the EU AI Act, which category of AI system is outright prohibited?', opts:['A chatbot that must disclose it is AI','A recruitment tool that ranks CVs','A government social scoring system that evaluates citizens’ trustworthiness','A medical imaging tool that flags anomalies for doctor review'], correct:2, exp:'<strong>Unacceptable risk</strong> systems are banned outright. Social scoring by public authorities is explicitly prohibited in Article 5. Recruitment AI is high-risk, chatbots are limited risk, and the medical tool — if a human doctor reviews — may be high-risk but not prohibited.', ref:'https://artificialintelligenceact.eu/article/5/' },
+  { id:2, domain:'EU AI Act', q:'When did obligations for prohibited AI systems become enforceable under the EU AI Act?', opts:['August 2024','February 2025','August 2025','August 2026'], correct:1, exp:'<strong>February 2025</strong> — 6 months after the Act entered into force in August 2024. Prohibited systems must have been discontinued by this date.', ref:'https://artificialintelligenceact.eu/the-act/' },
+  { id:3, domain:'EU AI Act', q:'A Finnish municipality deploys an AI tool to automatically score welfare benefit eligibility. What EU AI Act classification applies?', opts:['Minimal risk','Limited risk','High risk','Unacceptable risk'], correct:2, exp:'<strong>High risk</strong> — Annex III of the Act explicitly lists “AI systems used by public authorities or on their behalf to evaluate eligibility for public assistance benefits and services” as high-risk.', ref:'https://artificialintelligenceact.eu/annex/3/' },
+  { id:4, domain:'EU AI Act', q:'Under the EU AI Act, what does a deployer of a high-risk AI system specifically NOT need to do?', opts:['Implement human oversight measures','Conduct a fundamental rights impact assessment (if a public body)','Submit the AI model’s source code to the EU AI Office','Keep logs of system operation'], correct:2, exp:'Deployers are <strong>not</strong> required to submit source code to any authority. High-risk deployer obligations include: human oversight, monitoring, logging, staff training, and (for public bodies) fundamental rights impact assessments.', ref:'https://artificialintelligenceact.eu/article/26/' },
+  { id:5, domain:'EU AI Act', q:'Azure OpenAI (GPT-4) falls under which EU AI Act category?', opts:['High-risk AI','General Purpose AI (GPAI) model','Prohibited AI','Limited-risk AI'], correct:1, exp:'<strong>GPAI model</strong> — GPT-4 is a general-purpose AI model trained for a wide range of tasks. GPAI rules apply from August 2025. GPAI models with systemic risk (>10²⁵ FLOPs training compute) face additional obligations.', ref:'https://artificialintelligenceact.eu/article/51/' },
+  { id:6, domain:'EU AI Act', q:'What is the maximum fine for a serious violation of the EU AI Act (e.g. deploying a prohibited AI system)?', opts:['€10 million or 2% of global turnover','€20 million or 4% of global turnover','€35 million or 7% of global annual turnover','€50 million or 10% of global turnover'], correct:2, exp:'<strong>€35 million or 7% of global annual worldwide turnover</strong>, whichever is higher, for violating the prohibited AI provisions. For high-risk system violations: €15M or 3%. For providing false information: €7.5M or 1%.', ref:'https://artificialintelligenceact.eu/article/99/' },
+  { id:7, domain:'EU AI Act', q:'A Finnish bank deploys an AI system for credit scoring. Under the EU AI Act, this is classified as:', opts:['Minimal risk — no obligations','Limited risk — transparency notice only','High risk — listed in Annex III','Unacceptable risk — prohibited'], correct:2, exp:'<strong>High risk</strong> — AI in credit scoring is explicitly listed in Annex III (creditworthiness assessment of natural persons). The bank must conduct conformity assessments, maintain logs, and implement human oversight before deployment.', ref:'https://artificialintelligenceact.eu/annex/3/' },
+  { id:8, domain:'EU AI Act', q:'Which statement about the EU AI Act and GPAI models is correct?', opts:['Only EU-based GPAI model providers are subject to the rules','All GPAI models face the same obligations regardless of training compute','GPAI models with systemic risk must conduct adversarial testing and report incidents to the EU AI Office','Organisations that deploy GPAI models do not need to check provider compliance'], correct:2, exp:'<strong>GPAI models with systemic risk</strong> (training compute >10²⁵ FLOPs, e.g. GPT-4) must: perform adversarial testing, report serious incidents to the EU AI Office, ensure cybersecurity protections. Deployers must obtain compliance evidence from providers.', ref:'https://artificialintelligenceact.eu/article/55/' },
+  { id:9, domain:'EU AI Act', q:'An AI chatbot deployed on a company’s public website must, under the EU AI Act’s limited-risk rules:', opts:['Undergo conformity assessment before deployment','Clearly disclose to users that they are interacting with an AI system','Register in the EU AI Act database','Appoint a human supervisor on duty at all times'], correct:1, exp:'<strong>Transparency obligation</strong> — limited risk AI (chatbots, deepfakes, emotion recognition) must disclose AI nature to users. This is the core obligation at this risk level. Conformity assessment and database registration apply to high-risk systems.', ref:'https://artificialintelligenceact.eu/article/50/' },
+  { id:10, domain:'EU AI Act', q:'What is a Fundamental Rights Impact Assessment (FRIA) and who must conduct it?', opts:['A technical bias test — required from all AI providers','An assessment of impacts on fundamental rights before deploying high-risk AI — required from public bodies and certain private deployers','A GDPR data protection impact assessment, required from all organisations','A financial impact model — required from organisations above €250M revenue'], correct:1, exp:'<strong>FRIA</strong> is required from public authorities and private entities deploying high-risk AI in certain areas (Article 27). It covers impacts on fundamental rights, including discrimination and dignity. It is distinct from — and in addition to — a GDPR DPIA.', ref:'https://artificialintelligenceact.eu/article/27/' },
+  { id:11, domain:'EU AI Act', q:'Real-time remote biometric identification of individuals in public spaces by law enforcement is:', opts:['Always prohibited under the EU AI Act','Permitted only with prior judicial authorisation and limited to specific serious crimes','A limited-risk system requiring transparency notices only','Unregulated if used solely for national security purposes'], correct:1, exp:'Real-time biometric identification is <strong>generally prohibited</strong> but with narrow exceptions: authorisation for terrorism, specific serious crime, or finding missing persons — subject to prior judicial or administrative authorisation.', ref:'https://artificialintelligenceact.eu/article/5/' },
+  { id:12, domain:'EU AI Act', q:'When a Finnish company buys an off-the-shelf high-risk AI system from a US vendor and deploys it internally, who bears deployer obligations under the EU AI Act?', opts:['The US vendor, as the provider who placed it on the market','The Finnish company, as the deployer in the EU','Both share obligations equally — no distinction is made','Neither — off-the-shelf products used internally are exempt'], correct:1, exp:'<strong>The Finnish company</strong> as deployer bears deployer obligations (human oversight, monitoring, logging, FRIA if applicable). The US vendor as provider must meet provider obligations (conformity assessment, technical documentation, registration).', ref:'https://artificialintelligenceact.eu/article/26/' },
+  // GDPR x AI
+  { id:13, domain:'GDPR × AI', q:'Under GDPR Article 22, when is an individual protected against automated decision-making?', opts:['Any time an algorithm is used in business processes','When a decision is based solely on automated processing and produces significant legal or similarly significant effects','Only for decisions made by government authorities','When the individual has not given explicit consent to AI usage'], correct:1, exp:'<strong>Article 22</strong> applies when: (1) the decision is <em>solely</em> automated (no meaningful human review), and (2) it produces <em>legal or similarly significant effects</em> (e.g. loan rejection, hiring, insurance pricing).', ref:'https://gdpr-info.eu/art-22-gdpr/' },
+  { id:14, domain:'GDPR × AI', q:'A company wants to deploy an AI tool to monitor employee productivity via screen analysis. What GDPR step is most critical before deployment?', opts:['Notify the Data Protection Ombudsman 72 hours before go-live','Conduct a Data Protection Impact Assessment (DPIA) under Article 35','Obtain individual consent from all employees','Appoint an AI Ethics Officer'], correct:1, exp:'<strong>DPIA (Article 35)</strong> is mandatory for systematic monitoring of employees, large-scale processing, and evaluation of natural persons. Employee monitoring AI almost certainly triggers this requirement.', ref:'https://gdpr-info.eu/art-35-gdpr/' },
+  { id:15, domain:'GDPR × AI', q:'An AI vendor stores model training data in the US and processes EU personal data for a Finnish customer. What mechanism is required?', opts:['No mechanism needed — US companies follow Privacy Shield automatically','Standard Contractual Clauses (SCCs) or other valid transfer mechanism under Chapter V GDPR','An adequacy decision by the Finnish Data Protection Ombudsman','The Finnish company must obtain explicit consent from all data subjects'], correct:1, exp:'<strong>Standard Contractual Clauses (SCCs)</strong> or another Chapter V transfer mechanism is required for any transfer of EU personal data to the US or other third countries. Privacy Shield was invalidated by Schrems II in 2020.', ref:'https://gdpr-info.eu/chapter-5/' },
+  { id:16, domain:'GDPR × AI', q:'Under GDPR, when must a Data Protection Impact Assessment (DPIA) be conducted for an AI system?', opts:['Only for AI systems processing health data','Before deployment of any AI system that processes personal data','When processing is “likely to result in high risk” — including systematic profiling, large-scale special category data, or systematic monitoring','Only when the data controller has more than 250 employees'], correct:2, exp:'<strong>Article 35</strong> requires a DPIA before processing “likely to result in high risk”. This includes: systematic and extensive evaluation/profiling, large-scale processing of special categories, and systematic monitoring of public areas.', ref:'https://gdpr-info.eu/art-35-gdpr/' },
+  { id:17, domain:'GDPR × AI', q:'A Finnish HR system uses AI to rank candidates and a rejected candidate asks why they were rejected. What GDPR right applies?', opts:['Right to data portability (Article 20)','Right to erasure / “right to be forgotten” (Article 17)','Right to meaningful information about automated decision-making logic (Article 22)','Right to restriction of processing (Article 18)'], correct:2, exp:'<strong>Article 22</strong> gives data subjects the right to: (1) obtain human intervention, (2) express their point of view, and (3) contest the decision. They are also entitled to meaningful information about the logic involved.', ref:'https://gdpr-info.eu/art-22-gdpr/' },
+  { id:18, domain:'GDPR × AI', q:'What does “data protection by design” (Article 25 GDPR) require for AI system development?', opts:['Encrypting all model weights at rest','Implementing data minimisation and privacy safeguards from the earliest design stage, not as an afterthought','Storing all AI training data within Finland','Appointing a DPO before any AI development begins'], correct:1, exp:'<strong>Privacy by design</strong> means privacy protections are built into the system architecture from the start — data minimisation, pseudonymisation, access controls — not bolted on post-development.', ref:'https://gdpr-info.eu/art-25-gdpr/' },
+  { id:19, domain:'GDPR × AI', q:'A Finnish health organisation uses Azure AI to analyse patient notes. Which legal basis under GDPR is most appropriate?', opts:['Legitimate interests (Article 6(1)(f))','Consent (Article 6(1)(a)) plus explicit consent for health data (Article 9(2)(a))','Vital interests (Article 6(1)(d))','Public task (Article 6(1)(e)) plus Article 9(2)(h) for health or social care purposes'], correct:3, exp:'For a <strong>health organisation processing patient data</strong> for care purposes: Article 6(1)(e) (public task or legitimate purpose) + Article 9(2)(h) is the correct basis. Consent is fragile in healthcare contexts due to power imbalance.', ref:'https://gdpr-info.eu/art-9-gdpr/' },
+  { id:20, domain:'GDPR × AI', q:'How do GDPR and the EU AI Act interact when both apply to the same AI system?', opts:['The EU AI Act supersedes GDPR where they overlap','GDPR supersedes the EU AI Act for all personal data processing','Both apply cumulatively — the organisation must comply with both simultaneously','Only the most recently enacted law applies (EU AI Act)'], correct:2, exp:'<strong>Both apply cumulatively</strong> — Recital 9 of the EU AI Act explicitly states it does not affect GDPR. A high-risk AI system processing personal data must satisfy both simultaneously.', ref:'https://artificialintelligenceact.eu/recital/9/' },
+  { id:21, domain:'GDPR × AI', q:'What is the maximum GDPR fine for the most serious violations?', opts:['€10 million or 2% of global annual turnover','€20 million or 4% of global annual turnover','€35 million or 7% of global annual turnover','€50 million or 10% of global annual turnover'], correct:1, exp:'<strong>€20 million or 4% of global annual worldwide turnover</strong>, whichever is higher, for the most serious violations. Less serious violations: €10M or 2%.', ref:'https://gdpr-info.eu/art-83-gdpr/' },
+  { id:22, domain:'GDPR × AI', q:'Pseudonymisation of personal data used in AI model training:', opts:['Exempts the data from GDPR entirely','Reduces risk but the data remains personal data under GDPR if re-identification is possible','Requires explicit consent from all data subjects','Is prohibited for AI training purposes under GDPR'], correct:1, exp:'<strong>Pseudonymised data is still personal data</strong> under GDPR if re-identification is possible (Recital 26). It is a risk-reducing measure that can lower DPIA risk — but does not exempt organisations from GDPR compliance.', ref:'https://gdpr-info.eu/recitals/no-26/' },
+  // Azure AI
+  { id:23, domain:'Azure AI', q:'To prevent Azure OpenAI from being accessible over the public internet, which Azure control should an EA mandate?', opts:['Network Security Group with inbound deny rule','Private Endpoint combined with disabling public network access on the Azure OpenAI resource','Azure DDoS Protection Standard','Azure Firewall FQDN filtering rule'], correct:1, exp:'<strong>Private Endpoint + disabling public network access</strong> is the correct architecture. This projects Azure OpenAI into your VNet with a private IP, eliminating public internet exposure.', ref:'https://learn.microsoft.com/azure/ai-services/cognitive-services-virtual-networks' },
+  { id:24, domain:'Azure AI', q:'By default, does Azure OpenAI store customer prompts and completions?', opts:['Yes — all prompts stored for 12 months for model improvement','No — prompts and completions are not retained by default; temporary processing only','Yes — stored for 30 days in all cases','Yes — unless the customer explicitly opts out via Azure portal'], correct:1, exp:'<strong>No retention by default</strong> — Azure OpenAI processes prompts in-memory and does not retain them. When abuse monitoring is enabled, Microsoft may retain data temporarily (up to 30 days).', ref:'https://learn.microsoft.com/azure/ai-services/openai/concepts/data-privacy' },
+  { id:25, domain:'Azure AI', q:'Which Azure service allows an EA to define and enforce governance policies preventing deployment of non-compliant AI models across the organisation?', opts:['Azure Advisor','Microsoft Defender for Cloud','Azure Policy','Azure Blueprints'], correct:2, exp:'<strong>Azure Policy</strong> allows deny, audit, and remediation effects on Azure resource configurations including AI Services. You can prevent deployment of Azure OpenAI in non-approved regions, enforce private endpoint requirements, or require specific SKUs.', ref:'https://learn.microsoft.com/azure/governance/policy/overview' },
+  { id:26, domain:'Azure AI', q:'What is the purpose of Azure AI Content Safety in a Copilot or Azure OpenAI deployment?', opts:['It encrypts AI model weights at rest using customer-managed keys','It filters harmful, hate, violence, and sexual content from AI inputs and outputs','It provides bias detection for AI training datasets','It manages access control to Azure OpenAI endpoints'], correct:1, exp:'<strong>Azure AI Content Safety</strong> is a content moderation service that detects and filters: hate speech, violence, sexual content, and self-harm across text and images — in both user inputs (jailbreak detection) and AI outputs.', ref:'https://learn.microsoft.com/azure/ai-services/content-safety/overview' },
+  { id:27, domain:'Azure AI', q:'Which Microsoft 365 Copilot statement is correct regarding data privacy?', opts:['Copilot uses customer interaction data to improve Microsoft’s foundation models','Copilot may surface documents that the user does not have permission to access','Copilot interaction data is not used to train foundation models per contractual commitment','Copilot stores all generated content in Microsoft’s global training dataset'], correct:2, exp:'Microsoft contractually commits that <strong>Copilot for Microsoft 365 data is not used to train foundation models</strong>. Copilot respects existing Microsoft 365 permissions and cannot surface content a user cannot normally access.', ref:'https://learn.microsoft.com/copilot/microsoft-365/microsoft-365-copilot-privacy' },
+  { id:28, domain:'Azure AI', q:'What is Microsoft’s Responsible AI standard “Accountability” principle most concerned with?', opts:['AI systems must be encrypted and access-controlled at all times','Humans must remain responsible and answerable for AI system outcomes, with clear governance structures','AI performance must be audited quarterly by an external firm','All AI decisions must be explainable in plain language to end users'], correct:1, exp:'<strong>Accountability</strong> in Microsoft’s framework means humans — not AI — are ultimately responsible for AI-driven outcomes. This requires: clear ownership, internal review processes, impact assessments, and governance structures.', ref:'https://www.microsoft.com/ai/responsible-ai' },
+  { id:29, domain:'Azure AI', q:'An organisation wants to ensure Azure AI services can only be accessed by applications within their Azure VNet. Which combination is correct?', opts:['Service Endpoint + Network Security Group','Private Endpoint + disable public network access + VNet integration for the consuming app','Azure Firewall Premium + Application Gateway WAF','ExpressRoute + VPN Gateway redundancy'], correct:1, exp:'<strong>Private Endpoint + disable public network access + VNet integration</strong> is the correct architecture. Private Endpoint gives the AI service a private IP. Disabling public access ensures no traffic routes via internet. VNet integration for the consuming app keeps calls on the private network.', ref:'https://learn.microsoft.com/azure/private-link/private-endpoint-overview' },
+  { id:30, domain:'Azure AI', q:'Which Azure feature allows organisations to maintain control of encryption keys for Azure AI service data, ensuring Microsoft cannot access them?', opts:['Azure Active Directory (Entra ID) encryption','Customer Managed Keys (CMK) stored in Azure Key Vault','Azure Confidential Computing','Microsoft Managed Keys with FIPS 140-2 compliance'], correct:1, exp:'<strong>Customer Managed Keys (CMK)</strong> in Azure Key Vault lets the organisation control the encryption key lifecycle. Microsoft holds no access to the keys. Even if Microsoft infrastructure were compromised, CMK-protected data remains inaccessible.', ref:'https://learn.microsoft.com/azure/ai-services/encryption/cognitive-services-encryption-keys-portal' },
+  // EA Governance
+  { id:31, domain:'EA Governance', q:'As an enterprise architect, you receive a request to deploy AI-assisted CV screening. What is your first governance action?', opts:['Select the Azure AI service and begin a POC','Classify the system under EU AI Act risk tiers and conduct a DPIA','Obtain budget approval from the CFO','Benchmark accuracy against competitor products'], correct:1, exp:'<strong>Classification + DPIA</strong> first. CV screening AI is high-risk under EU AI Act Annex III. Before any POC: classify the risk tier, conduct a DPIA (systematic profiling of job applicants), assess human oversight requirements, and involve the DPO and legal team.', ref:'https://artificialintelligenceact.eu/annex/3/' },
+  { id:32, domain:'EA Governance', q:'An organisation builds a RAG system using Azure OpenAI to answer employee HR policy questions. What is the key EA concern?', opts:['Azure OpenAI is not capable of RAG architectures','The system must be registered in the EU AI Act database before deployment','The knowledge base must only include policy documents, and access controls must ensure employees cannot retrieve each other’s personal data via retrieval','RAG systems are prohibited under GDPR Article 17'], correct:2, exp:'<strong>Data access control in the retrieval layer</strong> is the key concern. If the knowledge base contains personal data, the retrieval mechanism must enforce the same permission model as the source systems. Poor RAG design can allow retrieval of data the user should not see.', ref:'https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview' },
+  { id:33, domain:'EA Governance', q:'What is the primary difference between a DPIA (GDPR) and a FRIA (EU AI Act)?', opts:['A DPIA covers technical risks; a FRIA covers financial risks','A DPIA focuses on personal data processing risks; a FRIA assesses impacts on fundamental rights more broadly (discrimination, dignity, freedom)','A FRIA is required from private companies; a DPIA only from public authorities','They are the same document with different names'], correct:1, exp:'<strong>DPIA</strong> (Article 35 GDPR) focuses specifically on data protection risks. <strong>FRIA</strong> (Article 27 EU AI Act) covers broader fundamental rights impacts: dignity, non-discrimination, access to justice, freedom of expression — beyond just data.', ref:'https://artificialintelligenceact.eu/article/27/' },
+  { id:34, domain:'EA Governance', q:'When evaluating "build vs buy" for an AI solution, from an EU AI Act compliance perspective, the key advantage of buying an off-the-shelf AI solution is:', opts:['You are exempt from all EU AI Act obligations as a purchaser','The provider bears provider obligations (conformity assessment, technical documentation); you only need to meet deployer obligations','No GDPR DPIA is required for purchased solutions','You can deploy without human oversight if the vendor certifies compliance'], correct:1, exp:'<strong>Shared compliance responsibility</strong> — when buying, the vendor (provider) handles conformity assessment, technical documentation, and CE marking. As deployer, you focus on: human oversight, monitoring, logging, staff training, and FRIA (if a public body).', ref:'https://artificialintelligenceact.eu/article/26/' },
+  { id:35, domain:'EA Governance', q:'Which of these is a valid human oversight measure for a high-risk AI system, as required by the EU AI Act?', opts:['Automated rollback if the model confidence score drops below 80%','A human reviewer with authority and capability to override, correct, or shut down the AI system','Annual penetration testing of the AI system’s API endpoints','Storing all AI decisions in an immutable audit log'], correct:1, exp:'<strong>Human oversight (Article 14)</strong> requires: a natural person who understands the system, can monitor it, can interpret its output critically, and can override or stop it. This means a real person with authority and training — not just a technical failsafe or an audit log.', ref:'https://artificialintelligenceact.eu/article/14/' },
+  { id:36, domain:'EA Governance', q:'An organisation wants to deploy AI that generates legal contract summaries for use by lawyers. The most important compliance design decision is:', opts:['Use GPT-4 Turbo for best accuracy','The AI output must be clearly labelled as AI-generated and subject to mandatory lawyer review before any legal reliance','Store all contracts in Azure Blob Storage with geo-redundancy','Implement token budgeting to control Azure OpenAI costs'], correct:1, exp:'<strong>Transparency + human oversight</strong> — AI-generated legal summaries used in actual legal work may constitute high-risk AI. At minimum, outputs must be labelled as AI-generated and a qualified lawyer must review before legal reliance. This also manages professional liability.', ref:'https://artificialintelligenceact.eu/article/50/' },
+  // Finnish Context
+  { id:37, domain:'Finnish Context', q:'Which Finnish authority is designated as the primary market surveillance authority for the EU AI Act in Finland?', opts:['Tietosuojavaltuutettu (Data Protection Ombudsman)','Liikenne- ja viestintävirasto (Traficom)','Kilpailu- ja kuluttajavirasto (KKV)','Valtiovarainministeriö (Ministry of Finance)'], correct:1, exp:'<strong>Traficom</strong> (Finnish Transport and Communications Agency) is designated as Finland’s national competent authority / market surveillance authority for the EU AI Act. Tietosuojavaltuutettu remains the GDPR enforcement authority.', ref:'https://www.traficom.fi/en/ai' },
+  { id:38, domain:'Finnish Context', q:'A Finnish public organisation plans to deploy AI for automated processing of citizen applications. Under Finnish law, what additional requirement applies beyond the EU AI Act?', opts:['A Tietosuojavaltuutettu licence is required for all public AI deployments','The Administrative Procedure Act (Hallintolaki) requires that citizens can request a human decision-maker review any automated decision','All citizen data must be stored on Finnish government-operated servers','The organisation must publish the AI model’s source code as open data'], correct:1, exp:'<strong>Hallintolaki (Administrative Procedure Act)</strong> guarantees the right to a human decision on administrative matters. Automated decisions in public administration must allow citizens to request human review — reinforcing and in some ways exceeding GDPR Article 22.', ref:'https://www.finlex.fi/fi/laki/ajantasa/2003/20030434' },
+  { id:39, domain:'Finnish Context', q:'A Finnish company integrates SAP Joule (AI assistant) with SAP S/4HANA running on Azure. Which compliance step is most critical if Joule will assist in HR-related decisions?', opts:['Migrate SAP workloads to Azure Finland South region only','Conduct a DPIA and assess EU AI Act risk classification — Joule assisting HR decisions may qualify as high-risk AI','Obtain a Microsoft enterprise agreement with Finnish data residency addendum','Register SAP as an AI provider with Traficom'], correct:1, exp:'<strong>DPIA + EU AI Act classification</strong> — SAP Joule assisting HR decisions likely qualifies as high-risk AI under Annex III. A DPIA is required under GDPR for systematic evaluation of employees. Both should be completed before go-live.', ref:'https://artificialintelligenceact.eu/annex/3/' },
+  { id:40, domain:'Finnish Context', q:'What is the key data residency requirement for Finnish public sector organisations deploying Azure AI services?', opts:['All data must be stored on Finnish government-operated bare-metal servers','Data must reside within the EU/EEA — Azure regions such as Sweden Central, North Europe, or West Europe satisfy this requirement','A specific Finland-only Azure region is required for public sector use','Public sector data must be stored on-premises and cannot use cloud AI services'], correct:1, exp:'<strong>EU/EEA data residency</strong> satisfies Finnish public sector requirements. Finland does not yet have a dedicated Azure region. Azure regions North Europe (Ireland) and Sweden Central are compliant for Finnish public sector data under the government cloud strategy.', ref:'https://azure.microsoft.com/regions/' }
+];
+
+let state = {
+  answers: {},
+  filter: 'all',
+  order: QUESTIONS.map(q => q.id)
+};
+
+function getVisible() {
+  const qs = state.filter === 'all' ? QUESTIONS : QUESTIONS.filter(q => q.domain === state.filter);
+  return state.order.filter(id => qs.find(q => q.id === id)).map(id => QUESTIONS.find(q => q.id === id));
+}
+
+function render() {
+  const visible = getVisible();
+  document.getElementById('visible-count').textContent = visible.length;
+  const answered = visible.filter(q => state.answers[q.id]);
+  const correct = answered.filter(q => state.answers[q.id].correct);
+  const pct = visible.length > 0 ? (answered.length / visible.length) * 100 : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  const container = document.getElementById('questions-container');
+  const scorePanel = document.getElementById('score-panel');
+  const allAnswered = visible.length > 0 && answered.length === visible.length;
+
+  if (allAnswered) {
+    scorePanel.classList.add('show');
+    const score = Math.round((correct.length / visible.length) * 100);
+    const scoreEl = document.getElementById('score-big');
+    scoreEl.textContent = score + '%';
+    scoreEl.style.color = score >= 80 ? 'var(--green)' : score >= 60 ? 'var(--accent2)' : 'var(--red)';
+    document.getElementById('sc-correct').textContent = correct.length;
+    document.getElementById('sc-wrong').textContent = answered.length - correct.length;
+    document.getElementById('sc-total').textContent = answered.length;
+
+    const domains = [...new Set(QUESTIONS.map(q => q.domain))];
+    const breakdown = domains.map(d => {
+      const dqs = visible.filter(q => q.domain === d && state.answers[q.id]);
+      if (!dqs.length) return null;
+      const dc = dqs.filter(q => state.answers[q.id].correct).length;
+      const p = Math.round((dc / dqs.length) * 100);
+      return { d, dc, total: dqs.length, p };
+    }).filter(Boolean);
+
+    document.getElementById('domain-breakdown').innerHTML = '<h4>DOMAIN BREAKDOWN</h4>' + breakdown.map(b =>
+      `<div class="domain-row"><span class="dn">${b.d}</span><span style="color:${b.p>=80?'var(--green)':b.p>=60?'var(--accent2)':'var(--red)'}">${b.dc}/${b.total} — ${b.p}%</span></div>`
+    ).join('');
+  } else {
+    scorePanel.classList.remove('show');
+  }
+
+  container.innerHTML = visible.map((q, idx) => {
+    const ans = state.answers[q.id];
+    const domainColor = { 'EU AI Act':'tag-eu','GDPR × AI':'tag-gdpr','Azure AI':'tag-azure','EA Governance':'tag-gov','Finnish Context':'tag-fi' }[q.domain];
+    const opts = q.opts.map((opt, i) => {
+      let cls = 'option-btn';
+      if (ans) {
+        if (i === q.correct) cls += ans.selected === i ? ' correct' : ' reveal-correct';
+        else if (i === ans.selected && ans.selected !== q.correct) cls += ' wrong';
+      }
+      return `<button class="${cls}" onclick="answer(${q.id},${i})" ${ans?'disabled':''}><span class="opt-letter">${['A','B','C','D'][i]}</span><span>${opt}</span></button>`;
+    }).join('');
+    const expHtml = ans ? `<div class="explanation show">${q.exp}<br><br><a href="${q.ref}" target="_blank" rel="noopener">→ ${q.ref.replace('https://','')}</a></div>` : '';
+    return `<div class="question-card" id="qcard-${q.id}"><div class="q-meta"><span class="q-num">Q${idx+1}</span><span class="section-tag ${domainColor} q-domain">${q.domain}</span></div><div class="question-text">${q.q}</div><div class="options">${opts}</div>${expHtml}</div>`;
+  }).join('');
+}
+
+function answer(qId, selected) {
+  const q = QUESTIONS.find(x => x.id === qId);
+  state.answers[qId] = { selected, correct: selected === q.correct };
+  render();
+  const card = document.getElementById('qcard-' + qId);
+  if (card) setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+
+function filterDomain(domain, btn) {
+  state.filter = domain;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function shuffleAndReset() {
+  state.answers = {};
+  const arr = QUESTIONS.map(q => q.id);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  state.order = arr;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetAll() {
+  state.answers = {};
+  state.order = QUESTIONS.map(q => q.id);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchTab(tab, ev) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  ev.target.classList.add('active');
+}
+
+render();
+</script>
+</body>
+</html>

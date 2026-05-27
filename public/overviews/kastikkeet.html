@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sauce Master — Classical &amp; Modern Sauces</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#F97316;--cl:#FED7AA;--cb:rgba(249,115,22,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #F9731644;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:600px}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:16px}
+main{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #F9731630;border-radius:8px;padding:6px 14px}
+h2{font-size:20px;font-weight:800;color:#fff;margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:16px;font-weight:800;color:var(--cl);margin:22px 0 8px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.sauce-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px;margin-bottom:24px}
+.sauce{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px;border-top:3px solid var(--c)}
+.sauce-name{font-size:17px;font-weight:900;color:#fff;margin-bottom:4px}
+.sauce-sub{font-size:11px;color:var(--c);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.sauce-desc{font-size:13px;color:#94a3b8;margin-bottom:14px;line-height:1.7}
+.recipe-label{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.ingredients{font-size:12px;color:#94a3b8;margin-bottom:10px;line-height:1.75;padding-left:16px}
+.method{font-size:12px;color:#94a3b8;line-height:1.75;padding-left:16px}
+.method li{margin-bottom:4px}
+.children{margin-top:12px;padding-top:12px;border-top:1px solid #1e2d45}
+.child-label{font-size:11px;color:#64748b;font-weight:700;margin-bottom:6px}
+.tag{background:#1e2d45;color:#94a3b8;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;margin:2px;display:inline-block}
+.tip{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:8px;padding:14px 18px;margin-bottom:12px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.tree-row{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #1e2d45;flex-wrap:wrap}
+.tree-mother{font-size:13px;font-weight:800;color:#fff;min-width:130px}
+.tree-desc{font-size:12px;color:#64748b}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html" class="active">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge">🍳 Culinary Arts — Classical French Cuisine</div>
+    <h1>Sauce Master</h1>
+    <p class="sub">The five French mother sauces, their derivatives, and modern emulsification techniques — with actual recipes. Master these and you understand the architecture of classical cooking.</p>
+    <div class="meta"><span>🇫🇷 Based on Escoffier &amp; Carême</span><span><a href="https://www.escoffier.edu/blog/culinary-arts/mother-sauces/" target="_blank" class="ext">Escoffier on Mother Sauces ↗</a></span></div>
+  </div>
+</div>
+<main>
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🌳 The Sauce Family Tree</h2>
+  <p>Auguste Escoffier codified five <strong>mother sauces</strong> (sauces mères) in the early 20th century. Every classical French sauce derives from one of these five bases. Understanding the mother sauces means you can reverse-engineer any classical recipe.</p>
+  <div style="background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:16px;margin-bottom:24px">
+    <div class="tree-row"><div class="tree-mother">Béchamel</div><div class="tree-desc">Milk + white roux → Mornay, Cream Sauce, Soubise, Nantua</div></div>
+    <div class="tree-row"><div class="tree-mother">Velouté</div><div class="tree-desc">Light stock + blonde roux → Suprême, Allemande, Vin Blanc, Normande</div></div>
+    <div class="tree-row"><div class="tree-mother">Espagnole</div><div class="tree-desc">Brown stock + brown roux → Demi-glace, Bordelaise, Chasseur, Robert, Madeira</div></div>
+    <div class="tree-row"><div class="tree-mother">Sauce Tomat</div><div class="tree-desc">Tomatoes + stock → Tomato Coulis, Arrabbiata, Provençale, Portuguese</div></div>
+    <div class="tree-row" style="border-bottom:none"><div class="tree-mother">Hollandaise</div><div class="tree-desc">Egg yolks + clarified butter → Béarnaise, Maltaise, Mousseline, Choron</div></div>
+  </div>
+
+  <h2>🥛 1. Béchamel — The White Sauce</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Béchamel</div>
+      <div class="sauce-sub">Mother Sauce · Milk + White Roux</div>
+      <div class="sauce-desc">The simplest mother sauce. A white roux (equal parts butter and flour) cooked with milk, seasoned with nutmeg. Forms the base for most creamy white sauces.</div>
+      <div class="recipe-label">Ingredients (500 ml)</div>
+      <ul class="ingredients">
+        <li>500 ml whole milk</li>
+        <li>30 g unsalted butter</li>
+        <li>30 g plain flour</li>
+        <li>Salt, white pepper, freshly grated nutmeg</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Melt butter in a heavy saucepan over medium heat.</li>
+        <li>Add flour and stir constantly for 1–2 minutes until pale (white roux).</li>
+        <li>Remove from heat. Gradually whisk in warm milk, a little at a time.</li>
+        <li>Return to medium heat, stirring constantly until thick and smooth (~5 min).</li>
+        <li>Season with salt, white pepper, and a pinch of nutmeg.</li>
+      </ol>
+      <div class="children">
+        <div class="child-label">Classic derivatives</div>
+        <span class="tag">Mornay (+ Gruyère)</span>
+        <span class="tag">Cream Sauce (+ cream)</span>
+        <span class="tag">Soubise (+ sweated onion)</span>
+        <span class="tag">Nantua (+ crayfish butter)</span>
+      </div>
+    </div>
+    <div class="sauce">
+      <div class="sauce-name">Sauce Mornay</div>
+      <div class="sauce-sub">Béchamel Derivative · Cheese Sauce</div>
+      <div class="sauce-desc">The most famous Béchamel derivative. Essential for gratin dishes, croque monsieur, and cauliflower cheese.</div>
+      <div class="recipe-label">Method (from Béchamel)</div>
+      <ol class="method">
+        <li>Make 500 ml Béchamel.</li>
+        <li>Remove from heat, add 2 egg yolks whisked with 50 ml cream.</li>
+        <li>Stir in 50 g grated Gruyère and 25 g Parmesan.</li>
+        <li>Season and use immediately, or finish under the grill for a gratin.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>🍗 2. Velouté — The Velvet Sauce</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Velouté</div>
+      <div class="sauce-sub">Mother Sauce · Light Stock + Blonde Roux</div>
+      <div class="sauce-desc">Made with light (white) stock — chicken, veal, or fish — thickened with a blonde roux. Richer than Béchamel, lighter than Espagnole. The base for the most elegant French sauces.</div>
+      <div class="recipe-label">Ingredients (500 ml)</div>
+      <ul class="ingredients">
+        <li>500 ml white chicken or veal stock (hot)</li>
+        <li>30 g unsalted butter</li>
+        <li>30 g plain flour</li>
+        <li>Salt, white pepper</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Make a blonde roux: cook butter and flour 2–3 min until lightly golden.</li>
+        <li>Gradually whisk in hot stock.</li>
+        <li>Simmer 20 minutes, skimming occasionally, until velvety and coating.</li>
+        <li>Strain through a fine sieve.</li>
+      </ol>
+      <div class="children">
+        <div class="child-label">Classic derivatives</div>
+        <span class="tag">Suprême (chicken velouté + cream)</span>
+        <span class="tag">Allemande (+ egg yolk liaison)</span>
+        <span class="tag">Vin Blanc (fish velouté + white wine)</span>
+        <span class="tag">Normande (fish + mushrooms + cream)</span>
+      </div>
+    </div>
+    <div class="sauce">
+      <div class="sauce-name">Sauce Suprême</div>
+      <div class="sauce-sub">Velouté Derivative · Classic Fine Dining</div>
+      <div class="sauce-desc">The most luxurious white sauce — reduced chicken velouté finished with cream. Served with poached chicken, quenelles, and vegetables.</div>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Reduce 500 ml chicken velouté by one third.</li>
+        <li>Add 150 ml double cream and reduce to a coating consistency.</li>
+        <li>Finish with 30 g cold butter, swirled in off heat.</li>
+        <li>Season and strain.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>🥩 3. Espagnole — The Brown Sauce</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Espagnole</div>
+      <div class="sauce-sub">Mother Sauce · Brown Stock + Brown Roux</div>
+      <div class="sauce-desc">The most complex mother sauce. Brown roux with brown veal stock, mirepoix, tomato purée, and a bouquet garni. Reduced to a rich, deeply savoury base. Always the starting point for demi-glace.</div>
+      <div class="recipe-label">Ingredients (1 litre)</div>
+      <ul class="ingredients">
+        <li>1.5 litres brown veal stock</li>
+        <li>60 g butter + 60 g flour (brown roux)</li>
+        <li>100 g each: diced onion, carrot, celery (mirepoix)</li>
+        <li>2 tbsp tomato purée</li>
+        <li>Bouquet garni (thyme, bay, parsley stalks)</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Make brown roux: cook butter and flour, stirring, until deep brown (8–10 min).</li>
+        <li>Add mirepoix and cook until softened and browned.</li>
+        <li>Add tomato purée, cook 2 minutes.</li>
+        <li>Gradually whisk in hot stock. Add bouquet garni.</li>
+        <li>Simmer 1–2 hours, skimming regularly, until reduced by half.</li>
+        <li>Strain. This is Espagnole — reduce further for Demi-glace.</li>
+      </ol>
+      <div class="children">
+        <div class="child-label">Classic derivatives</div>
+        <span class="tag">Demi-glace (reduced 50%)</span>
+        <span class="tag">Bordelaise (+ red wine + shallots)</span>
+        <span class="tag">Chasseur (+ mushrooms + white wine)</span>
+        <span class="tag">Robert (+ onion + mustard + vinegar)</span>
+        <span class="tag">Madeira (+ Madeira wine)</span>
+      </div>
+    </div>
+    <div class="sauce">
+      <div class="sauce-name">Demi-glace</div>
+      <div class="sauce-sub">Espagnole Derivative · The Ultimate Base</div>
+      <div class="sauce-desc">Equal parts Espagnole and brown stock, reduced by half to a glossy, intensely flavoured sauce. The foundation of all classic brown sauces. Any restaurant serving proper French cuisine makes this weekly.</div>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Combine 500 ml Espagnole + 500 ml brown veal stock.</li>
+        <li>Simmer over medium-low heat, skimming constantly.</li>
+        <li>Reduce by half until glossy and coats a spoon thickly (~45 min).</li>
+        <li>Strain through fine muslin. Season.</li>
+        <li>Use as a base or reduce further for a glaze.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>🍅 4. Sauce Tomat — The Tomato Sauce</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Sauce Tomat</div>
+      <div class="sauce-sub">Mother Sauce · Tomatoes + Stock</div>
+      <div class="sauce-desc">The French classical version is more complex than Italian tomato sauce — includes a roux and stock. Escoffier's version used salt pork, vegetables, and long simmering. Modern versions are simpler.</div>
+      <div class="recipe-label">Ingredients (modern, 500 ml)</div>
+      <ul class="ingredients">
+        <li>1 kg ripe tomatoes (or 800 g tinned whole)</li>
+        <li>1 onion, 2 garlic cloves, 1 carrot — diced</li>
+        <li>2 tbsp olive oil</li>
+        <li>150 ml chicken or veal stock</li>
+        <li>Thyme, bay leaf, pinch of sugar</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Sweat onion, carrot, garlic in oil until soft (8 min).</li>
+        <li>Add tomatoes, stock, herbs, and sugar.</li>
+        <li>Simmer uncovered 25–30 minutes until thick.</li>
+        <li>Pass through a mouli or blender, then strain for a fine sauce.</li>
+        <li>Adjust seasoning.</li>
+      </ol>
+      <div class="children">
+        <div class="child-label">Derivatives</div>
+        <span class="tag">Provençale (+ olives, capers, herbs)</span>
+        <span class="tag">Portuguese (+ sautéed onion, garlic)</span>
+        <span class="tag">Arrabbiata (+ chilli, garlic)</span>
+        <span class="tag">Coulis (strained, raw or cooked)</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>🥚 5. Hollandaise — The Emulsified Butter Sauce</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Hollandaise</div>
+      <div class="sauce-sub">Mother Sauce · Egg Yolks + Clarified Butter</div>
+      <div class="sauce-desc">A warm emulsified sauce. Egg yolks are whisked with a reduction of white wine and vinegar, then clarified butter is incorporated slowly to form a stable emulsion. The most technically demanding mother sauce — temperature control is critical.</div>
+      <div class="recipe-label">Ingredients (4 portions)</div>
+      <ul class="ingredients">
+        <li>3 egg yolks</li>
+        <li>250 g clarified (or whole) unsalted butter, warm</li>
+        <li>Reduction: 2 tbsp white wine vinegar + 2 tbsp white wine + 1 shallot + 6 peppercorns → reduce to 1 tbsp</li>
+        <li>Lemon juice, salt, cayenne pepper</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Strain the reduction into a bowl. Add egg yolks.</li>
+        <li>Whisk over barely simmering water (bain-marie) until thick, pale, and tripled (ribbon stage). Do NOT let the bowl touch the water.</li>
+        <li>Remove from heat. Whisk in clarified butter drop by drop at first, then in a thin stream.</li>
+        <li>Season with lemon, salt, and cayenne. Serve immediately or keep warm (max 65°C).</li>
+      </ol>
+      <div class="children">
+        <div class="child-label">Classic derivatives</div>
+        <span class="tag">Béarnaise (+ tarragon reduction)</span>
+        <span class="tag">Maltaise (+ blood orange juice)</span>
+        <span class="tag">Mousseline (+ whipped cream)</span>
+        <span class="tag">Choron (Béarnaise + tomato)</span>
+        <span class="tag">Foyot (Béarnaise + demi-glace)</span>
+      </div>
+    </div>
+    <div class="sauce">
+      <div class="sauce-name">Béarnaise</div>
+      <div class="sauce-sub">Hollandaise Derivative · The Steak Sauce</div>
+      <div class="sauce-desc">The most celebrated derivative of Hollandaise. The tarragon-forward reduction gives it a distinctive herbaceous, anise-like flavour. Essential with entrecôte, châteaubriand, and grilled fish.</div>
+      <div class="recipe-label">Method (differs from Hollandaise)</div>
+      <ol class="method">
+        <li>Make a new reduction: 50 ml white wine + 50 ml tarragon vinegar + 2 shallots + fresh tarragon + peppercorns → reduce to 2 tbsp.</li>
+        <li>Proceed exactly as Hollandaise from this reduction.</li>
+        <li>Finish with chopped fresh tarragon and chervil.</li>
+        <li>Do NOT add lemon juice (it would clash with the tarragon).</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>⚡ Modern &amp; Butter Sauces</h2>
+  <div class="sauce-grid">
+    <div class="sauce">
+      <div class="sauce-name">Beurre Blanc</div>
+      <div class="sauce-sub">Butter Emulsion · Loire Valley Origin</div>
+      <div class="sauce-desc">A classically French butter sauce from the Loire. Not technically a "mother sauce" but arguably the most versatile modern sauce. Brilliant with fish, vegetables, and seafood.</div>
+      <div class="recipe-label">Ingredients</div>
+      <ul class="ingredients">
+        <li>200 g cold unsalted butter, cubed</li>
+        <li>3 shallots, finely chopped</li>
+        <li>100 ml dry white wine</li>
+        <li>50 ml white wine vinegar</li>
+        <li>2 tbsp double cream (stabiliser, optional)</li>
+      </ul>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Simmer shallots, wine, and vinegar until reduced to 2 tbsp (almost dry).</li>
+        <li>Add cream and reduce briefly.</li>
+        <li>Over very low heat, whisk in cold butter cube by cube.</li>
+        <li>The sauce should be thick, creamy, and pale. Strain if desired.</li>
+        <li>Season with salt and white pepper. Serve immediately.</li>
+      </ol>
+    </div>
+    <div class="sauce">
+      <div class="sauce-name">Pan Sauce / Jus Lié</div>
+      <div class="sauce-sub">Modern Technique · From Fond</div>
+      <div class="sauce-desc">The simplest and most powerful modern sauce technique. Deglaze the fond (the caramelised bits left in a pan after searing meat) with wine or stock and reduce. The Maillard reaction creates complex flavour in minutes.</div>
+      <div class="recipe-label">Method</div>
+      <ol class="method">
+        <li>Remove the cooked protein and rest it. Pour off excess fat, leave the fond.</li>
+        <li>Deglaze with 100 ml wine or stock, scraping the fond vigorously.</li>
+        <li>Add 200 ml demi-glace or strong stock.</li>
+        <li>Reduce by half until coating consistency.</li>
+        <li>Mount with 30 g cold butter off the heat. Season.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>🔬 The Science Behind Sauce-Making</h2>
+  <div class="tip"><strong>Emulsification:</strong> Hollandaise, Béarnaise, and Beurre Blanc are emulsions — fat dispersed in water using lecithin in egg yolks as an emulsifier. Temperature must stay below 70°C or proteins denature and the sauce "breaks" (splits into greasy puddles).</div>
+  <div class="tip"><strong>Roux ratios:</strong> Thin sauce: 20 g butter + 20 g flour per 500 ml. Medium: 30 g each. Thick: 40 g each. Always cook the roux first to eliminate the raw flour taste — minimum 2 minutes for white, 10 minutes for brown.</div>
+  <div class="tip"><strong>Reduction = concentration:</strong> Reducing a sauce by half doubles the intensity of flavour. This is why demi-glace (reduced Espagnole) has such extraordinary depth. Time and patience is the secret ingredient.</div>
+
+  <h2>🔗 Further Reading</h2>
+  <p>
+    <a href="https://www.escoffier.edu/blog/culinary-arts/mother-sauces/" target="_blank" class="ext">Auguste Escoffier School — The 5 Mother Sauces ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.seriouseats.com/how-to-make-classic-french-mother-sauces" target="_blank" class="ext">Serious Eats — Mother Sauce Guide ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.bbcgoodfood.com/glossary/sauce" target="_blank" class="ext">BBC Good Food Sauce Glossary ↗</a>
+  </p>
+  <p>See also: <a href="hygieniapassi.html" class="ext">→ Hygieniapassi</a> for food safety temperatures and storage.</p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</main>
+</body>
+</html>

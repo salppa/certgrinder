@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IT4IT v3 Advanced – Suomenkielinen opiskeluopas</title>
+<style>
+:root{--c:#0891B2;--cl:#67E8F9;--cb:rgba(8,145,178,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0f1a;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.55}
+a{color:var(--cl);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+nav{background:#060b14;border-bottom:1px solid #1e293b;padding:0 12px;display:flex;flex-wrap:wrap;gap:2px;align-items:center}
+nav a{color:#94a3b8;font-size:12px;padding:8px 7px;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover{color:var(--cl);text-decoration:none}
+nav a.active{color:var(--cl);border-bottom-color:var(--c);font-weight:600}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060b14 0%,#0c1829 60%,#0a1a2e 100%);border-bottom:1px solid #1e293b;padding:40px 20px 32px;text-align:center}
+.hero-badge{display:inline-block;background:var(--cb);border:1px solid var(--c);color:var(--cl);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:14px}
+.hero h1{font-size:2rem;font-weight:800;color:#f1f5f9;margin-bottom:10px}
+.hero h1 span{color:var(--cl)}
+.hero-sub{color:#94a3b8;max-width:640px;margin:0 auto 18px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:8px}
+.hero-meta span{background:#111827;border:1px solid #1e293b;color:#cbd5e1;font-size:12px;padding:4px 12px;border-radius:12px}
+.hero-meta span strong{color:var(--cl)}
+.hero-prereq{color:#64748b;font-size:12px}
+.hero-prereq strong{color:#94a3b8}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+
+/* SECTION HEADERS */
+.section-title{display:flex;align-items:center;gap:10px;margin:32px 0 16px}
+.section-title h2{font-size:1.15rem;font-weight:700;color:#f1f5f9}
+.section-num{background:var(--c);color:#fff;font-size:11px;font-weight:800;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* CARDS */
+.card{background:#0d1526;border:1px solid #1e293b;border-radius:10px;padding:16px 18px;margin-bottom:16px}
+.card-title{font-size:.8rem;font-weight:700;color:var(--cl);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#111827;color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;text-align:left;border-bottom:1px solid #1e293b}
+td{padding:7px 10px;border-bottom:1px solid #111827;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.025)}
+td code,th code{background:#1e293b;color:#67E8F9;font-size:11px;padding:1px 5px;border-radius:3px}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;letter-spacing:.04em}
+.tag-blue{background:rgba(8,145,178,.2);color:#67E8F9;border:1px solid rgba(8,145,178,.35)}
+.tag-green{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.tag-amber{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+.tag-red{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.tag-indigo{background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
+.tag-purple{background:rgba(168,85,247,.15);color:#d8b4fe;border:1px solid rgba(168,85,247,.3)}
+
+/* HIGHLIGHT BOXES */
+.hl{border-radius:8px;padding:12px 15px;margin-bottom:12px;border-left:3px solid}
+.hl-cyan{background:rgba(6,182,212,.08);border-color:#0891B2;color:#cffafe}
+.hl-green{background:rgba(16,185,129,.08);border-color:#10b981;color:#d1fae5}
+.hl-amber{background:rgba(245,158,11,.08);border-color:#f59e0b;color:#fef3c7}
+.hl-indigo{background:rgba(99,102,241,.08);border-color:#6366f1;color:#e0e7ff}
+.hl-red{background:rgba(239,68,68,.08);border-color:#ef4444;color:#fee2e2}
+.hl-purple{background:rgba(168,85,247,.08);border-color:#a855f7;color:#f3e8ff}
+.hl-blue{background:var(--cb);border-color:var(--c);color:#cffafe}
+.hl strong{font-weight:700;display:block;margin-bottom:4px;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+.hl p,.hl li{font-size:12.5px;line-height:1.6;color:inherit}
+.hl ul{padding-left:16px}
+.hl li{margin-bottom:2px}
+
+/* BULLET LISTS */
+.blist{padding-left:18px;margin-bottom:12px}
+.blist li{margin-bottom:5px;font-size:13px;color:#cbd5e1}
+.blist li strong{color:#f1f5f9}
+.blist li code{background:#1e293b;color:#67E8F9;font-size:11px;padding:1px 5px;border-radius:3px}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+
+/* QUICK REF */
+.qr-title{font-size:1rem;font-weight:700;color:#f1f5f9;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #1e293b}
+.trap{color:#fca5a5}
+.correct{color:#6ee7b7}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a>
+  <a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">🤖 AI-103</a>
+  <a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏗️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html">📐 ArchiMate</a>
+  <a href="it4it.html">🔄 IT4IT</a>
+  <a href="it4it-advanced.html" class="active">🔄 IT4IT Advanced</a>
+  <a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a>
+  <a href="sabsa.html">🔐 SABSA</a>
+  <a href="ai-compliance.html">⚖️ AI Compliance</a>
+  <a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+  <a href="persoonallisuuspsykologia.html">🧠 Psykologia</a>
+  <a href="kirjanpito.html">📊 Kirjanpito</a>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-badge">🔄 The Open Group</div>
+  <h1>IT4IT v3 <span>Advanced</span></h1>
+  <p class="hero-sub">Syväsukellus IT-arkkitehtuurin hallinnoitiin, digitaaliseen tuotehallintaan, DevSecOps-integraatioon, pilvipalveluiden hallintaan ja AIOps-operaatioihin IT4IT-viitekehyksen edistyneen tason mukaisesti.</p>
+  <div class="hero-meta">
+    <span><strong>80 kysymystä</strong> · 8 aihealuetta</span>
+    <span>Läpäisyraja <strong>65 %</strong></span>
+    <span>Kesto <strong>120 min</strong></span>
+    <span><a href="https://www.opengroup.org/it4it" target="_blank" rel="noopener">opengroup.org/it4it ↗</a></span>
+  </div>
+  <p class="hero-prereq">Esitietovaatimus: <strong>IT4IT Foundation / Intermediate</strong> – edellyttää IT4IT-referenssiarkkitehtuurin perusteiden hallintaa</p>
+</div>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 · HALLINTOMALLI
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">1</div>
+  <h2>Hallintomalli (Governance)</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">Hallintoelimet ja niiden vastuut</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Hallintoelin</th><th>Päätehtävä</th><th>Kokoustiheys</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IT4IT Forum</strong></td><td>Viitekehyksen strateginen suunta, versiopläätökset, ekosysteemiyhteistyö</td><td>Neljännesvuosittain</td></tr>
+        <tr><td><strong>Steering Committee</strong></td><td>IT4IT-ohjelman rahoitus, prioriteetit, muutosjohtaminen, hyötyjen seuranta</td><td>Kuukausittain</td></tr>
+        <tr><td><strong>Architecture Board</strong></td><td>FC-komponenttien toteutuspläätökset, poikkeamat referenssiarkkitehtuurista, toolchain-valinnat</td><td>Joka toinen viikko</td></tr>
+        <tr><td><strong>Value Stream Owner – S2P</strong></td><td>Strategia-to-Portfolio-arvoketjun FC:iden omistajuus ja kypsyystavoitteet</td><td>Viikoittain</td></tr>
+        <tr><td><strong>Value Stream Owner – R2D</strong></td><td>Requirement-to-Deploy-arvoketjun FC:iden omistajuus ja DevOps-integraatio</td><td>Viikoittain</td></tr>
+        <tr><td><strong>Value Stream Owner – R2F</strong></td><td>Request-to-Fulfill-arvoketjun FC:iden omistajuus ja palvelukatalogin hallinta</td><td>Viikoittain</td></tr>
+        <tr><td><strong>Value Stream Owner – D2C</strong></td><td>Detect-to-Correct-arvoketjun FC:iden omistajuus ja AIOps-kehitys</td><td>Viikoittain</td></tr>
+        <tr><td><strong>Data Backbone Custodian</strong></td><td>Jaettujen Data Objectien eheydestä, metatiedoista ja MDM-periaatteista vastaaminen</td><td>Kuukausittain</td></tr>
+        <tr><td><strong>Tooling Council</strong></td><td>FC-toolchain-standardien ylläpito, integraatiomallit, myyjahallinta</td><td>Neljännesvuosittain</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Keskeiset roolit</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Rooli</th><th>Vastuu IT4IT:ssä</th><th>Pääarvoketju</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Digital Product Owner</strong></td><td>Digitaalisen tuotteen elinkaari, OKR-asetus, backlog-priorisointi</td><td>S2P / R2D</td></tr>
+        <tr><td><strong>Enterprise Architect</strong></td><td>FC-kartoitus liiketoimintavaatimuksiin, Data Backbone -suunnittelu</td><td>Kaikki</td></tr>
+        <tr><td><strong>Portfolio Manager</strong></td><td>RTB/GTB/TTB-rahoitussegmentit, investointipläätökset</td><td>S2P</td></tr>
+        <tr><td><strong>DevOps Lead</strong></td><td>CI/CD-putken FC-integraatio, Automated Change -hallinta</td><td>R2D</td></tr>
+        <tr><td><strong>Service Catalogue Manager</strong></td><td>Service Entry Point -päivitykset, palvelukuvausten laatu</td><td>R2F</td></tr>
+        <tr><td><strong>Configuration Manager</strong></td><td>CMS-eheys, CI-suhteiden ylläpito, CMDB-ristiintarkistukset</td><td>D2C / R2F</td></tr>
+        <tr><td><strong>Major Incident Manager</strong></td><td>P1/P2-tapahtumien koordinointi, War Room, korjausketju</td><td>D2C</td></tr>
+        <tr><td><strong>Problem Manager</strong></td><td>Juurisyyanalyysi, Known Error -tietokanta, ennakoiva ongelmienhallinta</td><td>D2C</td></tr>
+        <tr><td><strong>IT Financial Controller</strong></td><td>Kustannusmallien validointi, FinOps-raportointi, showback/chargeback</td><td>S2P / R2F</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-blue">
+  <strong>Yksi vastuuhenkilö per FC (Single FC Owner)</strong>
+  <p>Jokainen Functional Component (FC) tarvitsee yhden nimetyn vastuuhenkilön – ilman selkeää omistajuutta FC jää toteutusvajeeseen, integraatiot hajoavat ja Data Backbone menettää eheytensä. Kokeessa kysytään usein, mitä tapahtuu kun FC:llä ei ole omistajaa.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Policy Management FC – käytäntöjen elinkaari</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tila</th><th>Kuvaus</th><th>Siirtymälaukaisin</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-amber">Luonnos</span></td><td>Käytäntö luotu, ei vielä katselmoitu. Vain tekijällä muokkausoikeus.</td><td>Tekijä lähettää katselmointiin</td></tr>
+        <tr><td><span class="tag tag-indigo">Katselmointi</span></td><td>Architecture Board tai valtuutettu omistaja arvioi sisältöä.</td><td>Hyväksyntä tai palautus luonnokseksi</td></tr>
+        <tr><td><span class="tag tag-blue">Hyväksytty</span></td><td>Sisältö validoitu, odottaa aktivointiajankohtaa tai linkitystä FC:ihin.</td><td>Julkaisupäivä saavutettu</td></tr>
+        <tr><td><span class="tag tag-green">Aktiivinen</span></td><td>Käytäntö voimassa, FC:t viittaavat siihen automaatiotarkistuksissa.</td><td>Voimassaoloajan päättyminen tai korvaava käytäntö</td></tr>
+        <tr><td><span class="tag tag-red">Poistettu</span></td><td>Käytäntö ei enää voimassa. Arkistoitu auditointia varten.</td><td>Manuaalinen poisto tai automaattinen vanhentuminen</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 · DIGITAALINEN TUOTEHALLINTA
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">2</div>
+  <h2>Digitaalinen tuotehallinta (Digital Product Management)</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">Projekti vs. Digitaalinen tuote – vertailu</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Dimensio</th><th>Perinteinen projekti</th><th>Digitaalinen tuote</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Elinkaari</strong></td><td>Alku–loppu, määräaikainen</td><td>Jatkuva, Discover → Retire</td></tr>
+        <tr><td><strong>Tiimi</strong></td><td>Resurssit vapautetaan projektin päättyessä</td><td>Pysyvä tuotetiimi, koko vaihtelee elinkaaressa</td></tr>
+        <tr><td><strong>Rahoitus</strong></td><td>Projektivaraukset, kertainvestointi</td><td>Juokseva tuotebudjetti, portfolio-segmenttiin sidottu</td></tr>
+        <tr><td><strong>Menestymismittari</strong></td><td>Aikataulussa/budjetissa pysyminen</td><td>Liiketoimintahyöty (OKR), käyttäjätyytyväisyys, arvo</td></tr>
+        <tr><td><strong>Backlog</strong></td><td>Kiinteä vaatimusmäärittely</td><td>Elävä backlog, jatkuva priorisointi</td></tr>
+        <tr><td><strong>Omistajuus</strong></td><td>Projektipäällikkö (tehtäväkeskeinen)</td><td>Digital Product Owner (tuotekeskeinen)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Digitaalisen tuotteen elinkaari</div>
+  <ul class="blist">
+    <li><strong>Discover (Löydä):</strong> Markkinatutkimus, liiketoimintatarpeiden tunnistus, strateginen sopivuus portfolioon</li>
+    <li><strong>Define (Määrittele):</strong> Tuotevisio, MVP-laajuus, arkkitehtuurisuunnittelu, Service Blueprint luonnostelu</li>
+    <li><strong>Fund (Rahoita):</strong> Liiketoimintaperustelu hyväksytään, budjetti vapautetaan portfolio-segmentistä (RTB/GTB/TTB)</li>
+    <li><strong>Build (Rakenna):</strong> Iteratiivinen kehitys CI/CD-putkessa, R2D-arvoketju aktiivinen, Release Blueprint päivittyy</li>
+    <li><strong>Operate (Operoi):</strong> D2C-arvoketju vastaa, SLA-seuranta, kapasiteetinhallinta, FinOps-optimointi</li>
+    <li><strong>Retire (Poista käytöstä):</strong> Hallittu alasajo, riippuvuuksien katkaisu, datan arkistointi, lisenssit vapautetaan</li>
+  </ul>
+</div>
+
+<div class="hl hl-green">
+  <strong>OKR-integraatio digitaaliseen tuotteeseen</strong>
+  <p>Digital Product Data Object sisältää OKR-attribuutit, jotka linkittävät tuotteen tavoitteet (Objectives) ja mitattavat tulokset (Key Results) suoraan portfoliopäätöksiin. Tämä mahdollistaa arvo-ohjatun priorisoinnin: jos OKR ei toteudu, tuote voidaan siirtää Back-Burner-segmenttiin tai rahoitusta voidaan leikata ilman projektibyrokratiaa.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Portfolio-segmentit – rahoitus ja päätöslogiikka</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Segmentti</th><th>Tarkoitus</th><th>Päätöslinssit</th><th>Tyypillinen FC</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-green"><strong>RTB</strong></span><br>Run the Business</td><td>Olemassaolevan IT:n ylläpito, käyttökulut, SLA-täyttö</td><td>Kustannustehokkuus, riskinhallinta, compliance</td><td>Capacity Management, Incident, Problem</td></tr>
+        <tr><td><span class="tag tag-blue"><strong>GTB</strong></span><br>Grow the Business</td><td>Olemassaolevan liiketoiminnan kasvattaminen digitaalisesti</td><td>ROI, markkinakasvupotentiaali, TTM</td><td>Portfolio Demand, Service Catalogue</td></tr>
+        <tr><td><span class="tag tag-indigo"><strong>TTB</strong></span><br>Transform the Business</td><td>Liiketoimintamallien uudistaminen, disruptiiviset hankkeet</td><td>Strateginen sopivuus, innovaatiopotentiaali</td><td>Enterprise Architecture, Policy Mgmt</td></tr>
+        <tr><td><span class="tag tag-amber"><strong>Technical Debt</strong></span></td><td>Teknisen velan hallinta ja poisto</td><td>Riski, modernisointikustannus, ketteryys</td><td>Configuration Management, Release</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 · DEVSECOPS-INTEGRAATIO (R2D)
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">3</div>
+  <h2>DevSecOps-integraatio (R2D-arvoketju)</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">IT4IT Functional Component → DevSecOps-vaihe → Tyypilliset työkalut</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>IT4IT FC</th><th>DevSecOps-vaihe</th><th>Tyypilliset työkalut</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Requirement Management</strong></td><td>Plan / Backlog</td><td>Jira, Azure DevOps Boards, Rally</td></tr>
+        <tr><td><strong>Source Code Management</strong></td><td>Code / Version Control</td><td>Git, GitHub, GitLab, Bitbucket</td></tr>
+        <tr><td><strong>Build Management</strong></td><td>Build / CI</td><td>Jenkins, GitHub Actions, GitLab CI, Azure Pipelines</td></tr>
+        <tr><td><strong>Test Management</strong></td><td>Test / Quality Gate</td><td>Selenium, JUnit, Trivy, SonarQube</td></tr>
+        <tr><td><strong>Deployment Management</strong></td><td>Deploy / CD</td><td>ArgoCD, Helm, Terraform, Ansible</td></tr>
+        <tr><td><strong>Release Management</strong></td><td>Release / Gate</td><td>ServiceNow, Octopus Deploy, Change Management</td></tr>
+        <tr><td><strong>Configuration Management</strong></td><td>Operate / CMDB</td><td>ServiceNow CMDB, iQuate, Device42</td></tr>
+        <tr><td><strong>Service Level Management</strong></td><td>Monitor / Operate</td><td>Dynatrace, Datadog, Prometheus + Grafana</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Security Gates – Shift-Left Security -portit CI/CD-putkessa</div>
+  <ul class="blist">
+    <li><strong>Pre-commit:</strong> Secrets scanning (gitleaks, trufflehog), linting, credential-tarkistus ennen koodin siirtoa repositorioon</li>
+    <li><strong>Build / SAST:</strong> Static Application Security Testing – koodianalyysi (SonarQube, Checkmarx, Semgrep) rakennusvaiheessa</li>
+    <li><strong>Test / DAST:</strong> Dynamic Application Security Testing – ajetaan testiympäristöä vasten (OWASP ZAP, Burp Suite Enterprise)</li>
+    <li><strong>SCA (Software Composition Analysis):</strong> Avoimen lähdekoodin haavoittuvuudet ja lisenssiongelmat (Snyk, OWASP Dependency-Check)</li>
+    <li><strong>Container Scan:</strong> Docker-kuvan haavoittuvuusskannus ennen rekisteriin siirtoa (Trivy, Clair, Anchore)</li>
+    <li><strong>IaC Scan:</strong> Infrastructure-as-Code -turvallisuusanalyysi (tfsec, Checkov, KICS) – Terraform/Helm-virheet kiinni ennen deploymenttia</li>
+    <li><strong>Policy Gate:</strong> OPA (Open Policy Agent) tai Cloud Policy Engine tarkistaa, että release Blueprint noudattaa turva- ja compliance-käytäntöjä</li>
+  </ul>
+</div>
+
+<div class="hl hl-amber">
+  <strong>Automated Change – matalanriskin muutokset ilman manuaalista CAB-hyväksyntää</strong>
+  <p>IT4IT v3:ssa matalanriskin, toistuvat ja hyvin testatut muutokset voidaan automatisoida: CI/CD-putki kerää kaikkien security gatejen hyväksynnät, tallentaa ne Change Recordiin automaattisesti ja deployaa ilman Change Advisory Board -istuntoa. Edellytykset: muutos täyttää ennalta määritetyn riskirajan, Service Release Blueprint on päivitetty, ja testitulokset täyttävät quality gate -kynnykset. CAB pidetään edelleen poikkeuksille ja korkeariskisille muutoksille.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Service Release Blueprint – rakenne ja sisältö</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Osa</th><th>Sisältö</th><th>Käyttää</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Palvelukuvaus</strong></td><td>Palvelun tarkoitus, omistaja, liiketoiminta-arvo, OKR-linkitys</td><td>Portfolio Mgmt, Digital Product Owner</td></tr>
+        <tr><td><strong>2. Arkkitehtuurikaavio</strong></td><td>Komponentit, riippuvuudet, verkko, CI/CD-topologia</td><td>Enterprise Architect, DevOps Lead</td></tr>
+        <tr><td><strong>3. Releasesuunnitelma</strong></td><td>Vaiheet, aikataulut, rollback-strategia, ympäristöpolku</td><td>Release Manager, Change Mgmt</td></tr>
+        <tr><td><strong>4. Testausstrategia</strong></td><td>Testikattavuustavoitteet, quality gate -kynnykset, hyväksyntäkriteerit</td><td>Test Manager, DevSecOps</td></tr>
+        <tr><td><strong>5. Turvallisuusvaatimukset</strong></td><td>Security gate -tulokset, compliance-kartoitus, haavoittuvuusraportit</td><td>Security Officer, Compliance</td></tr>
+        <tr><td><strong>6. Konfiguraatiotietue</strong></td><td>CI-listat, CMDB-päivitystarpeet, Infrastructure-as-Code -versiot</td><td>Configuration Manager</td></tr>
+        <tr><td><strong>7. Operatiiviset ohjeet</strong></td><td>Monitorointikynnykset, hälytykset, runbook-viittaukset, SLO-tasot</td><td>Service Operations, AIOps</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 4 · CLOUD MANAGEMENT & FINOPS
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">4</div>
+  <h2>Cloud Management &amp; FinOps</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">IT4IT-arvoketjut pilviympäristössä</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Arvoketju</th><th>Pilvisopeutus</th><th>Keskeinen haaste</th></tr></thead>
+      <tbody>
+        <tr><td><strong>S2P</strong><br>Strategy-to-Portfolio</td><td>Cloud-natiivi portfolio-segmentointi; TCO-mallinnus pilvi vs. on-prem; reserved instance -päätökset portfoliotasolla</td><td>Pilvi-investointien liiketoimintahyödyn mittaaminen ja OKR-linkitys</td></tr>
+        <tr><td><strong>R2D</strong><br>Requirement-to-Deploy</td><td>IaC-pohjainen provisiointi (Terraform/Pulumi); multi-cloud pipeline; containerized release; GitOps-malli</td><td>Ympäristöajautuminen (drift), secrets management, monitoimipilven CI/CD-putket</td></tr>
+        <tr><td><strong>R2F</strong><br>Request-to-Fulfill</td><td>Self-service cloud portal (Service Catalogue); automaattinen provisiointi API:n kautta; cloud service broker</td><td>Shadow IT: käyttäjät tilaavat suoraan pilvistä ohittaen palvelukatalogin</td></tr>
+        <tr><td><strong>D2C</strong><br>Detect-to-Correct</td><td>Cloud-natiivi observability (CloudWatch, Azure Monitor); AIOps-alustat; auto-scaling ja auto-healing</td><td>Kustannusräjähdys ilman guardraileja; lyhytikäiset resurssit haastavat CMDB-eheyyttä</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">FinOps-vaiheet (FinOps Foundation -malli IT4IT-kontekstissa)</div>
+  <ul class="blist">
+    <li><strong>INFORM (Tiedosta):</strong> Kustannusnäkyvyyden rakentaminen – tagipolitiikat, kustannusraportointi tiimeittäin, showback-mallit. IT4IT FC: Cost Management, Service Level Management</li>
+    <li><strong>OPTIMISE (Optimoi):</strong> Oikean kokoistaminen (right-sizing), idle-resurssien tunnistus, reserved/spot-instanssien käyttöönotto, säästösuunnitelmien ostopäätökset. IT4IT FC: Capacity Management, Portfolio Mgmt</li>
+    <li><strong>OPERATE (Operoi):</strong> Jatkuva kustannusohjaus, chargeback-laskutus liiketoimintayksiköille, FinOps-KPI:den integrointi OKR-mittaristoon, budjettihälytysten automaatio. IT4IT FC: Financial Management, Service Portfolio</li>
+  </ul>
+</div>
+
+<div class="hl hl-indigo">
+  <strong>CMP-mappaus – Cloud Management Platform toteuttaa useita IT4IT FC:tä</strong>
+  <p>Cloud Management Platform (CMP) ei ole yksittäinen IT4IT FC vaan toteutuskerros, joka kattaa useita komponentteja samanaikaisesti: Provisioning Management (automaattinen resurssien luonti), Capacity Management (auto-scaling-politiikat), Configuration Management (IaC-tila CMDB:ssä), Cost Management (FinOps-raportointi) ja Service Catalogue (self-service portaali). CMP:n hankintapäätös on Architecture Boardin vastuulla.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Monitoimipilvihallinnan (Multi-Cloud) tagging-käytännöt</div>
+  <ul class="blist">
+    <li><strong>Pakollinen tagihierarkia:</strong> <code>env</code> (prod/staging/dev), <code>product</code> (Digital Product ID), <code>cost-centre</code>, <code>owner</code>, <code>portfolio-segment</code> (RTB/GTB/TTB)</li>
+    <li><strong>Automaattinen tagivalidointi:</strong> Policy gate CI/CD-putkessa tarkistaa pakolliset tagit ennen provisiointia – resursseja ei luoda ilman täydellisiä tageja</li>
+    <li><strong>Tagikartoitus FinOps-raportteihin:</strong> <code>product</code>-tagi linkittää pilvikulut Digital Product Data Objectiin → OKR-kustannusnäkyvyys</li>
+    <li><strong>Multi-cloud normalisaatio:</strong> Eri pilvipalveluntarjoajien tagiformaatit normalisoidaan yhteiseen Data Backbone -skeemaan ennen raportointia</li>
+    <li><strong>Compliance-tagit:</strong> <code>data-classification</code> ja <code>regulatory-scope</code> ohjaavat automaattisia tietoturva- ja GDPR-kontrolleja</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 5 · DATA BACKBONE & INTEGRAATIO
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">5</div>
+  <h2>Data Backbone &amp; integraatioarkkitehtuuri</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">Ongelmat ilman Data Backbonea vs. Ratkaisu</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ongelma (ilman Data Backbone)</th><th>Ratkaisu (Data Backbone käytössä)</th></tr></thead>
+      <tbody>
+        <tr><td>Jokainen FC ylläpitää omaa CI-/palveludataansa → tiedot epäsynkronissa</td><td>Jaettu Data Object -kerros toimii yhtenä totuuden lähteenä (Single Source of Truth)</td></tr>
+        <tr><td>Integraatiot ovat point-to-point → n²-ongelma, hauras arkkitehtuuri</td><td>Tähtimalli tai tapahtumavyöhy (event bus) vähentää integraatioiden määrää</td></tr>
+        <tr><td>Konfiguraatiotietueet vanhenevat eivätkä vastaa todellisuutta</td><td>Automaattinen löytö (discovery) ja reconciliation pitävät CMDB-tiedot ajantasaisina</td></tr>
+        <tr><td>Arvoketjujen väliset handofit epäselvhät → tieto katoaa siiloihin</td><td>Service Entry Point -sopimukset määrittävät, mitä dataa siirretään missä muodossa</td></tr>
+        <tr><td>Auditointi vaikeaa kun data hajallaan useissa järjestelmässä</td><td>Audit Trail Data Objectissa kaikissa FC-muutoksissa → täysi traceability</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Kolme Data Backbone -toteutusmallia</div>
+  <ul class="blist">
+    <li><strong>Keskitetty malli (Centralized):</strong> Yksi MDM-alusta tai CMDB toimii kanonisena rekisteräinä. Yksinkertainen hallinnoida, mutta yksittäinen vikakohta ja skaalausrajoite suurissa ympäristöissä.</li>
+    <li><strong>Federoitu malli (Federated):</strong> Kukin FC omistaa oman datansa mutta altistaa sen yhteisen skeeman kautta. Erillinen federaatiokerros yhdistää näkymät. Sopii hajautetuille organisaatioille.</li>
+    <li><strong>Tapahtumalaähtöinen malli (Event-Driven):</strong> FC:t julkaisevat muutostapahtumia (events) tapahtumavyöhälle (Kafka, Event Grid). Muut FC:t tilaavat tarvitsemansa tapahtumat. Paras reaaliaikaisuus ja skaalautuvuus.</li>
+  </ul>
+</div>
+
+<div class="hl hl-cyan">
+  <strong>IT Service Model (ISM) – tärkein jaettu Data Object</strong>
+  <p>IT Service Model on Data Backbonen keskeinen jaettu Data Object: se kuvaa palvelun rakenteen, komponentit, niiden väliset suhteet ja riippuvuudet. ISM on CMDB:n looginen ydinkohde ja sitä käyttävät kaikki neljä arvoketjua. S2P käyttää sitä arvioidakseen muutoksen portfoliovaikutusta, R2D deployatessaan oikeaan ympäristöön, R2F rakentaessaan palvelukatalogimerkintöjä ja D2C diagnoosissa tapahtumakorrelointiin. Kokeessa ISM on yleinen "yhdistävä tekijä" -kysymys.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Service Entry Pointit – arvoketjujen väliset handofit</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>SEP-nimi</th><th>Lähettävä VS</th><th>Vastaanottava VS</th><th>Siirrettävä Data Object</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Approved Change Record</strong></td><td>S2P → R2D</td><td>R2D</td><td>Change Record, Portfolio-segmentti, rahoituspäätös</td></tr>
+        <tr><td><strong>Service Release Package</strong></td><td>R2D → R2F</td><td>R2F</td><td>Release Blueprint, testausraportti, CMDB-päivitys</td></tr>
+        <tr><td><strong>Service Entry (Deployed)</strong></td><td>R2D → D2C</td><td>D2C</td><td>Deployment Record, SLO-tavoitteet, monitorointiprofiili</td></tr>
+        <tr><td><strong>Incident Record</strong></td><td>D2C → R2D</td><td>R2D (hotfix)</td><td>Incident-tiedot, vaikutusanalyysi, kiireellinen muutostarve</td></tr>
+        <tr><td><strong>Service Request Fulfillment</strong></td><td>R2F → D2C</td><td>D2C</td><td>Provisioitu palvelu, konfiguraatiotietue, SLA-parametrit</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">MDM-periaatteet (Master Data Management) Data Backbonessa</div>
+  <ul class="blist">
+    <li><strong>Golden Record (Kultainen tietue):</strong> Jokainen Data Object-tyyppi omaa yhden autoritatiivisen instanssin; muut järjestelmät viittaavat siihen, eivät kopioi sitä</li>
+    <li><strong>Reconciliation (Täsmäytys):</strong> Automaattinen vertailu löydettyjen ja rekisteröityjen CI-tietojen välillä – poikkeamat raportoidaan Configuration Managerille</li>
+    <li><strong>Data Stewardship (Tietohoitajuus):</strong> Jokaiselle Data Object -tyypille nimetty tietohoitaja, joka vastaa skeemapäätöksistä ja laadun seurannasta</li>
+    <li><strong>Audit Trail (Muutoshistoria):</strong> Kaikki Data Object -muutokset tallennetaan aikaleimoin, tekijätiedoin ja muutossyyin – vaatimus compliance-raportoinnille</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 6 · AIOPS & ÄLYKKÄÄT OPERAATIOT
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">6</div>
+  <h2>AIOps &amp; älykkäät operaatiot</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">D2C FC:t – perinteinen lähestymistapa vs. AIOps-parannus</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>D2C FC</th><th>Perinteinen lähestymistapa</th><th>AIOps-parannus</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Event Management</strong></td><td>Operaattori tarkistaa hälytyskonsolin manuaalisesti, suuri hälytysmäärä (alert storm)</td><td>ML-pohjainen korrelointi → suodatetaan toimintakelpoiset hälytykset, poistetaan kohinat</td></tr>
+        <tr><td><strong>Incident Management</strong></td><td>Manuaalinen luokittelu, vaikutusten arviointi sähköpostilla</td><td>Automaattinen CI-ryhmän tunnistus ISM:stä, NLP-pohjainen luokittelu, automaattinen prioriteetti</td></tr>
+        <tr><td><strong>Problem Management</strong></td><td>Post-mortem jälkeen käsin; tietopohja sirpaloitunut</td><td>Ennakoiva ongelmienhallinta: poikkeamamallit ennen häiriötä, trendikorrelointi</td></tr>
+        <tr><td><strong>Capacity Management</strong></td><td>Kapasiteettiraportti kuukausittain, manuaaliset muutostyöpyyntöt</td><td>Reaaliaikainen käyttöasteen ennuste; auto-scaling laukaisee provisiointityönkulun</td></tr>
+        <tr><td><strong>Availability Management</strong></td><td>SLA-raportointi jälkikäteen; käyttökatkoanalyysi käsin</td><td>Reaaliaikainen SLO-amplitudi; ennakoiva korjaus ennen SLA-rikkomusta</td></tr>
+        <tr><td><strong>Change Management</strong></td><td>CAB-istunto kaikille muutoksille; pitkä läpimenoaika</td><td>ML arvioi muutosriskin automaattisesti; matalanriskin muutokset automaattiputkeen</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Tapahtumakorrelaation (Event Correlation) menetelmät</div>
+  <ul class="blist">
+    <li><strong>Topologiapohjainen korrelaatio:</strong> ISM-riippuvuuskartta tunnistaa juurisyykomponentin ja yhdistää siihen liittyvät hälytykset yhdeksi tapaukseksi</li>
+    <li><strong>Aikasarjakorrelaatio:</strong> Hälytysten aikaleimavälien analysointi paljastaa cascade-ketjut – ensimmäinen hälytin on todennäköisin juurisyy</li>
+    <li><strong>Kausivaihtelumalli (Seasonality Model):</strong> Normaali käyttäytyminen vs. poikkeama lasketaan historiallisin tiedoin; hälytetään vain todellisista anomalioista</li>
+    <li><strong>Konfiguraatiomuutoskorrelaatio:</strong> Äskettäinen deploymentti tai CMDB-muutos kytketään häiriöön automaattisesti Change Record -viitteen avulla</li>
+    <li><strong>NLP-pohjainen luokittelu:</strong> Häiriökirjausten tekstitieto analysoidaan → automaattinen ryhmättely tunnettuihin virheluokkiin</li>
+  </ul>
+</div>
+
+<div class="hl hl-red">
+  <strong>Ennakoiva ongelmienhallinta vs. reaktiivinen</strong>
+  <ul>
+    <li><strong>Reaktiivinen:</strong> Ongelma tunnistetaan vasta häiriön jälkeen → MTTR korkea, liiketoimintavaikutus jo tapahtunut</li>
+    <li><strong>Ennakoiva:</strong> AIOps havaitsee toistuvan poikkeamakaavan, luo automaattisesti Problem Recordin ENNEN häiriötä → Problem Manager tutkii juurisyyn ilman kriisipainetta</li>
+    <li><strong>IT4IT-vaatimus:</strong> Advanced-tason organisaatioilta odotetaan ennakoivaa ongelmienhallintaa; kokeessa kysytään tunnusmerkkejä kypsyystasojen erottamiseksi</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">Auto-remediation Governance – hallittu automaattinen korjaus</div>
+  <ul class="blist">
+    <li><strong>Pre-approved Runbooks (Ennakkohyväksytyt toimenpideohjeet):</strong> Architecture Board hyväksyy runbookit etukäteen; automaatio saa ajaa vain listattuja toimenpiteitä</li>
+    <li><strong>Audit Trail vaatimus:</strong> Jokainen automaattinen korjaustoimenpide kirjautuu Incident Recordiin – kuka (järjestelmä), mitä, milloin, mihin CIhin vaikutti</li>
+    <li><strong>Escalation (Eskalaatio) -polku:</strong> Jos automaattinen korjaus epäonnistuu kahdessa yrityksessä, tapaus eskaloidaan Major Incident -tasolle ja ihminen ottaa ohjauksen</li>
+    <li><strong>Blast Radius -rajoitus:</strong> Runbook saa vaikuttaa enintään ennalta määritettyyn CI-joukkoon; laajemmat toimenpiteet vaativat Change Recordin</li>
+    <li><strong>Rollback-mekanismi:</strong> Jokaisella runbookilla on dokumentoitu rollback-polku; automaatio tarkistaa palvelun tilan korjauksen jälkeen SLO-kynnyksen avulla</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 7 · KYPSYYSMALLI & ARVIOINTI
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">7</div>
+  <h2>Kypsyysmalli &amp; arviointi</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">IT4IT-kypsyystasot (1–5)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Taso</th><th>Nimi</th><th>Tunnuspiirteet</th><th>Tyypilliset puutteet</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-red">1</span></td><td><strong>Initial (Alkutila)</strong></td><td>Ad hoc -prosessit, ei toistettavuutta, riippuvuus avainhenkilöistä, työkalut silossa</td><td>Ei FC-omistajuutta, ei integraatioita, CMDB ajantasaisuus alle 50 %</td></tr>
+        <tr><td><span class="tag tag-amber">2</span></td><td><strong>Managed (Hallittu)</strong></td><td>Perusprosessit dokumentoitu, FC:t tunnistettu, point-to-point -integraatiot, manuaalinen CMDB</td><td>Integraatiot hauraita, ei Data Backbonea, raportointiviive suuri</td></tr>
+        <tr><td><span class="tag tag-blue">3</span></td><td><strong>Defined (Määritelty)</strong></td><td>Standardoidut FC-prosessit, Service Entry Pointit sovittu, Data Backbone käytössä, KPI-mittaristo</td><td>Automaatio vähäistä, ei ennakoivaa analytiikkaa, FinOps-käytöt alkutasolla</td></tr>
+        <tr><td><span class="tag tag-indigo">4</span></td><td><strong>Quantitatively Managed (Mitattavasti hallittu)</strong></td><td>Kaikki FC:t KPI-ohjattuja, AIOps otettu käyttöön, FinOps-optimointi aktiivista, automaattinen muutoksenhallinta</td><td>Optimointi reaktiivista, ennakoiva analytiikka vasta kehityksessä</td></tr>
+        <tr><td><span class="tag tag-green">5</span></td><td><strong>Optimising (Optimoiva)</strong></td><td>Jatkuva parantaminen datalähtöisesti, ennakoiva ongelmienhallinta, täysi DevSecOps-integraatio, OKR-ohjattu portfolio</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">6 arviointidimensiota kypsyysarviossa</div>
+  <ul class="blist">
+    <li><strong>1. Prosessi:</strong> FC-prosessien dokumentaatio, noudattaminen ja toistettavuus – onko prosessi vai henkilöriippuvainen toimintamalli</li>
+    <li><strong>2. Tooling (Työkalut):</strong> Onko FC:llä dedikoidut, integroidut työkalut vai hajautetut spreadsheetit ja sähköpostit</li>
+    <li><strong>3. Data:</strong> Data Backbonen kattavuus – kuinka suuri osa Data Objecteista on jaettu ja ajantasainen</li>
+    <li><strong>4. Integraatio:</strong> Service Entry Pointien toteutumisaste – kuinka monta sovittua SEPistä on automatisoitu</li>
+    <li><strong>5. Mittarit (Metrics):</strong> KPI-mittarit, niiden kattavuus, ajantasaisuus ja käyttö päätöksenteossa</li>
+    <li><strong>6. Automaatio:</strong> Automatisoitujen työnkulkujen osuus vs. manuaaliset – erityisesti Automated Change ja auto-remediation</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">Yleiset kypsyysongelmat arvoketjuittain</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Arvoketju</th><th>Tyypillinen kypsyysongelma</th><th>Diagnoosi</th></tr></thead>
+      <tbody>
+        <tr><td><strong>S2P</strong></td><td>Portfoilio-segmentointi puuttuu tai on epäselvä; investointipläätökset perustuvat HiPPO:hon (Highest Paid Person's Opinion)</td><td>Taso 1–2: ei datalähtöistä päätöksentekoa</td></tr>
+        <tr><td><strong>R2D</strong></td><td>Pitkä lead time ideoista tuotantoon; security on bolt-on eikä built-in; manualinen change approval kaikille</td><td>Taso 2–3: Shift-Left puuttuu, automaatio alhainen</td></tr>
+        <tr><td><strong>R2F</strong></td><td>Palvelukatalogi vanhentunut; shadow IT yleistä; fulfilment-prosessi epäselvä</td><td>Taso 2: SEP R2D→R2F katkennut</td></tr>
+        <tr><td><strong>D2C</strong></td><td>Alert storm – operaattorit hukutetaan hälytyksiin; MTTR korkea; CMDB epäluotettava</td><td>Taso 1–2: ei korrelointi-logiikkaa, CMDB ei ajantasainen</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="hl hl-green">
+  <strong>Priorisointiperiaate: Integroi ensin</strong>
+  <p>Kun organisaatio haluaa nousta kypsyystasolta toiselle, paras ROI saadaan priorisoimalla Service Entry Pointien automatisointi ennen uusien FC-työkalujen hankintaa. Yksittäinen automatisoitu SEP voi poistaa kymmeniä manuaalisia siirtoja. Kokeessa: "Mitä tehdä ensin?" → Integroi olemassaolevat FC:t Data Backboneen ennen uuden toolingin ostoa.</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 8 · MUUTOS & TOTEUTUS
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">8</div>
+  <h2>Muutos &amp; toteutus (Transformation &amp; Implementation)</h2>
+</div>
+
+<div class="card">
+  <div class="card-title">7-vaiheinen IT4IT-toteutussuunnitelma</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Vaihe</th><th>Nimi</th><th>Fokus</th><th>Toimitettavat</th><th>Tyypillinen kesto</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-blue">0</span></td><td><strong>Foundation</strong></td><td>Hallintomalli, sponsorointi, tiimi, nykytila-arviointi</td><td>Kypsyysarvio, hallintomalli-dokumentti, toteutusroadmap</td><td>4–6 viikkoa</td></tr>
+        <tr><td><span class="tag tag-blue">1</span></td><td><strong>Architecture</strong></td><td>Referenssiarkkitehtuurin sovitus, FC-kartoitus, Data Backbone -suunnittelu</td><td>IT4IT-viitearkkitehtuuri (target state), FC-omistajuusmatriisi</td><td>6–8 viikkoa</td></tr>
+        <tr><td><span class="tag tag-indigo">2</span></td><td><strong>Data Backbone</strong></td><td>Jaettujen Data Objectien toteutus, MDM-käytännöt, SEP-sopimukset</td><td>Data Backbone -toteutus, Service Entry Point -katalogi</td><td>8–12 viikkoa</td></tr>
+        <tr><td><span class="tag tag-indigo">3</span></td><td><strong>Value Stream 1</strong></td><td>Ensimmäinen arvoketju (yleensä D2C tai R2D) integroitu ja automatisoitu</td><td>Automatisoitu VS, KPI-mittaristo, toolchain-integraatiot</td><td>12–16 viikkoa</td></tr>
+        <tr><td><span class="tag tag-green">4</span></td><td><strong>Value Streams 2–4</strong></td><td>Loput arvoketjut integroitu; cross-VS-datavirrat toimivat</td><td>Kaikkien VS:ien integraatio, cross-VS dashboard</td><td>16–24 viikkoa</td></tr>
+        <tr><td><span class="tag tag-green">5</span></td><td><strong>Optimisation</strong></td><td>AIOps, FinOps, automaatio kaikissa FC:issä, ennakoiva analytiikka</td><td>AIOps-alusta, FinOps-raportit, auto-remediation runbookit</td><td>12–20 viikkoa</td></tr>
+        <tr><td><span class="tag tag-amber">6</span></td><td><strong>Continuous Improvement</strong></td><td>Jatkuvan parantamisen kulttuurin vakiintuminen, OKR-linkitys kaikille FC:ille</td><td>Neljännesvuosittaiset kypsyysarviot, roadmap-päivitykset</td><td>Jatkuva</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">6 yleistä sudenkuoppaa IT4IT-toteutuksessa</div>
+  <ul class="blist">
+    <li><strong>Tooling ennen prosesseja:</strong> Organisaatio ostaa kalliit työkalut ennen FC-prosessien määrittelyä → työkalu käytetään väärin tai jää käyttämättä</li>
+    <li><strong>Data Backbone ohitetaan:</strong> FC:t integroidaan point-to-point "nopeamman" tuloksen toivossa → integraatiohelvetti vuoden kuluttua</li>
+    <li><strong>Ei FC-omistajuutta:</strong> Functional Componenteille ei nimetä omistajia → kukaan ei vastaa laadusta, prosessi rapistuu</li>
+    <li><strong>Kaikki kerralla -lähestymistapa:</strong> Yritys toteuttaa kaikki 4 arvoketjua samanaikaisesti → laajuusräjähdys, hanke kaatuu omaan painoonsa</li>
+    <li><strong>Muutosvastarinta ignoroitu:</strong> Tekninen toteutus onnistuu mutta käyttäjät eivät ota prosessia käyttöön → hyödyt jäävät realisoitumatta</li>
+    <li><strong>KPI:t valittu väärin:</strong> Mitataan aktiviteetteja (tikettien määrä) eikä tuloksia (MTTR, deployment frequency, kustannustehokkuus) → optimoidaan väärää asiaa</li>
+  </ul>
+</div>
+
+<div class="hl hl-blue">
+  <strong>IT4IT + ITIL 4 + COBIT 2019 – yhteiskäyttö</strong>
+  <ul>
+    <li><strong>IT4IT</strong> tarjoaa <em>arkkitehtuurin ja FC-rakenteen</em> – mitä järjestelmiä tarvitaan ja miten ne integroituvat</li>
+    <li><strong>ITIL 4</strong> tarjoaa <em>käytäntökirjaston</em> – miten prosessit suoritetaan (Incident, Problem, Change, Service Request)</li>
+    <li><strong>COBIT 2019</strong> tarjoaa <em>hallintomallin</em> – miten IT-toiminto hallinnoidaan ja ohjataan liiketoiminnan tavoitteisiin</li>
+    <li>Tyypillinen jako: COBIT asettaa tavoitteet → IT4IT strukturoi toteutuksen → ITIL 4 operationalisoi käytännöt</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">TOGAF ADM Phase -kartoitus IT4IT-arkkitehtuuriin</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>TOGAF ADM -vaihe</th><th>IT4IT-aktiviteetti</th><th>Tuotos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Phase A: Architecture Vision</strong></td><td>IT4IT target state -visio, liiketoimintaperustelu, kypsyystavoitteet</td><td>IT4IT Roadmap, Stakeholder Map</td></tr>
+        <tr><td><strong>Phase B: Business Architecture</strong></td><td>Arvoketjujen kartoitus liiketoimintaprosesseihin, Digital Product -mallinnus</td><td>Liiketoiminta-arvoketju-kartta</td></tr>
+        <tr><td><strong>Phase C: Information Systems</strong></td><td>FC-kartoitus, Data Backbone -suunnittelu, Data Object -skeema</td><td>FC-katalogi, Data Object -malli</td></tr>
+        <tr><td><strong>Phase D: Technology Architecture</strong></td><td>Toolchain-valinta, integraatioarkkitehtuuri, SEP-tekniset sopimukset</td><td>Toolchain-arkkitehtuuri, SEP-spesifikaatiot</td></tr>
+        <tr><td><strong>Phase E: Opportunities &amp; Solutions</strong></td><td>Toteutusvaiheiden priorisointi, quick wins -tunnistus, build vs. buy</td><td>Toteutussuunnitelma, vaiheiden priorisointi</td></tr>
+        <tr><td><strong>Phase F: Migration Planning</strong></td><td>Siirtymäsuunnitelma (as-is → to-be), riippuvuudet, muutosvaikutusanalyysi</td><td>Migraatiosuunnitelma, muutostenhallintasuunnitelma</td></tr>
+        <tr><td><strong>Phase G: Implementation Governance</strong></td><td>FC-toteutuksen valvonta, poikkeamaprosessi Architecture Boardille</td><td>Poikkeamarekisteri, toteutusvalvontaraportti</td></tr>
+        <tr><td><strong>Phase H: Architecture Change Management</strong></td><td>IT4IT-arkkitehtuurin ylläpito, versiopläivitykset, uudelleenarvioinnit</td><td>Arkkitehtuurimuutospyynnot, päivitetty IT4IT-referenssimalli</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     QUICK REFERENCE – EXAM TRAPS
+══════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-num">⚡</div>
+  <h2>Koepikaohjeet – yleisimmät ansarigit</h2>
+</div>
+
+<div class="card">
+  <div class="qr-title">10 yleisintä koekysymysansakuoppaa</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Ansarikysymys</th><th class="trap">Väärä vastaus</th><th class="correct">Oikea vastaus</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Mitä tehdään ensin kypsyystason nostamiseksi?</td><td class="trap">Ostetaan uusi ITSM-työkalu</td><td class="correct">Automatisoidaan olemassaolevien FC:ien Service Entry Pointit</td></tr>
+        <tr><td>2</td><td>FC ilman nimettyä omistajaa – mitä tapahtuu?</td><td class="trap">FC toimii, mutta hitaammin</td><td class="correct">FC:n integraatiot hajoavat, Data Backbone menettää eheyden</td></tr>
+        <tr><td>3</td><td>Mikä on IT Service Modelin tärkein rooli?</td><td class="trap">Se on CMDB:n korvike</td><td class="correct">Se on kaikkia neljää arvoketjua yhdistävä jaettu Data Object</td></tr>
+        <tr><td>4</td><td>Mitä Automated Change vaatii ennen kuin CAB voidaan ohittaa?</td><td class="trap">Vain DevOps Leadin hyväksynnän</td><td class="correct">Kaikki security gate -tarkistukset läpäisty + Change Record luotu automaattisesti</td></tr>
+        <tr><td>5</td><td>Mikä ero Projekti vs. Digitaalinen tuote rahoituksessa?</td><td class="trap">Digitaalisella tuotteella on suurempi budjetti</td><td class="correct">Projektilla kertainvestointi; tuotteella jatkuva portfolio-segmenttiin sidottu budjetti</td></tr>
+        <tr><td>6</td><td>FinOps INFORM-vaiheen tärkein aktiviteetti?</td><td class="trap">Reserved instancejen ostaminen kustannussäästöihin</td><td class="correct">Kustannusnäkyvyyden rakentaminen tagipolitiikoilla ja showback-malleilla</td></tr>
+        <tr><td>7</td><td>Mitä CMP (Cloud Management Platform) edustaa IT4IT:ssä?</td><td class="trap">Yksittäinen uusi Functional Component</td><td class="correct">Toteutuskerros joka kattaa useita FC:tä (Provisioning, Capacity, Config, Cost, Catalogue)</td></tr>
+        <tr><td>8</td><td>Miten COBIT 2019 ja IT4IT eroavat?</td><td class="trap">Kilpailevat viitekehykset, ei käytetä yhdessä</td><td class="correct">COBIT = hallintomalli; IT4IT = toteutusarkkitehtuuri – toisiaan täydentäviä</td></tr>
+        <tr><td>9</td><td>Ennakoiva ongelmienhallinta – koska luodaan Problem Record?</td><td class="trap">Vasta häiriön jälkeen, kun juurisyy selvitetään</td><td class="correct">AIOps tunnistaa poikkeamakaavan ENNEN häiriötä → Problem Record luodaan etukäteen</td></tr>
+        <tr><td>10</td><td>Mikä vaihe TOGAF ADM:ssä vastaa IT4IT Data Backbone -suunnittelua?</td><td class="trap">Phase A (Architecture Vision)</td><td class="correct">Phase C (Information Systems Architecture) – FC-kartoitus ja Data Object -skeema</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<footer style="text-align:center;padding:20px 16px;color:#334155;font-size:11px;border-top:1px solid #111827">
+  IT4IT™ on The Open Group -organisaation rekisteröity tavaramerkki. Tämä opiskeluopas on laadittu tutkintoharjoittelua varten. ·
+  <a href="https://www.opengroup.org/it4it" target="_blank" rel="noopener" style="color:#475569">opengroup.org/it4it</a>
+</footer>
+
+</body>
+</html>

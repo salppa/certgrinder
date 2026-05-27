@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ITIL 4 Foundation — Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#10B981;--cl:#6EE7B7;--cb:rgba(16,185,129,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #10B98144;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #10B98130;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #10B98130;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 16px}
+.svc-a{background:#0d1424;border:1px solid var(--c);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:var(--cl)}
+.num{font-size:20px;font-weight:900;color:var(--cl);margin-right:6px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">📐 ArchiMate</a><a href="it4it.html">🔄 IT4IT</a><a href="itil4.html" class="active">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">⚙️ AXELOS / PeopleCert · Service Management</div>
+  <h1>ITIL 4 Foundation</h1>
+  <p class="sub">Service Value System, Service Value Chain, 7 Guiding Principles, 4 Dimensions, and 34 Practices — the complete framework for modern IT service management.</p>
+  <div class="meta"><span><a href="https://www.axelos.com/certifications/itil-service-management/itil-4-foundation" target="_blank" class="ext">axelos.com/itil ↗</a></span><span><a href="https://www.peoplecert.org/en/itil" target="_blank" class="ext">peoplecert.org ↗</a></span><span>Related: <a href="cobit2019.html" class="ext">COBIT 2019 →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🏗️ The Service Value System (SVS)</h2>
+  <p>The SVS is the top-level ITIL 4 model. It converts <strong>Opportunity &amp; Demand</strong> (inputs) into <strong>Value</strong> (output) through five interconnected components. Everything else in ITIL sits inside the SVS.</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">🧭 Guiding Principles</div><div class="card-body">7 universal recommendations that guide decisions in any situation. Cannot be overridden by management. Apply to all stakeholders.</div></div>
+    <div class="card"><div class="card-title">🏛️ Governance</div><div class="card-body">Evaluation, direction, and monitoring by the governing body. Ensures the organisation aligns with strategy and regulatory requirements.</div></div>
+    <div class="card"><div class="card-title">🔄 Service Value Chain</div><div class="card-body">6 interconnected activities that combine to create value. The operating model of the SVS. Activities combine in "value streams".</div></div>
+    <div class="card"><div class="card-title">⚙️ Practices (34)</div><div class="card-body">Sets of organisational resources (people, processes, tools, information) designed to perform work. Categorised in 3 groups.</div></div>
+    <div class="card"><div class="card-title">📈 Continual Improvement</div><div class="card-body">Recurring activity at every level. The 7-step Continual Improvement Model guides iterative improvement aligned with the organisation's vision.</div></div>
+  </div>
+  <div class="tip"><strong>Exam tip:</strong> Inputs to the SVS = Opportunity AND Demand. Output = Value. The SVS exists to convert one into the other.</div>
+
+  <h2>🔄 The Service Value Chain (SVC)</h2>
+  <p>Six activities that combine flexibly into <strong>value streams</strong> to address different scenarios (e.g., a "user support" value stream combines Engage → Deliver &amp; Support). All six activities interact with Practices and with each other.</p>
+  <div class="svc">
+    <div class="svc-a">📋 Plan</div><div class="svc-a">📈 Improve</div><div class="svc-a">🤝 Engage</div>
+    <div class="svc-a">🎨 Design &amp; Transition</div><div class="svc-a">🔧 Obtain / Build</div><div class="svc-a">🚀 Deliver &amp; Support</div>
+  </div>
+  <table><thead><tr><th>Activity</th><th>Core Purpose</th></tr></thead><tbody>
+    <tr><td>Plan</td><td>Shared understanding of vision, current status, and improvement direction for all four dimensions.</td></tr>
+    <tr><td>Improve</td><td>Continual improvement of services, practices, and the value chain itself. Applies to everything.</td></tr>
+    <tr><td>Engage</td><td>Stakeholder understanding, transparency, and continuous relationship management. The "voice of the customer".</td></tr>
+    <tr><td>Design &amp; Transition</td><td>New/changed services meet expectations for quality, cost, and time-to-market.</td></tr>
+    <tr><td>Obtain / Build</td><td>Service components are available when and where needed, meeting agreed specifications.</td></tr>
+    <tr><td>Deliver &amp; Support</td><td>Services delivered to agreed specification; support for live services provided.</td></tr>
+  </tbody></table>
+
+  <h2>🧭 The 7 Guiding Principles</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title"><span class="num">1</span>Focus on Value</div><div class="card-body">Everything maps to value for stakeholders. Always ask: how does this help create value for customers and other stakeholders?</div></div>
+    <div class="card"><div class="card-title"><span class="num">2</span>Start Where You Are</div><div class="card-body">Don't discard what exists. Assess current state objectively. Preserve and reuse successful practices and services before redesigning.</div></div>
+    <div class="card"><div class="card-title"><span class="num">3</span>Progress Iteratively with Feedback</div><div class="card-body">Work in small, manageable iterations. Use feedback at every step to course-correct. Resist the urge to do everything at once.</div></div>
+    <div class="card"><div class="card-title"><span class="num">4</span>Collaborate and Promote Visibility</div><div class="card-body">Involve the right stakeholders. Make work visible. Hidden work and hidden decisions are risks. Break down silos.</div></div>
+    <div class="card"><div class="card-title"><span class="num">5</span>Think and Work Holistically</div><div class="card-body">No component works in isolation. Consider end-to-end impacts across all four dimensions. Avoid local optimisations that harm the whole.</div></div>
+    <div class="card"><div class="card-title"><span class="num">6</span>Keep it Simple and Practical</div><div class="card-body">Use the minimum steps needed. Eliminate processes that add no value. Simple solutions are easier to maintain and improve.</div></div>
+    <div class="card"><div class="card-title"><span class="num">7</span>Optimise and Automate</div><div class="card-body">First optimise (simplify), then automate. Automating a broken process just makes it fail faster. Maximise human value-add work.</div></div>
+  </div>
+
+  <h2>🔲 The 4 Dimensions</h2>
+  <p>Every service and the SVS must be considered from all four perspectives. PESTLE forces (Political, Economic, Social, Technological, Legal, Environmental) act as external constraints on all four dimensions.</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">👥 Organisations &amp; People</div><div class="card-body">Culture, structure, skills, roles, responsibilities. Do people have the capabilities needed? Is the culture aligned with strategy?</div></div>
+    <div class="card"><div class="card-title">💻 Information &amp; Technology</div><div class="card-body">Information managed by services, and technology required. AI, databases, communication platforms, ITSM tools, analytics.</div></div>
+    <div class="card"><div class="card-title">🤝 Partners &amp; Suppliers</div><div class="card-body">Other organisations involved in service delivery — vendors, cloud providers, outsourcers. Managed via supplier and contract management.</div></div>
+    <div class="card"><div class="card-title">🔁 Value Streams &amp; Processes</div><div class="card-body">How activities are coordinated and sequenced. Defines workflows, procedures, and how inputs become outputs.</div></div>
+  </div>
+
+  <h2>⚙️ The 34 Practices — Key Ones to Know</h2>
+  <h3>Service Management (must-know for exam)</h3>
+  <table><thead><tr><th>Practice</th><th>Key Point</th></tr></thead><tbody>
+    <tr><td>Incident Management ⭐</td><td>Restore normal service ASAP. Goal = restoration, NOT root cause. Prioritise by Impact × Urgency.</td></tr>
+    <tr><td>Problem Management ⭐</td><td>Find and eliminate root causes. Incident = symptom. Problem = root cause. Known Error = problem with known workaround.</td></tr>
+    <tr><td>Change Enablement ⭐</td><td>3 types: Standard (pre-approved, low risk), Normal (goes through CAB), Emergency (bypass for urgency). Goal: maximise successful changes.</td></tr>
+    <tr><td>Service Desk ⭐</td><td>Single point of contact. Handles incidents AND service requests. Can be local, centralised, virtual, or follow-the-sun.</td></tr>
+    <tr><td>Service Level Management ⭐</td><td>Set, monitor, and report SLAs. Balance business expectations with IT capabilities. Uses XLAs (experience level agreements) in modern ITIL.</td></tr>
+    <tr><td>Service Request Management</td><td>Predefined, low-risk requests (password reset, new laptop). Separate from incident management.</td></tr>
+    <tr><td>Monitoring &amp; Event Management</td><td>Observe services, detect events, categorise (informational/warning/exception), trigger appropriate action.</td></tr>
+    <tr><td>Service Configuration Management</td><td>CMDB — Configuration Management Database. Records CIs (Configuration Items) and their relationships. Feeds other practices.</td></tr>
+    <tr><td>IT Asset Management</td><td>Manages full lifecycle of IT assets (hardware, software licences). Financial accountability and compliance.</td></tr>
+    <tr><td>Availability Management</td><td>Ensure services deliver agreed availability. MTBF (Mean Time Between Failures), MTRS (Mean Time to Restore Service).</td></tr>
+  </tbody></table>
+  <h3>General Management (key ones)</h3>
+  <table><thead><tr><th>Practice</th><th>Key Point</th></tr></thead><tbody>
+    <tr><td>Continual Improvement ⭐</td><td>7-step model: Vision → Current state → Target → Plan → Take action → Check → Keep momentum. Applies everywhere.</td></tr>
+    <tr><td>Information Security Management</td><td>Protect CIA: Confidentiality, Integrity, Availability. Also Authentication and Non-repudiation in modern versions.</td></tr>
+    <tr><td>Risk Management</td><td>Identify, assess, respond to risks. Supports all other practices. Risk = uncertainty affecting outcomes.</td></tr>
+    <tr><td>Relationship Management</td><td>Establish and nurture links between provider and stakeholders at strategic level (≠ Service Level Management which is operational).</td></tr>
+    <tr><td>Supplier Management</td><td>Manage supplier performance. Supplier contracts, SLAs with third parties. Ensures suppliers meet commitments.</td></tr>
+  </tbody></table>
+
+  <h2>💡 Core Concepts</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Utility &amp; Warranty</div><div class="card-body"><strong>Utility</strong> = what it does (fit for purpose). <strong>Warranty</strong> = how it performs (fit for use: available, secure, sufficient capacity, continuous). Both are required for value.</div></div>
+    <div class="card"><div class="card-title">Output vs Outcome</div><div class="card-body"><strong>Output</strong> = tangible deliverable. <strong>Outcome</strong> = result for the stakeholder. ITIL focuses on outcomes. Customers buy outcomes, not outputs.</div></div>
+    <div class="card"><div class="card-title">Value Co-creation</div><div class="card-body">Value is not delivered TO customers — it is co-created WITH them. The consumer must actively participate in value creation (e.g. use the service correctly).</div></div>
+    <div class="card"><div class="card-title">Service Relationship</div><div class="card-body">Service Provider ↔ Service Consumer. Consumer roles: Customer (defines requirements), User (uses service), Sponsor (authorises budget). One person can play multiple roles.</div></div>
+  </div>
+
+  <h2>🔗 Resources</h2>
+  <p>
+    <a href="https://www.axelos.com/certifications/itil-service-management/itil-4-foundation" target="_blank" class="ext">Official ITIL 4 Foundation ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.peoplecert.org/en/itil" target="_blank" class="ext">PeopleCert ITIL exam ↗</a> &nbsp;|&nbsp;
+    <a href="cobit2019.html" class="ext">→ COBIT 2019</a> &nbsp;|&nbsp;
+    <a href="togaf-basics.html" class="ext">→ TOGAF</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

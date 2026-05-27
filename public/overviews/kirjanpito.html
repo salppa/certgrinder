@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kirjanpidon perusteet — Suomen kirjanpito</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#059669;--cl:#6EE7B7;--cb:rgba(5,150,105,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #05966944;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #05966930;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #05966930;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:13px 16px;margin-bottom:8px;font-size:13px;color:#94a3b8}
+.warn strong{color:#FCA5A5}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.step-num{font-size:20px;font-weight:900;color:var(--cl);margin-right:8px}
+.tase-box{background:#111827;border:1px solid #1e2d45;border-radius:10px;overflow:hidden;margin-bottom:16px}
+.tase-header{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid #1e2d45}
+.tase-col-head{padding:10px 16px;font-size:12px;font-weight:800;color:var(--cl);text-transform:uppercase;background:var(--cb)}
+.tase-col-head:first-child{border-right:1px solid #1e2d45}
+.tase-body{display:grid;grid-template-columns:1fr 1fr}
+.tase-col{padding:12px 16px;border-right:1px solid #1e2d45;font-size:12px}
+.tase-col:last-child{border-right:none}
+.tase-item{padding:4px 0;color:#94a3b8;border-bottom:1px solid #1a2030}
+.tase-item:last-child{border-bottom:none}
+.tase-item strong{color:#e2e8f0;display:block;font-size:11px;margin-top:6px;margin-bottom:2px}
+.tase-total{background:#0d1424;padding:8px 16px;display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--c)}
+.tase-total-cell{font-size:12px;font-weight:800;color:var(--cl)}
+.tase-total-cell:first-child{border-right:1px solid #1e2d45}
+.flow-step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #1e2d45}
+.flow-step:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🟦 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏗️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a><a href="persoonallisuuspsykologia.html">🧠 Psykologia</a><a href="kirjanpito.html" class="active">📊 Kirjanpito</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">📊 Kirjanpidon perusteet</div>
+  <h1>Kirjanpito</h1>
+  <p class="sub">Kirjanpidon perusteet suomalaisesta näkökulmasta: kahdenkertainen kirjanpito, tase, tuloslaskelma, ALV ja Suomen kirjanpitolaki.</p>
+  <div class="meta"><span><a href="https://www.finlex.fi/fi/laki/ajantasa/1997/19971336" target="_blank" class="ext">Kirjanpitolaki 1336/1997 (Finlex) ↗</a></span><span><a href="https://tem.fi/kila" target="_blank" class="ext">KILA — Kirjanpitolautakunta ↗</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>📚 Mikä on kirjanpito?</h2>
+  <p>Kirjanpito on järjestelmällinen tapa kirjata ja seurata yrityksen taloudellisia tapahtumia. Suomessa kirjanpitovelvollisuudesta säätää <strong>kirjanpitolaki (KPL 1336/1997)</strong>. Kirjanpito on pakollinen kaikille, jotka harjoittavat liike- tai ammattitoimintaa.</p>
+  <p>Kirjanpidon avulla yritys pystyy seuraamaan kannattavuuttaan, maksamaan veronsa oikein, raportoimaan omistajille ja velkojille sekä täyttämään lakisääteiset velvoitteensa.</p>
+  <div class="tip"><strong>Kahdenkertainen kirjanpito:</strong> Jokainen liiketapahtuma kirjataan <em>kahdelle tilille</em> — debet-puolelle ja kredit-puolelle yhtä suurina summina. Tämä pitää taseen aina tasapainossa (vastaavaa = vastattavaa).</div>
+  <div class="grid">
+    <div class="card"><div class="card-title">🏢 Kirjanpitovelvollisia ovat</div><div class="card-body">Osakeyhtiö (Oy), osuuskunta, avoin yhtiö (Ay), kommandiittiyhtiö (Ky), yhdistykset, säätiöt sekä kaikki liike- tai ammattitoimintaa harjoittavat.</div></div>
+    <div class="card"><div class="card-title">📅 Tilikalenteri</div><div class="card-body">Tilikausi on yleensä 12 kuukautta. Voi olla lyhyempi tai pidempi (max 18 kk) toimintaa aloitettaessa. Tilipäätös laaditaan 4 kk:n kuluessa tilikauden päättymisestä.</div></div>
+    <div class="card"><div class="card-title">⚖️ Suoriteperuste</div><div class="card-body">Tulot ja menot kirjataan, kun suorite luovutetaan tai vastaanotetaan — ei maksun hetkellä. Tämä on kirjanpitolain mukainen pääperiaate.</div></div>
+    <div class="card"><div class="card-title">🔗 Kirjausketju (audit trail)</div><div class="card-body">Jokaisesta kirjanpidon merkinnästä pitää päästä jäljittelemään sen perustana oleva tosite, ja pääinväin. KPL edellyttää kirjausketjun säilymistä.</div></div>
+  </div>
+
+  <h2>🔄 Kirjanpidon rakenne</h2>
+  <table><thead><tr><th>Vaihe</th><th>Mitä tapahtuu</th><th>Tulos</th></tr></thead><tbody>
+    <tr><td>1. Juokseva kirjanpito</td><td>Tositteiden kirjaaminen tilipäästä tilikauden aikana kuukausittain</td><td>Päivitetyt tilit, ALV-ilmoitukset</td></tr>
+    <tr><td>2. Tilipäätös</td><td>Tilikauden päättyessä laaditaan yhteenveto: tase + tuloslaskelma + liitetiedot</td><td>Virallinen tilipäätöskirja</td></tr>
+    <tr><td>3. Tilintarkastus</td><td>Lakisääteinen tarkastus (tarvittaessa) — varmistaa oikeellisuuden</td><td>Tilintarkastuskertomus</td></tr>
+    <tr><td>4. Veroilmoitus</td><td>Tilipäätöksen pohjalta annetaan veroilmoitus Verohallinnolle</td><td>Verotuspaatos</td></tr>
+    <tr><td>5. Säilytys</td><td>Tilikirjat 10 v, tositteet 6 v tilikauden päättymisestä</td><td>Arkistoitu aineisto</td></tr>
+  </tbody></table>
+
+  <h2>💱 Debet &amp; Kredit -säännöt</h2>
+  <p>Kahdenkertaisessa kirjanpidossa jokaisella tilillä on debet (vasen) ja kredit (oikea) puoli. Normaalinen saldo on tilin tyypin mukaan:</p>
+  <table><thead><tr><th>Tilityyppi</th><th>Kasvaa</th><th>Pienenee</th><th>Esimerkki</th></tr></thead><tbody>
+    <tr><td>Vastaavaa (omaisuus)</td><td>Debet (+)</td><td>Kredit (−)</td><td>Pankkitili, koneet, myyntisaamiset</td></tr>
+    <tr><td>Vastattavaa (velat)</td><td>Kredit (+)</td><td>Debet (−)</td><td>Ostovelat, pankkilainat</td></tr>
+    <tr><td>Oma pääoma</td><td>Kredit (+)</td><td>Debet (−)</td><td>Osakepaoma, kertyneet voittovarat</td></tr>
+    <tr><td>Menotilit (kulut)</td><td>Debet (+)</td><td>Kredit (−)</td><td>Vuokra, palkat, materiaalikulut</td></tr>
+    <tr><td>Tulotilit (tuotot)</td><td>Kredit (+)</td><td>Debet (−)</td><td>Myynti (liikevaihto), korkotuotot</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Muistisääntö:</strong> Omaisuus ja menot kasvavat <strong>debet</strong>-puolelle. Velat, oma pääoma ja tulot kasvavat <strong>kredit</strong>-puolelle. Jokaisen kirjauksen debet-summa = kredit-summa.</div>
+
+  <h2>📊 Tase-kaavio</h2>
+  <p>Tase kuvaa yrityksen taloudellisen aseman tilikauden päättämishetkellä. Se jakautuu kahteen puoleen, jotka ovat aina yhtä suuret.</p>
+  <div class="tase-box">
+    <div class="tase-header">
+      <div class="tase-col-head">◀ Vastaavaa (Assets)</div>
+      <div class="tase-col-head">► Vastattavaa (Liabilities &amp; Equity)</div>
+    </div>
+    <div class="tase-body">
+      <div class="tase-col">
+        <div class="tase-item"><strong>Pysyvät vastaavat</strong></div>
+        <div class="tase-item">&nbsp;&nbsp;Aineettomat hyödykkeet<br><span style="font-size:11px;color:#475569">(patentit, goodwill, ohjelmistot)</span></div>
+        <div class="tase-item">&nbsp;&nbsp;Aineelliset hyödykkeet<br><span style="font-size:11px;color:#475569">(koneet, rakennukset, maa-alueet)</span></div>
+        <div class="tase-item">&nbsp;&nbsp;Sijoitukset<br><span style="font-size:11px;color:#475569">(osakkeet, lainasaamiset)</span></div>
+        <div class="tase-item"><strong>Vaihtuvat vastaavat</strong></div>
+        <div class="tase-item">&nbsp;&nbsp;Vaihto-omaisuus<br><span style="font-size:11px;color:#475569">(varasto, keskener. tuotteet)</span></div>
+        <div class="tase-item">&nbsp;&nbsp;Saamiset<br><span style="font-size:11px;color:#475569">(myyntisaamiset, muut saamiset)</span></div>
+        <div class="tase-item">&nbsp;&nbsp;Rahat ja pankkisaamiset<br><span style="font-size:11px;color:#475569">(kassa, pankkitili)</span></div>
+      </div>
+      <div class="tase-col">
+        <div class="tase-item"><strong>Oma pääoma</strong></div>
+        <div class="tase-item">&nbsp;&nbsp;Osakepääoma</div>
+        <div class="tase-item">&nbsp;&nbsp;Muut rahastot</div>
+        <div class="tase-item">&nbsp;&nbsp;Kertyneet voittovarat</div>
+        <div class="tase-item">&nbsp;&nbsp;Tilikauden tulos (+/−)</div>
+        <div class="tase-item"><strong>Vieras pääoma</strong></div>
+        <div class="tase-item">&nbsp;&nbsp;Pitkäaikainen vieras pääoma<br><span style="font-size:11px;color:#475569">(pankkilainat &gt; 1 v)</span></div>
+        <div class="tase-item">&nbsp;&nbsp;Lyhytaikainen vieras pääoma<br><span style="font-size:11px;color:#475569">(ostovelat, siirtovelat, lainat &lt; 1 v)</span></div>
+      </div>
+    </div>
+    <div class="tase-total">
+      <div class="tase-total-cell">Σ Vastaavaa yhteensä</div>
+      <div class="tase-total-cell">&nbsp;&nbsp;Σ Vastattavaa yhteensä</div>
+    </div>
+  </div>
+
+  <h2>📈 Tuloslaskelma-rakenne</h2>
+  <p>Tuloslaskelma kertoo, miten tilikauden tulos on muodostunut. Se etenee askel askeleelta liikevaihdosta nettotulokseen.</p>
+  <div style="background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:18px;margin-bottom:16px">
+    <div class="flow-step"><span class="step-num">1</span><div><strong style="color:#fff">Liikevaihto</strong><br><span style="font-size:12px;color:#64748b">Varsinaisen myynnin tuotot ilman ALV:a ja palautuksia. Lähtöpiste.</span></div></div>
+    <div class="flow-step"><span class="step-num">2</span><div><strong style="color:#fff">− Muuttuvat kulut = Myyntikate</strong><br><span style="font-size:12px;color:#64748b">Vähennetään aineet, tarvikkeet ja muut myynnin suorat kustannukset.</span></div></div>
+    <div class="flow-step"><span class="step-num">3</span><div><strong style="color:#fff">− Kiinteät kulut = Käyttökate (EBITDA)</strong><br><span style="font-size:12px;color:#64748b">Vähennetään vuokra, palkat, hallinto ja muut kiinteät kulut.</span></div></div>
+    <div class="flow-step"><span class="step-num">4</span><div><strong style="color:#fff">− Poistot = Liiketulos (EBIT)</strong><br><span style="font-size:12px;color:#64748b">Poistojen jälkeinen tulos. Kertoo operatiivisen kannattavuuden.</span></div></div>
+    <div class="flow-step"><span class="step-num">5</span><div><strong style="color:#fff">+/− Rahoituserät = Tulos ennen veroja (EBT)</strong><br><span style="font-size:12px;color:#64748b">Lisätään rahoitustuotot (korkotuotot, osingot), vähennetään rahoituskulut (korkomenot).</span></div></div>
+    <div class="flow-step"><span class="step-num">6</span><div><strong style="color:#fff">− Verot = Nettotulos (tilikauden voitto/tappio)</strong><br><span style="font-size:12px;color:#64748b">Lopullinen tulos. Siirtyy taseen omaan pääomaan.</span></div></div>
+  </div>
+
+  <h2>🯧 ALV-taulukko — Suomi</h2>
+  <table><thead><tr><th>ALV-kanta</th><th>Esimerkkituotteet / -palvelut</th><th>Laskentaesimerkki (sis. ALV)</th></tr></thead><tbody>
+    <tr><td>25,5 % (2024→)</td><td>Yleinen kanta: tavara- ja palvelumyynti, elektroniikka, vaatteet, konsultointi</td><td>1 000 € + 255 € = 1 255 €</td></tr>
+    <tr><td>14 %</td><td>Elintarvikkeet, rehut, ravintola-ateriat (ruoka)</td><td>100 € + 14 € = 114 €</td></tr>
+    <tr><td>10 %</td><td>Kirjat, sanomalehdet, liikenteen henkilökuljetus, majoitus, lääkkeet, kulttuuri- ja urheilutapahtumat</td><td>90 € + 9 € = 99 €</td></tr>
+    <tr><td>0 %</td><td>EU:n ulkopuolinen vienti, tietyt terveydenhuolto- ja koulutuspalvelut, vakuutuspalvelut</td><td>Veroton — ei ALV:a</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>ALV:n laskeminen hinnasta:</strong> ALV-osuus = Hinta × ALV% / (100 + ALV%). Esim. 1 240 € sis. ALV 24 %: ALV = 1 240 × 24/124 = 240 €. Veroton hinta = 1 000 €.</div>
+  <div class="tip"><strong>Tilitettävä ALV</strong> = Myynnin ALV − Ostojen ALV (vähennysoikeuden mukaan). Jos negatiivinen, Verohallinto palauttaa erotuksen.</div>
+
+  <h2>⚖️ Lainsäädäntö — tärkeimmät kohdat</h2>
+  <table><thead><tr><th>Asia</th><th>Sääntö / Vaatimus</th></tr></thead><tbody>
+    <tr><td>Kirjanpitolaki</td><td>KPL 1336/1997 — per ustuu EU:n kirjanpitodirektiivihin</td></tr>
+    <tr><td>Kirjanpitovelvollisuus</td><td>KPL 1:1 § — kaikki liike- tai ammattitoimintaa harjoittavat; aina Oy, Ay, Ky, osuuskunta</td></tr>
+    <tr><td>Tilikausi</td><td>Pääsääntöisesti 12 kk; max 18 kk perustamis-/muutosvaiheessa (KPL 1:4 §)</td></tr>
+    <tr><td>Tilinpäätöspaketti</td><td>Tase + tuloslaskelma + liitetiedot (+ toimintakertomus suurille)</td></tr>
+    <tr><td>Tilinpäätöksen määräaika</td><td>4 kuukautta tilikauden päättymisestä (KPL 3:6 §)</td></tr>
+    <tr><td>Tilikirjojen säilytys</td><td>10 vuotta tilikauden päättymisestä</td></tr>
+    <tr><td>Tositteiden säilytys</td><td>6 vuotta sen vuoden lopusta, jona tilikausi on päättynyt</td></tr>
+    <tr><td>KILA</td><td>Kirjanpitolautakunta — antaa ohjeita ja poikkeuslupia; toimii TEM:n yhteydessä</td></tr>
+    <tr><td>ALV-velvollisuusraja</td><td>15 000 € / 12 kk liikevaihto (AVL 3 §)</td></tr>
+  </tbody></table>
+
+  <h2>📄 Tositteen vaatimukset</h2>
+  <p>Kirjanpitolaki edellyttää, että jokaiselle kirjanpidon kirjaukselle on olemassa asianmukainen tosite (KPL 2:5 §).</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">✅ Pakollinen: Päiväys</div><div class="card-body">Tositteessa on oltava päiväys: liiketapahtuman tai maksun päivämäärä. Ilman päiväystä tositetta ei voida kohdistaa oikealle tilikaudelle.</div></div>
+    <div class="card"><div class="card-title">✅ Pakollinen: Rahamäärä</div><div class="card-body">Selkeä euromäärä. ALV-erittelyt on näyttävä erikseen laskuilla (veroton + ALV-kanta + ALV-osuus).</div></div>
+    <div class="card"><div class="card-title">✅ Pakollinen: Sisältö / liiketapahtuma</div><div class="card-body">Kuvaus siitä, mitä on ostettu tai myyty. Epäselvä tosite ei kelpaa kirjanpitoon eikä verotukseen.</div></div>
+    <div class="card"><div class="card-title">✅ Menotositteen hyväksyminen</div><div class="card-body">Menotositteessa on näyttävä menon hyväksyjä — henkilö, jolla on valtuus hyväksyä ko. meno. Ei saa olla sama kuin kirjanpitäjä.</div></div>
+    <div class="card"><div class="card-title">✅ Osapuolten tunnistaminen</div><div class="card-body">Myyjän nimi, Y-tunnus ja osoite on oltava laskussa. ALV-rekisterinumero (FI-numero) on pakollinen ALV-laskuissa.</div></div>
+    <div class="card"><div class="card-title">💾 Sähköinen tosite</div><div class="card-body">PDF-lasku, verkkolasku tai sähköinen kuitti on yhtä pätevä kuin paperitosite — kunhan eheys ja luettavuus voidaan taata säilytysajan.</div></div>
+    <div class="card"><div class="card-title">📝 Muistiotositteet</div><div class="card-body">Sisäiset kirjaukset (jaksotukset, oikaisut, poistot) vaativat muistiotositteen: tekijä, päiväys, selitys kirjauksen perusteesta.</div></div>
+    <div class="card"><div class="card-title">🔗 Tositenumero ja kirjausketju</div><div class="card-body">Jokaisella tositteella on yksilöllinen numero. Tämä varmistaa audit trail -vaatimuksen: kirjanpidosta pääsee aina tositteeseen ja päinvastoin.</div></div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

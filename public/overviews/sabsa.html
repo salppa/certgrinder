@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SABSA Foundation — Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#F59E0B;--cl:#FCD34D;--cb:rgba(245,158,11,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #F59E0B44;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #F59E0B30;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #F59E0B30;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+/* Matrix */
+.matrix{overflow-x:auto;margin-bottom:20px}
+.mtable{border-collapse:collapse;font-size:12px;min-width:700px;width:100%}
+.mtable th,.mtable td{padding:9px 11px;border:1px solid #1e2d45;text-align:left;vertical-align:top}
+.mtable thead th{background:#111827;color:var(--cl);font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:.5px}
+.mtable .row-header{background:#0d1424;color:var(--cl);font-weight:800;font-size:11px;min-width:110px}
+.mtable td{color:#64748b;font-size:11px}
+.mtable tr:hover td{background:#0d1424}
+.lc{display:inline-block;background:var(--cb);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;color:var(--cl);margin:2px}
+.lifecycle{display:flex;gap:0;margin:14px 0 20px;overflow-x:auto}
+.lc-step{flex:1;min-width:120px;background:#111827;border:1px solid #1e2d45;padding:14px;text-align:center;position:relative}
+.lc-step:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--cl);font-size:16px;z-index:1}
+.lc-step:first-child{border-radius:8px 0 0 8px}
+.lc-step:last-child{border-radius:0 8px 8px 0}
+.lc-num{font-size:22px;font-weight:900;color:var(--cl);display:block}
+.lc-title{font-size:11px;font-weight:800;color:#fff;margin:4px 0 3px}
+.lc-desc{font-size:10px;color:#64748b}
+.sep{border:none;border-top:2px dashed #1e2d45;margin:36px 0}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html" class="active">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🔐 SABSA Institute · Security Architecture</div>
+  <h1>SABSA Foundation</h1>
+  <p class="sub">Sherwood Applied Business Security Architecture — a business-driven, risk-based framework for enterprise security architecture. The 6×6 Matrix, Business Attributes, Lifecycle, and Traceability explained.</p>
+  <div class="meta">
+    <span><a href="https://sabsa.org" target="_blank" class="ext">sabsa.org ↗</a></span>
+    <span>80 questions · Foundation level</span>
+    <span>Related: <a href="togaf.html" class="ext">TOGAF →</a> <a href="cobit2019.html" class="ext">COBIT 2019 →</a></span>
+  </div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🔑 What is SABSA?</h2>
+  <p><strong>SABSA</strong> (Sherwood Applied Business Security Architecture) is a <em>business-driven</em> security architecture framework. Unlike technology-first approaches, SABSA starts with the <strong>business need</strong> and traces everything — every control, every policy, every product — back to a measurable business attribute.</p>
+  <p>Created by <strong>John Sherwood</strong>. Holistic — covers People, Process, and Technology. Maps to ISO 27001, NIST, COBIT, and other standards. Used by large enterprises, governments, and regulated industries worldwide.</p>
+  <div class="tip"><strong>Core principle:</strong> Security is a <em>business enabler</em>, not a barrier. Every control exists to enable a business attribute. If you can't trace a control to a business requirement, you shouldn't have it.</div>
+
+  <h2>📐 The SABSA Matrix</h2>
+  <p>The SABSA Matrix is a <strong>6×6 grid</strong> (6 layers × 6 columns = 36 cells). Each cell defines a specific architectural artefact. The rows move from abstract business context down to concrete operational detail.</p>
+
+  <h3>The 6 Columns (What, How, Where, Who, When, Why)</h3>
+  <div class="grid">
+    <div class="card"><div class="card-title">📦 What — Assets</div><div class="card-body">The inventory. What things need to be protected? At contextual level: the Business Domain. At component level: specific data packets and protocols.</div></div>
+    <div class="card"><div class="card-title">⚙️ How — Process</div><div class="card-body">The processes. How is work done? At contextual level: Business Activities. At component level: Security tools and mechanisms.</div></div>
+    <div class="card"><div class="card-title">🗺️ Where — Geography</div><div class="card-body">The locations. Where do things happen? At contextual level: Business Locations. At component level: Network nodes and interface specs.</div></div>
+    <div class="card"><div class="card-title">👤 Who — Entity</div><div class="card-body">The actors. Who is involved? At contextual level: People and Organisations. At component level: Certificates and specific credentials.</div></div>
+    <div class="card"><div class="card-title">🕐 When — Time</div><div class="card-body">The timing. When do things happen? At contextual level: Business Calendar / Timescales. At component level: Specific timestamps, session durations.</div></div>
+    <div class="card"><div class="card-title">❓ Why — Motivation</div><div class="card-body">The drivers. Why is this needed? At contextual level: Business Drivers (regulations, competition). At component level: Operational targets (e.g. 99.9% uptime SLA).</div></div>
+  </div>
+
+  <h3>The 6 Layers (Rows)</h3>
+  <div class="matrix"><table class="mtable"><thead>
+    <tr><th>Layer</th><th>View</th><th>What</th><th>How</th><th>Where</th><th>Who</th><th>When</th><th>Why</th></tr>
+  </thead><tbody>
+    <tr><td class="row-header">1 Contextual</td><td>Asset Owner</td><td>Business Domain</td><td>Business Processes</td><td>Business Locations</td><td>People &amp; Orgs</td><td>Business Timescales</td><td>Business Drivers</td></tr>
+    <tr><td class="row-header">2 Conceptual</td><td>Architect</td><td>Business Attributes</td><td>Security Principles</td><td>Trust Zones</td><td>Roles &amp; Orgs</td><td>Security Lifecycles</td><td>Control Objectives</td></tr>
+    <tr><td class="row-header">3 Logical</td><td>Designer</td><td>Information Arch.</td><td>Trust Model</td><td>Domain Structure</td><td>Roles &amp; Groups</td><td>Time-dep. Policy</td><td>Policy &amp; Rules</td></tr>
+    <tr><td class="row-header">4 Physical</td><td>Builder</td><td>Data Structures</td><td>Security Mechanisms</td><td>Network Nodes</td><td>Certificates/IDs</td><td>Timing Protocols</td><td>Detailed Design</td></tr>
+    <tr><td class="row-header">5 Component</td><td>Specialist</td><td>Data Packets</td><td>Security Tools</td><td>Interface Specs</td><td>Named Users/IDs</td><td>Timestamps</td><td>Operational Targets</td></tr>
+    <tr><td class="row-header">6 Operational</td><td>Manager</td><td>Live Data</td><td>Operational Controls</td><td>Live Locations</td><td>Live Identities</td><td>Live Events</td><td>KPIs / SLAs</td></tr>
+  </tbody></table></div>
+  <div class="tip"><strong>Memory trick:</strong> Layers go from <em>abstract → concrete</em>: Contextual (business) → Conceptual (principles) → Logical (design) → Physical (mechanisms) → Component (products) → Operational (live). The further down, the more technical.</div>
+
+  <h2>📊 Business Attributes &amp; Risk</h2>
+  <p><strong>Business Attributes</strong> are the desired qualities of the business or system — things like "Private", "Traceable", "Available", "Authentic". They are identified by stakeholders and drive the entire security architecture.</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">🔍 Attributes Profiling</div><div class="card-body">The process of translating business needs into measurable security attributes. Each attribute gets a <strong>proxy metric</strong> — something you can actually measure (e.g. "time to detect a breach" as proxy for "Traceable").</div></div>
+    <div class="card"><div class="card-title">⚖️ Risk as Balance</div><div class="card-body">SABSA views risk as both <strong>threat</strong> (negative) and <strong>opportunity</strong> (positive). Security architecture must mitigate threats <em>and</em> enable opportunities — not just say no.</div></div>
+    <div class="card"><div class="card-title">🎯 Controls = Enablers</div><div class="card-body">In SABSA, security controls are not restrictions — they are <strong>enablers</strong>. A control enables business attributes. If you can't trace a control to an attribute, it shouldn't exist.</div></div>
+    <div class="card"><div class="card-title">📏 Control Objective</div><div class="card-body">The goal a control is designed to achieve. Sits at the Conceptual layer in the "Why" column. Drives the detailed design of physical and component controls below it.</div></div>
+  </div>
+
+  <h3>Common Business Attribute Categories</h3>
+  <table><thead><tr><th>Category</th><th>Examples</th></tr></thead><tbody>
+    <tr><td>CIA Triad</td><td>Confidentiality, Integrity, Availability</td></tr>
+    <tr><td>Authenticity &amp; Trust</td><td>Authenticity, Non-repudiation, Accountability</td></tr>
+    <tr><td>Operational</td><td>Reliability, Auditability, Scalability</td></tr>
+    <tr><td>Compliance</td><td>Auditability, Regulatory compliance, Lawfulness</td></tr>
+    <tr><td>Business Performance</td><td>Efficiency, Cost-effectiveness, Agility</td></tr>
+  </tbody></table>
+
+  <h3>Risk Types</h3>
+  <table><thead><tr><th>Type</th><th>Definition</th></tr></thead><tbody>
+    <tr><td>Inherent Risk</td><td>The raw risk <em>before</em> any controls are applied</td></tr>
+    <tr><td>Residual Risk</td><td>The risk that <em>remains after</em> controls are applied</td></tr>
+    <tr><td>Risk Appetite</td><td>How much risk the business is willing to accept — defined at Contextual layer by asset owners</td></tr>
+    <tr><td>Opportunity</td><td>A positive risk — a chance to gain value. SABSA explicitly includes opportunities in risk management.</td></tr>
+  </tbody></table>
+
+  <h2>🔄 The SABSA Lifecycle</h2>
+  <p>Architecture is never static. SABSA uses a four-phase lifecycle that repeats continuously — not a one-time project.</p>
+  <div class="lifecycle">
+    <div class="lc-step"><span class="lc-num">1</span><div class="lc-title">Strategy &amp; Planning</div><div class="lc-desc">Define business context, drivers, risk appetite. Contextual + Conceptual layers.</div></div>
+    <div class="lc-step"><span class="lc-num">2</span><div class="lc-title">Design</div><div class="lc-desc">Logical and Physical architecture. Trust models, mechanisms, domain structure.</div></div>
+    <div class="lc-step"><span class="lc-num">3</span><div class="lc-title">Implement</div><div class="lc-desc">Build or acquire. Component layer — specific products, configurations, deployments.</div></div>
+    <div class="lc-step"><span class="lc-num">4</span><div class="lc-title">Manage &amp; Measure</div><div class="lc-desc">Operational layer. Prove attributes are met. Continuous monitoring. Feed back to Strategy.</div></div>
+  </div>
+  <div class="tip"><strong>Through-life Management:</strong> Architecture must be managed throughout its entire lifecycle, not just at initial deployment. Business drivers change → attributes change → architecture must adapt.</div>
+
+  <h2>🔗 Traceability</h2>
+  <p>Traceability is one of SABSA's most distinctive features. It ensures that <strong>every control exists for a reason</strong> (no gold-plating) and <strong>every requirement is addressed</strong> (no gaps).</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">↕️ Vertical Traceability</div><div class="card-body">Links <em>across layers</em> — from business driver (top) down to the specific security tool (bottom). Ensures a firewall rule traces back to a business requirement.</div></div>
+    <div class="card"><div class="card-title">↔️ Horizontal Traceability</div><div class="card-body">Links <em>within a layer</em> — ensures the What, How, Where, Who, When, Why of a single layer are all consistent with each other. No internal contradictions.</div></div>
+    <div class="card"><div class="card-title">⛔ Gold-plating</div><div class="card-body">Adding controls that have no corresponding business requirement. Traceability prevents this — every control must trace upward to a driver. Wastes resources.</div></div>
+    <div class="card"><div class="card-title">⚠️ Gaps</div><div class="card-body">Business requirements that have no corresponding control. Vertical traceability catches these — every driver at the top must trace down to something concrete.</div></div>
+  </div>
+
+  <h2>🏛️ Governance</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🔑 SABSA Defined</div><div class="card-body">SABSA = <strong>S</strong>herwood <strong>A</strong>pplied <strong>B</strong>usiness <strong>S</strong>ecurity <strong>A</strong>rchitecture. Created by <strong>John Sherwood</strong>. Published in 1995, continuously evolved. Managed by the SABSA Institute.</div></div>
+    <div class="card"><div class="card-title">📋 Stakeholder Role</div><div class="card-body">Stakeholders (business owners) define the Business Attributes and Risk Appetite at the Contextual layer. The architect translates these requirements — not the other way around.</div></div>
+    <div class="card"><div class="card-title">🤝 Framework Integration</div><div class="card-body">SABSA is holistic and integrates with ISO 27001, NIST CSF, COBIT, TOGAF, and ITIL. It provides the "why and what" — other frameworks provide the "how to do it" detail.</div></div>
+    <div class="card"><div class="card-title">🏢 Domain</div><div class="card-body">A set of entities under a common <em>trust</em> and <em>policy</em>. Domains at the Logical layer define trust zones. Policies are consistent within a domain and explicitly managed at boundaries.</div></div>
+  </div>
+
+  <hr class="sep"/>
+  <p style="font-size:12px;color:#475569;text-align:center">Extra content section — add supplementary notes below this line</p>
+</div></main>
+</body>
+</html>

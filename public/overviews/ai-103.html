@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI-103 Azure AI Apps and Agents Developer — Study Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#0D9488;--cl:#5EEAD4;--cb:rgba(13,148,136,.12);--c2:#6366f1;--cl2:#a5b4fc}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,rgba(99,102,241,.08) 50%,#0a0f1a 100%);border-bottom:1px solid #1e2d45;padding:48px 24px 40px}
+.hero-inner,.main-inner{max-width:920px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid rgba(13,148,136,.3);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+.badge-new{display:inline-flex;align-items:center;margin-left:10px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.35);border-radius:4px;padding:2px 9px;font-size:10px;font-weight:800;color:var(--cl2);letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+h1{font-size:clamp(26px,5vw,44px);font-weight:900;letter-spacing:-1.5px;color:#fff;margin-bottom:10px;line-height:1.1}
+.sub{font-size:15px;color:#94a3b8;max-width:660px;line-height:1.65}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:16px}
+main{padding:36px 24px 100px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:32px;background:var(--cb);border:1px solid rgba(13,148,136,.25);border-radius:8px;padding:6px 14px}
+h2{font-size:20px;font-weight:800;color:#fff;margin:40px 0 14px;padding-bottom:10px;border-bottom:2px solid #1e2d45;display:flex;align-items:center;gap:10px}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+strong{color:#e2e8f0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card.indigo{border-left-color:var(--c2)}
+.card.amber{border-left-color:#f59e0b}
+.card.rose{border-left-color:#f43f5e}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}
+th{text-align:left;padding:9px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827;letter-spacing:.04em}
+td{padding:10px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid rgba(13,148,136,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8;line-height:1.7}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8}
+.warn strong{color:#fbbf24}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:4px;margin:2px;letter-spacing:.04em;text-transform:uppercase}
+.pill-g{background:rgba(94,234,212,.12);color:#5EEAD4;border:1px solid rgba(94,234,212,.25)}
+.pill-b{background:rgba(99,102,241,.12);color:#a5b4fc;border:1px solid rgba(99,102,241,.25)}
+.pill-a{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.25)}
+.pill-r{background:rgba(244,63,94,.12);color:#fb7185;border:1px solid rgba(244,63,94,.25)}
+.pill-ret{background:rgba(252,129,129,.1);color:#fc8181;border:1px solid rgba(252,129,129,.25)}
+
+/* flow diagram */
+.flow{display:flex;flex-wrap:wrap;gap:0;margin:16px 0 24px;overflow-x:auto}
+.flow-step{flex:1;min-width:120px;background:#111827;border:1px solid #1e2d45;padding:14px 10px;text-align:center;position:relative}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--cl);font-size:16px;z-index:1;font-weight:700}
+.flow-step:first-child{border-radius:8px 0 0 8px}
+.flow-step:last-child{border-radius:0 8px 8px 0}
+.flow-num{font-size:18px;font-weight:900;color:var(--cl);display:block;margin-bottom:4px}
+.flow-lbl{font-size:12px;font-weight:800;color:#fff;margin-bottom:2px}
+.flow-desc{font-size:10px;color:#64748b;line-height:1.4}
+
+/* hierarchy */
+.hier{background:#0d1424;border:1px solid #1e2d45;border-radius:10px;padding:20px 24px;margin:16px 0;font-size:13px}
+.hier-row{display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid rgba(30,45,69,.8)}
+.hier-row:last-child{border-bottom:none}
+.hier-icon{font-size:18px;min-width:28px;text-align:center;margin-top:2px}
+.hier-name{font-weight:800;color:#fff;font-size:13px}
+.hier-desc{color:#64748b;font-size:12px;margin-top:2px}
+.hier-indent{padding-left:28px}
+
+/* comparison */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 20px}
+.cmp-col{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:16px}
+.cmp-head{font-size:13px;font-weight:800;color:#fff;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #1e2d45}
+.cmp-row{display:flex;gap:8px;margin-bottom:8px;font-size:12px}
+.cmp-icon{min-width:16px;color:var(--cl)}
+.cmp-text{color:#94a3b8;line-height:1.5}
+
+/* sep */
+.sep{border:none;border-top:2px dashed #1e2d45;margin:44px 0}
+
+/* domain bar */
+.domain-bar{display:flex;gap:4px;margin:14px 0 24px;flex-wrap:wrap}
+.domain-chip{display:flex;align-items:center;gap:6px;background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:8px 14px;font-size:12px}
+.domain-chip .pct{font-weight:800;color:var(--cl);font-size:14px}
+.domain-chip .name{color:#94a3b8}
+
+/* param table highlight */
+.val-good{color:#5EEAD4;font-weight:700}
+.val-warn{color:#fbbf24;font-weight:700}
+.val-note{color:#94a3b8;font-size:11px}
+
+@media(max-width:600px){.cmp{grid-template-columns:1fr}.flow-step:not(:last-child)::after{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a>
+  <a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html" class="active">🤖 AI-103</a>
+  <a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a>
+  <a href="sabsa.html">🔐 SABSA</a>
+  <a href="ai-compliance.html">⚖️ AI Compliance</a>
+  <a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🤖 Microsoft Azure AI <span class="badge-new">GA Jun 2026</span></div>
+  <h1>AI-103: Azure AI Apps<br>&amp; Agents Developer</h1>
+  <p class="sub">The modern replacement for AI-102 (retiring Jun 2026). Covers building generative AI applications and autonomous agents using Azure AI Foundry, Azure OpenAI, Semantic Kernel, and the full Azure AI services stack.</p>
+  <div class="meta">
+    <span><a href="https://learn.microsoft.com/credentials/certifications/azure-ai-apps-and-agents-developer-associate/" target="_blank" class="ext">Official cert page ↗</a></span>
+    <span><a href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-103" target="_blank" class="ext">Study guide ↗</a></span>
+    <span>80 questions · 5 domains</span>
+    <span>Replaces: <span class="pill pill-ret">AI-102 retiring Jun 2026</span></span>
+    <span>Related: <a href="ai-900.html" class="ext">AI-900 →</a> <a href="ab-731.html" class="ext">AB-731 →</a> <a href="ai-compliance.html" class="ext">AI Compliance →</a></span>
+  </div>
+</div></div>
+
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <!-- ═══════════════════════════════════════ EXAM OVERVIEW -->
+  <h2>📋 Exam Domain Weights</h2>
+  <div class="domain-bar">
+    <div class="domain-chip"><span class="pct">25–30%</span><span class="name">Plan &amp; Manage</span></div>
+    <div class="domain-chip"><span class="pct">30–35%</span><span class="name">Generative AI &amp; Agents</span></div>
+    <div class="domain-chip"><span class="pct">10–15%</span><span class="name">Computer Vision</span></div>
+    <div class="domain-chip"><span class="pct">10–15%</span><span class="name">Text Analysis</span></div>
+    <div class="domain-chip"><span class="pct">10–15%</span><span class="name">Information Extraction</span></div>
+  </div>
+  <table>
+    <thead><tr><th>Domain</th><th>Key topics</th><th>vs AI-102</th></tr></thead>
+    <tbody>
+      <tr><td>Plan &amp; Manage</td><td>Foundry hubs/projects, managed identity, PTUs, evaluation, content safety, private endpoints, CMK, red teaming</td><td>Similar scope, Foundry-first tooling</td></tr>
+      <tr><td>Generative AI &amp; Agents</td><td>Prompt engineering, RAG, function calling, Agents service, threads/runs/tools, Semantic Kernel, multi-agent, GPT-4o</td><td><strong>Much heavier</strong> — agents are 30–35% combined</td></tr>
+      <tr><td>Computer Vision</td><td>Vision 4.0, DALL-E, GPT-4o image grounding, Custom Vision, Face API, Video Indexer, Content Safety images</td><td>Broadly similar</td></tr>
+      <tr><td>Text Analysis</td><td>NER, CLU, custom classification, sentiment, key phrases, language detection, Speech STT/TTS/translation, pronunciation, diarization</td><td>Broadly similar</td></tr>
+      <tr><td>Information Extraction</td><td>Document Intelligence, Azure AI Search vector/hybrid, RAG pipeline, knowledge store, skillsets</td><td>Renamed services, deeper vector focus</td></tr>
+    </tbody>
+  </table>
+  <div class="warn"><strong>Key shift from AI-102:</strong> AI-103 treats Azure AI Foundry as the primary development platform. Expect questions about the Foundry hub/project hierarchy, Prompt flow, the Agents service, and Semantic Kernel that were absent from AI-102.</div>
+
+  <!-- ═══════════════════════════════════════ PLAN & MANAGE -->
+  <hr class="sep"/>
+  <h2>🏗️ Plan &amp; Manage Azure AI Solutions</h2>
+
+  <h3>Azure AI Foundry Architecture</h3>
+  <div class="hier">
+    <div class="hier-row">
+      <div class="hier-icon">🏢</div>
+      <div>
+        <div class="hier-name">Hub <span class="pill pill-g">Shared resource</span></div>
+        <div class="hier-desc">Top-level governance layer. Holds shared <strong>connections</strong> to Azure services, managed compute, and security settings. One hub serves multiple teams/use cases.</div>
+      </div>
+    </div>
+    <div class="hier-row hier-indent">
+      <div class="hier-icon">📁</div>
+      <div>
+        <div class="hier-name">Project <span class="pill pill-b">Scoped workspace</span></div>
+        <div class="hier-desc">Created inside a hub. Inherits hub connections. Where you build flows, deploy models, run evaluations, and develop agents. Scoped to a team or app.</div>
+      </div>
+    </div>
+    <div class="hier-row hier-indent">
+      <div class="hier-icon">🔗</div>
+      <div>
+        <div class="hier-name">Connections</div>
+        <div class="hier-desc">Securely stored references (endpoint + credentials or managed identity) to linked services: Azure OpenAI, Azure AI Search, Azure Storage, custom APIs. Referenced by name in flows — no secrets in code.</div>
+      </div>
+    </div>
+    <div class="hier-row hier-indent">
+      <div class="hier-icon">🚀</div>
+      <div>
+        <div class="hier-name">Deployments</div>
+        <div class="hier-desc">Named configuration mapping a model version to a capacity tier (Standard / PTU / Serverless). Makes the model callable via REST API.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Capacity Options — Which to Choose</h3>
+  <table>
+    <thead><tr><th>Option</th><th>Capacity</th><th>Billing</th><th>Use when</th></tr></thead>
+    <tbody>
+      <tr><td>Standard</td><td>Shared (Microsoft infrastructure)</td><td>Per token</td><td>Development, low-volume, variable load</td></tr>
+      <tr><td><strong>Provisioned (PTU)</strong></td><td>Reserved dedicated capacity</td><td>Hourly flat rate</td><td>Production, latency SLA, predictable high-volume</td></tr>
+      <tr><td>Serverless API</td><td>Microsoft-managed, no subscription deployment</td><td>Per token</td><td>Quick experiments, model catalog trials</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Exam tip:</strong> HTTP 429 errors = quota exhausted. Check <strong>Remaining Tokens</strong> metric in Azure Monitor. PTUs guarantee throughput and eliminate throttling for production workloads.</div>
+
+  <h3>Authentication — Managed Identity Pattern</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">✅ Managed Identity (recommended)</div>
+      <div class="card-body">App gets an Entra ID token automatically. Assign <strong>Cognitive Services User</strong> or <strong>Azure AI User</strong> RBAC role on the Azure OpenAI resource. No secrets to store or rotate. Use DefaultAzureCredential in SDK.</div>
+    </div>
+    <div class="card rose">
+      <div class="card-title">⚠️ API Key (avoid in production)</div>
+      <div class="card-body">Key stored as a secret must be rotated, protected, and never committed to source control. Acceptable only for local development or quick prototypes. Store in Key Vault if used.</div>
+    </div>
+  </div>
+
+  <h3>Security Controls</h3>
+  <table>
+    <thead><tr><th>Control</th><th>What it does</th><th>Exam scenario</th></tr></thead>
+    <tbody>
+      <tr><td>Private Endpoint</td><td>Projects Azure OpenAI into your VNet with a private IP</td><td>Must set <em>public network access = Disabled</em> alongside it</td></tr>
+      <tr><td>Customer Managed Keys (CMK)</td><td>Organisation controls encryption keys in Key Vault; Microsoft cannot access</td><td>Compliance requires data inaccessible to Microsoft</td></tr>
+      <tr><td>Azure Policy (deny)</td><td>Prevents resource creation outside permitted regions/SKUs</td><td>Data residency enforcement at scale across subscriptions</td></tr>
+      <tr><td>Prompt Shields</td><td>Detects jailbreaks (User Prompt Attack) and indirect injection (Document Attack) before model processes prompt</td><td>RAG pipeline injecting malicious instructions via retrieved docs</td></tr>
+      <tr><td>Content Filters</td><td>Hate / Sexual / Violence / Self-harm — configurable severity thresholds on input and output</td><td>Setting the right threshold without over-blocking legitimate content</td></tr>
+      <tr><td>Red Teaming</td><td>AI-assisted adversarial prompt generation + model response scoring before go-live</td><td>Pre-production security validation of custom AI apps</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Evaluation — Built-in Quality Metrics</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Measures</th><th>Low score means</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Groundedness</strong></td><td>Every factual claim traceable to retrieved context</td><td>Model is hallucinating — responses not supported by retrieved docs</td></tr>
+      <tr><td>Relevance</td><td>Answer addresses the actual question asked</td><td>Off-topic responses — retrieval or prompt mismatch</td></tr>
+      <tr><td>Coherence</td><td>Logical flow and consistency across the response</td><td>Contradictory or disorganised outputs</td></tr>
+      <tr><td>Fluency</td><td>Grammatical correctness and natural language quality</td><td>Awkward, broken, or unnatural text</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Responsible AI principle mapping:</strong> Low <strong>groundedness</strong> = Reliability &amp; Safety risk. Unequal treatment across groups = Fairness. Inaccessible to disability users = Inclusiveness. Opaque decision logic = Transparency. No human accountability = Accountability.</div>
+
+  <h3>Prompt Flow (CI/CD for LLM Apps)</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="flow-num">1</span><div class="flow-lbl">Build</div><div class="flow-desc">YAML + Python nodes, visual DAG editor</div></div>
+    <div class="flow-step"><span class="flow-num">2</span><div class="flow-lbl">Evaluate</div><div class="flow-desc">Run against labeled dataset, score metrics</div></div>
+    <div class="flow-step"><span class="flow-num">3</span><div class="flow-lbl">Version</div><div class="flow-desc">Git-backed flow files, PR-based review</div></div>
+    <div class="flow-step"><span class="flow-num">4</span><div class="flow-lbl">Deploy</div><div class="flow-desc">Managed online endpoint (REST API)</div></div>
+    <div class="flow-step"><span class="flow-num">5</span><div class="flow-lbl">Monitor</div><div class="flow-desc">Trace viewer, Azure Monitor metrics</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ GEN AI & AGENTS -->
+  <hr class="sep"/>
+  <h2>🤖 Generative AI &amp; Agentic Solutions</h2>
+
+  <h3>Core API Parameters — Cheat Sheet</h3>
+  <table>
+    <thead><tr><th>Parameter</th><th>Controls</th><th>Typical values</th><th>Exam tip</th></tr></thead>
+    <tbody>
+      <tr><td><strong>temperature</strong></td><td>Randomness of token selection</td><td class="val-good">0</td><td>0 = deterministic/structured tasks; 0.7–1.0 = creative tasks</td></tr>
+      <tr><td><strong>max_tokens</strong></td><td>Max length of <em>response only</em></td><td>256–4096</td><td>Does NOT limit input; total (input+output) must fit context window</td></tr>
+      <tr><td><strong>top_p</strong></td><td>Nucleus sampling probability threshold</td><td>0.95</td><td>Alternative to temperature; don't set both simultaneously</td></tr>
+      <tr><td><strong>frequency_penalty</strong></td><td>Penalises tokens proportional to how often they appear</td><td>0–2</td><td>Reduces verbatim repetition of phrases</td></tr>
+      <tr><td><strong>presence_penalty</strong></td><td>Flat penalty for any token already used</td><td>0–2</td><td>Encourages topic breadth; discourages circling back</td></tr>
+      <tr><td><strong>stream</strong></td><td>Server-sent events delivery</td><td>true/false</td><td>Reduces perceived latency; total generation time unchanged</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Prompting Techniques</h3>
+  <div class="grid3">
+    <div class="card"><div class="card-title">Zero-shot</div><div class="card-body">Task description only, no examples. Good for simple, well-understood tasks with capable models.</div></div>
+    <div class="card"><div class="card-title">Few-shot</div><div class="card-body">Include 2–5 worked input→output examples. Best for consistent format, structured extraction, or domain style.</div></div>
+    <div class="card"><div class="card-title">Chain-of-thought</div><div class="card-body">"Think step by step before answering." Dramatically improves multi-step reasoning, maths, logic tasks.</div></div>
+    <div class="card"><div class="card-title">System message</div><div class="card-body">Sets persona, rules, constraints, output format. Applied to every turn. Primary behavioural control mechanism.</div></div>
+    <div class="card"><div class="card-title">Prompt caching</div><div class="card-body">Repeated identical prompt prefixes (e.g. long system message) are cached — reduces latency and cost on subsequent calls.</div></div>
+    <div class="card"><div class="card-title">Function calling</div><div class="card-body">Model returns structured JSON to signal which function to call. App executes; model incorporates result. Enables live data access.</div></div>
+  </div>
+
+  <h3>RAG vs Fine-tuning — When to Use Each</h3>
+  <div class="cmp">
+    <div class="cmp-col">
+      <div class="cmp-head">📚 RAG (Retrieval-Augmented Generation)</div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Knowledge updates frequently (weekly, daily)</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Must cite specific source documents</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Knowledge base too large for context window</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Need to verify factual accuracy against sources</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✗</span><span class="cmp-text">Does not change model weights or style</span></div>
+    </div>
+    <div class="cmp-col">
+      <div class="cmp-head">⚙️ Fine-tuning</div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Consistent output format/schema difficult to prompt-engineer</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Domain-specific writing style or tone required</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Reduce token usage on repetitive structured tasks</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✗</span><span class="cmp-text">Not for frequently updated factual knowledge</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✗</span><span class="cmp-text">Requires labeled training data; expensive to update</span></div>
+    </div>
+  </div>
+
+  <h3>RAG Pipeline — Step by Step</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="flow-num">1</span><div class="flow-lbl">Chunk</div><div class="flow-desc">Split docs into focused segments (512–1024 tokens)</div></div>
+    <div class="flow-step"><span class="flow-num">2</span><div class="flow-lbl">Embed</div><div class="flow-desc">Call embedding model → float vector per chunk</div></div>
+    <div class="flow-step"><span class="flow-num">3</span><div class="flow-lbl">Index</div><div class="flow-desc">Store vectors in Azure AI Search vector index</div></div>
+    <div class="flow-step"><span class="flow-num">4</span><div class="flow-lbl">Retrieve</div><div class="flow-desc">Embed user query → top-k cosine similarity search</div></div>
+    <div class="flow-step"><span class="flow-num">5</span><div class="flow-lbl">Augment</div><div class="flow-desc">Inject retrieved chunks into prompt context</div></div>
+    <div class="flow-step"><span class="flow-num">6</span><div class="flow-lbl">Generate</div><div class="flow-desc">Model responds grounded in retrieved facts</div></div>
+  </div>
+  <div class="tip"><strong>Chunking matters:</strong> Embedding an entire 50-page document produces one averaged vector — retrieval precision collapses. Focused chunks (one topic per chunk) produce tight vectors that retrieve precisely relevant content. Minimum: 512 tokens. Maximum: embedding model's token limit (e.g. 8,191 for text-embedding-3-large).</div>
+
+  <h3>Azure AI Foundry Agents Service</h3>
+  <table>
+    <thead><tr><th>Concept</th><th>What it is</th><th>Analogy</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Thread</strong></td><td>Persistent conversation session storing all messages for a user-agent interaction</td><td>A chat conversation log that persists between sessions</td></tr>
+      <tr><td><strong>Run</strong></td><td>A single invocation of the agent on a thread — model reads history, calls tools, appends response</td><td>One "turn" of agent thinking and responding</td></tr>
+      <tr><td><strong>Message</strong></td><td>A user or assistant message appended to a thread</td><td>Individual chat bubble</td></tr>
+      <tr><td><strong>Tool</strong></td><td>A capability attached to the agent (Code Interpreter, File Search, Function, Bing)</td><td>An app the agent can open</td></tr>
+      <tr><td><strong>Vector Store</strong></td><td>Managed embedding store created by the file search tool</td><td>Auto-indexed document library</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Built-in Agent Tools — When to Use Each</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">💻 Code Interpreter</div>
+      <div class="card-body">Sandboxed Python execution. Agent writes + runs code to analyse data, generate charts, do maths, or process files. No external infrastructure needed. <strong>Use for:</strong> data analysis, CSV processing, calculations, chart generation.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔍 File Search</div>
+      <div class="card-body">Auto-chunks uploaded files, generates embeddings, builds managed vector store. Agent retrieves relevant chunks semantically. <strong>Use for:</strong> Q&amp;A over large document collections without building a RAG pipeline manually.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🌐 Bing Grounding</div>
+      <div class="card-body">Agent queries Bing Search for real-time web content beyond training cutoff. <strong>Use for:</strong> current news, live stock prices, recent events, public information that changes frequently.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚡ Function Calling</div>
+      <div class="card-body">Agent returns structured JSON to signal which function to call and with what args. App executes the actual API/DB call and returns result. <strong>Use for:</strong> any internal system — HR APIs, CRM, ERP, databases.</div>
+    </div>
+  </div>
+
+  <h3>Multi-Agent Patterns</h3>
+  <table>
+    <thead><tr><th>Pattern</th><th>Role</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Orchestrator</strong></td><td>Receives goal, decomposes into subtasks, delegates to specialists, assembles result</td><td>Project manager agent routing to search, coding, and email agents</td></tr>
+      <tr><td><strong>Specialist / Sub-agent</strong></td><td>Executes a focused task, returns result to orchestrator</td><td>SQL query agent, document summariser, calculator agent</td></tr>
+      <tr><td><strong>Evaluator</strong></td><td>Reviews outputs from other agents before delivery to user</td><td>Fact-checker agent verifying claims against a knowledge base</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Semantic Kernel</strong> (Python / C# / Java) is Microsoft's open-source SDK for agentic apps. Key abstractions: <strong>Plugins</strong> (callable functions with schemas), <strong>Planner</strong> (auto-decomposes goals into plugin calls), <strong>Memory</strong> (vector store connectors), <strong>Kernel</strong> (DI container wiring everything together).</div>
+
+  <h3>Prompt Injection &amp; Security</h3>
+  <div class="grid2">
+    <div class="card rose">
+      <div class="card-title">🔴 User Prompt Attack (Jailbreak)</div>
+      <div class="card-body">Malicious user message tries to override system instructions: "Ignore all previous instructions and…" Detected by <strong>Prompt Shields — User Prompt Attack</strong> detection.</div>
+    </div>
+    <div class="card rose">
+      <div class="card-title">🔴 Document Attack (Indirect Injection)</div>
+      <div class="card-body">Instructions hidden inside a retrieved document or web page attempt to hijack the agent mid-RAG-pipeline. Detected by <strong>Prompt Shields — Document Attack</strong> detection. Specific RAG risk.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ COMPUTER VISION -->
+  <hr class="sep"/>
+  <h2>👁️ Computer Vision Solutions</h2>
+
+  <h3>Azure AI Vision 4.0 — Feature Map</h3>
+  <table>
+    <thead><tr><th>Feature</th><th>Output</th><th>Use case</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Dense Captions</strong></td><td>Full-image caption + up to 10 region-level captions with bounding boxes</td><td>E-commerce product descriptions, accessibility alt-text</td></tr>
+      <tr><td>Image Tagging</td><td>Flat list of keyword labels with confidence scores</td><td>Auto-categorisation, search indexing, content filtering</td></tr>
+      <tr><td>Object Detection</td><td>Bounding boxes + class names for common objects</td><td>Counting items, locating objects — no prose description</td></tr>
+      <tr><td><strong>Read (OCR)</strong></td><td>Printed and handwritten text with word-level bounding polygons</td><td>Logistics label extraction, form capture, receipt scanning</td></tr>
+      <tr><td><strong>Background Removal</strong></td><td>PNG with transparent background, subject isolated</td><td>Product catalogue images, portrait editing, compositing</td></tr>
+      <tr><td><strong>Smart Crop</strong></td><td>Bounding box for most visually salient region</td><td>Adaptive thumbnail generation focussed on subject</td></tr>
+      <tr><td>Semantic Segmentation</td><td>Per-pixel class labels</td><td>Scene understanding, autonomous vehicle datasets</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Image Generation &amp; Multimodal Reasoning</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🎨 DALL-E (Azure OpenAI)</div>
+      <div class="card-body">Generates photorealistic images from text prompts. Called via <code>images/generations</code> endpoint on an Azure OpenAI DALL-E deployment. <strong>Not</strong> Azure AI Vision — a separate service entirely.</div>
+    </div>
+    <div class="card indigo">
+      <div class="card-title">🧠 GPT-4o with Image Input</div>
+      <div class="card-body">Native multimodal — processes text + images in one model. Supports <strong>image grounding</strong> (returns bounding boxes for referenced objects). Best for open-ended visual reasoning and complex Q&amp;A over images.</div>
+    </div>
+  </div>
+  <div class="tip"><strong>GPT-4o vs Azure AI Vision:</strong> Use Vision for structured, high-throughput tasks with defined outputs (tags, bounding boxes, OCR). Use GPT-4o for open-ended reasoning — "explain what is unusual in this scene" or "compare these two product photos."</div>
+
+  <h3>Specialised Vision Services</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">👤 Azure AI Face API</div>
+      <div class="card-body"><strong>Detect:</strong> bounding box + attributes (age estimate, emotion, glasses). <strong>Identify:</strong> 1:N search against a PersonGroup — who is this person? <strong>Verify:</strong> 1:1 — are these two faces the same person? <strong>Find Similar:</strong> find lookalikes without named identity.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎬 Azure AI Video Indexer</div>
+      <div class="card-body">Extracts comprehensive insights from video: <strong>transcript</strong>, <strong>speaker IDs</strong>, <strong>face detection</strong>, <strong>OCR</strong>, <strong>brand/logo recognition</strong>, shot/scene detection, topic segments, sentiment. No single Vision API call covers this breadth.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎯 Azure AI Custom Vision</div>
+      <div class="card-body">Train custom <strong>classification</strong> or <strong>object detection</strong> models on your labeled images. Min ~15 images/class. For objects the pre-built Vision model doesn't recognise (e.g. proprietary equipment, specific product SKUs).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🛡️ Content Safety — Images</div>
+      <div class="card-body">Classifies uploaded images across Hate / Sexual / Violence / Self-harm with per-category severity scores (0–6). Configurable thresholds for moderation enforcement. Purpose-built for content policy at scale.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ TEXT ANALYSIS -->
+  <hr class="sep"/>
+  <h2>📝 Text Analysis Solutions</h2>
+
+  <h3>Azure AI Language — Service Map</h3>
+  <table>
+    <thead><tr><th>Feature</th><th>Output</th><th>Pre-built or custom</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Named Entity Recognition (NER)</strong></td><td>Entity spans with type (Person, Org, Location, DateTime, URL…)</td><td>Pre-built; custom NER for proprietary types</td></tr>
+      <tr><td><strong>Conversational Language Understanding (CLU)</strong></td><td>Intent classification + typed entity extraction from commands</td><td><strong>Custom</strong> — define intents, entity types, label utterances</td></tr>
+      <tr><td><strong>Custom Text Classification</strong></td><td>Document assigned to your category labels (multi-class or multi-label)</td><td><strong>Custom</strong> — label and train on your documents</td></tr>
+      <tr><td>Sentiment Analysis</td><td>Positive/Negative/Neutral/Mixed at document and sentence level</td><td>Pre-built; + <strong>Opinion Mining</strong> adds aspect-level targets</td></tr>
+      <tr><td>Key Phrase Extraction</td><td>Most important noun phrases summarising document topics</td><td>Pre-built — no training needed</td></tr>
+      <tr><td>Language Detection</td><td>ISO 639-1 language code + confidence score</td><td>Pre-built — 120+ languages</td></tr>
+      <tr><td>Question Answering</td><td>Answer span extracted from a provided knowledge base document</td><td>Pre-built (no QnA Maker in AI-103 scope)</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>CLU vs Custom Text Classification:</strong> CLU extracts <em>intent + entities from commands</em> ("turn off the kitchen lights" → intent: TurnOff, entity Room: kitchen). Custom classification assigns <em>category labels to documents</em> ("this email is a Fraud Dispute"). Different tasks, different features.</div>
+
+  <h3>Sentiment Analysis — Levels of Granularity</h3>
+  <div class="grid3">
+    <div class="card"><div class="card-title">Document level</div><div class="card-body">Overall sentiment of the full text: Positive / Negative / Neutral / Mixed with a confidence score.</div></div>
+    <div class="card"><div class="card-title">Sentence level</div><div class="card-body">Sentiment per sentence, allowing mixed-sentiment documents to be analysed phrase by phrase.</div></div>
+    <div class="card indigo"><div class="card-title">Opinion Mining (aspect)</div><div class="card-body">Identifies specific <em>aspect + opinion</em> pairs: "battery life is great" → aspect: battery life, sentiment: positive. Critical for product feedback analytics.</div></div>
+  </div>
+
+  <h3>Azure AI Speech — Feature Reference</h3>
+  <table>
+    <thead><tr><th>Feature</th><th>What it does</th><th>Key detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Real-time STT</strong></td><td>Streams audio → live text with partial hypotheses ("recognizing" events) and final results ("recognized")</td><td>Partial results show as user speaks — minimal perceived latency</td></tr>
+      <tr><td>Batch Transcription</td><td>Submits audio file for offline processing; result polled or webhook</td><td>Lower cost; not real-time; for post-call analytics</td></tr>
+      <tr><td><strong>Pronunciation Assessment</strong></td><td>Compares learner audio to reference text; scores Accuracy, Fluency, Completeness, Prosody at phoneme/word/utterance level</td><td>Language learning apps; interviewing coaching</td></tr>
+      <tr><td><strong>Speaker Diarization</strong></td><td>Labels each speech segment by speaker ID — separates multiple speakers in one audio stream</td><td>Call centre analytics: who said what</td></tr>
+      <tr><td>Neural TTS</td><td>High-quality text-to-speech with built-in neural voices</td><td>100+ voices, 140+ languages; SSML for fine control</td></tr>
+      <tr><td><strong>Custom Neural Voice</strong></td><td>Fine-tuned TTS model trained on recordings of a specific person's voice</td><td>Requires consent + voice recording release; cannot fake voices</td></tr>
+      <tr><td><strong>Speech Translation</strong></td><td>Spoken source language → spoken or written target language in real-time via one streaming pipeline</td><td>Simultaneous interpretation; sub-second latency</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════ INFO EXTRACTION -->
+  <hr class="sep"/>
+  <h2>🔍 Information Extraction Solutions</h2>
+
+  <h3>Azure AI Document Intelligence — Model Types</h3>
+  <table>
+    <thead><tr><th>Model type</th><th>Training required</th><th>Best for</th><th>Min samples</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Prebuilt</strong> (Invoice, Receipt, ID Document, W-2, Health Insurance…)</td><td>None</td><td>Standard document types with well-known schemas</td><td>0</td></tr>
+      <tr><td><strong>Custom Template</strong></td><td>Yes — fixed-layout forms</td><td>Your company's fixed-format PO, claim, or application form</td><td>5 per variant</td></tr>
+      <tr><td><strong>Custom Neural</strong></td><td>Yes — variable-layout forms</td><td>Same form type printed differently across vendors/locations</td><td>~50+</td></tr>
+      <tr><td><strong>Composed</strong></td><td>Yes — combines custom models</td><td>Single endpoint covering multiple form types via routing</td><td>Per sub-model</td></tr>
+      <tr><td>General Document</td><td>None</td><td>General OCR + key-value extraction, no field-specific training</td><td>0</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Template vs Neural:</strong> Template models anchor fields to pixel positions — fast and accurate on fixed layouts. Neural models learn semantic meaning of fields — handle layout drift across print variants. Choose neural when the same form type appears in different layouts.</div>
+
+  <h3>Azure AI Search — Search Modes Compared</h3>
+  <table>
+    <thead><tr><th>Mode</th><th>How it works</th><th>Strengths</th><th>Weaknesses</th></tr></thead>
+    <tbody>
+      <tr><td><strong>BM25 (keyword)</strong></td><td>Term frequency × inverse document frequency ranking</td><td>Exact matches, product codes, names; fast; free</td><td>Misses synonyms, paraphrasing, semantic meaning</td></tr>
+      <tr><td><strong>Vector search</strong></td><td>Cosine similarity between query embedding and chunk embeddings</td><td>Semantic meaning, paraphrasing, cross-lingual</td><td>Misses exact rare terms; embedding cost; slower</td></tr>
+      <tr><td><strong>Hybrid (BM25 + Vector)</strong></td><td>Both run in parallel; merged via Reciprocal Rank Fusion (RRF)</td><td>Best of both — consistently outperforms either alone</td><td>Slightly more compute; requires vector index setup</td></tr>
+      <tr><td><strong>Semantic Ranking</strong></td><td>Cross-encoder LM re-ranks top BM25 results by semantic relevance</td><td>True semantic understanding of query intent</td><td>Applies only to top-50 BM25 results; extra cost</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Azure AI Search — Key Components</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">📐 Skillset</div>
+      <div class="card-body">AI enrichment pipeline applied during indexing. Skills: OCR (extracts text from images), NER, key phrases, language detection, entity linking, custom skills (Azure Functions). Enriched fields are indexed alongside raw content.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🗄️ Knowledge Store</div>
+      <div class="card-body">Persists AI-enriched content (extracted entities, translations, captions) to Azure Table Storage or Blob Storage as <strong>projections</strong>. Makes enriched data available to Power BI, ADF, and other tools independently of the search index.</div>
+    </div>
+    <div class="card indigo">
+      <div class="card-title">📊 Vector Index</div>
+      <div class="card-body">Stores high-dimensional float vectors (embeddings) for each document chunk. Enables cosine similarity search at query time. The foundation of any RAG retrieval pipeline on Azure AI Search.</div>
+    </div>
+    <div class="card indigo">
+      <div class="card-title">🏆 Semantic Ranking</div>
+      <div class="card-body">Language model re-ranks the top-50 BM25 candidates for deeper semantic relevance. Understands "myocardial infarction" = "heart attack" without synonym maps. Separate billing; add-on to any index.</div>
+    </div>
+  </div>
+
+  <h3>Hybrid Search — How RRF Works</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="flow-num">1</span><div class="flow-lbl">BM25 query</div><div class="flow-desc">Keyword search → ranked list A</div></div>
+    <div class="flow-step"><span class="flow-num">2</span><div class="flow-lbl">Vector query</div><div class="flow-desc">Embed query → cosine sim → ranked list B</div></div>
+    <div class="flow-step"><span class="flow-num">3</span><div class="flow-lbl">RRF merge</div><div class="flow-desc">Score = Σ 1/(rank+60) across both lists</div></div>
+    <div class="flow-step"><span class="flow-num">4</span><div class="flow-lbl">Combined list</div><div class="flow-desc">Documents in both lists rank highest</div></div>
+    <div class="flow-step"><span class="flow-num">5</span><div class="flow-lbl">Optional: Semantic re-rank</div><div class="flow-desc">LM re-scores top-50 for intent alignment</div></div>
+  </div>
+
+  <h3>File Search vs Azure AI Search — Which to Use</h3>
+  <div class="cmp">
+    <div class="cmp-col">
+      <div class="cmp-head">🤖 Agent File Search (Managed)</div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Zero pipeline code — upload files and go</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Auto-chunking, embedding, and indexing</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Tightly integrated with Agents service threads</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✗</span><span class="cmp-text">Limited control over chunking strategy and index schema</span></div>
+    </div>
+    <div class="cmp-col">
+      <div class="cmp-head">🔍 Azure AI Search (Custom)</div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Full control over schema, scoring, hybrid modes</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Skillsets for OCR, NER enrichment during indexing</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✓</span><span class="cmp-text">Knowledge store for downstream analytics</span></div>
+      <div class="cmp-row"><span class="cmp-icon">✗</span><span class="cmp-text">Requires pipeline development and infrastructure management</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ QUICK REF -->
+  <hr class="sep"/>
+  <h2>⚡ Quick Reference — Common Exam Traps</h2>
+  <table>
+    <thead><tr><th>Question pattern</th><th>Correct answer</th><th>Common wrong answer</th></tr></thead>
+    <tbody>
+      <tr><td>No API key in production code</td><td><strong>Managed Identity + RBAC</strong></td><td>Key Vault SDK (still a secret to fetch)</td></tr>
+      <tr><td>Guaranteed throughput, consistent latency</td><td><strong>Provisioned Throughput Units (PTU)</strong></td><td>Standard deployment with auto-scaling</td></tr>
+      <tr><td>Jailbreak detection in RAG</td><td><strong>Prompt Shields — Document Attack</strong></td><td>Content filter (detects harmful output, not injection)</td></tr>
+      <tr><td>Hallucination = low score on which metric</td><td><strong>Groundedness</strong></td><td>Relevance or Fluency</td></tr>
+      <tr><td>max_tokens controls…</td><td><strong>Response length only</strong></td><td>Total tokens (input + output)</td></tr>
+      <tr><td>temperature = 0 means…</td><td><strong>Deterministic/reproducible output</strong></td><td>Refused to answer / safer responses</td></tr>
+      <tr><td>Agent analyses uploaded CSV + makes chart</td><td><strong>Code Interpreter</strong></td><td>File Search (retrieval only, no code execution)</td></tr>
+      <tr><td>Agent persistent conversation state</td><td><strong>Thread</strong></td><td>Run (single invocation, not the persistent container)</td></tr>
+      <tr><td>Variable-layout version of same form</td><td><strong>Custom Neural model</strong></td><td>Custom Template model (requires fixed layout)</td></tr>
+      <tr><td>Keyword + vector merged result set</td><td><strong>Hybrid search with RRF</strong></td><td>Semantic ranking (re-ranks BM25 only, adds no vector)</td></tr>
+      <tr><td>Semantic meaning of "heart attack" = "myocardial infarction"</td><td><strong>Semantic ranking</strong></td><td>Synonym map (manual; doesn't generalise)</td></tr>
+      <tr><td>Enrich + persist for Power BI downstream</td><td><strong>Knowledge store projections</strong></td><td>Search index (search-query-only access)</td></tr>
+      <tr><td>Intent + entity from voice command</td><td><strong>CLU (Conversational Language Understanding)</strong></td><td>Sentiment analysis / NER</td></tr>
+      <tr><td>Specific person's voice in TTS</td><td><strong>Custom Neural Voice</strong></td><td>Built-in neural voice with pitch/rate adjustment</td></tr>
+      <tr><td>Generate image from text</td><td><strong>DALL-E via Azure OpenAI</strong></td><td>Azure AI Vision (analysis only)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip" style="margin-top:8px"><strong>Study approach:</strong> AI-103 is scenario-heavy — every question describes a business problem. Train yourself to map: "what outcome do they need?" → "which specific service/feature produces that output?" The table above covers the most frequent mapping traps on the exam.</div>
+
+</div></main>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ArchiMate 3 — Enterprise Architecture Modelling Language</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#6366F1;--cl:#A5B4FC;--cb:rgba(99,102,241,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 40px}
+.hero-inner,.main-inner{max-width:920px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid rgba(99,102,241,.3);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1.5px;color:#fff;margin-bottom:10px;line-height:1.1}
+.sub{font-size:15px;color:#94a3b8;max-width:660px;line-height:1.65}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:16px}
+main{padding:36px 24px 100px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:32px;background:var(--cb);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:40px 0 14px;padding-bottom:10px;border-bottom:2px solid #1e2d45}
+h3{font-size:12px;font-weight:800;color:var(--cl);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+strong{color:#e2e8f0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card.teal{border-left-color:#0891B2}
+.card.amber{border-left-color:#f59e0b}
+.card.rose{border-left-color:#f43f5e}
+.card.green{border-left-color:#10b981}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}
+th{text-align:left;padding:9px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827;letter-spacing:.04em}
+td{padding:10px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid rgba(99,102,241,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8;line-height:1.7}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px;color:#94a3b8}
+.warn strong{color:#fbbf24}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:4px;margin:2px;letter-spacing:.04em}
+.pill-i{background:rgba(99,102,241,.12);color:#a5b4fc;border:1px solid rgba(99,102,241,.25)}
+.pill-g{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.pill-a{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.25)}
+.sep{border:none;border-top:2px dashed #1e2d45;margin:44px 0}
+
+/* matrix */
+.matrix-wrap{overflow-x:auto;margin:14px 0 20px}
+.mtable{border-collapse:collapse;min-width:680px;width:100%;font-size:12px}
+.mtable th{padding:9px 12px;background:#111827;color:var(--cl);font-weight:800;text-align:center;border:1px solid #1e2d45;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.mtable th.row-h{text-align:left;min-width:130px}
+.mtable td{padding:9px 12px;border:1px solid #1e2d45;color:#64748b;font-size:11px;text-align:center;vertical-align:middle}
+.mtable td.layer-lbl{background:#0d1424;color:#fff;font-weight:800;font-size:12px;text-align:left}
+.biz{background:rgba(99,102,241,.08)}
+.app{background:rgba(8,145,178,.08)}
+.tech{background:rgba(245,158,11,.08)}
+.strat{background:rgba(16,185,129,.08)}
+
+/* rel table */
+.rel-row td:first-child{color:var(--cl)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a>
+  <a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">🤖 AI-103</a>
+  <a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html">📘 TOGAF Basics</a>
+  <a href="archimate.html" class="active">📐 ArchiMate</a>
+  <a href="it4it.html">🔄 IT4IT</a>
+  <a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a>
+  <a href="sabsa.html">🔐 SABSA</a>
+  <a href="ai-compliance.html">⚖️ AI Compliance</a>
+  <a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+
+<div class="hero"><div class="hero-inner">
+  <div class="badge">📐 The Open Group · Enterprise Architecture</div>
+  <h1>ArchiMate 3</h1>
+  <p class="sub">The open standard modelling language for enterprise architecture. Describes business, application, and technology architectures with precise, consistent notation — and how they relate to each other.</p>
+  <div class="meta">
+    <span><a href="https://pubs.opengroup.org/architecture/archimate3-doc/" target="_blank" class="ext">Official spec ↗</a></span>
+    <span>80 questions · 7 domains</span>
+    <span>Version: 3.2 (current)</span>
+    <span>Related: <a href="togaf.html" class="ext">TOGAF →</a> <a href="it4it.html" class="ext">IT4IT →</a> <a href="cobit2019.html" class="ext">COBIT 2019 →</a></span>
+  </div>
+</div></div>
+
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <!-- OVERVIEW -->
+  <h2>🗺️ The Big Picture</h2>
+  <p>ArchiMate is a <strong>modelling language</strong> — not a method or process framework. It gives enterprise architects a common vocabulary and notation to describe architectures at the enterprise level, across business, application, and technology domains, with rigorous but readable diagrams.</p>
+  <div class="grid2">
+    <div class="card"><div class="card-title">Publisher</div><div class="card-body">The Open Group — same as TOGAF and IT4IT. ArchiMate is managed by the ArchiMate Forum.</div></div>
+    <div class="card"><div class="card-title">Purpose</div><div class="card-body">Common language for describing, analysing, and communicating enterprise architectures to different stakeholders.</div></div>
+    <div class="card teal"><div class="card-title">Relation to TOGAF</div><div class="card-body">TOGAF provides the ADM method; ArchiMate provides the notation for creating the architecture deliverables ADM requires.</div></div>
+    <div class="card teal"><div class="card-title">Relation to UML</div><div class="card-body">UML = software design internals (class diagrams, sequence diagrams). ArchiMate = enterprise-level concerns across business, app, and tech layers.</div></div>
+  </div>
+  <div class="tip"><strong>Exam anchor:</strong> ArchiMate defines WHAT exists (elements) and HOW they are related (relationships) across the enterprise. It does not define processes for building the architecture — that is TOGAF's job.</div>
+
+  <!-- FRAMEWORK STRUCTURE -->
+  <h2>🏗️ Framework Structure — Layers &amp; Aspects</h2>
+  <p>Every ArchiMate element sits at the intersection of a <strong>Layer</strong> (vertical domain) and an <strong>Aspect</strong> (horizontal structural role).</p>
+
+  <h3>The Three Core Layers</h3>
+  <div class="grid3">
+    <div class="card"><div class="card-title">Business Layer</div><div class="card-body">Business actors, roles, processes, functions, services, objects. Represents the organisation and the value it delivers. Highest-level domain.</div></div>
+    <div class="card teal"><div class="card-title">Application Layer</div><div class="card-body">Application components, services, functions, data objects. Represents software systems supporting business behaviour.</div></div>
+    <div class="card amber"><div class="card-title">Technology Layer</div><div class="card-body">Nodes, system software, artifacts, paths, technology services. Infrastructure that executes and runs application software.</div></div>
+  </div>
+
+  <h3>The Three Aspects</h3>
+  <table>
+    <thead><tr><th>Aspect</th><th>Role in architecture</th><th>Examples across layers</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Active Structure</strong></td><td>Structural elements that perform behaviour — "who does it"</td><td>Business Actor, Application Component, Node</td></tr>
+      <tr><td><strong>Behaviour</strong></td><td>Activities, processes, functions — "what is done"</td><td>Business Process, Application Function, Technology Function</td></tr>
+      <tr><td><strong>Passive Structure</strong></td><td>Objects on which behaviour acts — "what it acts on"</td><td>Business Object, Data Object, Artifact</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The 3×3 Core Matrix</h3>
+  <div class="matrix-wrap">
+    <table class="mtable">
+      <thead>
+        <tr>
+          <th class="row-h">Layer</th>
+          <th>Active Structure</th>
+          <th>Behaviour</th>
+          <th>Passive Structure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="layer-lbl biz">Business</td>
+          <td class="biz">Actor, Role, Collaboration, Interface</td>
+          <td class="biz">Process, Function, Interaction, Event, Service</td>
+          <td class="biz">Object, Representation, Contract</td>
+        </tr>
+        <tr>
+          <td class="layer-lbl app">Application</td>
+          <td class="app">Component, Collaboration, Interface</td>
+          <td class="app">Function, Interaction, Event, Service</td>
+          <td class="app">Data Object</td>
+        </tr>
+        <tr>
+          <td class="layer-lbl tech">Technology</td>
+          <td class="tech">Node, Device, System Software, Collaboration, Interface</td>
+          <td class="tech">Function, Process, Interaction, Event, Service</td>
+          <td class="tech">Artifact</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXTENDED FRAMEWORK -->
+  <h2>🔭 Extended Framework — Beyond the Core</h2>
+  <table>
+    <thead><tr><th>Aspect / Layer</th><th>Key Elements</th><th>Answers</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Strategy</strong> (above Business)</td><td>Capability, Resource, Course of Action, Value Stream</td><td>"What can we do and how will we do it?"</td></tr>
+      <tr><td><strong>Motivation</strong> (cross-cutting)</td><td>Stakeholder, Driver, Assessment, Goal, Outcome, Principle, Requirement, Constraint</td><td>"Why does the architecture need to be this way?"</td></tr>
+      <tr><td><strong>Physical</strong> (below Technology)</td><td>Equipment, Facility, Distribution Network, Material</td><td>"What tangible physical assets exist?" (IoT, manufacturing)</td></tr>
+      <tr><td><strong>Implementation &amp; Migration</strong> (cross-cutting)</td><td>Work Package, Deliverable, Implementation Event, Plateau, Gap</td><td>"How do we get from here to there?"</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Plateau &amp; Gap:</strong> A <strong>Plateau</strong> is a stable architecture state (baseline, transition, target). A <strong>Gap</strong> is the difference between two Plateaus — what must be added, changed, or removed. Together they form the basis of an architecture roadmap.</div>
+
+  <!-- BUSINESS LAYER DETAIL -->
+  <hr class="sep"/>
+  <h2>💼 Business Layer — Key Elements</h2>
+  <table>
+    <thead><tr><th>Element</th><th>What it models</th><th>Distinction / Exam trap</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Business Actor</strong></td><td>Physical entity (person, team, org) that performs behaviour</td><td>Actor IS a physical entity; Role IS a responsibility assigned to an actor</td></tr>
+      <tr><td><strong>Business Role</strong></td><td>Defined responsibility / behaviour an actor takes on</td><td>Assignment connects Actor → Role</td></tr>
+      <tr><td><strong>Business Process</strong></td><td>Sequence of activities ordered in time, triggered by an event</td><td>Process = time-ordered; Function = competency-grouped</td></tr>
+      <tr><td><strong>Business Function</strong></td><td>Collection of behaviour grouped by competency, regardless of time order</td><td>e.g. "Claims Processing" — not a flow, a domain</td></tr>
+      <tr><td><strong>Business Service</strong></td><td>Externally visible value exposed to the environment</td><td>Hides internal implementation; consumed by the Business or Application layer above/using it</td></tr>
+      <tr><td><strong>Business Object</strong></td><td>Conceptual unit of information (Invoice, Contract, Order)</td><td>Conceptual — not the document. Business Representation is the physical form</td></tr>
+      <tr><td><strong>Business Capability</strong></td><td>Stable ability the org possesses or needs</td><td>Capability-based planning; stable even when processes change</td></tr>
+      <tr><td><strong>Value Stream</strong></td><td>Sequence of activities delivering increasing value to a stakeholder</td><td>Added in ArchiMate 3.0; cross-functional, outcome-oriented</td></tr>
+      <tr><td><strong>Business Event</strong></td><td>State change that triggers business behaviour</td><td>"Payment Received" triggers a process — not the same as a process step</td></tr>
+      <tr><td><strong>Business Collaboration</strong></td><td>Aggregate of two or more roles cooperating on shared behaviour</td><td>Interaction is the behaviour performed by a Collaboration</td></tr>
+    </tbody>
+  </table>
+
+  <!-- APPLICATION LAYER DETAIL -->
+  <h2>💻 Application Layer — Key Elements</h2>
+  <table>
+    <thead><tr><th>Element</th><th>What it models</th><th>Exam tip</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Application Component</strong></td><td>Modular, deployable software unit</td><td>Microservice, ERP module, database system</td></tr>
+      <tr><td><strong>Application Service</strong></td><td>Externally visible functionality of a component</td><td>Realised by a Component; consumed by Business Processes</td></tr>
+      <tr><td><strong>Application Function</strong></td><td>Internal behaviour of a component</td><td>Internal — not visible externally. Service is the external face</td></tr>
+      <tr><td><strong>Application Interface</strong></td><td>Access point through which a service is available</td><td>Same service can have multiple interfaces (REST, SOAP, MQ)</td></tr>
+      <tr><td><strong>Data Object</strong></td><td>Information stored, produced, or consumed by an application</td><td>Accessed via the Access relationship (read/write/r-w)</td></tr>
+      <tr><td><strong>Application Event</strong></td><td>State change relevant to an application that may trigger behaviour</td><td>Used in event-driven architectures; triggers Functions or Interactions</td></tr>
+    </tbody>
+  </table>
+
+  <!-- TECHNOLOGY LAYER DETAIL -->
+  <h2>⚙️ Technology Layer — Key Elements</h2>
+  <table>
+    <thead><tr><th>Element</th><th>What it models</th><th>Exam tip</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Node</strong></td><td>Computational resource — physical server, VM, container runtime</td><td>Everything that "runs" software is a Node</td></tr>
+      <tr><td><strong>System Software</strong></td><td>Platform software — OS, hypervisor, DBMS, container orchestrator</td><td>Special type of Node; runs ON infrastructure, runs other software</td></tr>
+      <tr><td><strong>Artifact</strong></td><td>Physical deployable unit — JAR, Docker image, config file</td><td>Passive element; the "package" that gets deployed to a Node</td></tr>
+      <tr><td><strong>Technology Service</strong></td><td>Externally visible capability of a Node or System Software</td><td>Consumed by Application Components</td></tr>
+      <tr><td><strong>Path (Communication Path)</strong></td><td>Logical or physical link between two Nodes</td><td>Network connection, VPN tunnel, API channel</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Deployment pattern:</strong> Application Component → Realization → Artifact → Assignment → Node. The Component is the logical unit; the Artifact is the deployable package; the Node is where it runs.</div>
+
+  <!-- RELATIONSHIPS -->
+  <hr class="sep"/>
+  <h2>🔗 Relationships — Complete Reference</h2>
+  <table>
+    <thead><tr><th>Relationship</th><th>Meaning</th><th>Typical use</th><th>Direction tip</th></tr></thead>
+    <tbody class="rel-row">
+      <tr><td>Serving</td><td>One element provides functionality to another</td><td>App Service serves Business Process; Tech Service serves App Component</td><td>Arrow from provider to consumer</td></tr>
+      <tr><td>Realization</td><td>Concrete element gives substance to an abstract one</td><td>Component realises Service; Process realises Service</td><td>Arrow from concrete to abstract</td></tr>
+      <tr><td>Assignment</td><td>Active element performs behaviour / is deployed to node</td><td>Actor assigned to Role; Artifact assigned to Node</td><td>Actor/Artifact → Role/Node</td></tr>
+      <tr><td>Access</td><td>Behaviour reads/writes a passive element</td><td>Function accesses Data Object</td><td>Arrowhead indicates read/write/r-w</td></tr>
+      <tr><td>Triggering</td><td>Direct causation — one behaviour starts another</td><td>Event triggers Process; Process triggers another Process</td><td>Arrow from trigger to triggered</td></tr>
+      <tr><td>Influence</td><td>Soft, non-causal effect on an element</td><td>Driver influences Goal; Principle influences Decision</td><td>Mostly Motivation aspect</td></tr>
+      <tr><td>Composition</td><td>Exclusive part-whole — shared lifecycle</td><td>Function is composed in Component — cannot exist independently</td><td>Filled diamond on parent end</td></tr>
+      <tr><td>Aggregation</td><td>Non-exclusive part-whole — parts can exist independently</td><td>Component aggregates Nodes in a cluster</td><td>Open diamond on parent end</td></tr>
+      <tr><td>Specialization</td><td>IS-A / inheritance relationship</td><td>"CRM Component" specialises "Application Component"</td><td>Arrow from specialised to general</td></tr>
+      <tr><td>Association</td><td>Unspecified or undetermined relationship</td><td>Placeholder when exact relationship type is unclear</td><td>Plain line, optional arrow</td></tr>
+    </tbody>
+  </table>
+  <div class="warn"><strong>Common exam traps:</strong> Serving arrow goes from provider TO consumer (not "consuming"). Realization goes from concrete TO abstract. Composition = exclusive (filled diamond); Aggregation = shared (open diamond).</div>
+
+  <!-- VIEWPOINTS -->
+  <hr class="sep"/>
+  <h2>👁️ Viewpoints — Audience-Focused Views</h2>
+  <table>
+    <thead><tr><th>Viewpoint</th><th>Audience</th><th>Content</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Layered</strong></td><td>All stakeholders — overview</td><td>All three core layers with cross-layer Serving and Realization relationships</td></tr>
+      <tr><td><strong>Organisation</strong></td><td>Business management</td><td>Business Actors, Roles, and their relationships — org structure</td></tr>
+      <tr><td><strong>Business Process</strong></td><td>Process owners</td><td>Business Processes, Events, Services — process flow</td></tr>
+      <tr><td><strong>Application Usage</strong></td><td>Business + Application architects</td><td>Application Components and Services supporting Business Processes</td></tr>
+      <tr><td><strong>Application Cooperation</strong></td><td>Application architects</td><td>Application Components, Services, and their interactions</td></tr>
+      <tr><td><strong>Technology Infrastructure</strong></td><td>Infrastructure architects</td><td>Nodes, System Software, Paths, Artifacts</td></tr>
+      <tr><td><strong>Motivation</strong></td><td>Senior stakeholders</td><td>Stakeholders, Drivers, Goals, Principles, Requirements</td></tr>
+      <tr><td><strong>Capability</strong></td><td>Strategy / EA</td><td>Capabilities, Resources, Courses of Action — strategic planning</td></tr>
+      <tr><td><strong>Implementation &amp; Migration</strong></td><td>Programme managers</td><td>Work Packages, Plateaus, Gaps — architecture roadmap</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>Viewpoint vs View:</strong> A <strong>Viewpoint</strong> is the specification (rules, element types allowed). A <strong>View</strong> is an actual diagram built according to a viewpoint. One viewpoint can produce many views.</div>
+
+  <!-- QUICK REFERENCE -->
+  <hr class="sep"/>
+  <h2>⚡ Quick Reference — Exam Traps</h2>
+  <table>
+    <thead><tr><th>Question pattern</th><th>Correct answer</th><th>Common wrong answer</th></tr></thead>
+    <tbody>
+      <tr><td>Process vs Function distinction</td><td><strong>Process</strong> = time-ordered, triggered; <strong>Function</strong> = competency-grouped</td><td>Treating them as synonyms</td></tr>
+      <tr><td>Actor vs Role distinction</td><td><strong>Actor</strong> = physical entity; <strong>Role</strong> = responsibility; Assignment links them</td><td>Actor and Role are the same thing</td></tr>
+      <tr><td>Service vs Function distinction</td><td><strong>Service</strong> = externally visible; <strong>Function</strong> = internal behaviour</td><td>Functions and Services are interchangeable</td></tr>
+      <tr><td>Composition vs Aggregation</td><td><strong>Composition</strong> = exclusive (shared lifecycle); <strong>Aggregation</strong> = shared parts</td><td>Both are the same part-whole relationship</td></tr>
+      <tr><td>Realization direction</td><td>Concrete → Abstract (Component realises Service)</td><td>Abstract → Concrete</td></tr>
+      <tr><td>Serving direction</td><td>Provider → Consumer (App Service serves Business Process)</td><td>Consumer → Provider</td></tr>
+      <tr><td>Deployment chain</td><td>Component → Artifact → Node</td><td>Component directly on Node with no Artifact</td></tr>
+      <tr><td>Plateau vs Gap</td><td><strong>Plateau</strong> = stable state; <strong>Gap</strong> = difference between two plateaus</td><td>Gap = a missing element in one plateau</td></tr>
+      <tr><td>ArchiMate 3 additions</td><td><strong>Strategy</strong> aspect (Capability, CoA) and <strong>Physical</strong> aspect (Equipment, Facility)</td><td>Motivation aspect (was already in v2 as an add-on)</td></tr>
+      <tr><td>Cross-layer dependency</td><td>Use <strong>Serving</strong> relationship between layers</td><td>Use Association for cross-layer dependencies</td></tr>
+    </tbody>
+  </table>
+</div></main>
+</body>
+</html>

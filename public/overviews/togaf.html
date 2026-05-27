@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TOGAF Standard — Enterprise Architecture Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#8B5CF6;--cl:#C4B5FD;--cb:rgba(139,92,246,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #8B5CF644;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #8B5CF630;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #8B5CF630;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.continuum{display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden}
+.cont-item{flex:1;padding:12px 10px;text-align:center;font-size:11px;font-weight:700;border-right:1px solid #0a0f1a}
+.cont-item:last-child{border-right:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html" class="active">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🏛️ The Open Group · Enterprise Architecture</div>
+  <h1>TOGAF Standard 10th Edition</h1>
+  <p class="sub">Enterprise Architecture framework: ADM, Enterprise Continuum, Architecture Repository, governance, stakeholder management, and relationships with ITIL and COBIT.</p>
+  <div class="meta"><span><a href="https://www.opengroup.org/togaf" target="_blank" class="ext">opengroup.org/togaf ↗</a></span><span><a href="https://pubs.opengroup.org/architecture/togaf10-doc/arch/" target="_blank" class="ext">TOGAF 10 Specification ↗</a></span><span>See: <a href="togaf-basics.html" class="ext">TOGAF Basics →</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🏛️ What is Enterprise Architecture?</h2>
+  <p>TOGAF defines Enterprise Architecture as <em>"a well-defined practice for conducting enterprise analysis, design, planning, and implementation, using a comprehensive approach at all times, for the successful development and execution of strategy."</em></p>
+  <p>EA answers four fundamental questions: <strong>What</strong> does the organisation do? (Business Architecture) <strong>What information</strong> does it need? (Data Architecture) <strong>What applications</strong> support it? (Application Architecture) <strong>What technology</strong> runs it? (Technology Architecture) — the BDAT model.</p>
+
+  <h2>🏗️ TOGAF Framework Structure</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Architecture Development Method (ADM)</div><div class="card-body">The core iterative process. 10 phases (P, A–H, RM). Provides a tested, repeatable process for developing enterprise architecture. See <a href="togaf-basics.html" class="ext">TOGAF Basics</a> for full ADM detail.</div></div>
+    <div class="card"><div class="card-title">Enterprise Continuum</div><div class="card-body">A classification system for architecture and solution artefacts. Shows the spectrum from generic (Foundation) to organisation-specific. Includes Architecture Continuum and Solutions Continuum.</div></div>
+    <div class="card"><div class="card-title">Architecture Repository</div><div class="card-body">Structured storage for all architecture work products. 6 classes of content. The "single source of truth" for the architecture practice.</div></div>
+    <div class="card"><div class="card-title">Reference Models</div><div class="card-body">TRM (Technical Reference Model) and III-RM (Integrated Information Infrastructure RM). Ready-made reference architectures for common needs.</div></div>
+    <div class="card"><div class="card-title">Architecture Capability Framework</div><div class="card-body">How to establish and operate the architecture practice itself — roles, skills, governance structures, Architecture Boards, processes.</div></div>
+  </div>
+
+  <h2>📊 Enterprise Continuum</h2>
+  <p>The Enterprise Continuum classifies architectures from the most generic to the most organisation-specific. It guides where to look for reusable assets and where to store new ones.</p>
+  <div class="continuum">
+    <div class="cont-item" style="background:#1a1040;color:#C4B5FD">Foundation Architecture<br><small style="font-weight:400;color:#64748b">Most generic<br>TRM, III-RM</small></div>
+    <div class="cont-item" style="background:#1e1550;color:#C4B5FD">Common Systems<br><small style="font-weight:400;color:#64748b">Shared across<br>industries</small></div>
+    <div class="cont-item" style="background:#221a60;color:#C4B5FD">Industry<br>Architectures<br><small style="font-weight:400;color:#64748b">Finance, health,<br>retail patterns</small></div>
+    <div class="cont-item" style="background:#261f70;color:#C4B5FD">Organisation-<br>Specific<br><small style="font-weight:400;color:#64748b">Most specific<br>Your EA</small></div>
+  </div>
+  <div class="tip"><strong>Reuse direction:</strong> When developing architecture, first look LEFT (more generic) for reusable assets. When you create something new, classify it appropriately and contribute it back to the right level so others can reuse it.</div>
+
+  <h2>🗄️ Architecture Repository — 6 Classes</h2>
+  <table><thead><tr><th>Class</th><th>Contents</th></tr></thead><tbody>
+    <tr><td>Architecture Metamodel</td><td>The rules and definitions for the architecture practice — what types of artefacts exist, how they relate.</td></tr>
+    <tr><td>Architecture Capability</td><td>Parameters, processes, roles, and responsibilities that define the architecture practice in this organisation.</td></tr>
+    <tr><td>Architecture Landscape</td><td>3 levels: <strong>Strategic</strong> (long-term, high-level), <strong>Segment</strong> (area/division), <strong>Capability</strong> (detailed, specific). All architectures live here.</td></tr>
+    <tr><td>Standards Information Base (SIB)</td><td>Approved standards — technology standards, compliance standards, industry standards. Referenced in all architectures.</td></tr>
+    <tr><td>Reference Library</td><td>Guidelines, templates, patterns from across the Enterprise Continuum that can be reused.</td></tr>
+    <tr><td>Governance Log</td><td>Record of governance activities, decisions, Architecture Contracts, dispensations, compliance assessments.</td></tr>
+  </tbody></table>
+
+  <h2>👥 Stakeholder Management</h2>
+  <p>TOGAF uses a structured approach: <strong>Stakeholders</strong> have <strong>Concerns</strong>. <strong>Viewpoints</strong> define how concerns are addressed. <strong>Views</strong> are the actual representations created from those viewpoints.</p>
+  <table><thead><tr><th>Stakeholder</th><th>Typical Concerns</th><th>Relevant Views</th></tr></thead><tbody>
+    <tr><td>CEO / Executive Board</td><td>Business value, investment return, risk, competitive advantage</td><td>Strategic architecture, roadmap, business capability map</td></tr>
+    <tr><td>CIO / IT Leadership</td><td>IT investment, architecture alignment, technology risk</td><td>Segment architectures, technology portfolio, landscape</td></tr>
+    <tr><td>Business Domain Expert</td><td>Business processes, capabilities, organisational structure</td><td>Business Architecture diagrams, process models</td></tr>
+    <tr><td>IT Developer / Engineer</td><td>Technical constraints, interfaces, standards compliance</td><td>Application communication diagrams, technology standards</td></tr>
+    <tr><td>Architect</td><td>Architecture integrity, completeness, compliance, reuse</td><td>All views, architecture definition document</td></tr>
+  </tbody></table>
+
+  <h2>🏛️ Architecture Governance</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Architecture Board</div><div class="card-body">Cross-organisational body that oversees architecture implementation. Reviews compliance, grants dispensations, resolves disputes. Chair is typically the Chief Architect or CIO.</div></div>
+    <div class="card"><div class="card-title">Architecture Contract</div><div class="card-body">Joint agreement between the development team and architecture sponsors on the deliverables, quality, and fitness-for-purpose of the architecture. Signed in Phase G.</div></div>
+    <div class="card"><div class="card-title">Compliance Reviews</div><div class="card-body">Formal assessments to ensure projects conform to the approved architecture. Carried out in Phase G (Implementation Governance). Can result in Dispensations (approved deviations).</div></div>
+    <div class="card"><div class="card-title">Architecture Principles</div><div class="card-body">Stable, general rules that govern architecture decisions. Set in Phase P (Preliminary). Example: "Data is an asset", "Technology independence", "Reuse before buy before build".</div></div>
+  </div>
+
+  <h2>🔗 TOGAF Relationships to Other Frameworks</h2>
+  <table><thead><tr><th>Framework</th><th>Relationship to TOGAF</th></tr></thead><tbody>
+    <tr><td><a href="itil4.html" class="ext">ITIL 4</a></td><td>ITIL governs IT service management (running services). TOGAF governs how IT services are designed and structured. TOGAF produces the architecture; ITIL operates against it.</td></tr>
+    <tr><td><a href="cobit2019.html" class="ext">COBIT 2019</a></td><td>COBIT provides governance and management objectives. APO03 (Managed Enterprise Architecture) is the COBIT objective directly supported by TOGAF.</td></tr>
+    <tr><td>Zachman Framework</td><td>Zachman is a 2D classification system (6 perspectives × 6 aspects). TOGAF is a process framework. They complement: Zachman classifies artefacts; TOGAF tells you how to create them.</td></tr>
+    <tr><td>SAFe (Scaled Agile)</td><td>TOGAF 10 introduced guidance on using ADM in agile contexts. Architecture runway concept in SAFe aligns with TOGAF's Segment and Capability architectures.</td></tr>
+  </tbody></table>
+
+  <h2>🎓 TOGAF Certification Paths</h2>
+  <table><thead><tr><th>Level</th><th>Exam</th><th>Focus</th></tr></thead><tbody>
+    <tr><td>TOGAF Foundation (Level 1)</td><td>Part 1 — 40 multiple choice, 60 min, 55% pass mark</td><td>Terminology, ADM phases, concepts, key artefacts</td></tr>
+    <tr><td>TOGAF Practitioner (Level 2)</td><td>Part 2 — 8 scenario-based, open book, 90 min, 60% pass mark</td><td>Apply TOGAF to realistic scenarios. Justify decisions.</td></tr>
+    <tr><td>TOGAF Enterprise Architect</td><td>Separate advanced certification</td><td>Demonstrate EA practice in complex enterprise settings</td></tr>
+  </tbody></table>
+
+  <h2>🔗 Resources</h2>
+  <p>
+    <a href="https://www.opengroup.org/togaf" target="_blank" class="ext">Official TOGAF page ↗</a> &nbsp;|&nbsp;
+    <a href="https://pubs.opengroup.org/architecture/togaf10-doc/arch/" target="_blank" class="ext">TOGAF 10 Specification (free) ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.opengroup.org/certifications/togaf" target="_blank" class="ext">Certification info ↗</a> &nbsp;|&nbsp;
+    <a href="togaf-basics.html" class="ext">→ TOGAF Basics (ADM diagram)</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

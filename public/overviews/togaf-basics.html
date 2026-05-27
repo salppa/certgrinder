@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TOGAF Fundamentals — ADM Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#7C3AED;--cl:#A78BFA;--cb:rgba(124,58,237,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #7C3AED44;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:600px;margin-bottom:18px}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:#64748b}
+main{max-width:860px;margin:0 auto;padding:32px 24px 80px}
+h2{font-size:20px;font-weight:800;color:#fff;margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid #1e2d45;display:flex;align-items:center;gap:8px}
+h3{font-size:15px;font-weight:800;color:var(--cl);margin:20px 0 8px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #7C3AED30;border-radius:8px;padding:6px 14px}
+.adm-wrap{background:#0d1424;border:1px solid #1e2d45;border-radius:12px;padding:24px;margin-bottom:24px;display:flex;flex-direction:column;align-items:center}
+.adm-wrap svg{width:100%;max-width:480px;height:auto}
+.phase-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px}
+.phase-table th{text-align:left;padding:9px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #1e2d45;background:#111827}
+.phase-table td{padding:11px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+.phase-table tr:hover td{background:#111827}
+.letter{font-size:20px;font-weight:900;color:var(--cl);min-width:34px;display:inline-block}
+.pname{color:#fff;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+.tip{background:var(--cb);border:1px solid #7C3AED33;border-radius:8px;padding:14px 18px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);font-weight:700;text-decoration:none;font-size:12px}
+.ext:hover{text-decoration:underline}
+.tag{background:#1e2d45;color:#94a3b8;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600;margin:2px;display:inline-block}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a>
+  <a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a>
+  <a href="ai-900.html">🤖 AI-900</a>
+  <a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a>
+  <a href="togaf.html">🏛️ TOGAF</a>
+  <a href="togaf-basics.html" class="active">📘 TOGAF Basics</a>
+  <a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a>
+  <a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a>
+  <a href="hygieniapassi.html">🧴 Hygieniapassi</a>
+  <a href="kastikkeet.html">🍳 Sauce Master</a>
+  <a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge">📘 Enterprise Architecture · The Open Group</div>
+    <h1>TOGAF Fundamentals</h1>
+    <p class="sub">The Architecture Development Method (ADM), phase letters, key outputs, and artifacts — everything you need to understand how TOGAF organises enterprise architecture work.</p>
+    <div class="meta">
+      <span>🏛️ TOGAF Standard 10th Edition</span>
+      <span>🔗 <a href="https://www.opengroup.org/togaf" target="_blank" class="ext">opengroup.org/togaf</a></span>
+      <span>📝 Relates to: <a href="togaf.html" class="ext">TOGAF Advanced →</a></span>
+    </div>
+  </div>
+</div>
+<main>
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🔄 The ADM Cycle</h2>
+  <p>The Architecture Development Method is the core of TOGAF — an iterative, cyclical process for developing and managing enterprise architectures. Requirements Management sits at the centre and feeds every phase.</p>
+
+  <div class="adm-wrap">
+    <svg viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,9 3.5,0 7" fill="#A78BFA99"/>
+        </marker>
+      </defs>
+      <!-- Background -->
+      <rect width="500" height="520" fill="#0d1424" rx="12"/>
+
+      <!-- Guide circle (dashed) -->
+      <circle cx="250" cy="270" r="175" fill="none" stroke="#7C3AED33" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+      <!-- RM arrows (dashed spokes) -->
+      <line x1="250" y1="195" x2="250" y2="145" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="298" y1="208" x2="338" y2="180" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="315" y1="255" x2="370" y2="255" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="298" y1="302" x2="338" y2="330" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="250" y1="315" x2="250" y2="390" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="202" y1="302" x2="162" y2="330" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="185" y1="255" x2="130" y2="255" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="202" y1="208" x2="162" y2="180" stroke="#7C3AED44" stroke-width="1" stroke-dasharray="4 3"/>
+
+      <!-- Flow arrows A→B→C→D→E→F→G→H→A -->
+      <!-- A(250,95) → B(374,146) -->
+      <line x1="278" y1="106" x2="347" y2="135" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- B(374,146) → C(425,270) -->
+      <line x1="386" y1="173" x2="414" y2="242" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- C(425,270) → D(374,394) -->
+      <line x1="414" y1="298" x2="386" y2="367" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- D(374,394) → E(250,445) -->
+      <line x1="347" y1="405" x2="278" y2="434" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- E(250,445) → F(126,394) -->
+      <line x1="222" y1="434" x2="153" y2="405" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- F(126,394) → G(75,270) -->
+      <line x1="114" y1="367" x2="86" y2="298" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- G(75,270) → H(126,146) -->
+      <line x1="86" y1="242" x2="114" y2="173" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- H(126,146) → A(250,95) -->
+      <line x1="153" y1="135" x2="222" y2="106" stroke="#A78BFA99" stroke-width="1.8" marker-end="url(#arr)"/>
+
+      <!-- P → A arrow -->
+      <line x1="250" y1="44" x2="250" y2="62" stroke="#A78BFA88" stroke-width="1.8" marker-end="url(#arr)"/>
+
+      <!-- P: Preliminary (outside cycle, top) -->
+      <rect x="185" y="14" width="130" height="30" rx="8" fill="#1a0f40" stroke="#7C3AED88" stroke-width="1.5"/>
+      <text x="250" y="33" text-anchor="middle" fill="#A78BFA" font-size="12" font-family="system-ui" font-weight="800">P: Preliminary</text>
+
+      <!-- Phase circles -->
+      <!-- A -->
+      <circle cx="250" cy="95" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="250" y="90" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">A</text>
+      <text x="250" y="105" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Vision</text>
+      <!-- B -->
+      <circle cx="374" cy="146" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="374" y="141" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">B</text>
+      <text x="374" y="156" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Business</text>
+      <!-- C -->
+      <circle cx="425" cy="270" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="425" y="265" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">C</text>
+      <text x="425" y="280" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Info Systems</text>
+      <!-- D -->
+      <circle cx="374" cy="394" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="374" y="389" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">D</text>
+      <text x="374" y="404" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Technology</text>
+      <!-- E -->
+      <circle cx="250" cy="445" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="250" y="440" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">E</text>
+      <text x="250" y="455" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Opportunities</text>
+      <!-- F -->
+      <circle cx="126" cy="394" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="126" y="389" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">F</text>
+      <text x="126" y="404" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Migration</text>
+      <!-- G -->
+      <circle cx="75" cy="270" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="75" y="265" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">G</text>
+      <text x="75" y="280" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Governance</text>
+      <!-- H -->
+      <circle cx="126" cy="146" r="33" fill="#1a1040" stroke="#A78BFA" stroke-width="2.2"/>
+      <text x="126" y="141" text-anchor="middle" fill="#A78BFA" font-size="20" font-family="system-ui" font-weight="900">H</text>
+      <text x="126" y="156" text-anchor="middle" fill="#C4B5FD" font-size="9" font-family="system-ui">Change Mgmt</text>
+
+      <!-- Centre: Requirements Management -->
+      <circle cx="250" cy="270" r="72" fill="#120d2a" stroke="#7C3AED" stroke-width="2"/>
+      <text x="250" y="260" text-anchor="middle" fill="#A78BFA" font-size="11" font-family="system-ui" font-weight="700">Requirements</text>
+      <text x="250" y="275" text-anchor="middle" fill="#A78BFA" font-size="11" font-family="system-ui" font-weight="700">Management</text>
+      <text x="250" y="291" text-anchor="middle" fill="#7C3AED" font-size="9.5" font-family="system-ui">(always active)</text>
+    </svg>
+    <p style="font-size:12px;color:#64748b;margin-top:12px;text-align:center">TOGAF ADM — Requirements Management feeds and draws from every phase. P (Preliminary) sets the foundation before the cycle begins.</p>
+  </div>
+
+  <h2>📋 All ADM Phases — Purpose &amp; Key Outputs</h2>
+  <table class="phase-table">
+    <thead><tr><th>Phase</th><th>Full Name</th><th>Purpose</th><th>Key Deliverables</th></tr></thead>
+    <tbody>
+      <tr><td><span class="letter">P</span></td><td><span class="pname">Preliminary</span></td><td>Define the architecture capability: who does architecture, how, with what tools and governance.</td><td>Architecture Principles, tailored TOGAF, Architecture Repository setup, Architecture Governance Framework</td></tr>
+      <tr><td><span class="letter">A</span></td><td><span class="pname">Architecture Vision</span></td><td>Define scope, identify stakeholders, create high-level vision of target architecture, get approval to proceed.</td><td>Statement of Architecture Work, Architecture Vision, Stakeholder Map, Communications Plan</td></tr>
+      <tr><td><span class="letter">B</span></td><td><span class="pname">Business Architecture</span></td><td>Develop baseline and target Business Architecture. Identify gaps.</td><td>Business Architecture Document, Business Capability Map, Organisation Map, Business Process Models, Value Stream Map</td></tr>
+      <tr><td><span class="letter">C</span></td><td><span class="pname">Information Systems Architecture</span></td><td>Develop Data Architecture and Application Architecture.</td><td>Data Architecture Document, Application Architecture Document, Data Entity Diagrams, Application Communication Diagrams</td></tr>
+      <tr><td><span class="letter">D</span></td><td><span class="pname">Technology Architecture</span></td><td>Map applications and data onto technology infrastructure.</td><td>Technology Architecture Document, Technology Portfolio Catalogue, Infrastructure Diagrams, Platform Decomposition</td></tr>
+      <tr><td><span class="letter">E</span></td><td><span class="pname">Opportunities &amp; Solutions</span></td><td>Identify delivery vehicles (projects, programmes), perform gap analysis, create initial roadmap.</td><td>Initial Architecture Roadmap, Work Package definitions, Gap Analysis results, Architecture Definition Document (draft)</td></tr>
+      <tr><td><span class="letter">F</span></td><td><span class="pname">Migration Planning</span></td><td>Prioritise and sequence projects. Create detailed implementation and migration plan.</td><td>Final Architecture Roadmap, Transition Architectures, Implementation &amp; Migration Plan, Architecture Definition Document (final)</td></tr>
+      <tr><td><span class="letter">G</span></td><td><span class="pname">Implementation Governance</span></td><td>Ensure implementation projects conform to the architecture.</td><td>Architecture Contracts, Compliance Assessments, Recommendations, Architecture Exceptions</td></tr>
+      <tr><td><span class="letter">H</span></td><td><span class="pname">Architecture Change Management</span></td><td>Establish procedures for managing changes to the architecture. Decide if change triggers a new ADM cycle.</td><td>Updated Architecture Landscape, Change Requests, Architecture Updates, Lessons Learned</td></tr>
+      <tr><td><span class="letter">RM</span></td><td><span class="pname">Requirements Management</span></td><td>Central hub — stores, manages, and prioritises all architecture requirements throughout the entire cycle.</td><td>Requirements Repository, Impact Analysis, Change Requests, Prioritisation decisions</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🏗️ The Four Architecture Domains (BDAT)</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">B — Business Architecture</div><div class="card-body">Business strategy, governance, organisation, and key processes. Answers: what does the business do and how is it structured? Outputs: capability maps, process models, org charts.</div></div>
+    <div class="card"><div class="card-title">D — Data Architecture</div><div class="card-body">Structure of logical and physical data assets and data management resources. Answers: what information exists and how is it managed? Outputs: data entity/component diagrams, data dictionaries.</div></div>
+    <div class="card"><div class="card-title">A — Application Architecture</div><div class="card-body">Blueprint for applications to be deployed, interactions between them, and relationships to business processes. Outputs: application portfolio catalogue, communication diagrams.</div></div>
+    <div class="card"><div class="card-title">T — Technology Architecture</div><div class="card-body">Logical software and hardware capabilities required to support the data and application layers. Outputs: technology portfolio, infrastructure diagrams, technology standards catalogue.</div></div>
+  </div>
+  <div class="tip">💡 <strong>Memory trick — BDAT:</strong> Think "Business Drives Applications on Technology" — each layer depends on the one above it. Business requirements drive data needs, which drive application choices, which are hosted on technology.</div>
+
+  <h2>📦 Artifact Types in the Architecture Repository</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">Catalogues</div><div class="card-body">Structured lists of elements — Technology Standards Catalogue, Application Portfolio Catalogue, Business Service/Function Catalogue. Document the inventory of building blocks.</div></div>
+    <div class="card"><div class="card-title">Matrices</div><div class="card-body">Show cross-relationships — Actor/Role Matrix, Business Interaction Matrix, Application/Organisation Matrix. Answer "who does what with what".</div></div>
+    <div class="card"><div class="card-title">Diagrams</div><div class="card-body">Visual representations at each level — Business Footprint Diagram, Data Flow Diagram, Application Communication Diagram, Technology Decomposition Diagram.</div></div>
+    <div class="card"><div class="card-title">Architecture Building Blocks (ABBs)</div><div class="card-body">Reusable components defined at the architectural level. Technology-independent. Become Solution Building Blocks (SBBs) when implementation-specific.</div></div>
+    <div class="card"><div class="card-title">Architecture Definition Document</div><div class="card-body">Master document describing the baseline and target architectures. Drafted in Phase E, finalised in Phase F. The primary formal output of an ADM cycle.</div></div>
+    <div class="card"><div class="card-title">Architecture Roadmap</div><div class="card-body">Timeline of work packages moving from baseline to target. First created in Phase E, refined in Phase F. Shows Transition Architectures as intermediate states.</div></div>
+  </div>
+
+  <h2>⚠️ Exam Memory Tricks</h2>
+  <div class="tip"><strong>Phase C = Information Systems</strong> — NOT "Computer Systems". C covers Data Architecture AND Application Architecture as two sub-phases. The exam tests this constantly.</div>
+  <div class="tip"><strong>Phase E = Opportunities &amp; Solutions</strong> — NOT "Execution". This is the first phase where you plan HOW to implement — not the implementation itself.</div>
+  <div class="tip"><strong>Phase G = Governance</strong> — The architect OVERSEES implementation, not performs it. Phase G produces Architecture Contracts and compliance reviews.</div>
+  <div class="tip"><strong>RM is not a phase</strong> — Requirements Management is a continuous process, not a sequential phase. It feeds into and draws from every other phase simultaneously.</div>
+  <div class="tip"><strong>Statement of Architecture Work vs Architecture Vision</strong> — The Statement of Architecture Work is the formal agreement to proceed (like a project charter). The Architecture Vision is the high-level description of what you're building.</div>
+
+  <h2>🔗 Official Resources</h2>
+  <p>
+    <a href="https://www.opengroup.org/togaf" target="_blank" class="ext">opengroup.org/togaf</a> — Official TOGAF page &nbsp;|&nbsp;
+    <a href="https://www.opengroup.org/certifications/togaf" target="_blank" class="ext">TOGAF Certification</a> &nbsp;|&nbsp;
+    <a href="togaf.html" class="ext">→ TOGAF Advanced module</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</main>
+</body>
+</html>

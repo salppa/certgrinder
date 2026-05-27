@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Retoriikka — Argumentointi &amp; Retoriset keinot</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#EC4899;--cl:#FBCFE8;--cb:rgba(236,72,153,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #EC489944;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #EC489930;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.7}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #EC489930;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.warn{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:13px 16px;margin-bottom:8px;font-size:13px;color:#94a3b8}
+.warn strong{color:#FCA5A5}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.quote{background:#111827;border-left:3px solid var(--c);border-radius:0 8px 8px 0;padding:14px 18px;margin:10px 0;font-size:14px;color:#e2e8f0;font-style:italic}
+.appeal{background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:18px;text-align:center}
+.appeal-icon{font-size:36px;margin-bottom:8px}
+.appeal-name{font-size:16px;font-weight:900;color:var(--cl);margin-bottom:4px}
+.appeal-fi{font-size:12px;color:#64748b;margin-bottom:8px}
+.appeal-body{font-size:12px;color:#94a3b8;line-height:1.7}
+.appeals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:600px){.appeals-grid{grid-template-columns:1fr}}
+.step-num{font-size:20px;font-weight:900;color:var(--cl);margin-right:8px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html" class="active">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🗣️ Argumentointi &amp; Retoriikka</div>
+  <h1>Retoriikka</h1>
+  <p class="sub">Aristoteleen vakuuttamisen keinot, argumentaatiorakenteet, retoriset keinot ja argumentaatiovirheet — käytännön opas vakuuttavaan viestintään.</p>
+  <div class="meta"><span><a href="http://classics.mit.edu/Aristotle/rhetoric.html" target="_blank" class="ext">Aristoteles: Retoriikka (engl.) ↗</a></span></div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>📜 Historia lyhyesti</h2>
+  <p>Retoriikka on oppi vakuuttavasta viestinnästä. Sen juuret ovat antiikin Kreikassa yli 2 500 vuotta sitten. <strong>Aristoteles</strong> (384–322 eKr.) kirjoitti teoksen <em>Retoriikka</em>, joka on alan perusteos yhä tänään. <strong>Cicero</strong> (106–43 eKr.) kehitti retoriikan käytännönläheiseksi taidoksi Rooman oikeussaleissa. <strong>Quintilianus</strong> (n. 35–100 jKr.) kirjoitti <em>Institutio Oratoria</em> -teoksen, joka on laajin antiikista säilynyt retoriikan opas.</p>
+  <p><em>(Rhetoric is the art of persuasive communication, rooted in Ancient Greece 2,500 years ago.)</em></p>
+
+  <h2>🎯 Aristoteleen Kolme Vakuuttamisen Keinoa</h2>
+  <p>Aristoteleen mukaan kaikki vakuuttaminen perustuu kolmeen elementtiin. Tehokas puhuja hallitsee kaikki kolme. <em>(According to Aristotle, all persuasion relies on three elements.)</em></p>
+
+  <div class="appeals-grid">
+    <div class="appeal">
+      <div class="appeal-icon">🏛️</div>
+      <div class="appeal-name">Ethos</div>
+      <div class="appeal-fi">Uskottavuus / Luotettavuus</div>
+      <div class="appeal-body">Puhujan luonne, asiantuntemus ja arvovalta. "Uskotko puhujaa?" Rakennetaan: viittauksilla, tunnustuksilla, ammatillisella taustalla, rehellisyydellä, yhteisillä arvoilla.<br><br><em>Speaker credibility and character. The audience must trust the speaker before they believe the message.</em></div>
+    </div>
+    <div class="appeal">
+      <div class="appeal-icon">❤️</div>
+      <div class="appeal-name">Pathos</div>
+      <div class="appeal-fi">Tunteisiin vetoaminen</div>
+      <div class="appeal-body">Yleisön tunteiden herättäminen ja ohjaaminen. Tunteet motivoivat toimintaan. Keinot: tarinankerronta, metaforat, kontrastit, elävät esimerkit, äänensävy.<br><br><em>Emotional appeal. Logic tells, emotion sells. Stories trigger feelings that motivate action.</em></div>
+    </div>
+    <div class="appeal">
+      <div class="appeal-icon">🧮</div>
+      <div class="appeal-name">Logos</div>
+      <div class="appeal-fi">Järkeen vetoaminen</div>
+      <div class="appeal-body">Looginen argumentaatio, faktat, tilastot, esimerkit, syy-seuraussuhteet. Rationaalinen perustelu. "Miksi väitteeni on totta?"<br><br><em>Logical appeal. Facts, data, evidence, reasoning, analogies. Rational justification for the claim.</em></div>
+    </div>
+  </div>
+  <div class="tip"><strong>Tasapaino ratkaisee:</strong> Pelkkä Logos on kylmä ja tylsä. Pelkkä Pathos on manipulatiivinen. Pelkkä Ethos on tyhjää auktoriteettia. Paras viestintä yhdistää kaikki kolme. <em>(Balance is key: effective persuasion combines all three.)</em></div>
+
+  <h2>📐 Toulminin Argumentaatiomalli</h2>
+  <p>Stephen Toulmin kehitti 1958 käytännöllisen mallin argumentin rakenteelle. Se on yleisempi kuin perinteinen syllogismi.</p>
+  <table><thead><tr><th>Osa (Element)</th><th>Kuvaus (Description)</th><th>Esimerkki (Example)</th></tr></thead><tbody>
+    <tr><td>Väite (Claim)</td><td>Mitä väitetään — lopputulos jonka puolesta argumentoidaan</td><td>"Ilmastonmuutos on ihmisen aiheuttamaa."</td></tr>
+    <tr><td>Perustelu (Ground / Data)</td><td>Todisteet ja faktat, jotka tukevat väitettä</td><td>"CO₂-pitoisuus on noussut 50% teollistumisen jälkeen."</td></tr>
+    <tr><td>Tukeva periaate (Warrant)</td><td>Logiikka joka yhdistää perustelun väitteeseen</td><td>"CO₂-pitoisuuden nousu johtaa lämpötilan nousuun."</td></tr>
+    <tr><td>Vahvistus (Backing)</td><td>Miksi tukeva periaate pitää paikkansa</td><td>"Tämä on osoitettu tuhansissa tieteellisissä tutkimuksissa."</td></tr>
+    <tr><td>Modaalisuus (Qualifier)</td><td>Kuinka vahva väite on — varaukset</td><td>"Lähes kaikki (97%) ilmastotutkijat ovat yhtä mieltä."</td></tr>
+    <tr><td>Varaus (Rebuttal)</td><td>Ehdot joissa väite ei päde</td><td>"Paitsi jos kaikki mittaukset olisivat systemaattisesti virheellisiä."</td></tr>
+  </tbody></table>
+
+  <h2>✨ Retoriset Keinot (Rhetorical Devices)</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">📢 Anafora (Anaphora)</div><div class="card-body">Saman sanan tai lauseen toisto jakson alussa. Tehostaa tunnetta ja rytmiä.<br><br><em>"Hänellä oli unelma. Hänellä oli unelma." — MLK: "I have a dream."</em></div></div>
+    <div class="card"><div class="card-title">⚖️ Antiteesi (Antithesis)</div><div class="card-body">Vastakkaisten ajatusten rinnastaminen samassa rakenteessa. Luo kontrastia ja selkeyttä.<br><br><em>"Se on pieni askel ihmiselle, mutta suuri harppaus ihmiskunnalle."</em></div></div>
+    <div class="card"><div class="card-title">🔢 Kolmen sääntö (Trikolon / Rule of Three)</div><div class="card-body">Kolme rinnasteista elementtiä on muistettavin rakenne. Aivot odottavat kolmikkoa.<br><br><em>"Veni, vidi, vici." — "Vapaus, veljeys, tasa-arvo."</em></div></div>
+    <div class="card"><div class="card-title">❓ Retorinen kysymys</div><div class="card-body">Kysymys, johon ei odoteta vastausta. Saa yleisön ajattelemaan tai hyväksymään oletetun vastauksen.<br><br><em>"Eikö jokaisen lapsen kuulu oppia rauhassa?"</em></div></div>
+    <div class="card"><div class="card-title">🌉 Metafora (Metaphor)</div><div class="card-body">Kuvaileva ilmaisu joka rinnastaa kaksi asiaa ilman "kuin" sanaa. Tekee abstraktista konkreettisen.<br><br><em>"Elämä on pelikenttä." — "Aika on rahaa."</em></div></div>
+    <div class="card"><div class="card-title">📈 Hyperbola (Hyperbole)</div><div class="card-body">Tarkoituksellinen liioittelu tehostamiseksi. Ei kirjaimellinen väite.<br><br><em>"Olen pyytänyt tätä jo miljoona kertaa." — "Odotin ikuisuuden."</em></div></div>
+    <div class="card"><div class="card-title">😏 Ironia (Irony)</div><div class="card-body">Sanotaan jotain mutta tarkoitetaan päinvastaista. Vaatii yhteistä kontekstia toimiakseen. Riski: väärinymmärrys.<br><br><em>"Hienoa, juuri mitä tarvittiin" (katastrofin jälkeen).</em></div></div>
+    <div class="card"><div class="card-title">🔤 Allitteraatio (Alliteration)</div><div class="card-body">Peräkkäisten sanojen alkukirjainten toisto. Tekee lauseesta mieleenpainuvan ja rytmikkään.<br><br><em>"Parempi pyy pivossa kuin kymmenen oksalla."</em></div></div>
+    <div class="card"><div class="card-title">🎭 Prosopopoeia</div><div class="card-body">Elottoman asian tai poissaolevan henkilön personifiointi. Puhutaan "Suomi sanoo..." tai "Historian tuomio on..."</div></div>
+  </div>
+
+  <h2>⚠️ Argumentaatiovirheet (Logical Fallacies)</h2>
+  <p>Argumentaatiovirhe on argumentti, joka näyttää vakuuttavalta mutta sisältää loogisen virheen. Tunnistaminen on kriittinen taito — sekä omassa ajattelussa että muiden argumentteja arvioitaessa.</p>
+  <table><thead><tr><th>Virhe (Fallacy)</th><th>Kuvaus</th><th>Esimerkki</th></tr></thead><tbody>
+    <tr><td>Ad Hominem</td><td>Hyökkää henkilöä vastaan, ei argumenttia vastaan</td><td>"Et voi puhua taloudesta, koska olet entinen opettaja."</td></tr>
+    <tr><td>Olkinukke (Straw Man)</td><td>Vääristetään vastustajan argumentti helpommin kumottavaksi</td><td>"Hän haluaa vähentää puolustusmäärärahoja, joten hän haluaa Suomen puolustuskyvyttömäksi."</td></tr>
+    <tr><td>Väärä dilemma (False Dilemma)</td><td>Esitetään vain kaksi vaihtoehtoa, vaikka niitä on enemmän</td><td>"Joko olet meidän puolellamme tai meitä vastaan."</td></tr>
+    <tr><td>Liukas rinne (Slippery Slope)</td><td>Väitetään, että yksi askel johtaa väistämättä äärimmäiseen lopputulokseen</td><td>"Jos annamme oppilaiden valita istumapaikkan, pian he valitsevat opettajansakin."</td></tr>
+    <tr><td>Auktoriteettiargumentti (Appeal to Authority)</td><td>Vedotaan auktoriteettiin todisteena — ilman muita perusteluita</td><td>"Lääkäri sanoi sen olevan turvallista" — ilman tutkimusnäyttöä.</td></tr>
+    <tr><td>Kehäpäättely (Circular Reasoning)</td><td>Väite perustellaan itsellään</td><td>"Raamattu on totta, koska Raamattu sanoo niin."</td></tr>
+    <tr><td>Hätiköity yleistys (Hasty Generalization)</td><td>Yleistys liian pienen otoksen perusteella</td><td>"Kaksi helsinkiläistä ajoi punaisia päin — helsinkiläiset ajavat aina punaisia."</td></tr>
+    <tr><td>Houkutteleva joukko (Bandwagon)</td><td>Vedotaan suosioon todisteena totuudesta</td><td>"Kaikki tekevät niin — sen täytyy olla oikein."</td></tr>
+  </tbody></table>
+
+  <h2>🏛️ Klassisen Puheen Viisi Osaa</h2>
+  <div style="background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:18px;margin-bottom:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid #1e2d45"><span class="step-num">1</span><div><strong style="color:#fff">Exordium (Johdanto)</strong><br><span style="font-size:12px;color:#64748b">Herätä yleisön huomio ja kerro heille miksi heidän kannattaa kuunnella. Ethos-rakentaminen alkaa tässä.</span></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid #1e2d45"><span class="step-num">2</span><div><strong style="color:#fff">Narratio (Taustan kuvaus)</strong><br><span style="font-size:12px;color:#64748b">Esitä taustatiedot, tilanne ja konteksti. Neutraalisti — ei vielä argumentteja.</span></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid #1e2d45"><span class="step-num">3</span><div><strong style="color:#fff">Partitio (Rakenne)</strong><br><span style="font-size:12px;color:#64748b">Kerro mitä aiot käsitellä. "Esitän kolme syytä miksi..." Auttaa yleisöä seuraamaan.</span></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 0;border-bottom:1px solid #1e2d45"><span class="step-num">4</span><div><strong style="color:#fff">Confirmatio (Argumentit)</strong><br><span style="font-size:12px;color:#64748b">Pääargumentit perusteluineen. Logos, Pathos ja Ethos yhdessä. Vastalauseiden kumoaminen (refutatio).</span></div></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 0"><span class="step-num">5</span><div><strong style="color:#fff">Peroratio (Lopetus)</strong><br><span style="font-size:12px;color:#64748b">Tiivistä keskeiset viestit. Tee toimintakehotus (Call to Action). Emotionaalinen huipentuma. Jätä muistettava lopetusrepliikki.</span></div></div>
+  </div>
+
+  <h2>🗣️ Käytännön Vinkkejä Esiintymiseen</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">👁️ Katsekontakti</div><div class="card-body">Katso kuulijaa silmiin 3–5 sekuntia kerrallaan. Luo yhteyttä. Älä lue suoraan paperista tai dialta. Vapauta itsesi muistiinpanoista.</div></div>
+    <div class="card"><div class="card-title">⏸️ Tauot (Pauses)</div><div class="card-body">Tauko ennen tärkeää kohtaa korostaa sen painoa. Tauko jälkeen antaa yleisölle aikaa prosessoida. Rohkeus olla hiljaa hetkeksi on esiintymisen merkki.</div></div>
+    <div class="card"><div class="card-title">🎵 Äänensävy ja -vaihtelut</div><div class="card-body">Vaihteleva ääni pitää yleisön hereillä. Hiljennetty ääni kiinnittää huomion yhtä tehokkaasti kuin korotettu. Monotoni tappaa viestin.</div></div>
+    <div class="card"><div class="card-title">🖐️ Eleet (Gestures)</div><div class="card-body">Avoimet kämmenet = rehellisyys ja avoimuus. Eleet tukevat puhetta — eivät korvaa. Vältä sulkeutuneita asentoja (kädet ristissä).</div></div>
+  </div>
+
+  <h2>🔗 Resurssit</h2>
+  <p>
+    <a href="http://classics.mit.edu/Aristotle/rhetoric.html" target="_blank" class="ext">Aristoteles: Retoriikka (englanniksi) ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.fallacyfiles.org/" target="_blank" class="ext">The Fallacy Files — argumentaatiovirheet ↗</a> &nbsp;|&nbsp;
+    <a href="https://www.helsinki.fi/fi/avoin-yliopisto/opinnot/kielitieteet-ja-viestinta/puheviestinta" target="_blank" class="ext">Helsingin yliopisto — puheviestintä ↗</a>
+  </p>
+
+  <div style="display:flex;align-items:center;gap:16px;margin:48px 0 32px">
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+    <div style="font-size:13px;font-weight:800;color:#1e2d45;letter-spacing:4px">---</div>
+    <div style="flex:1;height:1px;background:#1e2d45"></div>
+  </div>
+
+  <section id="extra-content">
+    <!-- Extra content goes here -->
+  </section>
+</div></main>
+</body>
+</html>

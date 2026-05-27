@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GCP Cloud Digital Leader — Overview</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1a;color:#e2e8f0;line-height:1.7;min-height:100vh}
+:root{--c:#4285F4;--cl:#93C5FD;--cb:rgba(66,133,244,.12)}
+nav{background:#0d1424;border-bottom:1px solid #1e2d45;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-decoration:none;border:1px solid #1e2d45;color:#64748b;white-space:nowrap}
+nav a:hover,nav a.active{background:var(--cb);border-color:var(--c);color:var(--cl)}
+.hero{background:linear-gradient(135deg,var(--cb) 0%,#0a0f1a 60%);border-bottom:1px solid #1e2d45;padding:48px 24px 36px}
+.hero-inner,.main-inner{max-width:860px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--cb);border:1px solid #4285F444;border-radius:99px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--cl);margin-bottom:16px}
+h1{font-size:clamp(24px,5vw,40px);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:10px}
+.sub{font-size:15px;color:#94a3b8;max-width:620px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b;margin-top:14px}
+main{padding:32px 24px 80px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--cl);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:28px;background:var(--cb);border:1px solid #4285F430;border-radius:8px;padding:6px 14px}
+h2{font-size:19px;font-weight:800;color:#fff;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid #1e2d45}
+h3{font-size:13px;font-weight:800;color:var(--cl);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+p{font-size:14px;color:#94a3b8;margin-bottom:12px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:14px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;border-left:3px solid var(--c)}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:5px}
+.card-body{font-size:12px;color:#64748b;line-height:1.65}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;border-bottom:2px solid #1e2d45;background:#111827}
+td{padding:9px 12px;border-bottom:1px solid #1a2030;color:#94a3b8;vertical-align:top}
+tr:hover td{background:#0d1424}
+td:first-child{color:#fff;font-weight:600}
+.tip{background:var(--cb);border:1px solid #4285F430;border-radius:8px;padding:13px 16px;margin-bottom:10px;font-size:13px;color:#94a3b8}
+.tip strong{color:var(--cl)}
+.ext{color:var(--cl);text-decoration:none;font-weight:700}
+.ext:hover{text-decoration:underline}
+.badge-sm{display:inline-block;background:var(--cb);border:1px solid #4285F444;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700;color:var(--cl);margin:2px}
+.hier{display:flex;flex-direction:column;gap:6px;margin:10px 0 16px}
+.hier-row{display:flex;align-items:center;gap:10px;background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:10px 14px}
+.hier-icon{font-size:20px;width:32px;text-align:center}
+.hier-label{font-weight:700;color:#fff;font-size:13px}
+.hier-desc{font-size:12px;color:#64748b}
+.arrow{text-align:center;color:#1e2d45;font-size:18px;margin:-2px 0}
+.sep{border:none;border-top:2px dashed #1e2d45;margin:36px 0}
+</style>
+</head>
+<body>
+<nav>
+  <a href="az-900.html">☁️ AZ-900</a><a href="aws-clf-c02.html">🔶 CLF-C02</a><a href="gcp-fundamentals.html" class="active">🌐 GCP</a><a href="ai-900.html">🤖 AI-900</a><a href="ai-103.html">&#x1F916; AI-103</a><a href="ab-731.html">💼 AB-731</a><a href="togaf.html">🏛️ TOGAF</a><a href="togaf-basics.html">📘 TOGAF Basics</a><a href="archimate.html">&#x1F4D0; ArchiMate</a><a href="it4it.html">&#x1F504; IT4IT</a><a href="itil4.html">⚙️ ITIL 4</a><a href="cobit2019.html">🎯 COBIT 2019</a><a href="sabsa.html">🔐 SABSA</a><a href="ai-compliance.html">&#x2696;&#xFE0F; AI Compliance</a><a href="finnish-culture.html">🇫🇮 Suomalainen kulttuuri</a><a href="hygieniapassi.html">🧴 Hygieniapassi</a><a href="kastikkeet.html">🍳 Sauce Master</a><a href="retoriikka.html">🗣️ Retoriikka</a>
+</nav>
+<div class="hero"><div class="hero-inner">
+  <div class="badge">🌐 Google Cloud · Cloud Digital Leader</div>
+  <h1>GCP Cloud Digital Leader</h1>
+  <p class="sub">Global infrastructure, compute & storage services, data & AI tools, IAM & security, and core cloud concepts — everything you need for the Google Cloud Digital Leader exam.</p>
+  <div class="meta">
+    <span><a href="https://cloud.google.com/learn/certification/cloud-digital-leader" target="_blank" class="ext">cloud.google.com/certification ↗</a></span>
+    <span>80 questions · 120 min · Multiple choice</span>
+    <span>Related: <a href="aws-clf-c02.html" class="ext">AWS CLF-C02 →</a></span>
+  </div>
+</div></div>
+<main><div class="main-inner">
+  <a href="javascript:history.back()" class="back">← Back to CertDrill</a>
+
+  <h2>🌍 Global Infrastructure</h2>
+  <p>GCP is organised into a three-tier hierarchy: <strong>Multi-regions → Regions → Zones</strong>. Most resources are deployed into a region or zone. Choosing the right location affects latency, compliance, and availability.</p>
+  <div class="hier">
+    <div class="hier-row"><div class="hier-icon">🌏</div><div><div class="hier-label">Multi-Region</div><div class="hier-desc">e.g. "EU" — geographic grouping for highest redundancy. Used for Cloud Storage multi-regional buckets.</div></div></div>
+    <div class="arrow">↓</div>
+    <div class="hier-row"><div class="hier-icon">🗺️</div><div><div class="hier-label">Region</div><div class="hier-desc">e.g. "europe-west1" — collection of 3+ zones. Independent power, cooling, networking. Deploy here for HA.</div></div></div>
+    <div class="arrow">↓</div>
+    <div class="hier-row"><div class="hier-icon">🏢</div><div><div class="hier-label">Zone</div><div class="hier-desc">e.g. "europe-west1-b" — a single data center. Deploy across zones for fault tolerance.</div></div></div>
+  </div>
+  <div class="tip"><strong>Exam tip:</strong> Regions = multiple zones. Zones = isolated within a region. Multi-region = spans multiple regions. Google's network interconnects all of them with premium low-latency fibre.</div>
+
+  <h2>🏗️ Resource Hierarchy &amp; Projects</h2>
+  <p>Every GCP resource must belong to a <strong>Project</strong>. Projects are grouped into <strong>Folders</strong> which sit under an <strong>Organisation</strong> node. IAM policies and billing flow down this hierarchy.</p>
+  <div class="hier">
+    <div class="hier-row"><div class="hier-icon">🏛️</div><div><div class="hier-label">Organization</div><div class="hier-desc">Root node. Maps to a Google Workspace or Cloud Identity domain. Policies here apply to everything below.</div></div></div>
+    <div class="arrow">↓</div>
+    <div class="hier-row"><div class="hier-icon">📁</div><div><div class="hier-label">Folder</div><div class="hier-desc">Optional grouping (e.g. by department or environment). Inherits org policies and can add its own.</div></div></div>
+    <div class="arrow">↓</div>
+    <div class="hier-row"><div class="hier-icon">📦</div><div><div class="hier-label">Project</div><div class="hier-desc">The unit of billing, API enablement, and access control. Every resource lives inside exactly one project.</div></div></div>
+    <div class="arrow">↓</div>
+    <div class="hier-row"><div class="hier-icon">⚙️</div><div><div class="hier-label">Resources</div><div class="hier-desc">VMs, buckets, databases, functions, etc. Inherit IAM from project/folder/org.</div></div></div>
+  </div>
+
+  <h2>💻 Compute Services</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🖥️ Compute Engine (IaaS)</div><div class="card-body">Virtual Machines you fully control. Choose CPU, RAM, GPU, OS. Includes Preemptible/Spot VMs (up to 91% cheaper, can be terminated by Google). Supports Live Migration — VMs move across hosts during maintenance with no downtime.</div></div>
+    <div class="card"><div class="card-title">☸️ GKE — Google Kubernetes Engine (CaaS)</div><div class="card-body">Fully managed Kubernetes clusters. Google handles control plane upgrades, scaling, and security patches. Autopilot mode manages node infrastructure too.</div></div>
+    <div class="card"><div class="card-title">🚀 Cloud Run (Serverless Containers)</div><div class="card-body">Run containers without managing servers. Scales to zero when idle. Pay per request. Ideal for stateless HTTP services and microservices.</div></div>
+    <div class="card"><div class="card-title">⚡ Cloud Functions (FaaS)</div><div class="card-body">Event-driven serverless code snippets. Triggered by HTTP, Pub/Sub, Cloud Storage events, etc. No infrastructure to manage.</div></div>
+    <div class="card"><div class="card-title">🌐 App Engine (PaaS)</div><div class="card-body">Platform for web applications. Standard (sandboxed, fastest autoscale) and Flexible (custom runtimes, Docker). Google manages servers, OS, and runtime patches.</div></div>
+  </div>
+  <table><thead><tr><th>Service</th><th>Model</th><th>You manage</th><th>Best for</th></tr></thead><tbody>
+    <tr><td>Compute Engine</td><td>IaaS</td><td>OS, runtime, app</td><td>Full control, lift-and-shift</td></tr>
+    <tr><td>GKE</td><td>CaaS</td><td>App + containers</td><td>Microservices at scale</td></tr>
+    <tr><td>App Engine</td><td>PaaS</td><td>App code only</td><td>Web apps, quick deploys</td></tr>
+    <tr><td>Cloud Run</td><td>Serverless</td><td>Container image</td><td>Stateless HTTP workloads</td></tr>
+    <tr><td>Cloud Functions</td><td>FaaS</td><td>Function code</td><td>Event triggers, glue logic</td></tr>
+  </tbody></table>
+
+  <h2>🗄️ Storage Services</h2>
+  <h3>Cloud Storage (Object Storage)</h3>
+  <p>Globally available, highly durable object storage. Organised into <strong>Buckets</strong>. Four storage classes based on access frequency:</p>
+  <table><thead><tr><th>Class</th><th>Min Duration</th><th>Access Frequency</th><th>Use Case</th></tr></thead><tbody>
+    <tr><td>Standard</td><td>None</td><td>Frequent</td><td>Hot data, web assets, analytics input</td></tr>
+    <tr><td>Nearline</td><td>30 days</td><td>~Monthly</td><td>Backups accessed monthly</td></tr>
+    <tr><td>Coldline</td><td>90 days</td><td>~Quarterly</td><td>Disaster recovery archives</td></tr>
+    <tr><td>Archive</td><td>365 days</td><td>~Yearly</td><td>Long-term regulatory archives</td></tr>
+  </tbody></table>
+  <div class="grid3">
+    <div class="card"><div class="card-title">💾 Persistent Disk</div><div class="card-body">Durable block storage attached to Compute Engine VMs. Standard (HDD) or SSD options. Survives VM deletion.</div></div>
+    <div class="card"><div class="card-title">⚡ Local SSD</div><div class="card-body">Physically attached to the host server. Extremely fast but ephemeral — data lost if VM stops.</div></div>
+    <div class="card"><div class="card-title">📂 Cloud Filestore</div><div class="card-body">Managed NAS (Network Attached Storage). NFS-compatible shared file system for VMs and GKE.</div></div>
+  </div>
+
+  <h2>🗃️ Database Services</h2>
+  <table><thead><tr><th>Service</th><th>Type</th><th>Scale</th><th>Best For</th></tr></thead><tbody>
+    <tr><td>Cloud SQL</td><td>Relational (MySQL / PostgreSQL / SQL Server)</td><td>Regional</td><td>Traditional OLTP apps, migrations</td></tr>
+    <tr><td>Cloud Spanner</td><td>Relational + globally distributed</td><td>Global</td><td>Financial systems, global transactions</td></tr>
+    <tr><td>Bigtable</td><td>NoSQL wide-column</td><td>Petabyte</td><td>IoT, time-series, AdTech, high-throughput</td></tr>
+    <tr><td>Firestore</td><td>NoSQL document</td><td>Auto</td><td>Mobile/web apps, real-time sync</td></tr>
+    <tr><td>Memorystore</td><td>In-memory (Redis / Memcached)</td><td>Regional</td><td>Caching, session management</td></tr>
+  </tbody></table>
+  <div class="tip"><strong>Exam tip:</strong> Cloud Spanner = SQL + global scale + ACID. Bigtable = NoSQL + massive scale. Firestore = document model for mobile/web. Cloud SQL = familiar relational, regional only.</div>
+
+  <h2>📊 Data &amp; AI Services</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">📈 BigQuery</div><div class="card-body">Serverless, petabyte-scale data warehouse. Pay per query. Separates compute from storage. Supports SQL, ML (BigQuery ML), and BI Engine for fast dashboards.</div></div>
+    <div class="card"><div class="card-title">📨 Pub/Sub</div><div class="card-body">Global asynchronous messaging. Decouples publishers from subscribers. Foundation for event-driven architectures and streaming pipelines.</div></div>
+    <div class="card"><div class="card-title">🔄 Dataflow</div><div class="card-body">Managed Apache Beam service for batch and stream data processing. Used for ETL, real-time analytics pipelines.</div></div>
+    <div class="card"><div class="card-title">🐘 Dataproc</div><div class="card-body">Managed Spark and Hadoop clusters. Spins up in 90 seconds. Migrate on-premises big data workloads with minimal change.</div></div>
+    <div class="card"><div class="card-title">🤖 Vertex AI</div><div class="card-body">Unified ML platform. Train, deploy, and manage models. Includes AutoML (no code needed), pre-built APIs (Vision, Speech, Translation, NLP), and Vertex AI Pipelines for MLOps.</div></div>
+    <div class="card"><div class="card-title">📊 Looker</div><div class="card-body">Business intelligence and data visualization. Embedded analytics. Connects to BigQuery and other sources. Google's BI product after 2019 acquisition.</div></div>
+  </div>
+
+  <h2>🔒 IAM &amp; Security</h2>
+  <h3>Identity and Access Management (IAM)</h3>
+  <p>IAM answers: <em>"Who can do what on which resource?"</em> It works by binding a <strong>Principal</strong> to a <strong>Role</strong> on a <strong>Resource</strong>.</p>
+  <div class="grid">
+    <div class="card"><div class="card-title">👤 Principals (Who)</div><div class="card-body">Google Account (person), Service Account (app/VM), Google Group, Google Workspace domain, Cloud Identity domain, allUsers / allAuthenticatedUsers.</div></div>
+    <div class="card"><div class="card-title">🎭 Roles (What)</div><div class="card-body"><strong>Basic:</strong> Owner / Editor / Viewer (avoid for prod). <strong>Predefined:</strong> Fine-grained per service (e.g. roles/storage.objectViewer). <strong>Custom:</strong> Build your own from individual permissions.</div></div>
+    <div class="card"><div class="card-title">🔑 Service Accounts</div><div class="card-body">Identity for non-human users (VMs, apps, pipelines). Has its own email address. Authenticate with keys or Workload Identity Federation (recommended).</div></div>
+  </div>
+  <div class="tip"><strong>Least Privilege:</strong> Always grant the <em>minimum permissions</em> needed. Use predefined roles over basic roles. Avoid owner role on production projects.</div>
+
+  <h3>Key Security Services</h3>
+  <table><thead><tr><th>Service</th><th>What it Does</th></tr></thead><tbody>
+    <tr><td>Cloud KMS</td><td>Managed cryptographic key storage. Customer-managed encryption keys (CMEK) for GCP services.</td></tr>
+    <tr><td>Secret Manager</td><td>Securely store and version API keys, passwords, certificates. Applications retrieve secrets at runtime.</td></tr>
+    <tr><td>Cloud Armor</td><td>DDoS protection and Web Application Firewall (WAF). Works with Cloud Load Balancing. Geo-based rules.</td></tr>
+    <tr><td>Identity-Aware Proxy (IAP)</td><td>Context-aware access to applications without a VPN. Verifies identity and device state.</td></tr>
+    <tr><td>VPC Service Controls</td><td>Security perimeter around GCP services. Prevents data exfiltration even by internal actors.</td></tr>
+    <tr><td>Cloud Identity</td><td>IDaaS — manage users, groups, and devices. Free tier available for GCP-only orgs.</td></tr>
+    <tr><td>Audit Logs</td><td>Admin Activity, Data Access, System Event, and Policy Denied logs. Immutable record of who did what.</td></tr>
+    <tr><td>Access Transparency</td><td>Logs of Google personnel actions on your content. Near-real-time visibility.</td></tr>
+    <tr><td>Organization Policy</td><td>Enforce constraints across all projects (e.g. "disable external IPs", "restrict resource locations").</td></tr>
+    <tr><td>Policy Intelligence</td><td>AI-powered tools: Recommender (suggest least-privilege), Policy Analyzer, Policy Troubleshooter.</td></tr>
+  </tbody></table>
+
+  <h2>🌐 Networking</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">🔵 VPC (Virtual Private Cloud)</div><div class="card-body">Global private network for GCP resources. Unlike other clouds, GCP VPCs are global — one VPC spans all regions. Subnets are regional. VPC peering and Shared VPC for cross-project connectivity.</div></div>
+    <div class="card"><div class="card-title">⚖️ Cloud Load Balancing</div><div class="card-body">Global (HTTP/S, SSL, TCP) or regional load balancers. Software-defined, no warm-up needed. Distributes traffic across instances, regions, or backends.</div></div>
+    <div class="card"><div class="card-title">🌍 Cloud CDN</div><div class="card-body">Content Delivery Network built on Google's global edge network. Caches content close to users for lower latency.</div></div>
+    <div class="card"><div class="card-title">🔗 Cloud Interconnect</div><div class="card-body">Dedicated (physical) or Partner (via ISP) private connection from on-premises to GCP. Lower latency and cost than using public internet for high-volume traffic.</div></div>
+    <div class="card"><div class="card-title">📡 Cloud DNS</div><div class="card-body">Managed authoritative DNS with 100% uptime SLA. Supports public and private DNS zones.</div></div>
+  </div>
+  <div class="tip"><strong>Network Service Tiers:</strong> <strong>Premium</strong> = traffic stays on Google's private fibre as long as possible (lowest latency, highest reliability). <strong>Standard</strong> = traffic uses public internet (lower cost). Premium is the default.</div>
+
+  <h2>☁️ Cloud Concepts</h2>
+  <div class="grid">
+    <div class="card"><div class="card-title">📦 Service Models</div><div class="card-body"><strong>IaaS</strong> — you manage OS upward (Compute Engine). <strong>PaaS</strong> — you manage app code (App Engine). <strong>SaaS</strong> — you use the software (Gmail, Workspace). <strong>FaaS/Serverless</strong> — you manage just the function (Cloud Functions, Cloud Run).</div></div>
+    <div class="card"><div class="card-title">💰 CapEx vs OpEx</div><div class="card-body"><strong>CapEx</strong> (Capital Expenditure) = upfront hardware purchase (on-premises). <strong>OpEx</strong> (Operating Expenditure) = pay-as-you-go consumption. Cloud converts CapEx to OpEx.</div></div>
+    <div class="card"><div class="card-title">🌱 Sustainability</div><div class="card-body">Google has been carbon-neutral since 2007 and aims for 24/7 carbon-free energy by 2030. GCP data centres are among the most energy-efficient globally (PUE ~1.1).</div></div>
+    <div class="card"><div class="card-title">🔄 Shared Responsibility</div><div class="card-body">Google secures the infrastructure (hardware, facilities, network). You secure your data, access controls, and what you build on top. More responsibility shifts to Google as you move from IaaS → PaaS → SaaS.</div></div>
+  </div>
+  <table><thead><tr><th>Concept</th><th>Definition</th></tr></thead><tbody>
+    <tr><td>Scalability</td><td>Ability to increase capacity to handle growing workloads (manually or automatically)</td></tr>
+    <tr><td>Elasticity</td><td>Automatic scaling up <em>and</em> back down in response to demand in real time</td></tr>
+    <tr><td>Agility</td><td>Speed of deploying and experimenting — cloud removes hardware procurement delays</td></tr>
+    <tr><td>High Availability</td><td>System designed to minimise downtime — typically via redundancy across zones/regions</td></tr>
+    <tr><td>Fault Tolerance</td><td>System continues operating even when a component fails</td></tr>
+    <tr><td>TCO</td><td>Total Cost of Ownership — all costs including power, cooling, staff, and depreciation</td></tr>
+    <tr><td>SLA</td><td>Service Level Agreement — Google's contractual commitment on uptime/availability per service</td></tr>
+  </tbody></table>
+
+  <hr class="sep"/>
+  <p style="font-size:12px;color:#475569;text-align:center">Extra content section — add supplementary notes below this line</p>
+</div></main>
+</body>
+</html>
