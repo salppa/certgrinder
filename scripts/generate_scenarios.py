@@ -17,8 +17,9 @@ from pathlib import Path
 
 try:
     import anthropic
+    import httpx
 except ImportError:
-    print("pip install anthropic")
+    print("pip install anthropic httpx")
     sys.exit(1)
 
 MODULE_CONTEXTS = {
@@ -72,7 +73,12 @@ def call_claude(client, prompt, max_tokens=2048):
         max_tokens=max_tokens,
         messages=[{"role": "user", "content": prompt}],
     )
-    return r.content[0].text.strip()
+    text = r.content[0].text.strip()
+    # strip markdown code fences if present
+    if text.startswith("```"):
+        text = text.split("\n", 1)[-1]
+        text = text.rsplit("```", 1)[0].strip()
+    return text
 
 
 def build_module(client, module_id, num_episodes=5, per_episode=4):
@@ -91,7 +97,7 @@ def build_module(client, module_id, num_episodes=5, per_episode=4):
         episodes.append({"id": ep_id, "title": domain,
                          "monologue": monologue,
                          "scenarios": json.loads(raw)})
-        print("✓")
+        print("OK")
     return {"moduleId": module_id, "mentor": ctx["mentor"], "episodes": episodes}
 
 
@@ -108,7 +114,10 @@ def main():
         print("Set ANTHROPIC_API_KEY")
         sys.exit(1)
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client = anthropic.Anthropic(
+        api_key=api_key,
+        http_client=httpx.Client(verify=False),
+    )
     out    = args.out or f"src/data/scenarios/{args.module}.js"
 
     print(f"Generating {args.module} ({args.episodes} eps x {args.per_episode} scenarios)...")
