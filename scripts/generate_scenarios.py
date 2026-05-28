@@ -29,10 +29,46 @@ MODULE_CONTEXTS = {
                     "Information Systems", "Technology Architecture", "Governance"],
         "mentor": "teacher",
     },
+    "togaf-basics": {
+        "name": "TOGAF Basics",
+        "domains": ["Architecture Fundamentals", "ADM Overview",
+                    "Content Framework", "Reference Models", "Governance Basics"],
+        "mentor": "teacher",
+    },
+    "archimate": {
+        "name": "ArchiMate Enterprise Modelling",
+        "domains": ["Motivation Layer", "Business Layer",
+                    "Application Layer", "Technology Layer", "Implementation & Migration"],
+        "mentor": "ea-strategist",
+    },
+    "cobit2019": {
+        "name": "COBIT 2019 IT Governance",
+        "domains": ["Governance Framework", "Management Objectives",
+                    "Risk Management", "Audit & Assurance", "Performance Management"],
+        "mentor": "ea-strategist",
+    },
     "cloud": {
         "name": "Cloud Architecture",
         "domains": ["Cloud Strategy", "Migration", "Security",
                     "Cost Optimization", "Resilience"],
+        "mentor": "cloud-architect",
+    },
+    "az900": {
+        "name": "Microsoft Azure AZ-900",
+        "domains": ["Cloud Concepts", "Azure Core Services",
+                    "Security & Compliance", "Pricing & SLA", "Azure Governance"],
+        "mentor": "cloud-architect",
+    },
+    "aws-clf-c02": {
+        "name": "AWS Cloud Practitioner",
+        "domains": ["Cloud Value Proposition", "AWS Core Services",
+                    "Security & Compliance", "Billing & Pricing", "AWS Architecture"],
+        "mentor": "cloud-architect",
+    },
+    "gcp-fundamentals": {
+        "name": "Google Cloud Fundamentals",
+        "domains": ["GCP Core Services", "Compute & Storage",
+                    "Networking", "Big Data & ML", "Security & IAM"],
         "mentor": "cloud-architect",
     },
     "itsm": {
@@ -40,6 +76,36 @@ MODULE_CONTEXTS = {
         "domains": ["Service Strategy", "Service Design", "Service Transition",
                     "Service Operation", "Continual Improvement"],
         "mentor": "itsm-consultant",
+    },
+    "it4it": {
+        "name": "IT4IT Reference Architecture",
+        "domains": ["Plan-to-Portfolio", "Requirement-to-Deploy",
+                    "Request-to-Fulfill", "Detect-to-Correct", "Service Model Integration"],
+        "mentor": "itsm-consultant",
+    },
+    "it4it-advanced": {
+        "name": "IT4IT Advanced",
+        "domains": ["Reference Architecture Deep Dive", "Data Model",
+                    "Integration Patterns", "Service Analytics", "Automation"],
+        "mentor": "itsm-consultant",
+    },
+    "ai-compliance": {
+        "name": "AI Compliance & Ethics",
+        "domains": ["AI Governance", "Data Privacy",
+                    "Algorithmic Bias", "Regulatory Compliance", "Ethical AI"],
+        "mentor": "ai-compliance",
+    },
+    "ai900": {
+        "name": "Azure AI-900 Fundamentals",
+        "domains": ["AI Fundamentals", "Machine Learning",
+                    "Computer Vision", "NLP", "Conversational AI"],
+        "mentor": "ai-compliance",
+    },
+    "sabsa": {
+        "name": "SABSA Security Architecture",
+        "domains": ["Security Architecture Framework", "Risk Assessment",
+                    "Security Services Design", "Security Governance", "Security Operations"],
+        "mentor": "ai-compliance",
     },
 }
 
