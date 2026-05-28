@@ -74,6 +74,12 @@ export class CertGrinderStack extends cdk.Stack {
     })
 
     // ── Lambda ───────────────────────────────────────────────────────────────
+    const fnLogGroup = new logs.LogGroup(this, 'FnLogGroup', {
+      logGroupName:  '/aws/lambda/certgrinder-user-data',
+      retention:     logs.RetentionDays.ONE_MONTH,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    })
+
     const fn = new lambda.Function(this, 'UserDataFn', {
       functionName:     'certgrinder-user-data',
       runtime:          lambda.Runtime.PYTHON_3_12,
@@ -83,7 +89,7 @@ export class CertGrinderStack extends cdk.Stack {
       environment:      { TABLE_NAME: table.tableName },
       tracing:          lambda.Tracing.ACTIVE,
       reservedConcurrentExecutions: 50,
-      logRetention:     logs.RetentionDays.ONE_MONTH,
+      logGroup:         fnLogGroup,
     })
     table.grantReadWriteData(fn)
 
@@ -102,9 +108,16 @@ export class CertGrinderStack extends cdk.Stack {
         allowHeaders: ['content-type', 'authorization'],
         maxAge:       cdk.Duration.days(1),
       },
-      defaultThrottlingBurstLimit: 100,
-      defaultThrottlingRateLimit:  50,
     })
+
+    // Throttling on the default stage (50 rps / 100 burst)
+    const defaultStage = api.defaultStage?.node.defaultChild as apigwv2.CfnStage
+    if (defaultStage) {
+      defaultStage.defaultRouteSettings = {
+        throttlingBurstLimit: 100,
+        throttlingRateLimit:  50,
+      }
+    }
 
     const integration = new integ.HttpLambdaIntegration('FnInteg', fn)
 
