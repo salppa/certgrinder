@@ -1,8 +1,8 @@
 # CertGrinder — Tuotedokumentaatio
 
-**Versio:** 0.1.0  
-**Päivitetty:** 2026-05-27  
-**Status:** Vaihe 1–4 valmis — CI/CD käytössä
+**Versio:** 0.2.0  
+**Päivitetty:** 2026-05-28  
+**Status:** Vaihe 1–5 valmis — 14 moduulia, CI/CD käytössä
 
 **Repo:** [github.com/salppa/certgrinder](https://github.com/salppa/certgrinder)  
 **CertDrill-repo:** [github.com/salppa/certdrill](https://github.com/salppa/certdrill)  
@@ -41,18 +41,22 @@ certgrinder/
 │   ├── screens/
 │   │   ├── Dashboard.jsx            # Etusivu — moduulien yleiskatsaus
 │   │   ├── ModulePicker.jsx         # Moduulivalinta + [SIMULAATIO]-badge
-│   │   ├── EpisodeSelect.jsx        # Episodivalinta — lukituslogi
+│   │   ├── EpisodeSelect.jsx        # Episodivalinta — lukituslogiikka
 │   │   ├── ReignsScreen.jsx         # Pääpelinäkymä — swipe + mittarit
 │   │   ├── EpisodeComplete.jsx      # Episodi läpäisty
 │   │   └── GameOver.jsx             # Peli päättyi — mentori lohduttaa
 │   ├── data/
-│   │   ├── modules.js               # Moduulimäärittelyt + MODULE_MENTOR-map
-│   │   └── scenarios/
-│   │       └── togaf.js             # TOGAF: 5 episodia, 3–4 skenaariota/episodi
+│   │   ├── modules.js               # 14 moduulia + MODULE_MENTOR-map
+│   │   ├── questions/               # Kysymyspankit CertDrilliltä (13 tiedostoa)
+│   │   └── scenarios/               # Generoidut skenaariot (14 tiedostoa)
 │   ├── hooks/
 │   │   └── useProgress.js           # useProgress + useSympathy (localStorage + API)
 │   └── lib/
 │       └── api.js                   # REST-kutsut API Gatewayhin
+├── public/
+│   ├── assets/
+│   │   └── mentors/                 # 24 mentori-kuvaa (6 × 4 ilmettä)
+│   └── overviews/                   # 21 opiskelumateriaali-HTML:ää CertDrilliltä
 ├── infra/                           # AWS CDK v2
 │   ├── lib/
 │   │   ├── app.ts                   # CDK app entry point
@@ -63,7 +67,7 @@ certgrinder/
 │   ├── tsconfig.json
 │   └── package.json
 ├── scripts/
-│   └── generate_scenarios.py        # Claude API -pohjainen skenaariogeneraattori
+│   └── generate_scenarios.py        # Claude Opus -pohjainen skenaariogeneraattori
 ├── docs/
 │   └── CERTGRINDER.md              # Tämä tiedosto
 ├── .env.example
@@ -83,7 +87,7 @@ certgrinder/
 | Build | Vite | 5.4 |
 | Infra | AWS CDK | 2.1120+ |
 | Lambda | Python | 3.12 |
-| Skenaariot | Anthropic Claude API | — |
+| Skenaariogenerointi | Claude Opus 4.7 | — |
 
 ---
 
@@ -119,33 +123,91 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
 
 ---
 
-## Moduulit
+## Moduulit (14 kpl)
 
-| ID | Nimi | Mentori | Skenaariot | Episodit | Kysymyksiä |
-|----|------|---------|-----------|----------|-----------|
-| `togaf` | TOGAF | teacher | ✅ | 5 | 120 |
-| `cloud` | Cloud Architecture | cloud-architect | ❌ | 5 | 85 |
-| `itsm` | ITSM / ITIL | itsm-consultant | ❌ | 5 | 95 |
+### Enterprise Architecture
 
-`[SIMULAATIO]`-badge näkyy vain kun `module.hasScenarios === true`.
+| ID | Nimi | Mentori | Kysymyksiä | Väri |
+|----|------|---------|-----------|------|
+| `togaf` | TOGAF | teacher | 80 | `#6366f1` |
+| `togaf-basics` | TOGAF Basics | teacher | 64 | `#818cf8` |
+| `archimate` | ArchiMate | ea-strategist | 80 | `#8b5cf6` |
+| `cobit2019` | COBIT 2019 | ea-strategist | 80 | `#a855f7` |
+
+### Cloud
+
+| ID | Nimi | Mentori | Kysymyksiä | Väri |
+|----|------|---------|-----------|------|
+| `cloud` | Cloud Architecture | cloud-architect | 80 | `#3b82f6` |
+| `az900` | Azure AZ-900 | cloud-architect | 80 | `#0ea5e9` |
+| `aws-clf-c02` | AWS Cloud Practitioner | cloud-architect | 80 | `#f97316` |
+| `gcp-fundamentals` | GCP Fundamentals | cloud-architect | 80 | `#22c55e` |
+
+### IT Service Management
+
+| ID | Nimi | Mentori | Kysymyksiä | Väri |
+|----|------|---------|-----------|------|
+| `itsm` | ITSM / ITIL | itsm-consultant | 80 | `#10b981` |
+| `it4it` | IT4IT | itsm-consultant | 80 | `#14b8a6` |
+| `it4it-advanced` | IT4IT Advanced | itsm-consultant | 80 | `#06b6d4` |
+
+### AI & Security
+
+| ID | Nimi | Mentori | Kysymyksiä | Väri |
+|----|------|---------|-----------|------|
+| `ai-compliance` | AI Compliance | ai-compliance | 40 | `#f59e0b` |
+| `ai900` | Azure AI-900 | ai-compliance | 80 | `#eab308` |
+| `sabsa` | SABSA | ai-compliance | 80 | `#ef4444` |
+
+Kaikilla moduuleilla: `hasScenarios: true`, `badge: 'SIMULAATIO'`, 5 episodia × 4 skenaariota.
 
 ---
 
 ## Mentorit
 
-| ID | Nimi | Moduuli | Väri |
+| ID | Nimi | Moduulit | Väri |
 |----|------|---------|------|
-| `teacher` | Suomalainen opettaja | togaf | `#6366f1` |
-| `cloud-architect` | Cloud-arkkitehti | cloud | `#3b82f6` |
-| `ea-strategist` | EA-Strategi | ea | `#8b5cf6` |
-| `itsm-consultant` | ITSM-konsultti | itsm | `#10b981` |
-| `ai-compliance` | AI-Compliance | ai | `#f59e0b` |
-| `chef` | Kokki | chef | `#ef4444` |
+| `teacher` | Suomalainen opettaja | togaf, togaf-basics | `#6366f1` |
+| `cloud-architect` | Cloud-arkkitehti | cloud, az900, aws-clf-c02, gcp-fundamentals | `#3b82f6` |
+| `ea-strategist` | EA-Strategi | archimate, cobit2019 | `#8b5cf6` |
+| `itsm-consultant` | ITSM-konsultti | itsm, it4it, it4it-advanced | `#10b981` |
+| `ai-compliance` | AI-Compliance | ai-compliance, ai900, sabsa | `#f59e0b` |
+| `chef` | Kokki | — (ei käytössä) | `#ef4444` |
 
 **Kuvat:** `public/assets/mentors/{mentorId}-{mood}.png`  
 **Ilmeet:** `neutral` · `worried` · `angry` · `relieved`  
-**Fallback:** kuva puuttuu → emoji automaattisesti  
-**Valinta:** automaattinen moduulin perusteella (`MODULE_MENTOR` map `data/modules.js`)
+**Lähde:** kopioitu CertDrilliltä, nimet muunnettu (`broken→angry`, `anxious→worried`, `happy→relieved`, `normal→neutral`)  
+**Fallback:** kuva puuttuu → emoji automaattisesti
+
+---
+
+## Opiskelumateriaali
+
+### Kysymyspankit (`src/data/questions/`)
+
+Kopioitu CertDrilliltä. Käytetään `generate_scenarios.py`:ssä kontekstina.
+
+| Tiedosto | Kysymyksiä |
+|----------|-----------|
+| togaf.js | 80 |
+| togaf-basics.js | 64 |
+| archimate.js | 80 |
+| cobit2019.js | 80 |
+| itil4.js | 80 |
+| it4it.js | 80 |
+| it4it-advanced.js | 80 |
+| ai-compliance.js | 40 |
+| az900.js | 80 |
+| ai900.js | 80 |
+| aws-clf-c02.js | 80 |
+| gcp-fundamentals.js | 80 |
+| sabsa.js | 80 |
+
+### Overviewt (`public/overviews/`)
+
+21 HTML-opiskelumateriaalisivua kopioitu CertDrilliltä. Linkitettävissä peliin.
+
+`togaf.html` · `togaf-basics.html` · `archimate.html` · `cobit2019.html` · `itil4.html` · `it4it.html` · `it4it-advanced.html` · `ai-compliance.html` · `sabsa.html` · `az-900.html` · `ai-900.html` · `ai-103.html` · `ab-731.html` · `aws-clf-c02.html` · `gcp-fundamentals.html` · `finnish-culture.html` · `hygieniapassi.html` · `kastikkeet.html` · `kirjanpito.html` · `persoonallisuuspsykologia.html` · `retoriikka.html`
 
 ---
 
@@ -153,20 +215,10 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
 
 - **5 episodia** per moduuli, lukittu järjestyksessä
 - **Aloitusmonologi** per episodi (MentorMonologue-komponentti)
-- **3–4 skenaariota** per episodi, satunnaisessa järjestyksessä
-- **Lukituslogiikka:** episodi n on saatavilla vasta kun n−1 on suoritettu
+- **4 skenaariota** per episodi, satunnaisessa järjestyksessä
+- **Lukituslogiikka:** episodi n saatavilla vasta kun n−1 suoritettu
 
-### TOGAF-episodit
-
-| Episodi | Otsikko |
-|---------|---------|
-| 1 | Arkkitehtuuristrategia |
-| 2 | Liiketoiminta-arkkitehtuuri |
-| 3 | Teknologia-arkkitehtuuri |
-| 4 | Governance & Compliance |
-| 5 | Muutoshallinta |
-
-### Skeema (scenarios/togaf.js)
+### Skeema (`scenarios/{moduleId}.js`)
 
 ```js
 {
@@ -175,10 +227,10 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
   episodes: [{
     id: 1,
     title: '...',
-    monologue: '...',          // mentori puhuu ennen episodia
+    monologue: '...',
     scenarios: [{
       id: 's1e1',
-      text: '...',             // tilannekuvaus
+      text: '...',
       left:  { label, deltas: { r1, r2, r3, r4 }, consequence },
       right: { label, deltas: { r1, r2, r3, r4 }, consequence },
     }]
@@ -201,32 +253,34 @@ Kaikki kortit käyttävät `glass`-objektia: `{ ...glass, padding: 24 }`
 
 ---
 
-## Edistymisen tallennus (useProgress + useSympathy)
+## Edistymisen tallennus
 
-Kaksitasoinen tallennus: localStorage (offline) + DynamoDB (synkronoitu):
+Kaksitasoinen: localStorage (offline) + DynamoDB (synkronoitu):
 
 ```js
 useProgress(moduleId)   // { progress, completeEpisode, isLocked }
 useSympathy(moduleId)   // { sympathy, updateSympathy }
 ```
 
-- **userId:** `localStorage('cg:userId')` — automaattisesti generoitu UUID
-- **Fallback:** jos API ei vastaa, käytetään localStorage-arvoa
+- **userId:** automaattisesti generoitu UUID (`localStorage('cg:userId')`)
+- **Fallback:** API ei vastaa → localStorage-arvo
 - **DynamoDB-synk:** asynkroninen, epäonnistuminen ei kaada peliä
 
 ---
 
 ## Skenaariogeneraattori
 
-`scripts/generate_scenarios.py` — generoi `scenarios.js`-tiedostot Claude API:n avulla.
+`scripts/generate_scenarios.py` — käyttää Claude Opus 4.7 API:a.
 
 ```bash
 export ANTHROPIC_API_KEY=sk-...
-python generate_scenarios.py --module togaf
-python generate_scenarios.py --module cloud --episodes 5 --per-episode 4
+python scripts/generate_scenarios.py --module togaf
+python scripts/generate_scenarios.py --module cloud --episodes 5 --per-episode 4
 ```
 
-Generoidaan build-time, ei runtime.
+**Tuetut moduulit:** kaikki 14 (MODULE_CONTEXTS määritelty jokaiselle)  
+**Tulostiedosto:** `src/data/scenarios/{moduleId}.js`  
+**SSL-huomio:** Windows-ympäristössä `httpx.Client(verify=False)` — corporate proxy
 
 ---
 
@@ -291,19 +345,14 @@ npm run deploy
 **Tiedosto:** `.github/workflows/deploy.yml`  
 **Triggerit:** push `main`-haaraan tai manuaalinen `workflow_dispatch`
 
-### Pipeline
-
 | Job | Triggeroi kun | Tekee |
 |-----|--------------|-------|
 | `deploy-infra` | `infra/`-tiedostoja muutettu | `cdk deploy` |
 | `deploy-frontend` | aina push main | build → S3 sync → CloudFront invalidation |
 
-### S3-caching-strategia
+**S3-caching:** staattiset assetsit `max-age=31536000,immutable` · `index.html` `no-cache`
 
-- Staattiset assetsit (`dist/**` paitsi `index.html`): `max-age=31536000,immutable`
-- `index.html`: `no-cache,no-store,must-revalidate`
-
-### GitHub Secrets
+### GitHub Secrets (`github.com/salppa/certgrinder`)
 
 | Secret | Arvo |
 |--------|------|
@@ -318,20 +367,22 @@ npm run deploy
 
 ## Vaiheistus
 
-| Vaihe | Status | Sisältö | Sessio |
-|-------|--------|---------|--------|
+| Vaihe | Status | Sisältö | Pvm |
+|-------|--------|---------|-----|
 | 1 | ✅ Valmis | UI-runko, glassmorphism, perusnäkymät, routing | 2026-05-26 |
 | 2 | ✅ Valmis | Reigns swipe, resurssimittarit, consequence preview, game over | 2026-05-26 |
 | 3 | ✅ Valmis | Mentori-ilmeet, aloitusmonologi, episodiprogressio, TOGAF-skenaariot | 2026-05-26 |
 | 4 | ✅ Valmis | AWS CDK infra, Lambda, API GW, DynamoDB, S3, CloudFront, CI/CD | 2026-05-27 |
-| 5 | 🔲 Tulossa | Sympathy-tallennuksen testaus tuotannossa, lisää moduuleja (cloud, itsm) | — |
-| 6 | 🔲 Tulossa | Kognitoautentikointi, käyttäjäkohtainen historia, leaderboard | — |
+| 5 | ✅ Valmis | 14 moduulia, 24 mentori-kuvaa, 13 kysymyspankkia, 21 overviewta | 2026-05-28 |
+| 6 | 🔲 Tulossa | Cognito-autentikointi, käyttäjäkohtainen historia, leaderboard | — |
+| 7 | 🔲 Tulossa | Sympathy-mekaniikan aktivointi pelissä, moduulikohtaiset saavutukset | — |
 
 ---
 
 ## Avoimet päätökset
 
-- `scenarios.js` puuttuu `cloud`- ja `itsm`-moduuleilta — generoi `generate_scenarios.py`:llä
-- Sympathy-arvo: nyt tallennetaan, mutta pelimekaniikka ei vielä käytä sitä
-- userId: nyt localStorage UUID — vaihdetaan Cognito sub:iin Vaiheessa 6
-- CORS: nyt `allowOrigins: ['*']` — rajata CloudFront-domainiin tuotannossa
+- **userId:** nyt localStorage UUID → vaihdetaan Cognito sub:iin Vaiheessa 6
+- **CORS:** nyt `allowOrigins: ['*']` → rajata CloudFront-domainiin tuotannossa
+- **Sympathy:** tallennetaan DynamoDB:hen mutta pelimekaniikka ei vielä käytä arvoa
+- **chef-mentori:** kuvat olemassa mutta ei aktiivista moduulia
+- **Overviewt:** linkitys peliin ei vielä toteutettu (suunniteltu Vaiheessa 7)
