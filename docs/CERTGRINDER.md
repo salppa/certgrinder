@@ -1,6 +1,6 @@
 # CertGrinder — Tuotedokumentaatio
 
-**Versio:** 0.2.0  
+**Versio:** 0.3.0  
 **Päivitetty:** 2026-05-28  
 **Status:** Vaihe 1–5 valmis — 14 moduulia, CI/CD käytössä
 
@@ -21,10 +21,227 @@ Jokainen päätös vaikuttaa neljään resurssimittariin. Mittarin päädyt (0 t
 
 ---
 
+## Kaksi tuotetta — kaksi repoa
+
+| | CertDrill | CertGrinder |
+|-|-----------|-------------|
+| **Tarkoitus** | Kysymys–vastaus-harjoittelu | Reigns-tyylinen simulaatio |
+| **GitHub** | `github.com/salppa/certdrill` | `github.com/salppa/certgrinder` |
+| **Paikallinen polku** | `C:\Users\Timnu\OneDrive\Desktop\StudyApp` | `C:\Users\Timnu\OneDrive\Desktop\Certgrinder\certdrill\certgrinder` |
+| **Sisältää** | Frontend + backend + kysymyspankit | Frontend + CDK-infra + skenaariot |
+
+> **Huomio:** CertGrinderin paikallinen kansio on `Certgrinder\certdrill\certgrinder` — 
+> se on alkuperäinen git subtree -erotuksen tulema ja polku on tarkoituksella syvä.
+
+### Materiaali CertDrilliltä
+
+CertGrinder hyödyntää CertDrillissä tuotettua opiskelumateriaalia:
+
+| Materiaali | Lähde | Kohde |
+|------------|-------|-------|
+| Kysymyspankit | `StudyApp/frontend/src/questions/` | `certgrinder/src/data/questions/` |
+| Overviewt | `StudyApp/frontend/public/overviews/` | `certgrinder/public/overviews/` |
+| Mentori-kuvat | `StudyApp/docs/mentors/` | `certgrinder/public/assets/mentors/` |
+
+---
+
+## Paikallinen ympäristö
+
+### Kansiorakenne levyllä
+
+```
+C:\Users\Timnu\OneDrive\Desktop\
+├── StudyApp\                        # CertDrill — git repo: github.com/salppa/certdrill
+│   └── frontend\src\questions\      # Kysymyspankit (lähde)
+└── Certgrinder\
+    └── certdrill\
+        └── certgrinder\             # CertGrinder — git repo: github.com/salppa/certgrinder
+            ├── .gitignore
+            ├── .github\workflows\deploy.yml
+            ├── src\
+            ├── public\
+            ├── infra\
+            ├── scripts\
+            └── docs\CERTGRINDER.md  (tämä tiedosto)
+```
+
+### AWS-tunnukset
+
+```
+C:\Users\Timnu\.aws\credentials
+```
+
+```ini
+[default]
+aws_access_key_id     = ...
+aws_secret_access_key = ...
+
+[quizzy]
+aws_access_key_id     = ...
+aws_secret_access_key = ...
+```
+
+CDK deploy käyttää `[default]`-profiilia. Tarvittaessa: `--profile quizzy`.
+
+### GitHub CLI
+
+```
+C:\Program Files\GitHub CLI\gh.exe
+```
+
+GitHub-token tallennettu Windows Credential Manageriin (Ohjauspaneeli → Tunnistetietojen hallinta → Windows-tunnistetiedot → `git:https://github.com`).
+
+---
+
+## SSL-ohitus — Corporate proxy
+
+**Kaikki HTTPS-liikenne vaatii SSL-tarkistuksen ohituksen.** Jokaisella työkalulla on oma mekanismi:
+
+### npm
+
+```bash
+npm install --strict-ssl=false
+npm run build   # SSL ei vaikuta buildiin, vain installiin
+```
+
+### git
+
+```bash
+git -c http.sslVerify=false push
+git -c http.sslVerify=false pull --rebase
+git -c http.sslVerify=false push origin main
+```
+
+> **Älä** aseta `git config --global http.sslVerify false` — se koskee kaikkia repoja.
+
+### AWS CDK (bootstrap & deploy)
+
+```powershell
+$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
+npx cdk bootstrap aws://609247456986/eu-north-1
+npm run deploy
+```
+
+Tai yhdellä rivillä:
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 npx cdk deploy --require-approval never
+```
+
+### AWS CLI
+
+```bash
+aws cloudformation list-stacks --no-verify-ssl
+aws s3 sync dist/ s3://bucket-name --no-verify-ssl
+aws cloudfront create-invalidation --distribution-id ID --no-verify-ssl
+```
+
+### Python / anthropic SDK
+
+```python
+import httpx
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key=os.environ["ANTHROPIC_API_KEY"],
+    http_client=httpx.Client(verify=False),
+)
+```
+
+### GitHub Secrets API (PyNaCl)
+
+```python
+import requests
+
+session = requests.Session()
+session.verify = False
+```
+
+---
+
+## Git & GitHub — Säännöt
+
+### Päähaarakäytäntö
+
+- Ainoa haara: `main`
+- Suora push `main`-haaraan on sallittu (ei PR-pakkoa)
+- CI/CD käynnistyy automaattisesti jokaisen `main`-pushin jälkeen
+
+### Tavallinen työnkulku
+
+```bash
+# 1. Muutoksia paikallisesti
+git add src/data/scenarios/togaf.js docs/CERTGRINDER.md
+
+# 2. Commit
+git commit -m "feat: add togaf scenarios"
+
+# 3. Push SSL-ohituksella
+git -c http.sslVerify=false push origin main
+```
+
+### Jos remote on edellä (rejected)
+
+```bash
+git -c http.sslVerify=false pull --rebase
+git -c http.sslVerify=false push origin main
+```
+
+### Mitä ei commitoida (.gitignore)
+
+```
+node_modules/          # npm riippuvuudet
+infra/node_modules/    # CDK riippuvuudet
+dist/                  # Vite-build output
+infra/cdk.out/         # CDK syntetisointiulostulo
+package-lock.json      # Generoitu, vaihtelee ympäristöittäin
+infra/package-lock.json
+.env / .env.local      # Salaisuudet
+```
+
+### GitHub Secrets — Ylläpito
+
+Secretit tallennetaan repoon `github.com/salppa/certgrinder → Settings → Secrets and variables → Actions`.
+
+**Manuaalinen päivitys gh CLI:llä:**
+
+```bash
+gh secret set AWS_ACCESS_KEY_ID --body "AKIA..."
+gh secret set AWS_SECRET_ACCESS_KEY --body "..."
+gh secret set AWS_REGION --body "eu-north-1"
+gh secret set VITE_API_URL --body "https://ku422tldi6.execute-api.eu-north-1.amazonaws.com/"
+gh secret set S3_BUCKET --body "certgrinder-frontend-609247456986-eu-north-1"
+gh secret set CLOUDFRONT_DISTRIBUTION_ID --body "EVR0BK0EBPDUO"
+```
+
+**Listaus:**
+
+```bash
+gh secret list
+```
+
+**SSL-ongelma gh CLI:n kanssa:**
+
+```powershell
+$env:GH_HOST = "github.com"
+# Jos SSL-virhe: käytä Python-skriptiä (scripts/set_github_secrets.py)
+```
+
+**Python-skriptillä (SSL-ohitus):**
+
+```python
+# scripts/set_github_secrets.py
+# Käyttää PyNaCl-kirjastoa salauksen ja requests.Session(verify=False) SSL-ohitukseen
+# Aja: python scripts/set_github_secrets.py
+```
+
+---
+
 ## Hakemistorakenne
 
 ```
 certgrinder/
+├── .gitignore                       # node_modules, dist, cdk.out, .env
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml               # CI/CD — build + S3 + CloudFront
@@ -64,7 +281,7 @@ certgrinder/
 │   ├── lambda/
 │   │   └── user_data.py             # Lambda handler (Python 3.12)
 │   ├── cdk.json
-│   ├── tsconfig.json
+│   ├── tsconfig.json                # moduleResolution: "node" pakollinen
 │   └── package.json
 ├── scripts/
 │   └── generate_scenarios.py        # Claude Opus -pohjainen skenaariogeneraattori
@@ -273,21 +490,29 @@ useSympathy(moduleId)   // { sympathy, updateSympathy }
 `scripts/generate_scenarios.py` — käyttää Claude Opus 4.7 API:a.
 
 ```bash
-export ANTHROPIC_API_KEY=sk-...
+# Windows PowerShell
+$env:ANTHROPIC_API_KEY = "sk-ant-..."
 python scripts/generate_scenarios.py --module togaf
 python scripts/generate_scenarios.py --module cloud --episodes 5 --per-episode 4
+
+# Kaikki moduulit kerralla
+foreach ($m in @("togaf","togaf-basics","archimate","cobit2019","cloud","az900","aws-clf-c02","gcp-fundamentals","itsm","it4it","it4it-advanced","ai-compliance","ai900","sabsa")) {
+    python scripts/generate_scenarios.py --module $m
+}
 ```
 
 **Tuetut moduulit:** kaikki 14 (MODULE_CONTEXTS määritelty jokaiselle)  
 **Tulostiedosto:** `src/data/scenarios/{moduleId}.js`  
-**SSL-huomio:** Windows-ympäristössä `httpx.Client(verify=False)` — corporate proxy
+**SSL-ohitus:** `httpx.Client(verify=False)` — pakollinen corporate proxy -ympäristössä  
+**Enkoodaus:** Windows cp1252 → käytä ASCII-merkkejä konsolitulosteissa (ei ✓-merkkiä)  
+**JSON-virhe:** Jos Claude palauttaa markdown-aitaukset (```json) skripti poistaa ne automaattisesti
 
 ---
 
 ## Paikallinen kehitys
 
 ```bash
-npm install
+npm install --strict-ssl=false
 npm run dev        # http://localhost:5173
 npm run build      # tuotantobuild → dist/
 ```
@@ -329,12 +554,13 @@ GET  /users/{userId}/modules/{moduleId}/sympathy
 PUT  /users/{userId}/modules/{moduleId}/sympathy
 ```
 
-### Manuaalinen deploy
+### Manuaalinen deploy (VS Code terminaali)
 
-```bash
+```powershell
 cd infra
 npm install --strict-ssl=false
-npx cdk bootstrap
+$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
+npx cdk bootstrap aws://609247456986/eu-north-1
 npm run deploy
 ```
 
