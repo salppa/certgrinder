@@ -1,6 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { T } from './theme'
+import AuthGuard       from './components/AuthGuard'
+import LoginScreen     from './screens/LoginScreen'
+import AuthCallback    from './screens/AuthCallback'
 import Dashboard       from './screens/Dashboard'
 import ModulePicker    from './screens/ModulePicker'
 import EpisodeSelect   from './screens/EpisodeSelect'
@@ -21,14 +24,16 @@ export default function App() {
 
       <BrowserRouter>
         <Routes>
+          <Route path="/login"                           element={<LoginScreen />} />
+          <Route path="/callback"                        element={<AuthCallback />} />
           <Route path="/"                                element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard"                       element={<Dashboard />} />
-          <Route path="/modules"                         element={<ModulePicker />} />
-          <Route path="/episodes/:moduleId"              element={<EpisodeSelect />} />
-          <Route path="/reigns/:moduleId/:episodeId"     element={<ReignsScreen />} />
-          <Route path="/reigns/:moduleId"                element={<ReignsScreen />} />
-          <Route path="/complete/:moduleId/:episodeId"   element={<EpisodeComplete />} />
-          <Route path="/gameover/:moduleId"              element={<GameOver />} />
+          <Route path="/dashboard"                       element={<AuthGuard><Dashboard /></AuthGuard>} />
+          <Route path="/modules"                         element={<AuthGuard><ModulePicker /></AuthGuard>} />
+          <Route path="/episodes/:moduleId"              element={<AuthGuard><EpisodeSelect /></AuthGuard>} />
+          <Route path="/reigns/:moduleId/:episodeId"     element={<AuthGuard><ReignsScreen /></AuthGuard>} />
+          <Route path="/reigns/:moduleId"                element={<AuthGuard><ReignsScreen /></AuthGuard>} />
+          <Route path="/complete/:moduleId/:episodeId"   element={<AuthGuard><EpisodeComplete /></AuthGuard>} />
+          <Route path="/gameover/:moduleId"              element={<AuthGuard><GameOver /></AuthGuard>} />
         </Routes>
       </BrowserRouter>
     </div>
