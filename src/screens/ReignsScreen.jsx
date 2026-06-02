@@ -145,11 +145,6 @@ export default function ReignsScreen() {
         </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 8px', marginBottom: 8 }}>
-        <motion.span animate={{ opacity: previewSide === 'left'  ? 1 : 0.3, x: previewSide === 'left'  ? -4 : 0 }} style={{ fontSize: 12, color: T.red,   fontWeight: 600 }}>← {card.left.label}</motion.span>
-        <motion.span animate={{ opacity: previewSide === 'right' ? 1 : 0.3, x: previewSide === 'right' ? 4  : 0 }} style={{ fontSize: 12, color: T.green, fontWeight: 600 }}>{card.right.label} →</motion.span>
-      </div>
-
       <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
         <motion.div drag="x" dragConstraints={{ left: -300, right: 300 }}
           style={{ x, rotate, opacity: fadeOp, width: '100%' }}
@@ -159,6 +154,25 @@ export default function ReignsScreen() {
             <p style={{ fontSize: 16, lineHeight: 1.65, color: T.text, margin: 0 }}>{card.text}</p>
           </div>
         </motion.div>
+      </div>
+
+      <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+        <button
+          onClick={() => handleDecision('left')}
+          onMouseEnter={() => setPreviewSide('left')}
+          onMouseLeave={() => setPreviewSide(null)}
+          style={{ flex: 1, padding: '12px 16px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 12, color: T.red, fontSize: 13, fontWeight: 600, cursor: 'pointer', textAlign: 'center' }}
+        >
+          ← {card.left.label}
+        </button>
+        <button
+          onClick={() => handleDecision('right')}
+          onMouseEnter={() => setPreviewSide('right')}
+          onMouseLeave={() => setPreviewSide(null)}
+          style={{ flex: 1, padding: '12px 16px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12, color: T.green, fontSize: 13, fontWeight: 600, cursor: 'pointer', textAlign: 'center' }}
+        >
+          {card.right.label} →
+        </button>
       </div>
 
       {previewSide && (
