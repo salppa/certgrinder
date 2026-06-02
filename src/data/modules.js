@@ -3,23 +3,25 @@ export const MODULES = [
     id: 'togaf',
     name: 'TOGAF',
     domain: 'Enterprise Architecture',
-    mentor: 'teacher',
+    mentor: 'ea-strategist',
     hasScenarios: true,
     episodes: 5,
     badge: 'SIMULAATIO',
     color: '#6366f1',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'togaf-basics',
     name: 'TOGAF Basics',
     domain: 'Enterprise Architecture',
-    mentor: 'teacher',
+    mentor: 'ea-strategist',
     hasScenarios: true,
     episodes: 5,
     badge: 'SIMULAATIO',
     color: '#818cf8',
     questionCount: 64,
+    lang: 'en',
   },
   {
     id: 'archimate',
@@ -31,6 +33,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#8b5cf6',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'cobit2019',
@@ -42,6 +45,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#a855f7',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'cloud',
@@ -53,6 +57,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#3b82f6',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'az900',
@@ -64,6 +69,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#0ea5e9',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'aws-clf-c02',
@@ -75,6 +81,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#f97316',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'gcp-fundamentals',
@@ -86,6 +93,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#22c55e',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'itsm',
@@ -97,6 +105,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#10b981',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'it4it',
@@ -108,6 +117,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#14b8a6',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'it4it-advanced',
@@ -119,6 +129,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#06b6d4',
     questionCount: 80,
+    lang: 'fi',
   },
   {
     id: 'ai-compliance',
@@ -130,6 +141,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#f59e0b',
     questionCount: 40,
+    lang: 'en',
   },
   {
     id: 'ai900',
@@ -141,6 +153,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#eab308',
     questionCount: 80,
+    lang: 'en',
   },
   {
     id: 'sabsa',
@@ -152,6 +165,7 @@ export const MODULES = [
     badge: 'SIMULAATIO',
     color: '#ef4444',
     questionCount: 80,
+    lang: 'en',
   },
 ]
 

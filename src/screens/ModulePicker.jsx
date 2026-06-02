@@ -9,7 +9,8 @@ import { useLang }  from '../context/LangContext'
 
 export default function ModulePicker() {
   const navigate = useNavigate()
-  const { t } = useLang()
+  const { lang, t } = useLang()
+  const visible = MODULES.filter(m => m.lang === lang)
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '40px 24px' }}>
@@ -21,7 +22,7 @@ export default function ModulePicker() {
       </motion.div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
-        {MODULES.map((mod, i) => (
+        {visible.map((mod, i) => (
           <motion.div key={mod.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}>
             <GlassCard style={{ padding: 24 }}>
               {mod.badge && (
