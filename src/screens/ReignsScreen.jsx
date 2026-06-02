@@ -42,10 +42,11 @@ export default function ReignsScreen() {
   const [cardIndex,    setCardIndex]    = useState(0)
   const [mentorMood,   setMentorMood]   = useState('neutral')
   const [previewSide,  setPreviewSide]  = useState(null)
-  const [feedback,     setFeedback]     = useState(null) // { side, consequence, deltas }
+  const [feedback,     setFeedback]     = useState(null) // { side, consequence, deltas, net }
+  const [flagged,      setFlagged]      = useState(false)
 
-  const { completeEpisode } = useProgress(moduleId)
-  const { updateSympathy }  = useSympathy(moduleId)
+  const { completeEpisode, flagCard } = useProgress(moduleId)
+  const { updateSympathy }            = useSympathy(moduleId)
   const { t } = useLang()
 
   const x      = useMotionValue(0)
@@ -74,16 +75,18 @@ export default function ReignsScreen() {
   }, [])
 
   const handleChoice = useCallback((side) => {
-    const net = Object.values(card[side].deltas).reduce((a, b) => a + b, 0)
+    const net  = Object.values(card[side].deltas).reduce((a, b) => a + b, 0)
     const mood = net >= 0 ? 'relieved' : 'worried'
     setMentorMood(mood)
     setPreviewSide(null)
-    setFeedback({ side, consequence: card[side].consequence, deltas: card[side].deltas, mood })
+    setFlagged(false)
+    setFeedback({ side, consequence: card[side].consequence, deltas: card[side].deltas, mood, net, cardId: card.id })
   }, [card])
 
   const handleDecision = useCallback(() => {
     if (!feedback) return
-    const { side, deltas } = feedback
+    const { side, deltas, cardId } = feedback
+    if (flagged && cardId) flagCard(cardId)
     let gameOver = false
     const next = {}
     for (const k of ['r1', 'r2', 'r3', 'r4']) {
@@ -106,7 +109,7 @@ export default function ReignsScreen() {
       setMentorMood('neutral')
       setCardIndex(i => i + 1)
     }
-  }, [feedback, resources, cardIndex, cards?.length, epId, moduleId, navigate, completeEpisode, updateSympathy])
+  }, [feedback, flagged, flagCard, resources, cardIndex, cards?.length, epId, moduleId, navigate, completeEpisode, updateSympathy])
 
   const handleDragEnd = useCallback((_, info) => {
     const dx = info.offset.x
@@ -220,18 +223,40 @@ export default function ReignsScreen() {
             <MentorAvatar mentorId={module.mentor} mood={feedback.mood} size={120} showName />
 
             <div style={{ ...glass, padding: 28, width: '100%', textAlign: 'center' }}>
+
+              {/* Oikein / Väärin */}
+              <div style={{
+                fontSize: 20, fontWeight: 800, marginBottom: 8,
+                color: feedback.net > 0 ? T.green : feedback.net < 0 ? T.red : T.textMuted,
+              }}>
+                {feedback.net > 0 ? t.feedback.correct : feedback.net < 0 ? t.feedback.wrong : t.feedback.neutral}
+              </div>
+
+              {/* Valittu vaihtoehto */}
               <div style={{
                 display: 'inline-block', marginBottom: 16,
                 padding: '4px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700,
-                background: feedback.side === 'right' ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.10)',
-                color: feedback.side === 'right' ? T.green : T.red,
+                background: feedback.net >= 0 ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.10)',
+                color: feedback.net >= 0 ? T.green : T.red,
               }}>
                 {feedback.side === 'right' ? `→ ${card.right.label}` : `← ${card.left.label}`}
               </div>
 
-              <p style={{ margin: '0 0 24px', fontSize: 15, lineHeight: 1.65, color: T.text }}>
+              {/* Seuraukset */}
+              <p style={{ margin: '0 0 20px', fontSize: 15, lineHeight: 1.65, color: T.text }}>
                 {feedback.consequence}
               </p>
+
+              {/* Merkitse epäselväksi */}
+              <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 20, cursor: 'pointer', fontSize: 13, color: T.textMuted }}>
+                <input
+                  type="checkbox"
+                  checked={flagged}
+                  onChange={e => setFlagged(e.target.checked)}
+                  style={{ width: 16, height: 16, cursor: 'pointer', accentColor: T.accent }}
+                />
+                {t.feedback.flagLabel}
+              </label>
 
               <button
                 onClick={handleDecision}
@@ -242,7 +267,7 @@ export default function ReignsScreen() {
                   fontSize: 14, fontWeight: 600, cursor: 'pointer',
                 }}
               >
-                Jatka →
+                {t.feedback.continueBtn}
               </button>
             </div>
           </motion.div>

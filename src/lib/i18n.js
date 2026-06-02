@@ -33,6 +33,13 @@ export const translations = {
       title:         'Valitse moduuli',
       questions:     (n) => `${n} kysymystä`,
     },
+    feedback: {
+      correct:       'Oikein! ✓',
+      wrong:         'Väärin! ✗',
+      neutral:       'Tasapainossa',
+      flagLabel:     'Merkitse epäselväksi',
+      continueBtn:   'Jatka →',
+    },
     episodes: {
       title:         'Valitse episodi',
       episode:       (n) => `Episodi ${n}`,
@@ -93,6 +100,13 @@ export const translations = {
     modules: {
       title:         'Choose module',
       questions:     (n) => `${n} questions`,
+    },
+    feedback: {
+      correct:       'Correct! ✓',
+      wrong:         'Incorrect! ✗',
+      neutral:       'Balanced',
+      flagLabel:     'Flag as unclear',
+      continueBtn:   'Continue →',
     },
     episodes: {
       title:         'Choose episode',

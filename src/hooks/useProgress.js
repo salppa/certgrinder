@@ -17,7 +17,17 @@ export function useProgress(moduleId) {
 
   const completeEpisode = useCallback((epId) => {
     set(prev => {
-      const next = { completed: [...new Set([...prev.completed, epId])] }
+      const next = { ...prev, completed: [...new Set([...prev.completed, epId])] }
+      localStorage.setItem(lsKey(moduleId, 'progress'), JSON.stringify(next))
+      api.setProgress(moduleId, next).catch(() => {})
+      return next
+    })
+  }, [moduleId])
+
+  const flagCard = useCallback((cardId) => {
+    set(prev => {
+      const flags = [...new Set([...(prev.flags || []), cardId])]
+      const next = { ...prev, flags }
       localStorage.setItem(lsKey(moduleId, 'progress'), JSON.stringify(next))
       api.setProgress(moduleId, next).catch(() => {})
       return next
@@ -28,7 +38,7 @@ export function useProgress(moduleId) {
     epId > 1 && !progress.completed.includes(epId - 1)
   , [progress])
 
-  return { progress, completeEpisode, isLocked }
+  return { progress, completeEpisode, flagCard, isLocked }
 }
 
 export function useSympathy(moduleId) {
