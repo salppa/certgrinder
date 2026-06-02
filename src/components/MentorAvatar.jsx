@@ -1,5 +1,6 @@
 import React from 'react'
 import { T } from '../theme'
+import { useLang } from '../context/LangContext'
 
 const MENTOR_CONFIG = {
   'cloud-architect':  { name: 'Jordan Kim',      color: '#3b82f6' },
@@ -20,6 +21,7 @@ const MOOD_FALLBACK = {
 export default function MentorAvatar({ mentorId = 'teacher', mood = 'neutral', size = 80, showName }) {
   const config = MENTOR_CONFIG[mentorId] || MENTOR_CONFIG['teacher']
   const [imgError, setImgError] = React.useState(false)
+  const { lang } = useLang()
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
@@ -46,7 +48,12 @@ export default function MentorAvatar({ mentorId = 'teacher', mood = 'neutral', s
         )}
       </div>
       {showName && (
-        <span style={{ fontSize: 11, color: T.textMuted, fontWeight: 500 }}>{config.name}</span>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 10, color: T.textMuted, fontWeight: 400, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: 2 }}>
+            {lang === 'en' ? 'Your mentor' : 'Mentorisi'}
+          </div>
+          <div style={{ fontSize: 12, color: T.text, fontWeight: 600 }}>{config.name}</div>
+        </div>
       )}
     </div>
   )
