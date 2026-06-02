@@ -42,6 +42,7 @@ export default function ReignsScreen() {
   const [cardIndex,    setCardIndex]    = useState(0)
   const [mentorMood,   setMentorMood]   = useState('neutral')
   const [previewSide,  setPreviewSide]  = useState(null)
+  const [feedback,     setFeedback]     = useState(null) // { side, consequence, deltas }
 
   const { completeEpisode } = useProgress(moduleId)
   const { updateSympathy }  = useSympathy(moduleId)
@@ -72,8 +73,17 @@ export default function ReignsScreen() {
     }
   }, [])
 
-  const handleDecision = useCallback((side) => {
-    const deltas = card[side].deltas
+  const handleChoice = useCallback((side) => {
+    const net = Object.values(card[side].deltas).reduce((a, b) => a + b, 0)
+    const mood = net >= 0 ? 'relieved' : 'worried'
+    setMentorMood(mood)
+    setPreviewSide(null)
+    setFeedback({ side, consequence: card[side].consequence, deltas: card[side].deltas, mood })
+  }, [card])
+
+  const handleDecision = useCallback(() => {
+    if (!feedback) return
+    const { side, deltas } = feedback
     let gameOver = false
     const next = {}
     for (const k of ['r1', 'r2', 'r3', 'r4']) {
@@ -81,7 +91,7 @@ export default function ReignsScreen() {
       if (next[k] <= 0 || next[k] >= 100) gameOver = true
     }
     setResources(next)
-    setPreviewSide(null)
+    setFeedback(null)
     const net = Object.values(deltas).reduce((a, b) => a + b, 0)
     updateSympathy(Math.sign(net) * 5)
 
@@ -93,17 +103,17 @@ export default function ReignsScreen() {
       completeEpisode(epId)
       setTimeout(() => navigate(`/complete/${moduleId}/${epId}`), 600)
     } else {
-      setMentorMood('relieved')
-      setTimeout(() => { setCardIndex(i => i + 1); setMentorMood('neutral') }, 400)
+      setMentorMood('neutral')
+      setCardIndex(i => i + 1)
     }
-  }, [card, resources, cardIndex, cards.length, epId, moduleId, navigate, completeEpisode, updateSympathy])
+  }, [feedback, resources, cardIndex, cards?.length, epId, moduleId, navigate, completeEpisode, updateSympathy])
 
   const handleDragEnd = useCallback((_, info) => {
     const dx = info.offset.x
-    if      (dx >  DECIDE) handleDecision('right')
-    else if (dx < -DECIDE) handleDecision('left')
+    if      (dx >  DECIDE) handleChoice('right')
+    else if (dx < -DECIDE) handleChoice('left')
     else { setPreviewSide(null); setMentorMood('neutral') }
-  }, [handleDecision])
+  }, [handleChoice])
 
   if (!episode) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -131,8 +141,8 @@ export default function ReignsScreen() {
         </div>
       </motion.div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-        <MentorAvatar mentorId={module.mentor} mood={mentorMood} size={56} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
+        <MentorAvatar mentorId={module.mentor} mood={mentorMood} size={80} showName />
         <div>
           <div style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{episode.title}</div>
           <div style={{ fontSize: 11, color: T.textMuted, marginTop: 2 }}>{cardIndex + 1} / {cards.length}</div>
@@ -158,7 +168,7 @@ export default function ReignsScreen() {
 
       <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
         <button
-          onClick={() => handleDecision('left')}
+          onClick={() => handleChoice('left')}
           onMouseEnter={() => setPreviewSide('left')}
           onMouseLeave={() => setPreviewSide(null)}
           style={{ flex: 1, padding: '12px 16px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 12, color: T.red, fontSize: 13, fontWeight: 600, cursor: 'pointer', textAlign: 'center' }}
@@ -166,7 +176,7 @@ export default function ReignsScreen() {
           ← {card.left.label}
         </button>
         <button
-          onClick={() => handleDecision('right')}
+          onClick={() => handleChoice('right')}
           onMouseEnter={() => setPreviewSide('right')}
           onMouseLeave={() => setPreviewSide(null)}
           style={{ flex: 1, padding: '12px 16px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 12, color: T.green, fontSize: 13, fontWeight: 600, cursor: 'pointer', textAlign: 'center' }}
@@ -188,6 +198,56 @@ export default function ReignsScreen() {
       <div style={{ textAlign: 'center', marginTop: 16 }}>
         <span style={{ fontSize: 11, color: T.textMuted }}>{t.episodes.episode(epId)} · {episode.title}</span>
       </div>
+
+      {feedback && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 100,
+            background: 'rgba(248,250,252,0.92)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: 24,
+          }}
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+            style={{ maxWidth: 400, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}
+          >
+            <MentorAvatar mentorId={module.mentor} mood={feedback.mood} size={120} showName />
+
+            <div style={{ ...glass, padding: 28, width: '100%', textAlign: 'center' }}>
+              <div style={{
+                display: 'inline-block', marginBottom: 16,
+                padding: '4px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700,
+                background: feedback.side === 'right' ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.10)',
+                color: feedback.side === 'right' ? T.green : T.red,
+              }}>
+                {feedback.side === 'right' ? `→ ${card.right.label}` : `← ${card.left.label}`}
+              </div>
+
+              <p style={{ margin: '0 0 24px', fontSize: 15, lineHeight: 1.65, color: T.text }}>
+                {feedback.consequence}
+              </p>
+
+              <button
+                onClick={handleDecision}
+                style={{
+                  padding: '12px 32px',
+                  background: T.accent, color: '#fff',
+                  border: 'none', borderRadius: 12,
+                  fontSize: 14, fontWeight: 600, cursor: 'pointer',
+                }}
+              >
+                Jatka →
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   )
 }

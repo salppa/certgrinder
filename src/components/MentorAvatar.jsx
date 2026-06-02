@@ -2,12 +2,12 @@ import React from 'react'
 import { T } from '../theme'
 
 const MENTOR_CONFIG = {
-  'cloud-architect':  { name: 'Cloud-arkkitehti',        color: '#3b82f6' },
-  'ea-strategist':    { name: 'EA-Strategi',             color: '#8b5cf6' },
-  'itsm-consultant':  { name: 'ITSM-konsultti',          color: '#10b981' },
-  'ai-compliance':    { name: 'AI-Compliance',           color: '#f59e0b' },
-  'chef':             { name: 'Kokki',                   color: '#ef4444' },
-  'teacher':          { name: 'Suomalainen opettaja',    color: '#6366f1' },
+  'cloud-architect':  { name: 'Jordan Kim',      color: '#3b82f6' },
+  'ea-strategist':    { name: 'Marcus Voss',     color: '#8b5cf6' },
+  'itsm-consultant':  { name: 'Sofia Andersen',  color: '#10b981' },
+  'ai-compliance':    { name: 'Nora Lindqvist',  color: '#f59e0b' },
+  'chef':             { name: 'Marius Leblanc',  color: '#ef4444' },
+  'teacher':          { name: 'Eleanor Webb',    color: '#6366f1' },
 }
 
 const MOOD_FALLBACK = {

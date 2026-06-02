@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { T, glass } from '../theme'
 import MentorAvatar from './MentorAvatar'
+import { useLang } from '../context/LangContext'
 
 export default function MentorMonologue({ mentorId, text, onDismiss }) {
   const [visible, setVisible] = useState(true)
+  const { lang } = useLang()
 
   const dismiss = () => {
     setVisible(false)
@@ -50,7 +52,7 @@ export default function MentorMonologue({ mentorId, text, onDismiss }) {
                     fontSize: 14, fontWeight: 600, cursor: 'pointer',
                   }}
                 >
-                  Aloitetaan →
+                  {lang === 'en' ? "Let's go →" : 'Aloitetaan →'}
                 </button>
               </div>
             </div>
