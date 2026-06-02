@@ -7,6 +7,7 @@ import MentorAvatar     from '../components/MentorAvatar'
 import MentorMonologue  from '../components/MentorMonologue'
 import { MODULES }      from '../data/modules'
 import { useProgress, useSympathy } from '../hooks/useProgress'
+import { useLang } from '../context/LangContext'
 
 async function loadScenarios(moduleId) {
   try {
@@ -44,6 +45,7 @@ export default function ReignsScreen() {
 
   const { completeEpisode } = useProgress(moduleId)
   const { updateSympathy }  = useSympathy(moduleId)
+  const { t } = useLang()
 
   const x      = useMotionValue(0)
   const rotate = useTransform(x, [-200, 200], [-15, 15])
@@ -105,7 +107,7 @@ export default function ReignsScreen() {
 
   if (!episode) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-      <span style={{ color: T.textMuted, fontSize: 14 }}>Ladataan...</span>
+      <span style={{ color: T.textMuted, fontSize: 14 }}>{t.common.loading}</span>
     </div>
   )
 
@@ -139,7 +141,7 @@ export default function ReignsScreen() {
           onClick={() => navigate(`/episodes/${moduleId}`)}
           style={{ marginLeft: 'auto', background: 'none', border: 'none', color: T.textMuted, cursor: 'pointer', fontSize: 12 }}
         >
-          ✕ Poistu
+          {t.common.exit}
         </button>
       </div>
 
@@ -170,7 +172,7 @@ export default function ReignsScreen() {
       )}
 
       <div style={{ textAlign: 'center', marginTop: 16 }}>
-        <span style={{ fontSize: 11, color: T.textMuted }}>Episodi {epId} · {episode.title}</span>
+        <span style={{ fontSize: 11, color: T.textMuted }}>{t.episodes.episode(epId)} · {episode.title}</span>
       </div>
     </div>
   )

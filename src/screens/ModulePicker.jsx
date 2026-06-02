@@ -2,20 +2,22 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { T } from '../theme'
-import GlassCard   from '../components/GlassCard'
+import GlassCard    from '../components/GlassCard'
 import MentorAvatar from '../components/MentorAvatar'
-import { MODULES } from '../data/modules'
+import { MODULES }  from '../data/modules'
+import { useLang }  from '../context/LangContext'
 
 export default function ModulePicker() {
   const navigate = useNavigate()
+  const { t } = useLang()
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '40px 24px' }}>
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 32 }}>
         <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', color: T.accent, cursor: 'pointer', padding: 0, fontSize: 14, marginBottom: 16 }}>
-          ← Takaisin
+          {t.common.back}
         </button>
-        <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Valitse moduuli</h1>
+        <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>{t.modules.title}</h1>
       </motion.div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
@@ -31,20 +33,20 @@ export default function ModulePicker() {
                 <div>
                   <h3 style={{ margin: '0 0 4px', fontSize: 18, fontWeight: 700 }}>{mod.name}</h3>
                   <p style={{ margin: '0 0 8px', fontSize: 12, color: T.textMuted }}>{mod.domain}</p>
-                  <p style={{ margin: 0, fontSize: 12, color: T.textMuted }}>{mod.questionCount} kysymystä</p>
+                  <p style={{ margin: 0, fontSize: 12, color: T.textMuted }}>{t.modules.questions(mod.questionCount)}</p>
                 </div>
                 <MentorAvatar mentorId={mod.mentor} size={52} />
               </div>
               <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
                 <button style={{ flex: 1, padding: '10px 16px', background: T.accent, color: '#fff', border: 'none', borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
-                  Harjoittele
+                  {t.common.practice}
                 </button>
                 {mod.hasScenarios && (
                   <button
                     onClick={() => navigate(`/episodes/${mod.id}`)}
                     style={{ flex: 1, padding: '10px 16px', background: `${mod.color}15`, color: mod.color, border: `1px solid ${mod.color}40`, borderRadius: 12, fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
                   >
-                    🎮 Simulaatio
+                    🎮 {t.common.simulation}
                   </button>
                 )}
               </div>

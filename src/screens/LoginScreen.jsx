@@ -1,6 +1,7 @@
 import React from 'react'
 import { T, glass } from '../theme'
 import { login } from '../lib/auth'
+import { useLang } from '../context/LangContext'
 
 const GoogleIcon = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -11,14 +12,44 @@ const GoogleIcon = () => (
   </svg>
 )
 
+const btnBase = {
+  padding: '8px 20px',
+  borderRadius: 8,
+  fontSize: 13,
+  fontWeight: 700,
+  cursor: 'pointer',
+  border: 'none',
+  transition: 'opacity 0.15s',
+}
+
 export default function LoginScreen() {
+  const { lang, switchLang, t } = useLang()
+
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
       <div style={{ ...glass, padding: 48, maxWidth: 360, width: '100%', textAlign: 'center' }}>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 32 }}>
+          {['fi', 'en'].map(l => (
+            <button
+              key={l}
+              onClick={() => switchLang(l)}
+              style={{
+                ...btnBase,
+                background: lang === l ? T.accent : 'rgba(0,0,0,0.06)',
+                color:      lang === l ? '#fff'   : T.textMuted,
+              }}
+            >
+              {l === 'fi' ? '🇫🇮 Suomi' : '🇬🇧 English'}
+            </button>
+          ))}
+        </div>
+
         <div style={{ fontSize: 32, fontWeight: 800, color: T.text, marginBottom: 8 }}>CertGrinder</div>
         <div style={{ fontSize: 14, color: T.textMuted, marginBottom: 40 }}>
-          Kirjaudu sisään jatkaaksesi
+          {t.login.subtitle}
         </div>
+
         <button
           onClick={login}
           style={{
@@ -30,8 +61,9 @@ export default function LoginScreen() {
           }}
         >
           <GoogleIcon />
-          Kirjaudu Google-tilillä
+          {t.login.googleButton}
         </button>
+
       </div>
     </div>
   )

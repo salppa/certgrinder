@@ -16,9 +16,16 @@ export class CertGrinderStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    const googleClientId     = this.node.tryGetContext('googleClientId')     as string
-    const googleClientSecret = this.node.tryGetContext('googleClientSecret') as string
+    const googleClientId     = this.node.tryGetContext('googleClientId')     as string | undefined
+    const googleClientSecret = this.node.tryGetContext('googleClientSecret') as string | undefined
     const cognitoDomainPrefix = (this.node.tryGetContext('cognitoDomainPrefix') as string) || 'certgrinder-app'
+
+    if (!googleClientId || !googleClientSecret) {
+      throw new Error(
+        'Missing required CDK context: googleClientId and googleClientSecret.\n' +
+        'Deploy with: cdk deploy -c googleClientId=... -c googleClientSecret=...'
+      )
+    }
 
     // ── Cognito User Pool ─────────────────────────────────────────────────────
     const userPool = new cognito.UserPool(this, 'UserPool', {
@@ -30,19 +37,17 @@ export class CertGrinderStack extends cdk.Stack {
       removalPolicy:          cdk.RemovalPolicy.RETAIN,
     })
 
-    // Google identity provider — requires googleClientId/Secret passed as CDK context
-    if (googleClientId && googleClientSecret) {
-      new cognito.UserPoolIdentityProviderGoogle(this, 'GoogleIdP', {
-        userPool,
-        clientId:     googleClientId,
-        clientSecret: googleClientSecret,
-        scopes:       ['openid', 'email', 'profile'],
-        attributeMapping: {
-          email:     cognito.ProviderAttribute.GOOGLE_EMAIL,
-          givenName: cognito.ProviderAttribute.GOOGLE_NAME,
-        },
-      })
-    }
+    // Google identity provider
+    const googleIdP = new cognito.UserPoolIdentityProviderGoogle(this, 'GoogleIdP', {
+      userPool,
+      clientId:          googleClientId,
+      clientSecretValue: cdk.SecretValue.unsafePlainText(googleClientSecret),
+      scopes:       ['openid', 'email', 'profile'],
+      attributeMapping: {
+        email:     cognito.ProviderAttribute.GOOGLE_EMAIL,
+        givenName: cognito.ProviderAttribute.GOOGLE_NAME,
+      },
+    })
 
     const callbackUrl = `https://${this.node.tryGetContext('cloudfrontDomain') || 'localhost:5173'}/callback`
 
@@ -58,6 +63,8 @@ export class CertGrinderStack extends cdk.Stack {
       supportedIdentityProviders: [cognito.UserPoolClientIdentityProvider.GOOGLE],
       preventUserExistenceErrors:  true,
     })
+
+    appClient.node.addDependency(googleIdP)
 
     const userPoolDomain = userPool.addDomain('Domain', {
       cognitoDomain: { domainPrefix: cognitoDomainPrefix },

@@ -16,7 +16,9 @@ async function codeChallenge(verifier) {
 
 export async function login() {
   const verifier = generateVerifier()
+  const state    = generateVerifier()
   sessionStorage.setItem('pkce_verifier', verifier)
+  sessionStorage.setItem('oauth_state',   state)
   const challenge = await codeChallenge(verifier)
   const params = new URLSearchParams({
     response_type:         'code',
@@ -25,6 +27,8 @@ export async function login() {
     scope:                 'openid email profile',
     code_challenge:        challenge,
     code_challenge_method: 'S256',
+    identity_provider:     'Google',
+    state,
   })
   window.location.href = `${COGNITO_DOMAIN}/oauth2/authorize?${params}`
 }
@@ -65,12 +69,33 @@ export function getUserId() {
   }
 }
 
-export function isAuthenticated() {
+export async function refreshTokens() {
+  const refreshToken = localStorage.getItem('cg:refresh_token')
+  if (!refreshToken) throw new Error('No refresh token')
+  const res = await fetch(`${COGNITO_DOMAIN}/oauth2/token`, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body:    new URLSearchParams({
+      grant_type:    'refresh_token',
+      client_id:     CLIENT_ID,
+      refresh_token: refreshToken,
+    }),
+  })
+  if (!res.ok) throw new Error(`Token refresh failed: ${res.status}`)
+  const tokens = await res.json()
+  localStorage.setItem('cg:id_token',     tokens.id_token)
+  localStorage.setItem('cg:access_token', tokens.access_token)
+  return tokens
+}
+
+export async function isAuthenticated() {
   const token = getIdToken()
   if (!token) return false
   try {
     const { exp } = JSON.parse(atob(token.split('.')[1]))
-    return Date.now() < exp * 1000
+    if (Date.now() < exp * 1000) return true
+    await refreshTokens()
+    return true
   } catch {
     return false
   }

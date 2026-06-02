@@ -1,0 +1,123 @@
+export const translations = {
+  fi: {
+    login: {
+      subtitle:      'Kirjaudu sisään jatkaaksesi',
+      googleButton:  'Kirjaudu Google-tilillä',
+    },
+    auth: {
+      loading:       'Kirjaudutaan...',
+      failed:        (err) => `Kirjautuminen epäonnistui: ${err}`,
+      noCode:        'Ei auth-koodia URL:ssa',
+      badState:      'Virheellinen OAuth state — yritä kirjautua uudelleen',
+      tryAgain:      'Yritä uudelleen',
+    },
+    common: {
+      loading:       'Ladataan...',
+      back:          '← Takaisin',
+      exit:          '✕ Poistu',
+      practice:      'Harjoittele',
+      simulation:    'Simulaatio',
+      episodes:      'Episodit',
+      playAgain:     'Pelaa uudelleen',
+      home:          'Etusivulle',
+    },
+    dashboard: {
+      tagline:       'Grind your memory smarter!',
+      activeModule:  'Aktiivinen moduuli',
+      simResults:    'Simulaatiotulokset',
+      practicedToday:'Harjoiteltu tänään',
+      practiceDesc:  'Tenttikysymyksiä mukautuvan oppimisen algoritmilla',
+      simDesc:       'TOGAF kriisinhallinta',
+    },
+    modules: {
+      title:         'Valitse moduuli',
+      questions:     (n) => `${n} kysymystä`,
+    },
+    episodes: {
+      title:         'Valitse episodi',
+      episode:       (n) => `Episodi ${n}`,
+      play:          'Pelaa →',
+      completed:     'Suoritettu',
+      togafTitles: [
+        'Arkkitehtuuristrategia',
+        'Liiketoiminta-arkkitehtuuri',
+        'Tietojärjestelmäarkkitehtuuri',
+        'Teknologia-arkkitehtuuri',
+        'Hallinto ja migraatio',
+      ],
+    },
+    episodeComplete: {
+      allDone:       'Kaikki episodit suoritettu!',
+      done:          (n) => `Episodi ${n} suoritettu!`,
+      allDoneDesc:   'Erinomainen suoritus. Olet läpikäynyt koko moduulin simulaation.',
+      doneDesc:      (n) => `Hyvin tehty. Episodi ${n} on nyt avattu.`,
+      nextEpisode:   (n) => `Episodi ${n} →`,
+    },
+    gameOver: {
+      title:         'Simulaatio päättyi',
+      desc1:         'Organisaatio ajautui kriisiin. Se tapahtuu parhaille arkkitehdeille — tärkeintä on ymmärtää miksi.',
+      desc2:         'Resurssimittari saavutti kriittisen rajan. Tarkastele päätösten ketjua ja yritä uudelleen.',
+    },
+  },
+
+  en: {
+    login: {
+      subtitle:      'Sign in to continue',
+      googleButton:  'Sign in with Google',
+    },
+    auth: {
+      loading:       'Signing in...',
+      failed:        (err) => `Sign in failed: ${err}`,
+      noCode:        'No auth code in URL',
+      badState:      'Invalid OAuth state — please sign in again',
+      tryAgain:      'Try again',
+    },
+    common: {
+      loading:       'Loading...',
+      back:          '← Back',
+      exit:          '✕ Exit',
+      practice:      'Practice',
+      simulation:    'Simulation',
+      episodes:      'Episodes',
+      playAgain:     'Play again',
+      home:          'Home',
+    },
+    dashboard: {
+      tagline:       'Grind your memory smarter!',
+      activeModule:  'Active module',
+      simResults:    'Simulation results',
+      practicedToday:'Practiced today',
+      practiceDesc:  'Exam questions with adaptive learning algorithm',
+      simDesc:       'TOGAF crisis management',
+    },
+    modules: {
+      title:         'Choose module',
+      questions:     (n) => `${n} questions`,
+    },
+    episodes: {
+      title:         'Choose episode',
+      episode:       (n) => `Episode ${n}`,
+      play:          'Play →',
+      completed:     'Completed',
+      togafTitles: [
+        'Architecture Strategy',
+        'Business Architecture',
+        'Information Systems Architecture',
+        'Technology Architecture',
+        'Governance & Migration',
+      ],
+    },
+    episodeComplete: {
+      allDone:       'All episodes completed!',
+      done:          (n) => `Episode ${n} completed!`,
+      allDoneDesc:   'Excellent performance. You have completed the entire module simulation.',
+      doneDesc:      (n) => `Well done. Episode ${n} is now unlocked.`,
+      nextEpisode:   (n) => `Episode ${n} →`,
+    },
+    gameOver: {
+      title:         'Simulation ended',
+      desc1:         'The organization fell into crisis. It happens to the best architects — the important thing is understanding why.',
+      desc2:         'A resource meter hit a critical limit. Review your decision chain and try again.',
+    },
+  },
+}

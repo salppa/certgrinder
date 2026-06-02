@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { T } from './theme'
+import { LangProvider } from './context/LangContext'
 import AuthGuard       from './components/AuthGuard'
 import LoginScreen     from './screens/LoginScreen'
 import AuthCallback    from './screens/AuthCallback'
@@ -22,6 +23,7 @@ export default function App() {
       <div style={{ position: 'fixed', top: '-20%', right: '-10%', width: 600, height: 600, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)' }} />
       <div style={{ position: 'fixed', bottom: '-20%', left: '-10%', width: 500, height: 500, borderRadius: '50%', pointerEvents: 'none', background: 'radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%)' }} />
 
+      <LangProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/login"                           element={<LoginScreen />} />
@@ -36,6 +38,7 @@ export default function App() {
           <Route path="/gameover/:moduleId"              element={<AuthGuard><GameOver /></AuthGuard>} />
         </Routes>
       </BrowserRouter>
+      </LangProvider>
     </div>
   )
 }

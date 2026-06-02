@@ -5,23 +5,17 @@ import { T, glass } from '../theme'
 import MentorAvatar from '../components/MentorAvatar'
 import { MODULES } from '../data/modules'
 import { useProgress } from '../hooks/useProgress'
-
-const EP_TITLES = {
-  togaf: [
-    'Arkkitehtuuristrategia',
-    'Liiketoiminta-arkkitehtuuri',
-    'Tietojärjestelmäarkkitehtuuri',
-    'Teknologia-arkkitehtuuri',
-    'Hallinto ja migraatio',
-  ],
-}
+import { useLang } from '../context/LangContext'
 
 export default function EpisodeSelect() {
   const { moduleId } = useParams()
   const navigate = useNavigate()
+  const { t } = useLang()
   const module = MODULES.find(m => m.id === moduleId) || MODULES[0]
   const { progress, isLocked } = useProgress(moduleId)
-  const titles = EP_TITLES[moduleId] || Array.from({ length: 5 }, (_, i) => `Episodi ${i + 1}`)
+  const titles = moduleId === 'togaf'
+    ? t.episodes.togafTitles
+    : Array.from({ length: 5 }, (_, i) => t.episodes.episode(i + 1))
 
   return (
     <div style={{ maxWidth: 600, margin: '0 auto', padding: '40px 24px' }}>
@@ -30,20 +24,20 @@ export default function EpisodeSelect() {
           onClick={() => navigate('/modules')}
           style={{ background: 'none', border: 'none', color: T.accent, cursor: 'pointer', padding: 0, fontSize: 14, marginBottom: 16 }}
         >
-          ← Takaisin
+          {t.common.back}
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <MentorAvatar mentorId={module.mentor} size={56} />
           <div>
             <h1 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 2px' }}>{module.name}</h1>
-            <p style={{ margin: 0, color: T.textMuted, fontSize: 13 }}>Valitse episodi</p>
+            <p style={{ margin: 0, color: T.textMuted, fontSize: 13 }}>{t.episodes.title}</p>
           </div>
         </div>
       </motion.div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {titles.map((title, i) => {
-          const epId = i + 1
+          const epId      = i + 1
           const locked    = isLocked(epId)
           const completed = progress.completed.includes(epId)
 
@@ -74,11 +68,11 @@ export default function EpisodeSelect() {
                   {completed ? '✓' : locked ? '🔒' : epId}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>Episodi {epId}</div>
+                  <div style={{ fontWeight: 600, fontSize: 14 }}>{t.episodes.episode(epId)}</div>
                   <div style={{ fontSize: 12, color: T.textMuted, marginTop: 2 }}>{title}</div>
                 </div>
-                {!locked && !completed && <span style={{ fontSize: 12, color: T.accent, fontWeight: 600 }}>Pelaa →</span>}
-                {completed          && <span style={{ fontSize: 12, color: T.green,  fontWeight: 600 }}>Suoritettu</span>}
+                {!locked && !completed && <span style={{ fontSize: 12, color: T.accent, fontWeight: 600 }}>{t.episodes.play}</span>}
+                {completed          && <span style={{ fontSize: 12, color: T.green,  fontWeight: 600 }}>{t.episodes.completed}</span>}
               </div>
             </motion.div>
           )
