@@ -16,16 +16,21 @@ export class CertGrinderStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    const googleClientId     = this.node.tryGetContext('googleClientId')     as string | undefined
-    const googleClientSecret = this.node.tryGetContext('googleClientSecret') as string | undefined
+    const googleClientId      = this.node.tryGetContext('googleClientId') as string | undefined
     const cognitoDomainPrefix = (this.node.tryGetContext('cognitoDomainPrefix') as string) || 'certgrinder-app'
 
-    if (!googleClientId || !googleClientSecret) {
+    if (!googleClientId) {
       throw new Error(
-        'Missing required CDK context: googleClientId and googleClientSecret.\n' +
-        'Deploy with: cdk deploy -c googleClientId=... -c googleClientSecret=...'
+        'Missing required CDK context: googleClientId.\n' +
+        'Deploy with: cdk deploy -c googleClientId=...\n' +
+        'Client secret is read from Secrets Manager: certgrinder/google-oauth'
       )
     }
+
+    // Google client secret stored in Secrets Manager — never in plaintext
+    const googleClientSecret = cdk.SecretValue.secretsManager('certgrinder/google-oauth', {
+      jsonField: 'clientSecret',
+    })
 
     // ── Cognito User Pool ─────────────────────────────────────────────────────
     const userPool = new cognito.UserPool(this, 'UserPool', {
@@ -41,7 +46,7 @@ export class CertGrinderStack extends cdk.Stack {
     const googleIdP = new cognito.UserPoolIdentityProviderGoogle(this, 'GoogleIdP', {
       userPool,
       clientId:          googleClientId,
-      clientSecretValue: cdk.SecretValue.unsafePlainText(googleClientSecret),
+      clientSecretValue: googleClientSecret,
       scopes:       ['openid', 'email', 'profile'],
       attributeMapping: {
         email:     cognito.ProviderAttribute.GOOGLE_EMAIL,
@@ -151,6 +156,7 @@ export class CertGrinderStack extends cdk.Stack {
         contentSecurityPolicy: {
           contentSecurityPolicy: [
             "default-src 'self'",
+            "script-src 'self'",
             "connect-src 'self' https://*.amazonaws.com https://*.amazoncognito.com",
             "style-src 'self' 'unsafe-inline'",
             "img-src 'self' data: https:",
@@ -196,7 +202,7 @@ export class CertGrinderStack extends cdk.Stack {
       roleName:   'certgrinder-github-deploy',
       assumedBy:  new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, {
         StringEquals: { 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com' },
-        StringLike:   { 'token.actions.githubusercontent.com:sub': 'repo:salppa/certgrinder:*' },
+        StringLike:   { 'token.actions.githubusercontent.com:sub': 'repo:salppa/certgrinder:ref:refs/heads/main' },
       }),
     })
 

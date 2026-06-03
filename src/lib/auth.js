@@ -1,6 +1,15 @@
-const COGNITO_DOMAIN  = import.meta.env.VITE_COGNITO_DOMAIN   // https://xxx.auth.eu-north-1.amazoncognito.com
+const COGNITO_DOMAIN  = import.meta.env.VITE_COGNITO_DOMAIN
 const CLIENT_ID       = import.meta.env.VITE_COGNITO_CLIENT_ID
 const REDIRECT_URI    = `${window.location.origin}/callback`
+
+// Tokens are stored in sessionStorage (tab-scoped) instead of localStorage
+// to reduce XSS token-theft surface. Refresh token stays session-scoped too —
+// users re-login when closing the tab, which is the acceptable trade-off.
+const store = {
+  get:    (k)    => sessionStorage.getItem(k),
+  set:    (k, v) => sessionStorage.setItem(k, v),
+  remove: (k)    => sessionStorage.removeItem(k),
+}
 
 function generateVerifier() {
   const arr = new Uint8Array(32)
@@ -49,14 +58,14 @@ export async function exchangeCode(code) {
   if (!res.ok) throw new Error(`Token exchange failed: ${res.status}`)
   const tokens = await res.json()
   sessionStorage.removeItem('pkce_verifier')
-  localStorage.setItem('cg:id_token',      tokens.id_token)
-  localStorage.setItem('cg:access_token',  tokens.access_token)
-  if (tokens.refresh_token) localStorage.setItem('cg:refresh_token', tokens.refresh_token)
+  store.set('cg:id_token',     tokens.id_token)
+  store.set('cg:access_token', tokens.access_token)
+  if (tokens.refresh_token) store.set('cg:refresh_token', tokens.refresh_token)
   return tokens
 }
 
 export function getIdToken() {
-  return localStorage.getItem('cg:id_token')
+  return store.get('cg:id_token')
 }
 
 export function getUserId() {
@@ -70,7 +79,7 @@ export function getUserId() {
 }
 
 export async function refreshTokens() {
-  const refreshToken = localStorage.getItem('cg:refresh_token')
+  const refreshToken = store.get('cg:refresh_token')
   if (!refreshToken) throw new Error('No refresh token')
   const res = await fetch(`${COGNITO_DOMAIN}/oauth2/token`, {
     method:  'POST',
@@ -83,8 +92,8 @@ export async function refreshTokens() {
   })
   if (!res.ok) throw new Error(`Token refresh failed: ${res.status}`)
   const tokens = await res.json()
-  localStorage.setItem('cg:id_token',     tokens.id_token)
-  localStorage.setItem('cg:access_token', tokens.access_token)
+  store.set('cg:id_token',     tokens.id_token)
+  store.set('cg:access_token', tokens.access_token)
   return tokens
 }
 
@@ -102,9 +111,9 @@ export async function isAuthenticated() {
 }
 
 export function logout() {
-  localStorage.removeItem('cg:id_token')
-  localStorage.removeItem('cg:access_token')
-  localStorage.removeItem('cg:refresh_token')
+  store.remove('cg:id_token')
+  store.remove('cg:access_token')
+  store.remove('cg:refresh_token')
   const params = new URLSearchParams({ client_id: CLIENT_ID, logout_uri: window.location.origin })
   window.location.href = `${COGNITO_DOMAIN}/logout?${params}`
 }
